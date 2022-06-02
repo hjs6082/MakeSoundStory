@@ -1511,6 +1511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staffList: []
   workStaffList: []
+  isSelectStaff: 0
 --- !u!4 &686101772
 Transform:
   m_ObjectHideFlags: 0
@@ -2727,6 +2728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStaff: {fileID: 0}
+  selectButton: {fileID: 1459020773}
 --- !u!1 &1435677574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,6 +3766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStaff: {fileID: 0}
+  selectButton: {fileID: 1459020773}
 --- !u!1 &2002747087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,6 +3946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStaff: {fileID: 0}
+  selectButton: {fileID: 1459020773}
 --- !u!1 &2122646686
 GameObject:
   m_ObjectHideFlags: 0
