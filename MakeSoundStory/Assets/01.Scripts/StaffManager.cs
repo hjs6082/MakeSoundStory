@@ -10,6 +10,8 @@ public class StaffManager : MonoBehaviour
 
     public List<StaffSO> workStaffList = new List<StaffSO>();
 
+    public int isSelectStaff;
+
     private void Awake()
     {
         if(instance != null)
@@ -25,12 +27,6 @@ public class StaffManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            RandomStaff();
-            RandomStaff();
-            RandomStaff();
-        }
     }
 
     public void AddStaff()
@@ -43,7 +39,7 @@ public class StaffManager : MonoBehaviour
 
         foreach (var item in staffList)
         {
-            Debug.Log(item.name);
+           // Debug.Log(item.name);
         }
     }
 
@@ -53,8 +49,6 @@ public class StaffManager : MonoBehaviour
         {
             int randoxIndex = Random.Range(0, staffList.Count);
             StaffSO selectStaff = staffList[randoxIndex];
-            UIManager.instance.StaffGatcha(selectStaff);
-            //.Add(staffList[randoxIndex]);
             staffList.RemoveAt(randoxIndex);
 
 
@@ -72,6 +66,7 @@ public class StaffManager : MonoBehaviour
                     staffList.Remove(workStaffList[i]);
                 }
             }
+            UIManager.instance.StaffGatcha(selectStaff);
         }
     }
 

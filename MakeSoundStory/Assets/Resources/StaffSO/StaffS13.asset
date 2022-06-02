@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f923a8e69c7fc4daca735509df65aa, type: 3}
+  m_Name: StaffS13
+  m_EditorClassIdentifier: 
+  staffName: "\uC815\uB9CC\uD638"
+  staffJob: "\uD504\uB85C\uB4C0\uC11C"
+  favoriteGenre: "\uD799\uD569"
+  hateGenre: "\uBC1C\uB77C\uB4DC"
+  creativity: 10
+  addictive: 15
+  melodic: 20
+  popularity: 10
+  money: 1000

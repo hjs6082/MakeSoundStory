@@ -14,7 +14,9 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     private int staffCount = 0;
-    // Start is called before the first frame update
+
+    private bool isDistinct = false;
+
     void Start()
     {
         if (instance != null)
@@ -26,17 +28,22 @@ public class UIManager : MonoBehaviour
             instance = this;
         }
         //StaffGatcha();
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            StaffManager.instance.RandomStaff();
+            StaffManager.instance.RandomStaff();
+            StaffManager.instance.RandomStaff();
+        }
     }
 
     public void StaffGatcha(StaffSO selectStaff)
     {
-        Debug.Log("시작");
+        //Debug.Log("시작");
         int staffPanelsCount = staffPanelObj.transform.childCount;
         
         staffPanels = new GameObject[staffPanelsCount];
@@ -54,14 +61,17 @@ public class UIManager : MonoBehaviour
         staffPanels[staffCount].transform.GetChild(8).GetComponent<Text>().text = "중독성 : " + selectStaff.Addictive;
         staffPanels[staffCount].transform.GetChild(9).GetComponent<Text>().text = "대중성 : " + selectStaff.Popularity;
         staffPanels[staffCount].transform.GetChild(10).GetComponent<Text>().text = "계약금 : " + selectStaff.Money + "G";
+        staffPanels[staffCount].GetComponent<MyData>().myStaff = selectStaff;
 
-        if (staffCount != 3)
-        {
-            staffCount++;
-            if(staffCount == 3)
+            if (staffCount != 3)
             {
-                staffCount = 0;
+                staffCount++;
+                if (staffCount == 3)
+                {
+                    staffCount = 0;
+                }
             }
-        }
+
+
     }
 }
