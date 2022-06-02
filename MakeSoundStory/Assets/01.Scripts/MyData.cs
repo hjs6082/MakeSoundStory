@@ -10,6 +10,12 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
 
     private bool isSelect = false;
 
+    public Button selectButton;
+
+    private void Start()
+    {
+        selectButton.onClick.AddListener(() => { SelectStaff(); });
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isSelect == false)
@@ -53,4 +59,14 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
             image.color = tempColor;
         }
     }
+
+    public void SelectStaff()
+    {
+        if (isSelect == true)
+        {
+            StaffManager.instance.workStaffList.Add(myStaff);
+        }
+    }
+
+  
 }
