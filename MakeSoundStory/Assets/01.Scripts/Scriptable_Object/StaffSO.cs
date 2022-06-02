@@ -9,31 +9,35 @@ public class StaffSO : ScriptableObject
     private string staffName; // 이름
     public string StaffName { get { return staffName; } }
 
-    [SerializeField]
+    [SerializeField][Header("직업")]
     private string staffJob; // 직업
     public string StaffJob { get { return staffJob;  } }
 
-    [SerializeField]
+    [SerializeField][Header("선호 장르")]
     private string favoriteGenre; //선호 장르
-    public string FavoriteGenre { get { return favoriteGenre; } }
+    public string FavoriteGenre { get { return favoriteGenre; } } 
 
-    [SerializeField]
-    private string hateGenre; //선호 장르
+    [SerializeField] [Header("불호 장르")]
+    private string hateGenre; //싫어하는 장르
     public string HateGenre { get { return hateGenre; } }
 
-    [SerializeField]
+    [SerializeField][Header("독창성")]
     private int creativity; //독창성
     public int Creativity { get { return creativity; } }
 
-    [SerializeField]
+    [SerializeField][Header("중독성")]
     private int addictive; //중독성
     public int Addictive { get { return addictive; } }
 
-    [SerializeField]
+    [SerializeField][Header("멜로디컬")]
     private int melodic; //멜로디컬함
     public int Melodic { get { return melodic; } }
 
-    [SerializeField] 
-    private int popularity; //멜로디컬함
+    [SerializeField] [Header("대중성")]
+    private int popularity; //대중성   
     public int Popularity { get { return popularity; } }
+
+    [SerializeField][Header("계약금")]
+    private int money; //계약금
+    public int Money { get { return money; } }
 }
