@@ -8,6 +8,8 @@ public class StaffManager : MonoBehaviour
 
     public List<StaffSO> staffList = new List<StaffSO>();
 
+    public List<StaffSO> pickStaffList = new List<StaffSO>();
+
     public List<StaffSO> workStaffList = new List<StaffSO>();
 
     public int isSelectStaff;
@@ -37,10 +39,10 @@ public class StaffManager : MonoBehaviour
             staffList.Add(staffs[i]);
         }
 
-        foreach (var item in staffList)
+        /*foreach (var item in staffList)
         {
-           // Debug.Log(item.name);
-        }
+           Debug.Log(item.name);
+        }*/
     }
 
     public void RandomStaff()
