@@ -33,6 +33,7 @@ public class StaffManager : MonoBehaviour
 
     public void AddStaff()
     {
+        Debug.Log("234");
         StaffSO[] staffs = (Resources.LoadAll<StaffSO>("StaffSO"));
         for(int i = 0; i < staffs.Length; i++)
         {
@@ -51,11 +52,14 @@ public class StaffManager : MonoBehaviour
         {
             int randoxIndex = Random.Range(0, staffList.Count);
             StaffSO selectStaff = staffList[randoxIndex];
+            pickStaffList.Add(staffList[randoxIndex]);
             staffList.RemoveAt(randoxIndex);
 
+            UIManager.instance.StaffGatcha(selectStaff);
 
-            if (workStaffList != null)
+            if (workStaffList.Count != 0)
             {
+                Debug.Log("243");
                 staffList.Clear();
                 StaffSO[] staffs = (Resources.LoadAll<StaffSO>("StaffSO"));
                 for (int i = 0; i < staffs.Length; i++)
@@ -68,8 +72,22 @@ public class StaffManager : MonoBehaviour
                     staffList.Remove(workStaffList[i]);
                 }
             }
-            UIManager.instance.StaffGatcha(selectStaff);
+            if(pickStaffList.Count == 6)
+            {
+                pickStaffList.Clear();
+                staffList.Clear();
+                StaffSO[] staffs = (Resources.LoadAll<StaffSO>("StaffSO"));
+                for (int i = 0; i < staffs.Length; i++)
+                {
+                    staffList.Add(staffs[i]);
+                }
+
+                for (int i = 0; i < workStaffList.Count; i++)
+                {
+                    staffList.Remove(workStaffList[i]);
+                }
+            }  
+
         }
     }
-
 }

@@ -35,9 +35,10 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            StaffManager.instance.RandomStaff();
-            StaffManager.instance.RandomStaff();
-            StaffManager.instance.RandomStaff();
+            for(int i = 0; i < 3; i++)
+            {
+                StaffManager.instance.RandomStaff(); 
+            }
         }
     }
 
@@ -72,6 +73,19 @@ public class UIManager : MonoBehaviour
                 }
             }
 
-
+        //DistinctCheck(); 
     }
+
+/*    public void DistinctCheck()
+    {
+        if (staffPanels[0].transform.GetChild(1).GetComponent<Text>().text == staffPanels[1].transform.GetChild(1).GetComponent<Text>().text
+            || staffPanels[0].transform.GetChild(1).GetComponent<Text>().text == staffPanels[2].transform.GetChild(1).GetComponent<Text>().text
+            || staffPanels[1].transform.GetChild(1).GetComponent<Text>().text == staffPanels[0].transform.GetChild(1).GetComponent<Text>().text
+            || staffPanels[1].transform.GetChild(1).GetComponent<Text>().text == staffPanels[2].transform.GetChild(1).GetComponent<Text>().text
+            || staffPanels[2].transform.GetChild(1).GetComponent<Text>().text == staffPanels[0].transform.GetChild(1).GetComponent<Text>().text
+            || staffPanels[2].transform.GetChild(1).GetComponent<Text>().text == staffPanels[1].transform.GetChild(1).GetComponent<Text>().text)
+        {
+            Debug.Log("중복이 있습니다.");
+        }
+    }*/
 }
