@@ -31,8 +31,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject members;
 
+    [SerializeField]
+    private Button[] buttons;
 
-
+    public int buttonCount = 0;
 
     private int staffCount = 0;
 
@@ -46,7 +48,8 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
-        StaffGachaStart(); 
+        StaffGachaStart();
+        ButtonClick();
     }
 
     void Update()
@@ -119,17 +122,44 @@ public class UIManager : MonoBehaviour
 
     //---------스태프 선택 관련 함수-----------
 
+    public void ButtonClick()
+    {
+        buttons[0].onClick.AddListener(() => { buttonCount = 1; SelectPanelClick(); });
+        buttons[1].onClick.AddListener(() => { buttonCount = 2; SelectPanelClick(); });
+        buttons[2].onClick.AddListener(() => { buttonCount = 3; SelectPanelClick(); });
+        buttons[3].onClick.AddListener(() => { buttonCount = 4; SelectPanelClick(); });
+        buttons[4].onClick.AddListener(() => { buttonCount = 5; SelectPanelClick(); });
+    }
+
     public void SelectPanelClick()
     {
         selectPanel.SetActive(true);
 
-        for(int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+        Transform[] childList = members.GetComponentsInChildren<Transform>();
+        if (members.transform.childCount != 0)
         {
-            GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            staff.transform.parent = members.transform;
-            staff.transform.localScale = new Vector3(1, 1, 1);  
-            staff.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[i].MySprite;   
+            if (childList != null)
+            {
+                for (int i = 1; i < childList.Length; i++)
+                {
+                    if (childList[i] != transform)
+                    {
+                        Destroy(childList[i].gameObject);
+                    }
+                }
+            }
         }
+            for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+            {
+                GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                staff.transform.parent = members.transform;
+                staff.transform.localScale = new Vector3(1, 1, 1);
+                staff.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[i].MySprite;
+                staff.GetComponent<Button>().onClick.AddListener(() => { buttons[buttonCount - 1].GetComponent<Image>().sprite = staff.GetComponent<Image>().sprite; selectPanel.SetActive(false); });
+            }
+
+
 
     } 
+
 }
