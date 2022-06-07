@@ -10,11 +10,16 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
 
     private bool isSelect = false;
 
-    public Button selectButton;
+    [SerializeField]
+    private Button selectButton;
+
+    [SerializeField]
+    private Button exitButton;
 
     private void Start()
     {
         selectButton.onClick.AddListener(() => { SelectStaff(); });
+        exitButton.onClick.AddListener(() => { UIManager.instance.staffGachaPanel.SetActive(false); });
     }
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -65,6 +70,7 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
         if (isSelect == true)
         {
             StaffManager.instance.workStaffList.Add(myStaff);
+            UIManager.instance.SelectStaff(this.gameObject);
         }
     }
 

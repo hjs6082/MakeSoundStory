@@ -33,17 +33,11 @@ public class StaffManager : MonoBehaviour
 
     public void AddStaff()
     {
-        Debug.Log("234");
         StaffSO[] staffs = (Resources.LoadAll<StaffSO>("StaffSO"));
         for(int i = 0; i < staffs.Length; i++)
         {
             staffList.Add(staffs[i]);
         }
-
-        /*foreach (var item in staffList)
-        {
-           Debug.Log(item.name);
-        }*/
     }
 
     public void RandomStaff()

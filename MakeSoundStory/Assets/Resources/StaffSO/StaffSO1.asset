@@ -21,3 +21,4 @@ MonoBehaviour:
   melodic: 20
   popularity: 10
   money: 1000
+  mySprite: {fileID: -8195753727382534561, guid: 19727cfa455a336498f8d818fca87a7b, type: 3}

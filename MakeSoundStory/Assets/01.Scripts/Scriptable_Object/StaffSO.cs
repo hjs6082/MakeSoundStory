@@ -40,4 +40,9 @@ public class StaffSO : ScriptableObject
     [SerializeField][Header("계약금")]
     private int money; //계약금
     public int Money { get { return money; } }
+
+    [SerializeField][Header("직원 사진")]
+    private Sprite mySprite;
+    public Sprite MySprite { get { return mySprite; } }
+
 }
