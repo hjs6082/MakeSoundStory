@@ -225,7 +225,8 @@ public class UIManager : MonoBehaviour
             StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
         }
         StaffManager.instance.pickWorkStaffList.Clear();
-        staffChoicePanelObj.SetActive(false);
+        ClearTween(staffChoicePanelObj);
+        //staffChoicePanelObj.SetActive(false);
     }
 
 }

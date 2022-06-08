@@ -19,7 +19,7 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
     private void Start()
     {
         selectButton.onClick.AddListener(() => { SelectStaff(); });
-        exitButton.onClick.AddListener(() => { UIManager.instance.staffGachaPanel.SetActive(false); });
+        exitButton.onClick.AddListener(() => { UIManager.instance.ClearTween(UIManager.instance.staffGachaPanel); });
     }
     public void OnPointerClick(PointerEventData eventData)
     {
