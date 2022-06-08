@@ -70,6 +70,9 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
         if (isSelect == true)
         {
             StaffManager.instance.workStaffList.Add(myStaff);
+
+            StaffManager.instance.pickStaffList.Remove(myStaff); //삭제될수도?
+
             UIManager.instance.SelectStaff(this.gameObject);
         }
     }

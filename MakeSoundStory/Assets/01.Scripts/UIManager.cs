@@ -38,6 +38,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button pickUpExitButton; //나가기 버튼
 
+    [SerializeField]
+    private Button choiceStaffButton; //스태프 선택 버튼
+
     public int buttonCount = 0;
 
     private int staffCount = 0;
@@ -72,6 +75,7 @@ public class UIManager : MonoBehaviour
             staffPanels[i] = staffPanelObj.transform.GetChild(i).gameObject;
         }
 
+        StaffManager.instance.staffList.Remove(selectStaff);
         staffPanels[staffCount].transform.GetChild(0).GetComponent<Image>().sprite = selectStaff.MySprite;
         staffPanels[staffCount].transform.GetChild(1).GetComponent<Text>().text = "이름 : " + selectStaff.StaffName;
         staffPanels[staffCount].transform.GetChild(2).GetComponent<Text>().text = "직업 : " + selectStaff.StaffJob;
@@ -104,12 +108,17 @@ public class UIManager : MonoBehaviour
         staffPanel.SetActive(true);
         staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
         {
-            clearPanel.SetActive(true);
-            clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() => 
-            {
-                staffGachaPanel.SetActive(false);
-                clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-            });
+            ClearTween(staffGachaPanel); 
+        });
+    }
+     
+    public void ClearTween(GameObject falsePanel)
+    {
+        clearPanel.SetActive(true);
+        clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+        {
+            falsePanel.SetActive(false);
+            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f); 
         });
     }
 
@@ -133,7 +142,8 @@ public class UIManager : MonoBehaviour
         buttons[3].onClick.AddListener(() => { buttonCount = 4; SelectPanelClick(); });
         buttons[4].onClick.AddListener(() => { buttonCount = 5; SelectPanelClick(); });
 
-        pickUpExitButton.onClick.AddListener(() => { PickUpStaffEnd(); }); 
+        pickUpExitButton.onClick.AddListener(() => { PickUpStaffEnd(); });
+        choiceStaffButton.onClick.AddListener(() => { ClearTween(staffChoicePanelObj); });
     }
 
     public void SelectPanelClick()

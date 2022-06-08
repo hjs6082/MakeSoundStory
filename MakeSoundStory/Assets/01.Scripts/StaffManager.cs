@@ -53,7 +53,7 @@ public class StaffManager : MonoBehaviour
             int randoxIndex = Random.Range(0, staffList.Count);
             StaffSO selectStaff = staffList[randoxIndex];
             pickStaffList.Add(staffList[randoxIndex]);
-            staffList.RemoveAt(randoxIndex);
+            //staffList.RemoveAt(randoxIndex); 
 
             UIManager.instance.StaffGatcha(selectStaff);
 
