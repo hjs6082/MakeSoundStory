@@ -15,6 +15,9 @@ public class StaffManager : MonoBehaviour
     [Header("현재 일하고있는 스태프 리스트")]
     public List<StaffSO> workStaffList = new List<StaffSO>();
 
+    [Header("음악 제작에 뽑힌 스태프 리스트")]
+    public List<StaffSO> pickWorkStaffList = new List<StaffSO>();
+
     public int isSelectStaff;
 
     private void Awake()

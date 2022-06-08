@@ -11,28 +11,32 @@ public class UIManager : MonoBehaviour
     //---------스태프 뽑기 관련 변수-----------
 
     [SerializeField]
-    private GameObject staffPanelObj;   
+    private GameObject staffPanelObj;   //스태프 패널을 자식으로 가지고있는 부모 오브젝트
 
     [SerializeField]
-    private GameObject[] staffPanels;
+    private GameObject[] staffPanels; //각 3개의 스태프를 띄울 패널들;
 
     [SerializeField]
-    private GameObject clearPanel;
+    private GameObject clearPanel; //종료때 띄울 검은색 패널
 
-    public GameObject staffGachaPanel;
+    public GameObject staffGachaPanel; //스태프 가챠 패널
 
     //---------스태프 선택 관련 변수-----------
-
-    public GameObject selectPanel;
-
-    [SerializeField]
-    private GameObject staffPrefab;
+    public GameObject staffChoicePanelObj; // 스태프 선택 전체패널
+    
+    public GameObject selectPanel; // 스태프를 선택하는 패널
 
     [SerializeField]
-    private GameObject members;
+    private GameObject staffPrefab; // 스태프를 추가할 용도로 사용하는 게임오브젝트 프리팹
 
     [SerializeField]
-    private Button[] buttons;
+    private GameObject staffListPanel; //스태프를 자식으로 가지게될 패널
+
+    [SerializeField]
+    private Button[] buttons; //멤버를 선택할 수 있는 버튼들
+
+    [SerializeField]
+    private Button pickUpExitButton; //나가기 버튼
 
     public int buttonCount = 0;
 
@@ -89,7 +93,6 @@ public class UIManager : MonoBehaviour
                 }
             }
 
-        //DistinctCheck(); 
     }
 
     public void SelectStaff(GameObject staffPanel)
@@ -129,14 +132,16 @@ public class UIManager : MonoBehaviour
         buttons[2].onClick.AddListener(() => { buttonCount = 3; SelectPanelClick(); });
         buttons[3].onClick.AddListener(() => { buttonCount = 4; SelectPanelClick(); });
         buttons[4].onClick.AddListener(() => { buttonCount = 5; SelectPanelClick(); });
+
+        pickUpExitButton.onClick.AddListener(() => { PickUpStaffEnd(); }); 
     }
 
     public void SelectPanelClick()
     {
         selectPanel.SetActive(true);
 
-        Transform[] childList = members.GetComponentsInChildren<Transform>();
-        if (members.transform.childCount != 0)
+        Transform[] childList = staffListPanel.GetComponentsInChildren<Transform>();
+        if (staffListPanel.transform.childCount != 0)
         {
             if (childList != null)
             {
@@ -151,15 +156,66 @@ public class UIManager : MonoBehaviour
         }
             for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
             {
-                GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                staff.transform.parent = members.transform;
-                staff.transform.localScale = new Vector3(1, 1, 1);
-                staff.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[i].MySprite;
-                staff.GetComponent<Button>().onClick.AddListener(() => { buttons[buttonCount - 1].GetComponent<Image>().sprite = staff.GetComponent<Image>().sprite; selectPanel.SetActive(false); });
+            GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            staff.transform.parent = staffListPanel.transform;
+            staff.transform.localScale = new Vector3(1, 1, 1);
+
+            StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+            {
+                if (a.StaffNumber > b.StaffNumber) return 1;
+                else if (a.StaffNumber < b.StaffNumber) return -1;
+                return 0;
+            });
+
+            staff.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[i].MySprite;
+            staff.GetComponent<StaffData>().myStaffData = StaffManager.instance.workStaffList[i];
+
+            if (buttons[buttonCount - 1].GetComponent<Image>().sprite == null)
+            {
+                staff.GetComponent<Button>().onClick.AddListener(() => { SelectWorkStaff(staff); });
             }
-
-
-
+            else
+            {
+                staff.GetComponent<Button>().onClick.AddListener(() => { DistinctSelectWorkStaff(staff); });
+            }
+        }
     } 
+
+    public void SelectWorkStaff(GameObject staffObj)
+    {
+        StaffManager.instance.pickWorkStaffList.Add(staffObj.GetComponent<StaffData>().myStaffData);
+        StaffManager.instance.workStaffList.Remove(staffObj.GetComponent<StaffData>().myStaffData);
+        buttons[buttonCount - 1].GetComponent<Image>().sprite = staffObj.GetComponent<Image>().sprite; 
+
+        selectPanel.SetActive(false);
+    }
+
+    public void DistinctSelectWorkStaff(GameObject staffObj) //이미 있는 스태프를 수정하였을때
+    {
+        for (int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
+        {
+            if (buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].MySprite)
+            {
+                StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
+                StaffManager.instance.pickWorkStaffList.Remove(StaffManager.instance.pickWorkStaffList[i]);
+            }
+        }
+        StaffManager.instance.pickWorkStaffList.Add(staffObj.GetComponent<StaffData>().myStaffData);
+        StaffManager.instance.workStaffList.Remove(staffObj.GetComponent<StaffData>().myStaffData);
+        buttons[buttonCount - 1].GetComponent<Image>().sprite = staffObj.GetComponent<Image>().sprite;
+
+        selectPanel.SetActive(false);
+
+    }
+
+    public void PickUpStaffEnd()
+    {
+        for(int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
+        {
+            StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
+        }
+        StaffManager.instance.pickWorkStaffList.Clear();
+        staffChoicePanelObj.SetActive(false);
+    }
 
 }

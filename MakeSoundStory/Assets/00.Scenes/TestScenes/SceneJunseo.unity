@@ -1198,15 +1198,17 @@ MonoBehaviour:
   staffPanels: []
   clearPanel: {fileID: 1193354852}
   staffGachaPanel: {fileID: 1898562333}
+  staffChoicePanelObj: {fileID: 1908472676}
   selectPanel: {fileID: 1173441220}
   staffPrefab: {fileID: 7687254324807300041, guid: 8a666fe1dc0cf8d4bb481cb2fcf5c08a, type: 3}
-  members: {fileID: 612483808}
+  staffListPanel: {fileID: 612483808}
   buttons:
   - {fileID: 1789759512}
   - {fileID: 1497602646}
   - {fileID: 1109702017}
   - {fileID: 1477909870}
   - {fileID: 1546188997}
+  pickUpExitButton: {fileID: 1309406497}
   buttonCount: 0
 --- !u!1 &532473612
 GameObject:
@@ -1812,7 +1814,10 @@ MonoBehaviour:
   workStaffList:
   - {fileID: 11400000, guid: 06d36334e7b81c645a33b0d9f129cdb1, type: 2}
   - {fileID: 11400000, guid: d5ac36d1752e9044ba707d48609d16c3, type: 2}
-  - {fileID: 11400000, guid: d5ac36d1752e9044ba707d48609d16c3, type: 2}
+  - {fileID: 11400000, guid: 26807521047079245aa885ba9a95b0c9, type: 2}
+  - {fileID: 11400000, guid: 6e618cb184a20fb45a9e10ce96df627e, type: 2}
+  - {fileID: 11400000, guid: adc0b8d72dac11743a15725f9aba495f, type: 2}
+  pickWorkStaffList: []
   isSelectStaff: 0
 --- !u!4 &686101772
 Transform:
@@ -3000,7 +3005,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 27, y: -0.000061035156}
+  m_AnchoredPosition: {x: 27, y: 0}
   m_SizeDelta: {x: -1062.33, y: -542.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1173441222
