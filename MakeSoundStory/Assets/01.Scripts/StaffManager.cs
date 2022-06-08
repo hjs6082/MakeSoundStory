@@ -6,10 +6,13 @@ public class StaffManager : MonoBehaviour
 {
     public static StaffManager instance;
 
+    [Header("전체 스태프 리스트")]
     public List<StaffSO> staffList = new List<StaffSO>();
 
+    [Header("뽑힌 스태프 리스트")]
     public List<StaffSO> pickStaffList = new List<StaffSO>();
 
+    [Header("현재 일하고있는 스태프 리스트")]
     public List<StaffSO> workStaffList = new List<StaffSO>();
 
     public int isSelectStaff;
