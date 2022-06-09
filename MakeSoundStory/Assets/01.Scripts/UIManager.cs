@@ -8,10 +8,15 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    public bool isOneClick = false;
+    public bool isOneClick = false; // 한번만 되게 하는 bool 함수임 예)스태프 선택이 누를때마다 들어오면 안되기때문에 1회제한을 두는 변수.
+
+    public int allCreativity; // 현재 독창성
+    public int allAddictive; // 현재 중독성
+    public int allMelodic; // 현재 멜로디컬
+    public int allPopularity; // 현재 대중성
 
     [SerializeField]
-    private GameObject companyPanel;
+    private GameObject companyPanel; //회사 패널 
 
     //---------스태프 뽑기 관련 변수-----------
 
@@ -45,6 +50,12 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Button choiceStaffButton; //스태프 선택 버튼
+
+    [SerializeField]
+    private Button noChoiceStaffButton; //스태프 선택 안함 버튼
+
+    [SerializeField]
+    private Text[] statTexts;
 
     public int buttonCount = 0;
 
@@ -192,7 +203,14 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
-            for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+        GameObject noneStaff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        noneStaff.transform.parent = staffListPanel.transform;
+        noneStaff.transform.localScale = new Vector3(1, 1, 1);
+        noneStaff.GetComponent<Image>().sprite = Resources.Load<Sprite>("delete");
+        noChoiceStaffButton = noneStaff.GetComponent<Button>();
+        noChoiceStaffButton.onClick.AddListener(() => { StaffNoChoice(); });
+
+        for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
             {
             GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             staff.transform.parent = staffListPanel.transform;
@@ -217,15 +235,46 @@ public class UIManager : MonoBehaviour
                 staff.GetComponent<Button>().onClick.AddListener(() => { DistinctSelectWorkStaff(staff); });
             }
         }
+
     } 
 
     public void SelectWorkStaff(GameObject staffObj)
     {
         StaffManager.instance.pickWorkStaffList.Add(staffObj.GetComponent<StaffData>().myStaffData);
         StaffManager.instance.workStaffList.Remove(staffObj.GetComponent<StaffData>().myStaffData);
-        buttons[buttonCount - 1].GetComponent<Image>().sprite = staffObj.GetComponent<Image>().sprite; 
+        buttons[buttonCount - 1].GetComponent<Image>().sprite = staffObj.GetComponent<Image>().sprite;
 
+        StatSetting();
         selectPanel.SetActive(false);
+    }
+
+    public void StatReset()
+    {
+        allCreativity = 0;
+        allAddictive = 0;
+        allMelodic = 0;
+        allPopularity = 0;
+    }
+
+    public void ShowStat()
+    {
+        statTexts[0].text = allCreativity.ToString();
+        statTexts[1].text = allAddictive.ToString();
+        statTexts[2].text = allMelodic.ToString();
+        statTexts[3].text = allPopularity.ToString();
+    }
+
+    public void StatSetting()
+    {
+        StatReset();
+        for(int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
+        {
+            allCreativity += StaffManager.instance.pickWorkStaffList[i].Creativity;
+            allAddictive += StaffManager.instance.pickWorkStaffList[i].Addictive;
+            allMelodic += StaffManager.instance.pickWorkStaffList[i].Melodic;
+            allPopularity += StaffManager.instance.pickWorkStaffList[i].Popularity;
+        }
+        ShowStat();
     }
 
     public void DistinctSelectWorkStaff(GameObject staffObj) //이미 있는 스태프를 수정하였을때
@@ -234,6 +283,7 @@ public class UIManager : MonoBehaviour
         {
             if (buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].MySprite)
             {
+                StatSetting(); 
                 StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
                 StaffManager.instance.pickWorkStaffList.Remove(StaffManager.instance.pickWorkStaffList[i]);
             }
@@ -244,6 +294,26 @@ public class UIManager : MonoBehaviour
 
         selectPanel.SetActive(false);
 
+    }
+
+    public void StaffNoChoice()
+    {
+        for(int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
+        {
+            if(buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].MySprite)
+            {
+                allAddictive -= StaffManager.instance.pickWorkStaffList[i].Addictive;
+                allCreativity -= StaffManager.instance.pickWorkStaffList[i].Creativity;
+                allMelodic -= StaffManager.instance.pickWorkStaffList[i].Melodic;
+                allPopularity -= StaffManager.instance.pickWorkStaffList[i].Popularity;
+                StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
+                StaffManager.instance.pickWorkStaffList.Remove(StaffManager.instance.pickWorkStaffList[i]);
+            }
+        }
+        if(buttons[buttonCount - 1])
+        buttons[buttonCount - 1].GetComponent<Image>().sprite = null;
+        selectPanel.SetActive(false);
+        ShowStat();
     }
 
     public void PickUpStaffEnd()
@@ -285,8 +355,7 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            StaffGachaStart();
+            StaffGachaStart(); 
         }
-    }
-
+    }       
 }
