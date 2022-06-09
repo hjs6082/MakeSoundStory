@@ -5,6 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StaffSO", menuName = "Scriptable Object/StaffSO", order = 1)]
 public class StaffSO : ScriptableObject
 {
+    [SerializeField][Header("스태프 레벨")]
+    private int stafflevel; // 스태프 레벨
+    public int StaffLevel { get { return stafflevel; } }
+    
     [SerializeField][Header("스태프 번호")]
     private int staffNumber; // 스태프 넘버
     public int StaffNumber { get { return staffNumber; } }

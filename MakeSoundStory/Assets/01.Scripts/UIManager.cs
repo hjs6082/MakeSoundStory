@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
 
     public bool isOneClick = false; // 한번만 되게 하는 bool 함수임 예)스태프 선택이 누를때마다 들어오면 안되기때문에 1회제한을 두는 변수.
 
+    private bool isSort = false; //Sort를 하는것인지 체크용 bool;
+
     public int allCreativity; // 현재 독창성
     public int allAddictive; // 현재 중독성
     public int allMelodic; // 현재 멜로디컬
@@ -53,6 +55,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Button noChoiceStaffButton; //스태프 선택 안함 버튼
+
+    [SerializeField]
+    private Button[] sortButtons;
 
     [SerializeField]
     private Text[] statTexts;
@@ -103,6 +108,7 @@ public class UIManager : MonoBehaviour
         staffPanels[staffCount].transform.GetChild(8).GetComponent<Text>().text = "중독성 : " + selectStaff.Addictive;
         staffPanels[staffCount].transform.GetChild(9).GetComponent<Text>().text = "대중성 : " + selectStaff.Popularity;
         staffPanels[staffCount].transform.GetChild(10).GetComponent<Text>().text = "계약금 : " + selectStaff.Money + "G";
+        staffPanels[staffCount].transform.GetChild(12).GetComponent<Text>().text = "레벨 : " + selectStaff.StaffLevel; 
         staffPanels[staffCount].GetComponent<MyData>().myStaff = selectStaff;
 
             if (staffCount != 3)
@@ -207,6 +213,7 @@ public class UIManager : MonoBehaviour
         noneStaff.transform.parent = staffListPanel.transform;
         noneStaff.transform.localScale = new Vector3(1, 1, 1);
         noneStaff.GetComponent<Image>().sprite = Resources.Load<Sprite>("delete");
+        Destroy(noneStaff.GetComponent<StaffData>()); 
         noChoiceStaffButton = noneStaff.GetComponent<Button>();
         noChoiceStaffButton.onClick.AddListener(() => { StaffNoChoice(); });
 
@@ -216,12 +223,15 @@ public class UIManager : MonoBehaviour
             staff.transform.parent = staffListPanel.transform;
             staff.transform.localScale = new Vector3(1, 1, 1);
 
-            StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+            if (!isSort)
             {
-                if (a.StaffNumber > b.StaffNumber) return 1;
-                else if (a.StaffNumber < b.StaffNumber) return -1;
-                return 0;
-            });
+                StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                {
+                    if (a.StaffNumber > b.StaffNumber) return 1;
+                    else if (a.StaffNumber < b.StaffNumber) return -1;
+                    return 0;
+                });
+            }
 
             staff.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[i].MySprite;
             staff.GetComponent<StaffData>().myStaffData = StaffManager.instance.workStaffList[i];
@@ -358,4 +368,84 @@ public class UIManager : MonoBehaviour
             StaffGachaStart(); 
         }
     }       
+
+    public void StaffSort(GameObject sortObj, GameObject panelObj)
+    {
+        Debug.Log(53);
+        isSort = true;
+        switch (sortObj.GetComponent<SortButtonData>().sortData)
+        {
+            case SortButtonData.Sort.creativity:
+                Debug.Log(1);
+                for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+                {
+                    StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                    {
+                        if (a.Creativity < b.Creativity) return 1;
+                        else if (a.Creativity > b.Creativity) return -1;
+                        return 0;
+                    });
+                } 
+                
+                break;
+            case SortButtonData.Sort.addictive:
+                Debug.Log(2);
+                for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+                {
+                    StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                {
+                    if (a.Addictive < b.Addictive) return 1;
+                    else if (a.Addictive > b.Addictive) return -1;
+                    return 0;
+                });
+                }
+                break;
+            case SortButtonData.Sort.melodic:
+                Debug.Log(3);
+                for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+                {
+                    StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                {
+                    if (a.Melodic < b.Melodic) return 1;
+                    else if (a.Melodic > b.Melodic) return -1;
+                    return 0;
+                });
+                }
+                break;
+            case SortButtonData.Sort.popularity: 
+                Debug.Log(4);
+                for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+                {
+                    StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                {
+                    if (a.Popularity < b.Popularity) return 1;
+                    else if (a.Popularity > b.Popularity) return -1;
+                    return 0;
+                });
+                } 
+                break;
+            case SortButtonData.Sort.level:
+                Debug.Log(4);
+                for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+                {
+                    StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                    {
+                        if (a.StaffLevel < b.StaffLevel) return 1;
+                        else if (a.StaffLevel > b.StaffLevel) return -1; 
+                        return 0;
+                    });
+                }
+                break;
+            default:
+                break;
+        }
+        for(int i = 1; i < staffListPanel.transform.childCount; i++)
+        {
+            Destroy(staffListPanel.transform.GetChild(i).gameObject);
+        } 
+        SelectPanelClick();
+        isSort = false; 
+        panelObj.SetActive(false); 
+
+    }
 }
