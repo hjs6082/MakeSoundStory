@@ -35,6 +35,7 @@ public class StaffManager : MonoBehaviour
 
     void Update()
     {
+        
     }
 
     public void AddStaff()

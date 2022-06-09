@@ -8,6 +8,11 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+    public bool isOneClick = false;
+
+    [SerializeField]
+    private GameObject companyPanel;
+
     //---------스태프 뽑기 관련 변수-----------
 
     [SerializeField]
@@ -61,7 +66,8 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-
+        ClosePickUpPanel();
+        TestPanel();
     }
 
     public void StaffGatcha(StaffSO selectStaff)
@@ -108,8 +114,21 @@ public class UIManager : MonoBehaviour
         staffPanel.SetActive(true);
         staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
         {
-            ClearTween(staffGachaPanel); 
+            ClearTween(staffGachaPanel);
+            staffPanel.GetComponent<MyData>().isSelect = false; 
         });
+    }
+
+    public void StaffGachaEnd()
+    {
+        for(int i = 0; i < staffPanels.Length; i++)
+        {
+            Image image = staffPanels[i].GetComponent<Image>();
+            var tempColor = image.color;
+            tempColor.a = 0.42f;
+            image.color = tempColor;
+        }
+        StaffManager.instance.isSelectStaff--; 
     }
      
     public void ClearTween(GameObject falsePanel)
@@ -118,12 +137,21 @@ public class UIManager : MonoBehaviour
         clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
         {
             falsePanel.SetActive(false);
-            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f); 
+            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+            isOneClick = false;
+            StaffGachaEnd();
+            companyPanel.SetActive(true);
         });
     }
 
     public void StaffGachaStart()
     {
+        Debug.Log(23);
+        for(int i = 0; i < staffPanels.Length; i++)
+        {
+            staffPanels[i].SetActive(true);
+            staffPanels[i].transform.localScale = new Vector3(1f, 1f, 1f);
+        }
         for (int i = 0; i < 3; i++)
         {
             StaffManager.instance.RandomStaff();
@@ -227,6 +255,38 @@ public class UIManager : MonoBehaviour
         StaffManager.instance.pickWorkStaffList.Clear();
         ClearTween(staffChoicePanelObj);
         //staffChoicePanelObj.SetActive(false);
+    }
+
+    public void ClosePickUpPanel()
+    {
+        if(selectPanel.activeSelf)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                selectPanel.SetActive(false);
+            }
+        }
+    }
+
+    public void TestPanel()
+    {
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            companyPanel.SetActive(false);
+            staffGachaPanel.SetActive(true);
+            StaffGachaStart();
+            staffChoicePanelObj.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            companyPanel.SetActive(false); 
+            staffGachaPanel.SetActive(false);
+            staffChoicePanelObj.SetActive(true);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            StaffGachaStart();
+        }
     }
 
 }

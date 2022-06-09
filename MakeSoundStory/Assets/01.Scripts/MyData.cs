@@ -8,7 +8,7 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
 {
     public StaffSO myStaff;
 
-    private bool isSelect = false;
+    public bool isSelect = false;
 
     [SerializeField]
     private Button selectButton;
@@ -67,13 +67,17 @@ public class MyData : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler
 
     public void SelectStaff()
     {
-        if (isSelect == true)
+        if (!UIManager.instance.isOneClick)
         {
-            StaffManager.instance.workStaffList.Add(myStaff);
+            if (isSelect == true)
+            {
+                UIManager.instance.isOneClick = true;
+                StaffManager.instance.workStaffList.Add(myStaff);
 
-            StaffManager.instance.pickStaffList.Remove(myStaff); //삭제될수도?
+                StaffManager.instance.pickStaffList.Remove(myStaff); //삭제될수도?
 
-            UIManager.instance.SelectStaff(this.gameObject);
+                UIManager.instance.SelectStaff(this.gameObject);
+            }
         }
     }
 
