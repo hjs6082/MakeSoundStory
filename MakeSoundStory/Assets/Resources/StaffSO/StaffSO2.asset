@@ -22,5 +22,5 @@ MonoBehaviour:
   addictive: 45
   melodic: 0
   popularity: 54
-  money: 0
+  money: 5000
   mySprite: {fileID: -1965965269714156462, guid: 19727cfa455a336498f8d818fca87a7b, type: 3}

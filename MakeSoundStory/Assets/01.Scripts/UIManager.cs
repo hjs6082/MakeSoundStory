@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject companyPanel; //회사 패널 
 
+    private int minusMoney;
+
     //---------스태프 뽑기 관련 변수-----------
     [SerializeField]
     private Button gachaStartButton; //가챠 스타트 버튼
@@ -112,7 +114,7 @@ public class UIManager : MonoBehaviour
     
     public void GameStart()
     {
-        GameManager.instance.playerMoney = 5000;
+        GameManager.instance.playerMoney = 30000;
         companyPanel.SetActive(true);
         staffGachaPanel.SetActive(false);
         staffChoicePanelObj.SetActive(false);
@@ -166,7 +168,14 @@ public class UIManager : MonoBehaviour
         {
             staffPanels[i].SetActive(false);
         }
-        GameManager.instance.playerMoney -= staffPanel.GetComponent<MyData>().myStaff.Money;
+        if (GameManager.instance.playerMoney >= staffPanel.GetComponent<MyData>().myStaff.Money)
+        {
+            GameManager.instance.playerMoney -= staffPanel.GetComponent<MyData>().myStaff.Money;
+        }
+        else
+        {
+            ShowExplane("돈이 부족합니다.");
+        }
         staffPanel.SetActive(true);
         staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
         {
@@ -235,9 +244,16 @@ public class UIManager : MonoBehaviour
 
     public void MusicSceneChange()
     {
-        if(memberCount >= 3)
+        if (memberCount >= 3)
         {
-            SceneManager.LoadScene("SceneHaewoong");
+            companyPanel.SetActive(true);
+            staffGachaPanel.SetActive(false);
+            staffChoicePanelObj.SetActive(true);
+            clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+            {
+                clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+                SceneManager.LoadScene("SceneHaewoong");
+            });
         }
         else
         {
@@ -275,33 +291,41 @@ public class UIManager : MonoBehaviour
     {
         gachaGradePanel.SetActive(true);
 
-        gradeButtons[0].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[0], 500); });
-        gradeButtons[1].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[1], 1000); });
-        gradeButtons[2].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[2], 5000); });
+        gradeButtons[0].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[0]); minusMoney = 500; });
+        gradeButtons[1].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[1]); minusMoney = 1000; });
+        gradeButtons[2].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[2]); minusMoney = 5000; }); 
     }
 
-    public void RealChoiceQuestion(Button showButton,int minusMoney)
-    { 
-        string showText = showButton.transform.GetChild(0).GetComponent<Text>().text;
-        GameManager.instance.playerMoney -= minusMoney;
-        realPanelObj.transform.GetChild(1).GetComponent<Text>().text = showText;
-        realPanelObj.SetActive(true); 
+    public void RealChoiceQuestion(Button showButton)
+    {
+            string showText = showButton.transform.GetChild(0).GetComponent<Text>().text;
+            realPanelObj.transform.GetChild(1).GetComponent<Text>().text = showText;
+            realPanelObj.SetActive(true);
     }
 
     public void YesGacha()
     {
-        realPanelObj.SetActive(false);
-        gachaGradePanel.SetActive(false);
-        companyPanel.SetActive(false);
-        clearPanel.SetActive(true);
-        clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+        if (GameManager.instance.playerMoney >= minusMoney)
         {
-            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-            isOneClick = false;
-            StaffGachaStart();
-        });
-        staffGachaPanel.SetActive(true);
-        staffChoicePanelObj.SetActive(false);
+            GameManager.instance.playerMoney -= minusMoney;
+            realPanelObj.SetActive(false);
+            gachaGradePanel.SetActive(false);
+            companyPanel.SetActive(false);
+            clearPanel.SetActive(true);
+            clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+            {
+                clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+                isOneClick = false;
+                StaffGachaStart();
+                minusMoney = 0;
+            });
+            staffGachaPanel.SetActive(true);
+            staffChoicePanelObj.SetActive(false);
+        }
+        else
+        {
+            ShowExplane("돈이 부족합니다.");
+        }
     }
 
     public void NoGacha()

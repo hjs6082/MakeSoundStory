@@ -19,8 +19,8 @@ MonoBehaviour:
   favoriteGenre: "\uC5C6\uC74C"
   hateGenre: "\uC5C6\uC74C"
   creativity: 2
-  addictive: 2
-  melodic: 3
-  popularity: 4
-  money: 0
+  addictive: 7
+  melodic: 7
+  popularity: 6
+  money: 650
   mySprite: {fileID: -8852230285008876594, guid: 19727cfa455a336498f8d818fca87a7b, type: 3}
