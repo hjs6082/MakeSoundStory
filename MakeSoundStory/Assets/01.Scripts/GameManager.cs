@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int allMelodic; // 현재 멜로디컬
     public int allPopularity; // 현재 대중성
 
-    private void Awake()
+    void Start()
     {
         if(instance == null)
         {
@@ -23,16 +23,13 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("이미 게임매니저가 존재합니다.");
         }
-    }
-
-    void Start()
-    {
-        
+        UIManager.instance.GameStart();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
 }
