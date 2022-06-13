@@ -12,10 +12,7 @@ public class UIManager : MonoBehaviour
 
     private bool isSort = false; //Sort를 하는것인지 체크용 bool;
 
-    public int allCreativity; // 현재 독창성
-    public int allAddictive; // 현재 중독성
-    public int allMelodic; // 현재 멜로디컬
-    public int allPopularity; // 현재 대중성
+
 
     [SerializeField]
     private GameObject companyPanel; //회사 패널 
@@ -61,6 +58,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Text[] statTexts;
+
+    [SerializeField]
+    private Text sortText;
 
     public int buttonCount = 0;
 
@@ -260,18 +260,18 @@ public class UIManager : MonoBehaviour
 
     public void StatReset()
     {
-        allCreativity = 0;
-        allAddictive = 0;
-        allMelodic = 0;
-        allPopularity = 0;
+        GameManager.instance.allCreativity = 0;
+        GameManager.instance.allAddictive = 0;
+        GameManager.instance.allMelodic = 0;
+        GameManager.instance.allPopularity = 0;
     }
 
     public void ShowStat()
     {
-        statTexts[0].text = allCreativity.ToString();
-        statTexts[1].text = allAddictive.ToString();
-        statTexts[2].text = allMelodic.ToString();
-        statTexts[3].text = allPopularity.ToString();
+        statTexts[0].text = GameManager.instance.allCreativity.ToString();
+        statTexts[1].text = GameManager.instance.allAddictive.ToString();
+        statTexts[2].text = GameManager.instance.allMelodic.ToString();
+        statTexts[3].text = GameManager.instance.allPopularity.ToString();
     }
 
     public void StatSetting()
@@ -279,10 +279,10 @@ public class UIManager : MonoBehaviour
         StatReset();
         for(int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
         {
-            allCreativity += StaffManager.instance.pickWorkStaffList[i].Creativity;
-            allAddictive += StaffManager.instance.pickWorkStaffList[i].Addictive;
-            allMelodic += StaffManager.instance.pickWorkStaffList[i].Melodic;
-            allPopularity += StaffManager.instance.pickWorkStaffList[i].Popularity;
+            GameManager.instance.allCreativity += StaffManager.instance.pickWorkStaffList[i].Creativity;
+            GameManager.instance.allAddictive += StaffManager.instance.pickWorkStaffList[i].Addictive;
+            GameManager.instance.allMelodic += StaffManager.instance.pickWorkStaffList[i].Melodic;
+            GameManager.instance.allPopularity += StaffManager.instance.pickWorkStaffList[i].Popularity;
         }
         ShowStat();
     }
@@ -312,10 +312,10 @@ public class UIManager : MonoBehaviour
         {
             if(buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].MySprite)
             {
-                allAddictive -= StaffManager.instance.pickWorkStaffList[i].Addictive;
-                allCreativity -= StaffManager.instance.pickWorkStaffList[i].Creativity;
-                allMelodic -= StaffManager.instance.pickWorkStaffList[i].Melodic;
-                allPopularity -= StaffManager.instance.pickWorkStaffList[i].Popularity;
+                GameManager.instance.allAddictive -= StaffManager.instance.pickWorkStaffList[i].Addictive;
+                GameManager.instance.allCreativity -= StaffManager.instance.pickWorkStaffList[i].Creativity;
+                GameManager.instance.allMelodic -= StaffManager.instance.pickWorkStaffList[i].Melodic;
+                GameManager.instance.allPopularity -= StaffManager.instance.pickWorkStaffList[i].Popularity;
                 StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
                 StaffManager.instance.pickWorkStaffList.Remove(StaffManager.instance.pickWorkStaffList[i]);
             }
@@ -385,8 +385,9 @@ public class UIManager : MonoBehaviour
                         else if (a.Creativity > b.Creativity) return -1;
                         return 0;
                     });
-                } 
-                
+                }
+                sortText.text = sortObj.transform.GetChild(0).GetComponent<Text>().text;
+
                 break;
             case SortButtonData.Sort.addictive:
                 Debug.Log(2);
@@ -399,6 +400,7 @@ public class UIManager : MonoBehaviour
                     return 0;
                 });
                 }
+                sortText.text = sortObj.transform.GetChild(0).GetComponent<Text>().text;
                 break;
             case SortButtonData.Sort.melodic:
                 Debug.Log(3);
@@ -411,6 +413,7 @@ public class UIManager : MonoBehaviour
                     return 0;
                 });
                 }
+                sortText.text = sortObj.transform.GetChild(0).GetComponent<Text>().text;
                 break;
             case SortButtonData.Sort.popularity: 
                 Debug.Log(4);
@@ -422,7 +425,8 @@ public class UIManager : MonoBehaviour
                     else if (a.Popularity > b.Popularity) return -1;
                     return 0;
                 });
-                } 
+                }
+                sortText.text = sortObj.transform.GetChild(0).GetComponent<Text>().text;
                 break;
             case SortButtonData.Sort.level:
                 Debug.Log(4);
@@ -435,6 +439,7 @@ public class UIManager : MonoBehaviour
                         return 0;
                     });
                 }
+                sortText.text = sortObj.transform.GetChild(0).GetComponent<Text>().text;
                 break;
             default:
                 break;
