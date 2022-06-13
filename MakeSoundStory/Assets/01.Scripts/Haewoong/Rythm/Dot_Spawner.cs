@@ -7,7 +7,7 @@ public class Dot_Spawner : MonoBehaviour
     private static readonly System.Random DOT_RANDOM = new System.Random();
 
     private const float DEFAULT_SPAWN_DELAY = 1f;
-    private const float MAX_PLAYING_TIME = 10.0f;
+    private const float MAX_PLAYING_TIME = 60.0f;
 
 
     public List<Dot_NormalObj> dotList = null;

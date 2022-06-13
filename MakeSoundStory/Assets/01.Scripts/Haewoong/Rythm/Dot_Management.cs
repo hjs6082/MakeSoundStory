@@ -44,12 +44,9 @@ public class Dot_Management : MonoBehaviour
         InitValue();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.S) && !dot_Spawner.isPlaying)
-        {
-            makeStart_Act?.Invoke();
-        }
+        makeStart_Act?.Invoke();
     }
 
     private void InitSingleton()
