@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class UIManager : MonoBehaviour
     public bool isOneClick = false; // 한번만 되게 하는 bool 함수임 예)스태프 선택이 누를때마다 들어오면 안되기때문에 1회제한을 두는 변수.
 
     private bool isSort = false; //Sort를 하는것인지 체크용 bool;
+
+    [SerializeField]
+    private Text explaneText; //설명 텍스트 예) 소지금이 부족합니다.
 
     [SerializeField]
     private Text moneyText; // 소지금 텍스트
@@ -63,6 +67,9 @@ public class UIManager : MonoBehaviour
     private Button pickUpExitButton; //나가기 버튼
 
     [SerializeField]
+    private Button makeMusicButton; //음악 만들기 버튼
+
+    [SerializeField]
     private Button choiceStaffButton; //스태프 선택 버튼
 
     [SerializeField]
@@ -80,6 +87,9 @@ public class UIManager : MonoBehaviour
     public int buttonCount = 0;
 
     private int staffCount = 0;
+
+    [SerializeField]
+    private int memberCount = 0;
 
     void Awake()
     {
@@ -156,6 +166,7 @@ public class UIManager : MonoBehaviour
         {
             staffPanels[i].SetActive(false);
         }
+        GameManager.instance.playerMoney -= staffPanel.GetComponent<MyData>().myStaff.Money;
         staffPanel.SetActive(true);
         staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
         {
@@ -173,7 +184,7 @@ public class UIManager : MonoBehaviour
             tempColor.a = 0.42f;
             image.color = tempColor;
         }
-        StaffManager.instance.isSelectStaff--; 
+        StaffManager.instance.isSelectStaff = 0; // 원래 -1이였음.
     }
      
     public void ClearTween(GameObject falsePanel)
@@ -216,9 +227,48 @@ public class UIManager : MonoBehaviour
         buttons[4].onClick.AddListener(() => { buttonCount = 5; SelectPanelClick(); });
 
         pickUpExitButton.onClick.AddListener(() => { PickUpStaffEnd(); });
-        choiceStaffButton.onClick.AddListener(() => { ClearTween(staffChoicePanelObj); });
+        choiceStaffButton.onClick.AddListener(() => { MusicSceneChange(); /*ClearTween(staffChoicePanelObj);*/ });
         gachaStartButton.onClick.AddListener(() => { GachaGradeStart(); });
+        makeMusicButton.onClick.AddListener(() => { MakeMusicStart(); });
 
+    }
+
+    public void MusicSceneChange()
+    {
+        if(memberCount >= 3)
+        {
+            SceneManager.LoadScene("SceneHaewoong");
+        }
+        else
+        {
+            ShowExplane("3명 이상의 스태프를 선택해주세요.");   
+        }
+    }
+
+    public void ShowExplane(string showText)
+    {
+        explaneText.gameObject.SetActive(true);
+        explaneText.text = showText;
+        explaneText.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+        {
+            explaneText.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+            //isOneClick = false;
+            //explaneText.gameObject.SetActive(false);
+        });
+
+    }
+
+    public void MakeMusicStart()
+    {
+        companyPanel.SetActive(false);
+        staffGachaPanel.SetActive(false);
+        staffChoicePanelObj.SetActive(true);
+        clearPanel.SetActive(true);
+        clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+        {
+            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+            isOneClick = false; 
+        });
     }
 
     public void GachaGradeStart()
@@ -323,6 +373,7 @@ public class UIManager : MonoBehaviour
         StaffManager.instance.workStaffList.Remove(staffObj.GetComponent<StaffData>().myStaffData);
         buttons[buttonCount - 1].GetComponent<Image>().sprite = staffObj.GetComponent<Image>().sprite;
 
+        memberCount++;
         StatSetting();
         selectPanel.SetActive(false);
     }
@@ -391,12 +442,20 @@ public class UIManager : MonoBehaviour
         }
         if(buttons[buttonCount - 1])
         buttons[buttonCount - 1].GetComponent<Image>().sprite = null;
+        if (memberCount >= 1)
+        {
+            memberCount--;
+        }
         selectPanel.SetActive(false);
         ShowStat();
     }
 
     public void PickUpStaffEnd()
     {
+        for(int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].GetComponent<Image>().sprite = null;
+        }
         for(int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
         {
             StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
