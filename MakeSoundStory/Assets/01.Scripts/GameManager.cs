@@ -6,22 +6,23 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int playerMoney = 0;        //ÇÃ·¹ÀÌ¾îÀÇ ¼ÒÁö±Ý
+    public int playerMoney = 0;        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    
-    public int allCreativity; // ÇöÀç µ¶Ã¢¼º
-    public int allAddictive; // ÇöÀç Áßµ¶¼º
-    public int allMelodic; // ÇöÀç ¸á·ÎµðÄÃ
-    public int allPopularity; // ÇöÀç ´ëÁß¼º
+    public int allCreativity; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¢ï¿½ï¿½
+    public int allAddictive; // ï¿½ï¿½ï¿½ï¿½ ï¿½ßµï¿½ï¿½ï¿½
+    public int allMelodic; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Îµï¿½ï¿½ï¿½
+    public int allPopularity; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¼ï¿½
 
     void Start()
     {
         if(instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            Debug.Log("ÀÌ¹Ì °ÔÀÓ¸Å´ÏÀú°¡ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½Ó¸Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
         }
         UIManager.instance.GameStart();
     }

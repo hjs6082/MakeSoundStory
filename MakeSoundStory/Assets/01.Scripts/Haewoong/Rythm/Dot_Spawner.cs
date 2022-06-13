@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Dot_Spawner : MonoBehaviour
 {
-    private const float DEFAULT_SPAWN_DELAY = 1f;
-    private const float MAX_PLAYING_TIME = 90.0f;
+    private static readonly System.Random DOT_RANDOM = new System.Random();
 
-    private List<Dot_Obj> dotList = null;
+    private const float DEFAULT_SPAWN_DELAY = 1f;
+    private const float MAX_PLAYING_TIME = 10.0f;
+
+
+    public List<Dot_NormalObj> dotList = null;
 
     private float spawn_Delay = 0.0f;
     private float playingTime = 0.0f;
 
+    private int randomDot = 0;
+
     public bool isPlaying = false;
+    public bool bOnce = false;
 
     private void Awake()
     {
@@ -31,7 +37,11 @@ public class Dot_Spawner : MonoBehaviour
                 isPlaying = false;
             }
         }
-
+        else if(dotList.Count == 0 && bOnce)
+        {
+            Dot_Management.Instance.EndMakeSound();
+            bOnce = false;
+        }
     }
 
     private void InitValue()
@@ -39,16 +49,17 @@ public class Dot_Spawner : MonoBehaviour
         spawn_Delay = DEFAULT_SPAWN_DELAY;
         playingTime = 0.0f;
 
-        dotList = new List<Dot_Obj>();
+        dotList = new List<Dot_NormalObj>();
     }
 
     public void MakeStart()
     {
         isPlaying = true;
+        if(!bOnce) bOnce = true;
         StartCoroutine(RepeatSpawn());
     }
 
-    private Dot_Obj SpawnDot(int _idx)
+    private Dot_NormalObj SpawnDot(int _idx)
     {        
         GameObject dot_Prefab = Dot_Management.Instance.GetDot(_idx);
         Transform  guide_Line = Dot_Management.Instance.GetGuideLineTrm(_idx);
@@ -56,7 +67,7 @@ public class Dot_Spawner : MonoBehaviour
 
         GameObject dot = Instantiate(dot_Prefab, dot_SpawnPoint, Quaternion.identity, Dot_Management.Instance.dot_Parent);
 
-        Dot_Obj dot_Obj = dot.GetComponent<Dot_Obj>();
+        Dot_NormalObj dot_Obj = dot.GetComponent<Dot_NormalObj>();
 
         return dot_Obj;
     }
@@ -67,14 +78,23 @@ public class Dot_Spawner : MonoBehaviour
         {
             dotList.Clear();
 
-            for(int i = 0; i < Dot_Management.Instance.dotPrefabsCount; i++)
-            {
-                int randSp = Random.Range(0, 10);
+            randomDot = DOT_RANDOM.Next(0, 100);
 
-                if(randSp < 5)
+            if (randomDot < 95)
+            {
+                for (int i = 0; i < Dot_Management.Instance.dotPrefabsCount; i++)
                 {
-                    dotList.Add(SpawnDot(i));
+                    int randSp = Random.Range(0, 10);
+
+                    if (randSp < 5)
+                    {
+                        dotList.Add(SpawnDot(i));
+                    }
                 }
+            }
+            else
+            {
+                Debug.Log("특수 노트!");
             }
 
             yield return new WaitForSeconds(spawn_Delay);
