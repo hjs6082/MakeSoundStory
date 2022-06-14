@@ -9,7 +9,6 @@ public class Dot_Spawner : MonoBehaviour
     private const float DEFAULT_SPAWN_DELAY = 1f;
     private const float MAX_PLAYING_TIME = 60.0f;
 
-
     public List<Dot_NormalObj> dotList = null;
 
     private float spawn_Delay = 0.0f;

@@ -91,7 +91,7 @@ public class Dot_Management : MonoBehaviour
             stat_Counts[i] = 0;
         }
 
-        makeStart_Act += () => dot_Spawner.MakeStart();
+        makeStart_Act += () => StartCoroutine(DelayInvoke(() => dot_Spawner.MakeStart()));
         addScore_Act += (x, y) => AddStatCount(x, y);
     }
 
@@ -176,5 +176,12 @@ public class Dot_Management : MonoBehaviour
     public Dot_Graph GetGraph()
     {
         return dot_Graph;
+    }
+
+    private IEnumerator DelayInvoke(Action _action, float _delay = 0.5f)
+    {
+        yield return new WaitForSeconds(_delay);
+
+        _action?.Invoke();
     }
 }
