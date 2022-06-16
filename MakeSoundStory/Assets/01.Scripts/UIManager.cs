@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -88,6 +89,22 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Text sortText;
+
+    //------------------스태프 목록 관련 변수-----------------
+    [SerializeField]
+    private Button showStaffListButton;
+
+    [SerializeField]
+    private Button showStaffListLeftButton;
+
+    [SerializeField]
+    private Button showStaffListRightButton;
+
+    [SerializeField]
+    private GameObject showStaffListPanel;
+
+    [SerializeField]
+    private int showStaffCount = 0;
 
     public int buttonCount = 0;
 
@@ -275,7 +292,71 @@ public class UIManager : MonoBehaviour
         choiceStaffButton.onClick.AddListener(() => { MusicSceneChange(); /*ClearTween(staffChoicePanelObj);*/ });
         gachaStartButton.onClick.AddListener(() => { GachaGradeStart(); });
         makeMusicButton.onClick.AddListener(() => { MakeMusicStart(); });
+        showStaffListButton.onClick.AddListener(() => { showStaffList(); });
+        showStaffListLeftButton.onClick.AddListener(() => { showStaffLeft(); });
+        showStaffListRightButton.onClick.AddListener(() => { showStaffRight(); });
+    }
 
+    public void showStaffLeft()
+    {
+        if(showStaffCount >= 1)
+        {
+            showStaffCount--;  
+            int listIndex = showStaffCount + 1;
+            showStaffListPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[showStaffCount].MySprite;
+            showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
+            showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
+            showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
+            showStaffListPanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "싫어하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].HateGenre;
+            showStaffListPanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "독창성 : " + StaffManager.instance.workStaffList[showStaffCount].Creativity;
+            showStaffListPanel.transform.GetChild(7).gameObject.GetComponent<Text>().text = "중독성 : " + StaffManager.instance.workStaffList[showStaffCount].Addictive;
+            showStaffListPanel.transform.GetChild(8).gameObject.GetComponent<Text>().text = "멜로디컬 : " + StaffManager.instance.workStaffList[showStaffCount].Melodic;
+            showStaffListPanel.transform.GetChild(9).gameObject.GetComponent<Text>().text = "대중성 : " + StaffManager.instance.workStaffList[showStaffCount].Popularity;
+            showStaffListPanel.transform.GetChild(10).gameObject.GetComponent<Text>().text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+        }
+    }
+
+    public void showStaffRight()
+    {
+        if (showStaffCount <= StaffManager.instance.workStaffList.Count -2)
+        {
+            showStaffCount++;
+            int listIndex = showStaffCount + 1;
+            showStaffListPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[showStaffCount].MySprite;
+            showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
+            showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
+            showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
+            showStaffListPanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "싫어하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].HateGenre;
+            showStaffListPanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "독창성 : " + StaffManager.instance.workStaffList[showStaffCount].Creativity;
+            showStaffListPanel.transform.GetChild(7).gameObject.GetComponent<Text>().text = "중독성 : " + StaffManager.instance.workStaffList[showStaffCount].Addictive;
+            showStaffListPanel.transform.GetChild(8).gameObject.GetComponent<Text>().text = "멜로디컬 : " + StaffManager.instance.workStaffList[showStaffCount].Melodic;
+            showStaffListPanel.transform.GetChild(9).gameObject.GetComponent<Text>().text = "대중성 : " + StaffManager.instance.workStaffList[showStaffCount].Popularity;
+            showStaffListPanel.transform.GetChild(10).gameObject.GetComponent<Text>().text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+        }
+    }
+
+    public void showStaffList()
+    {
+        if (StaffManager.instance.workStaffList.Count != 0)
+        {
+            int listIndex = showStaffCount + 1;
+            showStaffListPanel.SetActive(true);
+
+            showStaffListPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[showStaffCount].MySprite;
+            showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
+            showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
+            showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
+            showStaffListPanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "싫어하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].HateGenre;
+            showStaffListPanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "독창성 : " + StaffManager.instance.workStaffList[showStaffCount].Creativity;
+            showStaffListPanel.transform.GetChild(7).gameObject.GetComponent<Text>().text = "중독성 : " + StaffManager.instance.workStaffList[showStaffCount].Addictive;
+            showStaffListPanel.transform.GetChild(8).gameObject.GetComponent<Text>().text = "멜로디컬 : " + StaffManager.instance.workStaffList[showStaffCount].Melodic;
+            showStaffListPanel.transform.GetChild(9).gameObject.GetComponent<Text>().text = "대중성 : " + StaffManager.instance.workStaffList[showStaffCount].Popularity;
+            showStaffListPanel.transform.GetChild(10).gameObject.GetComponent<Text>().text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+        }
+        else
+        {
+            ShowExplane("직원이 없습니다.");
+        }
     }
 
     public void MusicSceneChange()
@@ -553,6 +634,13 @@ public class UIManager : MonoBehaviour
                 {
                     gachaGradePanel.SetActive(false);
                 }
+            }
+        }
+        else if(showStaffListPanel.activeSelf)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                showStaffListPanel.SetActive(false);
             }
         }
     }
