@@ -6,7 +6,7 @@ namespace Piano
 {
     public class Piano_Control : MonoBehaviour
     {
-        private KeyCode[] pianoTile_Keys = new KeyCode[8] {
+        public KeyCode[] pianoTile_Keys = new KeyCode[8] {
             KeyCode.S,
             KeyCode.D,
             KeyCode.F,
@@ -17,7 +17,7 @@ namespace Piano
             KeyCode.L
         };
 
-        private void InitValue()
+        public void InitValue()
         {
             
         }

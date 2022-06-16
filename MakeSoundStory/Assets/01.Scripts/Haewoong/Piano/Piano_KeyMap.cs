@@ -31,7 +31,7 @@ namespace Piano
 
         private void Awake()
         {
-            InitValue();   
+             
         }
 
         private void Update()
@@ -39,7 +39,7 @@ namespace Piano
             
         }
 
-        private void InitValue()
+        public void InitValue()
         {
             Sprite[] alphabets = Resources.LoadAll<Sprite>("Haewoong/Piano/Alphabets");
 

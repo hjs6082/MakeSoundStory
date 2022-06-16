@@ -2,43 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Piano_Note : MonoBehaviour
+namespace Piano
 {
-    private const float NOTE_SPEED = 3.0f;
-
-    private Transform noteTrm = null;
-    private float curNoteSpeed = 3.0f;
-
-    private void Awake()
+    public class Piano_Note : MonoBehaviour
     {
-        InitValue();   
-    }
+        private const float NOTE_SPEED = 3.0f;
 
-    private void Update()
-    {
-        
-    }
+        private Transform noteTrm = null;
+        private float curNoteSpeed = 0.0f;
 
-    public void InitValue()
-    {
-        noteTrm = GetComponent<Transform>();
+        private void Awake()
+        {
+            InitValue();
+        }
 
-        Piano_Management.destroyNote_Act += this.DestroyNote;
-    }
+        private void Update()
+        {
+            MoveNote();
+        }
 
-    private void MoveNote()
-    {
-        noteTrm.position += Vector3.down * Time.deltaTime * curNoteSpeed;
-    }
+        public void InitValue()
+        {
+            noteTrm = GetComponent<Transform>();
+            curNoteSpeed = NOTE_SPEED;
+        }
 
-    private void DestroyNote()
-    {
-        Destroy(noteTrm.gameObject);
-    }
+        private void MoveNote()
+        {
+            noteTrm.position += Vector3.down * Time.deltaTime * curNoteSpeed;
+        }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Piano_Management.destroyNote_Act?.Invoke();
-        Piano_Management.destroyNote_Act -= this.DestroyNote;
+        private void DestroyNote()
+        {
+            Piano_Management.Instance.spawned_Note_List.Remove(noteTrm.gameObject);
+            Destroy(noteTrm.gameObject);
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            DestroyNote();
+        }
     }
 }
