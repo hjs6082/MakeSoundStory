@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
     private bool isSort = false; //Sort를 하는것인지 체크용 bool;
 
     [SerializeField]
+    private GameObject explanePanel; // 플레이어 마우스를 따라다니며 설명을 해줄 설명 패널.
+
+    [SerializeField]
     private Text explaneText; //설명 텍스트 예) 소지금이 부족합니다.
 
     [SerializeField]
@@ -110,8 +113,41 @@ public class UIManager : MonoBehaviour
     {
         ClosePickUpPanel();
         TestPanel();
+        Explane();
     }
-    
+
+    public void Explane()
+    {
+        explanePanel.transform.position = GetMousePosition(); 
+    }
+
+    public Vector2 GetMousePosition()
+    {
+        Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+
+        return worldPosition;
+    }
+
+    public void ExplaneSetting(StaffSO staffSO)
+    {
+        explanePanel.SetActive(true);
+        explanePanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
+        explanePanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 400);
+        explanePanel.transform.GetChild(0).gameObject.GetComponent<Text>().text = "이름: " + staffSO.StaffName;
+        explanePanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = staffSO.MySprite;
+        explanePanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "레벨 : " + staffSO.StaffLevel;
+        explanePanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "독창성 : " + staffSO.Creativity;
+        explanePanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "중독성 : " + staffSO.Addictive;
+        explanePanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "멜로디컬 : " + staffSO.Melodic;
+        explanePanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "대중성 : " + staffSO.Popularity; 
+    }
+
+    public void ExplaneExit()
+    {
+        explanePanel.SetActive(false); 
+    }
+
     public void GameStart()
     {
         GameManager.instance.playerMoney = 30000;
@@ -276,14 +312,14 @@ public class UIManager : MonoBehaviour
 
     public void MakeMusicStart()
     {
-        companyPanel.SetActive(false);
         staffGachaPanel.SetActive(false);
-        staffChoicePanelObj.SetActive(true);
         clearPanel.SetActive(true);
         clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
         {
             clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-            isOneClick = false; 
+            isOneClick = false;
+            companyPanel.SetActive(false);
+            staffChoicePanelObj.SetActive(true);
         });
     }
 
@@ -310,7 +346,7 @@ public class UIManager : MonoBehaviour
             GameManager.instance.playerMoney -= minusMoney;
             realPanelObj.SetActive(false);
             gachaGradePanel.SetActive(false);
-            companyPanel.SetActive(false);
+
             clearPanel.SetActive(true);
             clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
             {
@@ -318,8 +354,9 @@ public class UIManager : MonoBehaviour
                 isOneClick = false;
                 StaffGachaStart();
                 minusMoney = 0;
+                companyPanel.SetActive(false);
+                staffGachaPanel.SetActive(true);
             });
-            staffGachaPanel.SetActive(true);
             staffChoicePanelObj.SetActive(false);
         }
         else
@@ -356,7 +393,8 @@ public class UIManager : MonoBehaviour
         noneStaff.transform.parent = staffListPanel.transform;
         noneStaff.transform.localScale = new Vector3(1, 1, 1);
         noneStaff.GetComponent<Image>().sprite = Resources.Load<Sprite>("delete");
-        Destroy(noneStaff.GetComponent<StaffData>()); 
+        Destroy(noneStaff.GetComponent<StaffData>());
+        Destroy(noneStaff.GetComponent<ExplaneButton>()); 
         noChoiceStaffButton = noneStaff.GetComponent<Button>();
         noChoiceStaffButton.onClick.AddListener(() => { StaffNoChoice(); });
 
@@ -364,7 +402,7 @@ public class UIManager : MonoBehaviour
             {
             GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             staff.transform.parent = staffListPanel.transform;
-            staff.transform.localScale = new Vector3(1, 1, 1);
+            staff.transform.localScale = new Vector3(1, 1, 1);  
 
             if (!isSort)
             {
@@ -400,6 +438,8 @@ public class UIManager : MonoBehaviour
         memberCount++;
         StatSetting();
         selectPanel.SetActive(false);
+        sortText.text = ""; 
+        explanePanel.SetActive(false);
     }
 
     public void StatReset()
@@ -447,7 +487,8 @@ public class UIManager : MonoBehaviour
         buttons[buttonCount - 1].GetComponent<Image>().sprite = staffObj.GetComponent<Image>().sprite;
 
         selectPanel.SetActive(false);
-
+        sortText.text = "";
+        explanePanel.SetActive(false);
     }
 
     public void StaffNoChoice()
@@ -471,12 +512,16 @@ public class UIManager : MonoBehaviour
             memberCount--;
         }
         selectPanel.SetActive(false);
+        explanePanel.SetActive(false);
+        sortText.text = "";
         ShowStat();
     }
 
     public void PickUpStaffEnd()
     {
-        for(int i = 0; i < buttons.Length; i++)
+        StatReset();
+        ShowStat(); 
+        for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].GetComponent<Image>().sprite = null;
         }
@@ -496,6 +541,8 @@ public class UIManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 selectPanel.SetActive(false);
+                explanePanel.SetActive(false);
+                sortText.text = "";
             }
         }
         else if(gachaGradePanel.activeSelf)

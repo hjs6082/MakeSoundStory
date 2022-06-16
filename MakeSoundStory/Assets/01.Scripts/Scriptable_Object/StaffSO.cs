@@ -21,13 +21,30 @@ public class StaffSO : ScriptableObject
     private string staffJob; // 직업
     public string StaffJob { get { return staffJob;  } }
 
+    public enum Genre
+    {
+        팝,
+        알앤비,
+        재즈,
+        트랩,
+        붐뱁,
+        발라드,
+        트로트,
+        락,
+        펑크,
+        댄스, 
+        없음
+    }
+
     [SerializeField][Header("선호 장르")]
-    private string favoriteGenre; //선호 장르
-    public string FavoriteGenre { get { return favoriteGenre; } } 
+    private Genre favoriteGenre; //선호 장르
+
+    public Genre FavoriteGenre { get { return favoriteGenre; } }
 
     [SerializeField] [Header("불호 장르")]
-    private string hateGenre; //싫어하는 장르
-    public string HateGenre { get { return hateGenre; } }
+    private Genre hateGenre; //선호 장르
+
+    public Genre HateGenre { get { return hateGenre; } }
 
     [SerializeField][Header("독창성")]
     private int creativity; //독창성

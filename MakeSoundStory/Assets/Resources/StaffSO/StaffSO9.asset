@@ -16,8 +16,8 @@ MonoBehaviour:
   staffNumber: 9
   staffName: "\uC190\uBCD1\uC6B1"
   staffJob: "\uC5C6\uC74C"
-  favoriteGenre: "\uC5C6\uC74C"
-  hateGenre: "\uC5C6\uC74C"
+  favoriteGenre: 5
+  hateGenre: 9
   creativity: 30
   addictive: 20
   melodic: 20
