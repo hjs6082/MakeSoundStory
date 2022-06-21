@@ -113,6 +113,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private int memberCount = 0;
 
+
+
     void Awake()
     {
         if (instance != null)
@@ -752,4 +754,6 @@ public class UIManager : MonoBehaviour
         panelObj.SetActive(false); 
 
     }
+
+
 }
