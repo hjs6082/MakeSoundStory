@@ -32,15 +32,10 @@ namespace Piano
             noteTrm.position += Vector3.down * Time.deltaTime * curNoteSpeed;
         }
 
-        private void DestroyNote()
+        public void DestroyNote()
         {
             Piano_Management.Instance.spawned_Note_List.Remove(noteTrm.gameObject);
             Destroy(noteTrm.gameObject);
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            DestroyNote();
         }
     }
 }

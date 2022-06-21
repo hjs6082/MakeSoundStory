@@ -20,7 +20,7 @@ namespace Piano
             KeyCode.Z
         };
 
-        public List<Sprite> alphabet_Sprite_List = null;
+        private List<Sprite> alphabet_Sprite_List = null;
 
         [SerializeField]
         private Button[] pianoTile_Mapping_Btns = new Button[8];
@@ -44,6 +44,8 @@ namespace Piano
             Sprite[] alphabets = Resources.LoadAll<Sprite>("Haewoong/Piano/Alphabets");
 
             alphabet_Sprite_List = new List<Sprite>(alphabets);
+
+            
         }
 
         private void WaitMapping(int idx)

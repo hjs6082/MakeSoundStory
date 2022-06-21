@@ -22,16 +22,16 @@ TextureImporter:
     second: Alphabet_E
   - first:
       213: -8544348980476378992
-    second: PianoTIle_W_1
+    second: PianoTIle_W_0
   - first:
       213: 2875962423788970118
-    second: PianoTIle_W_2
+    second: PianoTIle_W_1
   - first:
       213: -456678549343235289
-    second: PianoTIle_W_3
+    second: PianoTIle_W_2
   - first:
       213: 547098803391763401
-    second: PianoTIle_W_4
+    second: PianoTIle_W_3
   - first:
       213: 6795074379541722896
     second: Alphabet_F
@@ -98,6 +98,12 @@ TextureImporter:
   - first:
       213: 2718855323540023927
     second: PianoTile_W_Empty
+  - first:
+      213: -7693421822164705621
+    second: Piano_EmptyNote
+  - first:
+      213: 1834607813033371981
+    second: PianoHit
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -325,7 +331,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PianoTIle_W_1
+      name: PianoTIle_W_0
       rect:
         serializedVersion: 2
         x: 0
@@ -346,7 +352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PianoTIle_W_2
+      name: PianoTIle_W_1
       rect:
         serializedVersion: 2
         x: 25
@@ -367,7 +373,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PianoTIle_W_3
+      name: PianoTIle_W_2
       rect:
         serializedVersion: 2
         x: 50
@@ -388,7 +394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PianoTIle_W_4
+      name: PianoTIle_W_3
       rect:
         serializedVersion: 2
         x: 75
@@ -866,6 +872,48 @@ TextureImporter:
       bones: []
       spriteID: 77a684bf2805bb520800000000000000
       internalID: 2718855323540023927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Piano_EmptyNote
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 65
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae52ae3d997b3590800000000000000
+      internalID: -7693421822164705621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PianoHit
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 65
+        width: 24
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d49a206f516d57910800000000000000
+      internalID: 1834607813033371981
       vertices: []
       indices: 
       edges: []

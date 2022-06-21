@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Piano
 {
-    struct NoteInfo
+    public struct NoteInfo
     {
         public GameObject _note;
         public Vector2 _notePos;
@@ -22,16 +22,15 @@ namespace Piano
         public List<int> lineIdxs = null;
 
         public float spawnDelay = 0.0f;
-        private bool bPlaying = false;
 
         private void Awake()
         {
             
         }
 
-        private void Start()
+        private void Update()
         {
-            StartPiano();
+            if(Input.GetKeyDown(KeyCode.Space) && !Piano_Management.Instance.bPlaying) Piano_Management.Instance.P_Stat.InitStatPanel();
         }
 
         public void InitValue()
@@ -41,13 +40,13 @@ namespace Piano
             lineIdxs = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
         }
 
-        private void StartPiano()
+        public void StartPiano()
         {
-            bPlaying = true;
+            Piano_Management.Instance.bPlaying = true;
             StartCoroutine(SpawnNote());
         }
 
-        private void InsNote(int _lineIdx)
+        private GameObject InsNote(int _lineIdx)
         {
             NoteInfo noteInfo;
 
@@ -58,6 +57,8 @@ namespace Piano
 
             GameObject note = Instantiate(noteInfo._note, noteInfo._notePos, Quaternion.identity, this.transform);
             Piano_Management.Instance.spawned_Note_List.Add(note);
+
+            return note;
         }
 
         private NoteInfo SetNote(int _noteIdx, int _lineIdx)
@@ -74,24 +75,25 @@ namespace Piano
 
         private IEnumerator SpawnNote()
         {
-            while(bPlaying)
+            while(Piano_Management.Instance.bPlaying)
             {
                 int spawnCount = UnityEngine.Random.Range(1, 5);
+
                 for(int i = 0; i < spawnCount; i++)
                 {
                     int randomLine = UnityEngine.Random.Range(0, guideLines.Length - i);
+                    int idx = lineIdxs[randomLine];
 
-                    for(int j = randomLine; j < lineIdxs.Count - 1; i++)
+                    for(int j = randomLine; j < lineIdxs.Count - i - 1; i++)
                     {
                         lineIdxs[j] = lineIdxs[j + 1];
                     }   
-                    lineIdxs[lineIdxs.Count - 1] = randomLine;
+                    lineIdxs[lineIdxs.Count - 1] = idx;
 
                     InsNote(randomLine);
                 }
 
                 lineIdxs.Sort();
-                bPlaying = false;
                 yield return new WaitForSeconds(spawnDelay);
             }
         }
