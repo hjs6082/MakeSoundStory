@@ -54,6 +54,7 @@ namespace Piano
             float nextPos = (isDown) ? UP_POS_Y : DOWN_POS_Y;
 
             isDown = false;
+            Piano_Management.Instance.bPlaying = true;
 
             start_Bar.DOAnchorPosY(nextPos, 1.0f)
             .SetEase(Ease.InBounce)

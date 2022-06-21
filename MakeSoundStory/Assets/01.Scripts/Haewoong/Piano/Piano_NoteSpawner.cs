@@ -42,7 +42,6 @@ namespace Piano
 
         public void StartPiano()
         {
-            Piano_Management.Instance.bPlaying = true;
             StartCoroutine(SpawnNote());
         }
 
