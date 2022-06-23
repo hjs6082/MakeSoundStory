@@ -371,7 +371,7 @@ public class UIManager : MonoBehaviour
             clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
             {
                 clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-                SceneManager.LoadScene("SceneHaewoong");
+                SceneManager.LoadScene("PianoScene");
             });
         }
         else

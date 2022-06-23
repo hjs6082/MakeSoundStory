@@ -6,7 +6,7 @@ using UnityEngine;
 public class EventSO : ScriptableObject
 {
     [Header("이벤트 내용")][SerializeField]
-    private string eventContents;
+    [TextArea]private string eventContents;
     public string EventContents { get { return eventContents; } }
 
     [Header("이벤트 사진")][SerializeField]
@@ -36,6 +36,10 @@ public class EventSO : ScriptableObject
     [SerializeField][Header("이벤트 타입")]
     private eventType myeventType; //이벤트 타입
     public eventType MyeventType { get { return myeventType; } }
+
+    [SerializeField][Header("이벤트 스탯")]
+    private eventStat myeventStat; //이벤트 타입
+    public eventStat MyeventStat { get { return myeventStat; } }
 
     [SerializeField][Header("증가량(0도 가능) 및 감소량")]
     private int increment;

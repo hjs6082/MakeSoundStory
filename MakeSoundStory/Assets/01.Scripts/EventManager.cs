@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
 {
@@ -34,7 +35,18 @@ public class EventManager : MonoBehaviour
 
     void Update()
     {
-        
+        ClosePanel();
+    }
+
+    public void ClosePanel()
+    {
+        if(eventPanel.activeSelf)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                eventPanel.SetActive(false);
+            }
+        }
     }
 
     public void AddEvent()
@@ -50,7 +62,7 @@ public class EventManager : MonoBehaviour
     {
         while (!isEvent)
         {
-            yield return new WaitForSeconds(30f);
+            yield return new WaitForSeconds(2f);
             Debug.Log(3);
             MakeEvent();
         }
@@ -65,13 +77,21 @@ public class EventManager : MonoBehaviour
             eventPanel.SetActive(true);
             eventPanel.transform.DOScale(new Vector3(1.0f, 1.0f), 0.5f).OnComplete(() =>
             {
-
+                SelectEvent(eventPanel);
             });
         }
         else
         {
 
         }
+    }
+
+    public void SelectEvent(GameObject setPanel)
+    {
+        int randoxIndex = Random.Range(0, eventList.Count);
+        EventSO selectEvent = eventList[randoxIndex]; 
+        setPanel.transform.GetChild(2).GetComponent<Image>().sprite = selectEvent.EventSprite;
+        setPanel.transform.GetChild(3).GetComponent<Text>().text = selectEvent.EventContents;
     }
 
     public void CloseEventPanel()
