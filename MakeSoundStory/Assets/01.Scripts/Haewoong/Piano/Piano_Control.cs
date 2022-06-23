@@ -39,6 +39,7 @@ namespace Piano
                     if (Input.GetKeyDown(tile.Key))
                     {
                         Piano_Management.Instance.noteCheck_Act?.Invoke(tile.Value);
+                        Piano_Management.Instance.tile_List[tile.Value].ChangeTileColor(true);
                         ChangeGuideLineColor(tile.Value, tile.Value);
                     }
                 }
@@ -48,6 +49,7 @@ namespace Piano
             {
                 if (Input.GetKeyUp(tile.Key))
                 {
+                    Piano_Management.Instance.tile_List[tile.Value].ChangeTileColor(false);
                     ChangeGuideLineColor(tile.Value, -1);
                 }
             }
@@ -61,7 +63,6 @@ namespace Piano
             else if (_colorIdx == 4 || _colorIdx == 5) { color = Piano_Management.STAT_COLORS[2]; }
             else if (_colorIdx == 6 || _colorIdx == 7) { color = Piano_Management.STAT_COLORS[3]; }
             else { color = Color.white; }
-
             Piano_Management.Instance.P_Spawner.guideLines[_hitIdx].color = color;
         }
     }

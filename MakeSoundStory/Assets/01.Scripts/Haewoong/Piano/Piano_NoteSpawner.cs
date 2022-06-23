@@ -30,7 +30,7 @@ namespace Piano
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space) && !Piano_Management.Instance.bPlaying) Piano_Management.Instance.P_Stat.InitStatPanel();
+            if(Input.GetKeyDown(KeyCode.Space) && !Piano_Management.Instance.bPlaying) Piano_Management.Instance.MakeStart();
         }
 
         public void InitValue()

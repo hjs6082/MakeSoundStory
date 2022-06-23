@@ -6,10 +6,11 @@ namespace Piano
 {
     public class Piano_Note : MonoBehaviour
     {
-        private const float NOTE_SPEED = 3.0f;
+        private const float NOTE_SPEED = 2.5f;
 
         private Transform noteTrm = null;
         private float curNoteSpeed = 0.0f;
+        public bool bMiss = true;
 
         private void Awake()
         {
@@ -36,6 +37,12 @@ namespace Piano
         {
             Piano_Management.Instance.spawned_Note_List.Remove(noteTrm.gameObject);
             Destroy(noteTrm.gameObject);
+        }
+
+        public void MissNote()
+        {
+            Piano_Management.Instance.combo = -1;
+            Piano_Management.Instance.UpdateCombo();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace Piano
 {
@@ -26,15 +27,20 @@ namespace Piano
         public bool CheckNote(int _hitIdx)
         {
             Piano_Note note = sameLine_Notes[0];
-            if(note.transform.position.y - this.transform.position.y <= 0.4f)
+            if(Mathf.Abs(note.transform.position.y - this.transform.position.y) <= 0.3f)
             {
                 Piano_Management.Instance.P_Stat.IncreaseScore(_hitIdx % 4);
 
                 sameLine_Notes.Remove(note);
+                note.bMiss = false;
                 note.DestroyNote();
+
+                Piano_Management.Instance.UpdateCombo();
 
                 return true;
             }
+
+            note.MissNote();
 
             return false;
         }
@@ -57,8 +63,16 @@ namespace Piano
             if(note != null)
             {
                 sameLine_Notes.Remove(note);
-                Destroy(other.gameObject);
+
+                if(note.bMiss)
+                {
+                    note.MissNote();
+                } 
+
+                note.DestroyNote();
             }
+
+              
         }
     }
 }

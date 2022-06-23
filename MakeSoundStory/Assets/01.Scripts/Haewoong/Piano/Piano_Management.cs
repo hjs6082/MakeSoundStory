@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using TMPro;
 
 namespace Piano
 {
@@ -39,7 +41,20 @@ namespace Piano
         public Transform guideLine_Parent = null;
         public GameObject tile_Prefab = null;
         public Transform tile_Parent = null;
+        public List<Piano_Tile> tile_List = null;
         public bool bPlaying = false;
+
+        // 시작 관련
+        private const float UP_POS_Y = 720.0f;
+        private const float DOWN_POS_Y = 110.0f;
+        [SerializeField] private RectTransform start_Bar = null;
+        public bool isDown = true;
+
+        // 점수 관련
+        public int combo = 0;
+        public int totalScore = 0;
+        [SerializeField] private TextMeshProUGUI comboTMP = null;
+        [SerializeField] private TextMeshProUGUI totalScoreTMP = null;
 
         private void Awake()
         {
@@ -76,6 +91,7 @@ namespace Piano
             }
 
             spawned_Note_List = new List<GameObject>();
+            tile_List = new List<Piano_Tile>();
 
             p_Ctrl = FindObjectOfType<Piano_Control>();
             p_KeyMap = FindObjectOfType<Piano_KeyMap>();
@@ -90,6 +106,10 @@ namespace Piano
             p_Stat?.InitValue();
 
             InitTile();
+            InitStartPanel();
+
+            combo = 0;
+            totalScore = 0;
         }
 
         private void InitTile()
@@ -109,9 +129,54 @@ namespace Piano
 
                 Piano_Tile pTile = tile.GetComponent<Piano_Tile>();
 
+                tile_List.Add(pTile);
+
                 pTile.tileImage.sprite = tileImg_List[i];
                 pTile.keyImage.sprite = keyImg_List[i];
             }
+        }
+
+        public void InitStartPanel()
+        {
+            start_Bar.anchoredPosition = new Vector2(0.0f, DOWN_POS_Y);
+            isDown = true;
+
+            start_Bar.DOAnchorPosY(140.0f, 0.75f)
+            .SetLoops(-1, LoopType.Yoyo);
+        }
+
+        public void MakeStart()
+        {
+            float nextPos = (isDown) ? UP_POS_Y : DOWN_POS_Y;
+
+            isDown = false;
+            bPlaying = true;
+
+            start_Bar.DOKill();
+            start_Bar.DOAnchorPosY(nextPos, 1.0f)
+            .SetEase(Ease.InBounce)
+            .SetDelay(0.5f)
+            .OnComplete(() =>
+            {
+                P_Spawner.StartPiano();
+            });
+        }
+
+        public void UpdateScore(int _increaseVal)
+        {
+            totalScore += _increaseVal;
+            totalScoreTMP.text = totalScore.ToString();
+        }
+
+        public void UpdateCombo()
+        {
+            RectTransform comboTMP_Parent = comboTMP.transform.parent.GetComponent<RectTransform>();
+
+            combo++;
+            comboTMP.text = combo.ToString();
+
+            comboTMP_Parent.DOComplete();
+            comboTMP_Parent.DOShakeAnchorPos(0.25f, 20, 20);
         }
     }
 }

@@ -9,5 +9,10 @@ namespace Piano
     {
         public Image tileImage = null;
         public Image keyImage = null;
+
+        public void ChangeTileColor(bool _bPress)
+        {
+            tileImage.color = (_bPress) ? Color.gray : Color.white;
+        }
     }
 }
