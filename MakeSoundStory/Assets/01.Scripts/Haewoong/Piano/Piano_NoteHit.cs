@@ -27,7 +27,7 @@ namespace Piano
         public bool CheckNote(int _hitIdx)
         {
             Piano_Note note = sameLine_Notes[0];
-            if(Mathf.Abs(note.transform.position.y - this.transform.position.y) <= 0.3f)
+            if(Mathf.Abs(note.transform.position.y - this.transform.position.y) <= 0.5f)
             {
                 Piano_Management.Instance.P_Stat.IncreaseScore(_hitIdx % 4);
 
