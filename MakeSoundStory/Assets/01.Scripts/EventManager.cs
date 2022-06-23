@@ -62,7 +62,7 @@ public class EventManager : MonoBehaviour
     {
         while (!isEvent)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(35f);
             Debug.Log(3);
             MakeEvent();
         }
