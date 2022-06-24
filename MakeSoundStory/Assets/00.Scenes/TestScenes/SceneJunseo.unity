@@ -1644,12 +1644,12 @@ GameObject:
   - component: {fileID: 151461056}
   - component: {fileID: 151461055}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: StaffSelectPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &151461054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1667,7 +1667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -61.25998}
+  m_AnchoredPosition: {x: 0, y: -61.26001}
   m_SizeDelta: {x: -547.16, y: -194.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151461055
@@ -4155,7 +4155,7 @@ MonoBehaviour:
   explanePanel: {fileID: 231433200}
   explaneText: {fileID: 1118479378}
   moneyText: {fileID: 1111665618}
-  companyPanel: {fileID: 1249161257}
+  companyPanel: {fileID: 1988888968}
   gachaStartButton: {fileID: 130466657}
   gachaGradePanel: {fileID: 1164880149}
   gradeButtons: []
