@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     private GameObject explanePanel; // 플레이어 마우스를 따라다니며 설명을 해줄 설명 패널.
 
     [SerializeField]
+    private GameObject buttonPanel; // 버튼들이 모여있는 패널
+
+    [SerializeField]
     private Text explaneText; //설명 텍스트 예) 소지금이 부족합니다.
 
     [SerializeField]
@@ -261,12 +264,16 @@ public class UIManager : MonoBehaviour
             isOneClick = false;
             StaffGachaEnd();
             companyPanel.SetActive(true);
+            buttonPanel.SetActive(true);
         });
     }
 
     public void StaffGachaStart()
     {
         Debug.Log(23);
+        companyPanel.SetActive(false);
+        buttonPanel.SetActive(false); 
+        staffGachaPanel.SetActive(true);
         for(int i = 0; i < staffPanels.Length; i++)
         {
             staffPanels[i].SetActive(true);     
@@ -371,7 +378,7 @@ public class UIManager : MonoBehaviour
             clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
             {
                 clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-                SceneManager.LoadScene("PianoScene");
+                LoadingSceneManager.LoadScene("PianoScene");
             });
         }
         else
@@ -401,6 +408,7 @@ public class UIManager : MonoBehaviour
         {
             clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
             isOneClick = false;
+            buttonPanel.SetActive(false);
             companyPanel.SetActive(false);
             staffChoicePanelObj.SetActive(true);
         });
@@ -437,6 +445,7 @@ public class UIManager : MonoBehaviour
                 isOneClick = false;
                 StaffGachaStart();
                 minusMoney = 0;
+                buttonPanel.SetActive(false);
                 companyPanel.SetActive(false);
                 staffGachaPanel.SetActive(true);
             });
@@ -653,6 +662,7 @@ public class UIManager : MonoBehaviour
         moneyText.text = "소지금 : " + GameManager.instance.playerMoney.ToString() + "G";  
         if(Input.GetKeyDown(KeyCode.C))
         {
+            buttonPanel.SetActive(false);
             companyPanel.SetActive(false);
             staffGachaPanel.SetActive(true);
             StaffGachaStart();
@@ -660,6 +670,7 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.V))
         {
+            buttonPanel.SetActive(false);
             companyPanel.SetActive(false); 
             staffGachaPanel.SetActive(false);
             staffChoicePanelObj.SetActive(true);
