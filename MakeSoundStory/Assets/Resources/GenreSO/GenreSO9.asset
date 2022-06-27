@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce30ffb4c81fa647bd6ddf3c944c587, type: 3}
+  m_Name: GenreSO9
+  m_EditorClassIdentifier: 
+  genreIdx: 9
+  genreName: "\uD391\uD06C"
+  genreExplane: "\uD391\uD06C\uB294 1960\uB144\uB300 \uC911\uBC18 \uC74C\uC545\uAC00\uB4E4\uC774
+    \uC18C\uC6B8, \uC7AC\uC988, \uB9AC\uB4EC \uC564 \uBE14\uB8E8\uC2A4(R&B)\uC758
+    \uD63C\uD569\uC744 \uD1B5\uD574 \uB9AC\uB4DC\uBBF8\uCEEC\uD558\uACE0 \uCDA4\uCD94\uAE30
+    \uC26C\uC6B4 \uC0C8\uB85C\uC6B4 \uD615\uD0DC\uC758 \uC74C\uC545\uC744 \uB9CC\uB4E4\uBA74\uC11C
+    \uBE14\uB799\uC544\uBA54\uB9AC\uCE74 \uCEE4\uBBA4\uB2C8\uD2F0\uC5D0\uC11C \uC720\uB798\uD55C
+    \uC74C\uC545 \uC7A5\uB974\uB2E4."

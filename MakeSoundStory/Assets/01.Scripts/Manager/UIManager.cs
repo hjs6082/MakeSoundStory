@@ -21,13 +21,28 @@ public class UIManager : MonoBehaviour
     private GameObject buttonPanel; // 버튼들이 모여있는 패널
 
     [SerializeField]
+    private GameObject genrePanel; 
+
+    [SerializeField]
+    private GameObject genreChoicePanel; 
+
+    [SerializeField]
+    private GameObject companyPanel; //회사 패널 
+
+    [SerializeField]
     private Text explaneText; //설명 텍스트 예) 소지금이 부족합니다.
 
     [SerializeField]
     private Text moneyText; // 소지금 텍스트
 
     [SerializeField]
-    private GameObject companyPanel; //회사 패널 
+    private Text mainText; // 메인 텍스트
+
+    [SerializeField]
+    private Button genreButton;
+
+    [SerializeField]
+    private Transform genreTransform; // 메인 텍스트
 
     private int minusMoney;
 
@@ -304,6 +319,8 @@ public class UIManager : MonoBehaviour
         showStaffListButton.onClick.AddListener(() => { showStaffList(); });
         showStaffListLeftButton.onClick.AddListener(() => { showStaffLeft(); });
         showStaffListRightButton.onClick.AddListener(() => { showStaffRight(); });
+        genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
+                                                GenreManager.instance.GenreSet(genreTransform); }); 
     }
 
     public void showStaffLeft()
@@ -372,13 +389,14 @@ public class UIManager : MonoBehaviour
     {
         if (memberCount >= 3)
         {
-            companyPanel.SetActive(true);
+            companyPanel.SetActive(false);
             staffGachaPanel.SetActive(false);
-            staffChoicePanelObj.SetActive(true);
+            staffChoicePanelObj.SetActive(false); 
+            mainText.gameObject.SetActive(false);
             clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
             {
                 clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-                LoadingSceneManager.LoadScene("PianoScene");
+                genrePanel.SetActive(true);
             });
         }
         else
