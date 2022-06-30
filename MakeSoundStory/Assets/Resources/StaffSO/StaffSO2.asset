@@ -15,12 +15,12 @@ MonoBehaviour:
   stafflevel: 4
   staffNumber: 2
   staffName: "\uAE40\uC2DC\uC791"
-  staffJob: "\uD15F\uD2B8"
+  staffJob: "\uD14C\uC2A4\uD2B8"
   favoriteGenre: 2
   hateGenre: 3
-  creativity: 4
-  addictive: 45
-  melodic: 0
-  popularity: 54
+  creativity: 20
+  addictive: 40
+  melodic: 20
+  popularity: 20
   money: 5000
   mySprite: {fileID: 621378851850375961, guid: 29a48f58d5e4fbe42aa45daa8a0f40a2, type: 3}
