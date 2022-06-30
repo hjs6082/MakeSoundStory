@@ -42,6 +42,9 @@ public class UIManager : MonoBehaviour
     private Button genreButton;
 
     [SerializeField]
+    private Button makeMusicStartButton;
+
+    [SerializeField]
     private Transform genreTransform; // 메인 텍스트
 
     private int minusMoney;
@@ -329,6 +332,21 @@ public class UIManager : MonoBehaviour
         showStaffListRightButton.onClick.AddListener(() => { showStaffRight(); });
         genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
                                                 GenreManager.instance.GenreSet(genreTransform); }); 
+         makeMusicStartButton.onClick.AddListener(() => { SceneChange(); });
+    }
+
+    public void SceneChange()
+    {
+        staffGachaPanel.SetActive(false);
+        staffChoicePanelObj.SetActive(false);
+        genrePanel.SetActive(false);
+        mainText.gameObject.SetActive(true);
+        companyPanel.SetActive(true);
+        clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+        {
+            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+            LoadingSceneManager.LoadScene("PianoScene");
+        });
     }
 
     public void showStaffLeft()
@@ -399,12 +417,13 @@ public class UIManager : MonoBehaviour
     {
         if (memberCount >= 3)
         {
-            companyPanel.SetActive(false);
+            companyPanel.SetActive(true);
             staffGachaPanel.SetActive(false);
             staffChoicePanelObj.SetActive(false); 
             mainText.gameObject.SetActive(false);
             clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
             {
+                companyPanel.SetActive(false);
                 clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
                 genrePanel.SetActive(true);
             });
@@ -554,7 +573,7 @@ public class UIManager : MonoBehaviour
     {
         StaffManager.instance.pickWorkStaffList.Add(staffObj.GetComponent<StaffData>().myStaffData);
         StaffManager.instance.workStaffList.Remove(staffObj.GetComponent<StaffData>().myStaffData);
-        GameObject buttonUnit = Instantiate(staffUnit, buttons[buttonCount - 1].transform.position + Vector3.down, Quaternion.identity, buttons[buttonCount - 1].transform);
+        GameObject buttonUnit = Instantiate(staffUnit, buttons[buttonCount - 1].transform.position + Vector3.down * 0.5f, Quaternion.identity, buttons[buttonCount - 1].transform);
 
         memberCount++;
         StatSetting();

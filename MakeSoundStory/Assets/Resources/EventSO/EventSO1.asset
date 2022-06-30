@@ -18,4 +18,4 @@ MonoBehaviour:
   eventSprite: {fileID: 0}
   myeventType: 0
   myeventStat: 6
-  increment: 0
+  increment: 10

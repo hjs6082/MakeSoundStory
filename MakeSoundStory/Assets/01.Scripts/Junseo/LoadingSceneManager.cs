@@ -71,7 +71,7 @@ public class LoadingSceneManager : MonoBehaviour
             else
             {
                 float progress = progressBar.fillAmount * 100;
-                progressText.text = progress.ToString() + "%";
+                progressText.text = (int)progress + 1 + "%"; 
                 progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 1f, timer);
                 if (progressBar.fillAmount == 1.0f)
                 {
