@@ -67,7 +67,7 @@ public class StaffSO : ScriptableObject
     public int Money { get { return money; } }
 
     [SerializeField][Header("직원 사진")]
-    private Sprite mySprite;
-    public Sprite MySprite { get { return mySprite; } }
+    private GameObject mySprite;
+    public GameObject MySprite { get { return mySprite; } } 
 
 }

@@ -131,7 +131,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private int memberCount = 0;
 
-
+    private List<GameObject> gachaStaff = new List<GameObject>();
+    private GameObject showStaffUnit = null;
 
     void Awake()
     {
@@ -172,7 +173,7 @@ public class UIManager : MonoBehaviour
         explanePanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
         explanePanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 400);
         explanePanel.transform.GetChild(0).gameObject.GetComponent<Text>().text = "이름: " + staffSO.StaffName;
-        explanePanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = staffSO.MySprite;
+        GameObject staffUnit = Instantiate(staffSO.MySprite, explanePanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, explanePanel.transform);
         explanePanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "레벨 : " + staffSO.StaffLevel;
         explanePanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "독창성 : " + staffSO.Creativity;
         explanePanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "중독성 : " + staffSO.Addictive;
@@ -211,7 +212,8 @@ public class UIManager : MonoBehaviour
         }
 
         StaffManager.instance.staffList.Remove(selectStaff);
-        staffPanels[staffCount].transform.GetChild(0).GetComponent<Image>().sprite = selectStaff.MySprite;
+        GameObject staffUnit = Instantiate(selectStaff.MySprite, staffPanels[staffCount].transform.GetChild(0).position + Vector3.down * 0.6f, Quaternion.identity, staffPanels[staffCount].transform);
+        gachaStaff.Add(staffUnit);
         staffPanels[staffCount].transform.GetChild(1).GetComponent<Text>().text = "이름 : " + selectStaff.StaffName;
         staffPanels[staffCount].transform.GetChild(2).GetComponent<Text>().text = "직업 : " + selectStaff.StaffJob;
         staffPanels[staffCount].transform.GetChild(3).GetComponent<Text>().text = "좋아하는 장르 : " + selectStaff.FavoriteGenre;
@@ -241,6 +243,7 @@ public class UIManager : MonoBehaviour
         {
             staffPanels[i].SetActive(false);
         }
+
         if (GameManager.instance.playerMoney >= staffPanel.GetComponent<MyData>().myStaff.Money)
         {
             GameManager.instance.playerMoney -= staffPanel.GetComponent<MyData>().myStaff.Money;
@@ -252,6 +255,11 @@ public class UIManager : MonoBehaviour
         staffPanel.SetActive(true);
         staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
         {
+            for (int i = 0; i < staffPanels.Length; i++)
+            {
+                Destroy(gachaStaff[i]);
+            }
+            gachaStaff.Clear();
             ClearTween(staffGachaPanel);
             staffPanel.GetComponent<MyData>().isSelect = false; 
         });
@@ -329,7 +337,8 @@ public class UIManager : MonoBehaviour
         {
             showStaffCount--;  
             int listIndex = showStaffCount + 1;
-            showStaffListPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[showStaffCount].MySprite;
+            Destroy(showStaffUnit);
+            showStaffUnit = Instantiate(StaffManager.instance.workStaffList[showStaffCount].MySprite, showStaffListPanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, showStaffListPanel.transform);
             showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
             showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
             showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
@@ -348,7 +357,8 @@ public class UIManager : MonoBehaviour
         {
             showStaffCount++;
             int listIndex = showStaffCount + 1;
-            showStaffListPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[showStaffCount].MySprite;
+            Destroy(showStaffUnit);
+            showStaffUnit = Instantiate(StaffManager.instance.workStaffList[showStaffCount].MySprite, showStaffListPanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, showStaffListPanel.transform);
             showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
             showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
             showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
@@ -368,7 +378,7 @@ public class UIManager : MonoBehaviour
             int listIndex = showStaffCount + 1;
             showStaffListPanel.SetActive(true);
 
-            showStaffListPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[showStaffCount].MySprite;
+            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[showStaffCount].MySprite, showStaffListPanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, showStaffListPanel.transform);
             showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
             showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
             showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
@@ -509,7 +519,7 @@ public class UIManager : MonoBehaviour
         noChoiceStaffButton.onClick.AddListener(() => { StaffNoChoice(); });
 
         for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
-            {
+        {
             GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             staff.transform.parent = staffListPanel.transform;
             staff.transform.localScale = new Vector3(1, 1, 1);  
@@ -524,26 +534,27 @@ public class UIManager : MonoBehaviour
                 });
             }
 
-            staff.GetComponent<Image>().sprite = StaffManager.instance.workStaffList[i].MySprite;
+            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[i].MySprite, staff.GetComponent<Image>().transform.position + Vector3.down * 0.6f, Quaternion.identity, staff.GetComponent<Image>().transform);
+            staffUnit.GetComponent<RectTransform>().localScale = new Vector3(150, 150, 1);
             staff.GetComponent<StaffData>().myStaffData = StaffManager.instance.workStaffList[i];
 
             if (buttons[buttonCount - 1].GetComponent<Image>().sprite == null)
             {
-                staff.GetComponent<Button>().onClick.AddListener(() => { SelectWorkStaff(staff); });
+                staff.GetComponent<Button>().onClick.AddListener(() => { SelectWorkStaff(staff, staffUnit); });
             }
             else
             {
-                staff.GetComponent<Button>().onClick.AddListener(() => { DistinctSelectWorkStaff(staff); });
+                staff.GetComponent<Button>().onClick.AddListener(() => { DistinctSelectWorkStaff(staff, staffUnit); });
             }
         }
 
     } 
 
-    public void SelectWorkStaff(GameObject staffObj)
+    public void SelectWorkStaff(GameObject staffObj, GameObject staffUnit)
     {
         StaffManager.instance.pickWorkStaffList.Add(staffObj.GetComponent<StaffData>().myStaffData);
         StaffManager.instance.workStaffList.Remove(staffObj.GetComponent<StaffData>().myStaffData);
-        buttons[buttonCount - 1].GetComponent<Image>().sprite = staffObj.GetComponent<Image>().sprite;
+        GameObject buttonUnit = Instantiate(staffUnit, buttons[buttonCount - 1].transform.position + Vector3.down, Quaternion.identity, buttons[buttonCount - 1].transform);
 
         memberCount++;
         StatSetting();
@@ -581,7 +592,7 @@ public class UIManager : MonoBehaviour
         ShowStat();
     }
 
-    public void DistinctSelectWorkStaff(GameObject staffObj) //이미 있는 스태프를 수정하였을때
+    public void DistinctSelectWorkStaff(GameObject staffObj, GameObject staffUnit) //이미 있는 스태프를 수정하였을때
     {
         for (int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
         {

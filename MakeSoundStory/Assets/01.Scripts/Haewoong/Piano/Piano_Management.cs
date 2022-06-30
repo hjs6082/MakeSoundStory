@@ -16,7 +16,7 @@ namespace Piano
         public static readonly Color[] STAT_COLORS = {
             Color.red, Color.green, Color.blue, Color.yellow
         };
-
+        private const float PLAY_TIME = 20.0f;
 
         public Piano_Control P_Ctrl => p_Ctrl;
         public Piano_KeyMap P_KeyMap => p_KeyMap;
@@ -43,10 +43,12 @@ namespace Piano
         public Transform tile_Parent = null;
         public List<Piano_Tile> tile_List = null;
         public bool bPlaying = false;
+        public bool bSpawn = false;
 
         // 시작 관련
         private const float UP_POS_Y = 720.0f;
         private const float DOWN_POS_Y = 110.0f;
+        private float curPlayTime = 0.0f;
         [SerializeField] private RectTransform start_Bar = null;
         public bool isDown = true;
 
@@ -63,7 +65,23 @@ namespace Piano
 
         private void Update()
         {
-            if(bPlaying) noteInput_Act?.Invoke();
+            if(bPlaying)
+            {
+                noteInput_Act?.Invoke();
+            }
+
+            if(bSpawn)
+            {
+                curPlayTime += Time.deltaTime;
+                if (curPlayTime >= PLAY_TIME)
+                {
+                    curPlayTime -= curPlayTime;
+                    bSpawn = false;
+
+                    // TODO : 피아노 종료 시 실행
+                    Debug.Log("끝");
+                }
+            }
         }
 
         private void InitSingleton()
@@ -108,6 +126,7 @@ namespace Piano
             InitTile();
             InitStartPanel();
 
+            curPlayTime = 0.0f;
             combo = 0;
             totalScore = 0;
         }
@@ -151,6 +170,7 @@ namespace Piano
 
             isDown = false;
             bPlaying = true;
+            bSpawn = true;
 
             start_Bar.DOKill();
             start_Bar.DOAnchorPosY(nextPos, 1.0f)

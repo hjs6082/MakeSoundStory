@@ -21,7 +21,7 @@ namespace Piano
 
         private void Update()
         {
-        
+            
         }
 
         public bool CheckNote(int _hitIdx)
@@ -71,8 +71,6 @@ namespace Piano
 
                 note.DestroyNote();
             }
-
-              
         }
     }
 }

@@ -51,6 +51,11 @@ namespace Piano
                 {
                     Piano_Management.Instance.tile_List[tile.Value].ChangeTileColor(false);
                     ChangeGuideLineColor(tile.Value, -1);
+
+                    if(Piano_Management.Instance.spawned_Note_List.Count == 0 && !Piano_Management.Instance.bSpawn)
+                    {
+                        Piano_Management.Instance.bPlaying = false;
+                    }
                 }
             }
         }

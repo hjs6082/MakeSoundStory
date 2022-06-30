@@ -16,11 +16,11 @@ MonoBehaviour:
   staffNumber: 10
   staffName: "\uC724\uC740\uC131"
   staffJob: "\uC5C6\uC74C"
-  favoriteGenre: "\uC5C6\uC74C"
-  hateGenre: "\uC5C6\uC74C"
+  favoriteGenre: 0
+  hateGenre: 0
   creativity: 4
   addictive: 4
   melodic: 3
   popularity: 4
   money: 0
-  mySprite: {fileID: -4136744631716902068, guid: 19727cfa455a336498f8d818fca87a7b, type: 3}
+  mySprite: {fileID: 3593811322849627655, guid: 15341dcd7f917164eb33285ba723630d, type: 3}

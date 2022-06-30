@@ -74,7 +74,7 @@ namespace Piano
 
         private IEnumerator SpawnNote()
         {
-            while(Piano_Management.Instance.bPlaying)
+            while(Piano_Management.Instance.bSpawn)
             {
                 int spawnCount = UnityEngine.Random.Range(1, 5);
 

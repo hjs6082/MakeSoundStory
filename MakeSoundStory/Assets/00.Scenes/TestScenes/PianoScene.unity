@@ -3638,6 +3638,7 @@ MonoBehaviour:
   tile_Parent: {fileID: 1420957357}
   tile_List: []
   bPlaying: 0
+  bSpawn: 0
   start_Bar: {fileID: 1447166316}
   isDown: 1
   combo: 0
