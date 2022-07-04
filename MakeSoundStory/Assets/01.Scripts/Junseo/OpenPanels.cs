@@ -63,10 +63,10 @@ public class OpenPanels : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             case type.Down:
                 break;
             case type.Left:
-                BackGroundManager.instance.BackGroundLeftMove();
+                //BackGroundManager.instance.BackGroundLeftMove();
                 break;
             case type.Right:
-                BackGroundManager.instance.BackGroundRightMove();
+                //BackGroundManager.instance.BackGroundRightMove();
                 break;
             default:
                 break;

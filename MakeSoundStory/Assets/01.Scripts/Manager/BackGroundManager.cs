@@ -9,27 +9,13 @@ public class BackGroundManager : MonoBehaviour
     public static BackGroundManager instance;
 
     [SerializeField]
-    private Sprite[] backgroundSprites;
-
-    [SerializeField]
-    private GameObject[] backgroundPanels;
-
-    [SerializeField]
     private GameObject backgroundParent;
 
     [SerializeField]
     private GameObject backgroundPrefab;
 
-    private bool isMove;
+    public List<BackgroundSO> backgroundList = new List<BackgroundSO>();
 
-    [SerializeField]
-    private bool lastTouch = true;
-
-    [SerializeField]
-    int panelIndex = 2;
-
-
-    // Start is called before the first frame update
     void Start()
     {
         if (instance == null)
@@ -40,8 +26,55 @@ public class BackGroundManager : MonoBehaviour
         {
             Debug.Log("백그라운드 매니저가 이미 있습니다.");
         }
-        StartSetting();
+        BackgroundSetting();
     }
+
+    private void Update()
+    {
+
+    }
+
+    public void BackgroundSetting()
+    {
+        BackgroundSO[] allBackgrounds = Resources.LoadAll<BackgroundSO>("BackgroundSO");
+        for(int i = 0; i < allBackgrounds.Length; i++)
+        {
+            backgroundList.Add(allBackgrounds[i]);
+            GameObject backPrefab = Instantiate(backgroundPrefab, backgroundParent.transform.position, Quaternion.identity);
+            backPrefab.transform.parent = backgroundParent.transform;
+            backPrefab.transform.localScale = new Vector3(1, 1, 1);
+            backPrefab.AddComponent<BackgroundData>().myData = allBackgrounds[i]; 
+            backPrefab.GetComponent<Image>().sprite = backPrefab.GetComponent<BackgroundData>().myData.MySprite;    
+        }
+    }
+
+    public void ShowNowPlace()
+    {
+
+    }
+}
+
+    /*    [SerializeField]
+        private Sprite[] backgroundSprites;
+
+        [SerializeField]
+        private GameObject[] backgroundPanels;
+
+        [SerializeField]
+        private GameObject backgroundParent;
+
+        [SerializeField]
+        private GameObject backgroundPrefab;
+
+        private bool isMove;
+
+       [SerializeField]
+        private bool lastTouch = true;
+
+        [SerializeField]
+        int panelIndex = 2;
+
+
 
     public void StartSetting()
     {
@@ -171,11 +204,4 @@ public class BackGroundManager : MonoBehaviour
             backGroundPanel.GetComponent<Image>().sprite = backgroundSprites[panelIndex];
 
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+    }*/
