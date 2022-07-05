@@ -43,14 +43,14 @@ public class PrototypeHeroDemo : MonoBehaviour {
         Debug.Log("234");
         if (collision.gameObject == leftMovePanel)
         {
-            //BackGroundManager.instance.BackGroundLeftMove();
+            BackGroundManager.instance.BackGroundLeftMove();
             this.gameObject.transform.localPosition = new Vector2(7.575697f, -4.93f);
             Debug.Log(this.gameObject.transform.position);
             Debug.Log("34");
         }
         else if (collision.gameObject == rightMovePanel)
         {
-            //BackGroundManager.instance.BackGroundRightMove();
+            BackGroundManager.instance.BackGroundRightMove();
             this.gameObject.transform.localPosition = new Vector2(-7.22f, -4.93f); 
             Debug.Log("34");
         }

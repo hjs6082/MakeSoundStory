@@ -14,7 +14,17 @@ public class BackGroundManager : MonoBehaviour
     [SerializeField]
     private GameObject backgroundPrefab;
 
-    public List<BackgroundSO> backgroundList = new List<BackgroundSO>();
+    [SerializeField]
+    private Text nowPlaceText;
+
+    [SerializeField]
+    private BackgroundSO nowBackground;
+
+    public List<BackgroundSO> backgroundSOList = new List<BackgroundSO>();
+
+    public List<GameObject> backgroundObjList = new List<GameObject>();
+
+    private int nowPlaceIndex;
 
     void Start()
     {
@@ -39,18 +49,87 @@ public class BackGroundManager : MonoBehaviour
         BackgroundSO[] allBackgrounds = Resources.LoadAll<BackgroundSO>("BackgroundSO");
         for(int i = 0; i < allBackgrounds.Length; i++)
         {
-            backgroundList.Add(allBackgrounds[i]);
+            backgroundSOList.Add(allBackgrounds[i]);
             GameObject backPrefab = Instantiate(backgroundPrefab, backgroundParent.transform.position, Quaternion.identity);
             backPrefab.transform.parent = backgroundParent.transform;
             backPrefab.transform.localScale = new Vector3(1, 1, 1);
-            backPrefab.AddComponent<BackgroundData>().myData = allBackgrounds[i]; 
-            backPrefab.GetComponent<Image>().sprite = backPrefab.GetComponent<BackgroundData>().myData.MySprite;    
+            backPrefab.AddComponent<BackgroundData>().myData = allBackgrounds[i];
+            backgroundPrefab.name = "Background" + i;
+            backPrefab.GetComponent<Image>().sprite = backPrefab.GetComponent<BackgroundData>().myData.MySprite;
+            backgroundObjList.Add(backPrefab);
         }
+        nowBackground = allBackgrounds[nowPlaceIndex];
+        StartCoroutine(ShowNowPlace(nowBackground.PlaceName));
     }
 
-    public void ShowNowPlace()
+    IEnumerator ShowNowPlace(string placeName)
     {
+        nowPlaceText.text = placeName;
+        nowPlaceText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        nowPlaceText.gameObject.SetActive(false);
+    }
 
+    public void BackGroundRightMove()
+    {
+        bool isMove = false;
+/*        if (backgroundParent.GetComponent<GridLayoutGroup>())
+        {*/
+            Destroy(backgroundParent.GetComponent<GridLayoutGroup>());
+/*        }
+        else
+        {
+            backgroundParent.AddComponent<GridLayoutGroup>();
+            backgroundParent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(1920f, 1080f);
+            backgroundParent.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Vertical;
+            backgroundParent.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
+        }*/
+        nowPlaceIndex++;
+        GameObject backupground = backgroundObjList[0];
+        for(int i = 4; i > 0; i--)
+        {
+            backgroundObjList[i].transform.DOMoveX(backgroundObjList[i - 1].transform.position.x, 2f).OnComplete(() => {
+                backgroundObjList[0].transform.DOLocalMove(new Vector2(8590f, -490f),0.1f).OnComplete(() => {
+                    if (isMove == false)
+                    {
+                        backgroundObjList.Remove(backgroundObjList[0]);
+                        isMove = true;
+                    }
+                });
+            });
+        }
+        backgroundObjList.Add(backupground);
+    }
+
+    public void BackGroundLeftMove()
+    {
+        bool isMove = false;
+        if(backgroundParent.GetComponent<GridLayoutGroup>())
+        {
+            Destroy(backgroundParent.GetComponent<GridLayoutGroup>());
+        }
+        else
+        {
+            backgroundParent.AddComponent<GridLayoutGroup>();
+            backgroundParent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(1920f, 1080f);
+            backgroundParent.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Vertical;
+            backgroundParent.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperRight;
+        }
+        nowPlaceIndex++;
+        GameObject backupground = backgroundObjList[0];
+        for (int i = 4; i > 0; i--)
+        {
+            backgroundObjList[i].transform.DOMoveX(backgroundObjList[i - 1].transform.position.x, 2f).OnComplete(() => {
+                backgroundObjList[0].transform.DOLocalMove(new Vector2(8590f, -490f), 0.1f).OnComplete(() => {
+                    if (isMove == false)
+                    {
+                        backgroundObjList.Remove(backgroundObjList[0]);
+                        isMove = true;
+                    }
+                });
+            });
+        }
+        backgroundObjList.Add(backupground);
     }
 }
 
