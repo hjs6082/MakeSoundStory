@@ -21,8 +21,6 @@ namespace Piano
         public Image[] guideLines = null;
         public List<int> lineIdxs = null;
 
-        public float spawnDelay = 0.0f;
-
         private void Awake()
         {
             
@@ -35,7 +33,6 @@ namespace Piano
 
         public void InitValue()
         {
-            spawnDelay = SPAWN_DELAY;
             guideLines = Piano_Management.Instance.guideLine_Parent.GetComponentsInChildren<Image>();
             lineIdxs = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
         }
@@ -76,6 +73,7 @@ namespace Piano
         {
             while(Piano_Management.Instance.bSpawn)
             {
+                float spawnDelay = UnityEngine.Random.Range(SPAWN_DELAY / 1.5f, SPAWN_DELAY);
                 int spawnCount = UnityEngine.Random.Range(1, 5);
 
                 for(int i = 0; i < spawnCount; i++)

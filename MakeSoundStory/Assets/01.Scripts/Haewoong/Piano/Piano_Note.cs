@@ -6,7 +6,7 @@ namespace Piano
 {
     public class Piano_Note : MonoBehaviour
     {
-        private const float NOTE_SPEED = 2.5f;
+        private const float NOTE_SPEED = 3f;
 
         private Transform noteTrm = null;
         private float curNoteSpeed = 0.0f;

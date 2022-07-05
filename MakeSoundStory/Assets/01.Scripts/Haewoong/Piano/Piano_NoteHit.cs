@@ -30,6 +30,7 @@ namespace Piano
             if(Mathf.Abs(note.transform.position.y - this.transform.position.y) <= 0.5f)
             {
                 Piano_Management.Instance.P_Stat.IncreaseScore(_hitIdx % 4);
+                Piano_Management.Instance.noteSound_Act?.Invoke(_hitIdx);
 
                 sameLine_Notes.Remove(note);
                 note.bMiss = false;
@@ -51,7 +52,7 @@ namespace Piano
 
             if(note != null)
             {
-                Debug.Log("노트 충돌");
+                Debug.Log("��Ʈ �浹");
                 sameLine_Notes.Add(note);
             }
         }

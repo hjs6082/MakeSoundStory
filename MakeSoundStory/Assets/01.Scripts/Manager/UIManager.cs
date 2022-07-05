@@ -1,10 +1,11 @@
+using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using UnityEngine.SceneManagement;
-using System;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,65 +15,28 @@ public class UIManager : MonoBehaviour
 
     private bool isSort = false; //Sort를 하는것인지 체크용 bool;
 
-    [SerializeField]
-    private GameObject explanePanel; // 플레이어 마우스를 따라다니며 설명을 해줄 설명 패널.
+    [SerializeField] private GameObject explanePanel     = null; // 플레이어 마우스를 따라다니며 설명을 해줄 설명 패널.
+    [SerializeField] private GameObject buttonPanel      = null; // 버튼들이 모여있는 패널
+    [SerializeField] private GameObject genrePanel       = null; 
+    [SerializeField] private GameObject genreChoicePanel = null; 
+    [SerializeField] private GameObject companyPanel     = null; //회사 패널 
+    [SerializeField] private Text       explaneText      = null; //설명 텍스트 예) 소지금이 부족합니다.
+    [SerializeField] private Text       moneyText        = null; // 소지금 텍스트
+    [SerializeField] private Text       mainText         = null; // 메인 텍스트
+    [SerializeField] private Button     genreButton      = null;
+    [SerializeField] private Transform  genreTransform   = null; // 메인 텍스트
 
-    [SerializeField]
-    private GameObject buttonPanel; // 버튼들이 모여있는 패널
-
-    [SerializeField]
-    private GameObject genrePanel; 
-
-    [SerializeField]
-    private GameObject genreChoicePanel; 
-
-    [SerializeField]
-    private GameObject companyPanel; //회사 패널 
-
-    [SerializeField]
-    private Text explaneText; //설명 텍스트 예) 소지금이 부족합니다.
-
-    [SerializeField]
-    private Text moneyText; // 소지금 텍스트
-
-    [SerializeField]
-    private Text mainText; // 메인 텍스트
-
-    [SerializeField]
-    private Button genreButton;
-
-    [SerializeField]
-    private Button makeMusicStartButton;
-
-    [SerializeField]
-    private Transform genreTransform; // 메인 텍스트
-
-    private int minusMoney;
+    private int minusMoney = 0;
 
     //---------스태프 뽑기 관련 변수-----------
-    [SerializeField]
-    private Button gachaStartButton; //가챠 스타트 버튼
-
-    [SerializeField]
-    private GameObject gachaGradePanel; //가챠의 등급을 정하는 패널
-
-    [SerializeField]
-    private Button[] gradeButtons;
-
-    [SerializeField]
-    private GameObject staffPanelObj;   //스태프 패널을 자식으로 가지고있는 부모 오브젝트
-
-    [SerializeField]
-    private GameObject realPanelObj;   //정말로 고를거냐고 물어보는 오브젝트
-
-    [SerializeField]
-    private GameObject[] staffPanels; //각 3개의 스태프를 띄울 패널들;
-
-    [SerializeField]
-    private GameObject gradeSelectPanel;
-
-    [SerializeField]
-    private GameObject clearPanel; //종료때 띄울 검은색 패널
+    [SerializeField] private Button         gachaStartButton = null; //가챠 스타트 버튼
+    [SerializeField] private GameObject     gachaGradePanel  = null; //가챠의 등급을 정하는 패널
+    [SerializeField] private Button[]       gradeButtons     = null;
+    [SerializeField] private GameObject     staffPanelObj    = null;   //스태프 패널을 자식으로 가지고있는 부모 오브젝트
+    [SerializeField] private GameObject     realPanelObj     = null;   //정말로 고를거냐고 물어보는 오브젝트
+    [SerializeField] private GameObject[]   staffPanels      = null; //각 3개의 스태프를 띄울 패널들;
+    [SerializeField] private GameObject     gradeSelectPanel = null;
+    [SerializeField] private GameObject     clearPanel       = null; //종료때 띄울 검은색 패널
 
     public GameObject staffGachaPanel; //스태프 가챠 패널
 
@@ -81,60 +45,32 @@ public class UIManager : MonoBehaviour
     
     public GameObject selectPanel; // 스태프를 선택하는 패널
 
-    [SerializeField]
-    private GameObject staffPrefab; // 스태프를 추가할 용도로 사용하는 게임오브젝트 프리팹
-
-    [SerializeField]
-    private GameObject staffListPanel; //스태프를 자식으로 가지게될 패널
-
-    [SerializeField]
-    private Button[] buttons; //멤버를 선택할 수 있는 버튼들
-
-    [SerializeField]
-    private Button pickUpExitButton; //나가기 버튼
-
-    [SerializeField]
-    private Button makeMusicButton; //음악 만들기 버튼
-
-    [SerializeField]
-    private Button choiceStaffButton; //스태프 선택 버튼
-
-    [SerializeField]
-    private Button noChoiceStaffButton; //스태프 선택 안함 버튼
-
-    [SerializeField]
-    private Button[] sortButtons;
-
-    [SerializeField]
-    private Text[] statTexts;
-
-    [SerializeField]
-    private Text sortText;
+    [SerializeField] private GameObject staffPrefab         = null; // 스태프를 추가할 용도로 사용하는 게임오브젝트 프리팹
+    [SerializeField] private GameObject staffListPanel      = null; //스태프를 자식으로 가지게될 패널
+    [SerializeField] private Button[]   buttons             = null; //멤버를 선택할 수 있는 버튼들
+    [SerializeField] private Button     pickUpExitButton    = null; //나가기 버튼
+    [SerializeField] private Button     makeMusicButton     = null; //음악 만들기 버튼
+    [SerializeField] private Button     choiceStaffButton   = null; //스태프 선택 버튼
+    [SerializeField] private Button     noChoiceStaffButton = null; //스태프 선택 안함 버튼
+    [SerializeField] private Button[]   sortButtons         = null;
+    [SerializeField] private Text[]     statTexts           = null;
+    [SerializeField] private Text       sortText            = null;
 
     //------------------스태프 목록 관련 변수-----------------
-    [SerializeField]
-    private Button showStaffListButton;
-
-    [SerializeField]
-    private Button showStaffListLeftButton;
-
-    [SerializeField]
-    private Button showStaffListRightButton;
-
-    [SerializeField]
-    private GameObject showStaffListPanel;
-
-    [SerializeField]
-    private int showStaffCount = 0;
+    [SerializeField] private Button     showStaffListButton      = null;
+    [SerializeField] private Button     showStaffListLeftButton  = null;
+    [SerializeField] private Button     showStaffListRightButton = null;
+    [SerializeField] private GameObject showStaffListPanel       = null;
+    [SerializeField] private Text       showStaffPageText        = null;
+    [SerializeField] private int        showStaffCount = 0;
 
     public int buttonCount = 0;
-
     private int staffCount = 0;
 
-    [SerializeField]
-    private int memberCount = 0;
+    [SerializeField] private int memberCount = 0;
 
     private List<GameObject> gachaStaff = new List<GameObject>();
+    private GameObject explainStaffUnit = null;
     private GameObject showStaffUnit = null;
 
     void Awake()
@@ -175,17 +111,12 @@ public class UIManager : MonoBehaviour
         explanePanel.SetActive(true);
         explanePanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
         explanePanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 400);
-        explanePanel.transform.GetChild(0).gameObject.GetComponent<Text>().text = "이름: " + staffSO.StaffName;
-        GameObject staffUnit = Instantiate(staffSO.MySprite, explanePanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, explanePanel.transform);
-        explanePanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "레벨 : " + staffSO.StaffLevel;
-        explanePanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "독창성 : " + staffSO.Creativity;
-        explanePanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "중독성 : " + staffSO.Addictive;
-        explanePanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "멜로디컬 : " + staffSO.Melodic;
-        explanePanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "대중성 : " + staffSO.Popularity; 
+        explainStaffUnit = InitStaffInfo(explanePanel, staffSO, 7); 
     }
 
     public void ExplaneExit()
     {
+        Destroy(explainStaffUnit);
         explanePanel.SetActive(false); 
     }
 
@@ -215,28 +146,18 @@ public class UIManager : MonoBehaviour
         }
 
         StaffManager.instance.staffList.Remove(selectStaff);
-        GameObject staffUnit = Instantiate(selectStaff.MySprite, staffPanels[staffCount].transform.GetChild(0).position + Vector3.down * 0.6f, Quaternion.identity, staffPanels[staffCount].transform);
+        GameObject staffUnit = InitStaffInfo(staffPanels[staffCount], selectStaff, 10);
         gachaStaff.Add(staffUnit);
-        staffPanels[staffCount].transform.GetChild(1).GetComponent<Text>().text = "이름 : " + selectStaff.StaffName;
-        staffPanels[staffCount].transform.GetChild(2).GetComponent<Text>().text = "직업 : " + selectStaff.StaffJob;
-        staffPanels[staffCount].transform.GetChild(3).GetComponent<Text>().text = "좋아하는 장르 : " + selectStaff.FavoriteGenre;
-        staffPanels[staffCount].transform.GetChild(4).GetComponent<Text>().text = "싫어하는 장르 : " + selectStaff.HateGenre;
-        staffPanels[staffCount].transform.GetChild(6).GetComponent<Text>().text = "독창성 : " + selectStaff.Creativity;
-        staffPanels[staffCount].transform.GetChild(7).GetComponent<Text>().text = "멜로디컬 : " + selectStaff.Melodic;
-        staffPanels[staffCount].transform.GetChild(8).GetComponent<Text>().text = "중독성 : " + selectStaff.Addictive;
-        staffPanels[staffCount].transform.GetChild(9).GetComponent<Text>().text = "대중성 : " + selectStaff.Popularity;
-        staffPanels[staffCount].transform.GetChild(10).GetComponent<Text>().text = "계약금 : " + selectStaff.Money + "G";
-        staffPanels[staffCount].transform.GetChild(12).GetComponent<Text>().text = "레벨 : " + selectStaff.StaffLevel; 
         staffPanels[staffCount].GetComponent<MyData>().myStaff = selectStaff;
 
-            if (staffCount != 3)
+        if (staffCount != 3)
+        {
+            staffCount++;
+            if (staffCount == 3)
             {
-                staffCount++;
-                if (staffCount == 3)
-                {
-                    staffCount = 0;
-                }
+                staffCount = 0;
             }
+        }
 
     }
 
@@ -258,11 +179,6 @@ public class UIManager : MonoBehaviour
         staffPanel.SetActive(true);
         staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
         {
-            for (int i = 0; i < staffPanels.Length; i++)
-            {
-                Destroy(gachaStaff[i]);
-            }
-            gachaStaff.Clear();
             ClearTween(staffGachaPanel);
             staffPanel.GetComponent<MyData>().isSelect = false; 
         });
@@ -285,6 +201,13 @@ public class UIManager : MonoBehaviour
         clearPanel.SetActive(true);
         clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
         {
+            for (int i = 0; i < 3; i++)
+            {
+                Destroy(gachaStaff[i]);
+            }
+            gachaStaff.Clear();
+                
+            
             falsePanel.SetActive(false);
             clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
             isOneClick = false;
@@ -332,60 +255,67 @@ public class UIManager : MonoBehaviour
         showStaffListRightButton.onClick.AddListener(() => { showStaffRight(); });
         genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
                                                 GenreManager.instance.GenreSet(genreTransform); }); 
-         makeMusicStartButton.onClick.AddListener(() => { SceneChange(); });
     }
 
-    public void SceneChange()
+    private readonly string[] STAFF_INFO_STRS = 
     {
-        staffGachaPanel.SetActive(false);
-        staffChoicePanelObj.SetActive(false);
-        genrePanel.SetActive(false);
-        mainText.gameObject.SetActive(true);
-        companyPanel.SetActive(true);
-        clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+        "이름 : ",
+        "레벨 : ",
+        "독창성 : ",
+        "멜로디컬 : ",
+        "중독성 : ",
+        "대중성 : ",
+        "좋아하는 장르 : ",
+        "싫어하는 장르 : ",
+        "직업 : ",
+        "계약금 : "
+    };
+
+    private GameObject InitStaffInfo(GameObject _infoPanel, StaffSO _staffSO, int _childCount)
+    {
+        string info = string.Empty;
+        StringBuilder sb = new StringBuilder();
+        Transform infoTrm = _infoPanel.transform;
+        Vector3 unitOffset = Vector3.down * 0.5f;
+
+        GameObject staffUnit = Instantiate(_staffSO.MySprite, infoTrm.GetChild(0).position + unitOffset, Quaternion.identity, infoTrm);
+        for(int i = 0; i < _childCount; i++)
         {
-            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-            LoadingSceneManager.LoadScene("PianoScene");
-        });
+            sb.Clear();
+            sb.Append(STAFF_INFO_STRS[i]);
+            sb.Append(_staffSO.GetInfos()[i]);
+            if(i == 9) sb.Append("G");
+            infoTrm.GetChild(i + 1).GetComponent<Text>().text = sb.ToString();
+        }
+
+        return staffUnit;
     }
 
     public void showStaffLeft()
     {
         if(showStaffCount >= 1)
         {
+            Destroy(showStaffUnit);
             showStaffCount--;  
             int listIndex = showStaffCount + 1;
-            Destroy(showStaffUnit);
-            showStaffUnit = Instantiate(StaffManager.instance.workStaffList[showStaffCount].MySprite, showStaffListPanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, showStaffListPanel.transform);
-            showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
-            showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
-            showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
-            showStaffListPanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "싫어하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].HateGenre;
-            showStaffListPanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "독창성 : " + StaffManager.instance.workStaffList[showStaffCount].Creativity;
-            showStaffListPanel.transform.GetChild(7).gameObject.GetComponent<Text>().text = "중독성 : " + StaffManager.instance.workStaffList[showStaffCount].Addictive;
-            showStaffListPanel.transform.GetChild(8).gameObject.GetComponent<Text>().text = "멜로디컬 : " + StaffManager.instance.workStaffList[showStaffCount].Melodic;
-            showStaffListPanel.transform.GetChild(9).gameObject.GetComponent<Text>().text = "대중성 : " + StaffManager.instance.workStaffList[showStaffCount].Popularity;
-            showStaffListPanel.transform.GetChild(10).gameObject.GetComponent<Text>().text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+            StaffSO staffSO = StaffManager.instance.workStaffList[showStaffCount];
+            showStaffUnit = InitStaffInfo(showStaffListPanel, staffSO, 9);
+            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
         }
     }
+
 
     public void showStaffRight()
     {
         if (showStaffCount <= StaffManager.instance.workStaffList.Count -2)
         {
+            Destroy(showStaffUnit);
             showStaffCount++;
             int listIndex = showStaffCount + 1;
-            Destroy(showStaffUnit);
-            showStaffUnit = Instantiate(StaffManager.instance.workStaffList[showStaffCount].MySprite, showStaffListPanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, showStaffListPanel.transform);
-            showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
-            showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
-            showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
-            showStaffListPanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "싫어하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].HateGenre;
-            showStaffListPanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "독창성 : " + StaffManager.instance.workStaffList[showStaffCount].Creativity;
-            showStaffListPanel.transform.GetChild(7).gameObject.GetComponent<Text>().text = "중독성 : " + StaffManager.instance.workStaffList[showStaffCount].Addictive;
-            showStaffListPanel.transform.GetChild(8).gameObject.GetComponent<Text>().text = "멜로디컬 : " + StaffManager.instance.workStaffList[showStaffCount].Melodic;
-            showStaffListPanel.transform.GetChild(9).gameObject.GetComponent<Text>().text = "대중성 : " + StaffManager.instance.workStaffList[showStaffCount].Popularity;
-            showStaffListPanel.transform.GetChild(10).gameObject.GetComponent<Text>().text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+            StaffSO staffSO = StaffManager.instance.workStaffList[showStaffCount];
+            showStaffUnit = InitStaffInfo(showStaffListPanel, staffSO, 9);
+
+            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
         }
     }
 
@@ -396,16 +326,9 @@ public class UIManager : MonoBehaviour
             int listIndex = showStaffCount + 1;
             showStaffListPanel.SetActive(true);
 
-            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[showStaffCount].MySprite, showStaffListPanel.transform.GetChild(1).position + Vector3.down * 0.6f, Quaternion.identity, showStaffListPanel.transform);
-            showStaffListPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "이름 : " + StaffManager.instance.workStaffList[showStaffCount].StaffName;
-            showStaffListPanel.transform.GetChild(3).gameObject.GetComponent<Text>().text = "레벨 : " + StaffManager.instance.workStaffList[showStaffCount].StaffLevel;
-            showStaffListPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = "좋아하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].FavoriteGenre;
-            showStaffListPanel.transform.GetChild(5).gameObject.GetComponent<Text>().text = "싫어하는 장르 : " + StaffManager.instance.workStaffList[showStaffCount].HateGenre;
-            showStaffListPanel.transform.GetChild(6).gameObject.GetComponent<Text>().text = "독창성 : " + StaffManager.instance.workStaffList[showStaffCount].Creativity;
-            showStaffListPanel.transform.GetChild(7).gameObject.GetComponent<Text>().text = "중독성 : " + StaffManager.instance.workStaffList[showStaffCount].Addictive;
-            showStaffListPanel.transform.GetChild(8).gameObject.GetComponent<Text>().text = "멜로디컬 : " + StaffManager.instance.workStaffList[showStaffCount].Melodic;
-            showStaffListPanel.transform.GetChild(9).gameObject.GetComponent<Text>().text = "대중성 : " + StaffManager.instance.workStaffList[showStaffCount].Popularity;
-            showStaffListPanel.transform.GetChild(10).gameObject.GetComponent<Text>().text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+            Destroy(showStaffUnit);
+            showStaffUnit = InitStaffInfo(showStaffListPanel, StaffManager.instance.workStaffList[showStaffCount], 9);
+            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
         }
         else
         {
@@ -417,13 +340,12 @@ public class UIManager : MonoBehaviour
     {
         if (memberCount >= 3)
         {
-            companyPanel.SetActive(true);
+            companyPanel.SetActive(false);
             staffGachaPanel.SetActive(false);
             staffChoicePanelObj.SetActive(false); 
             mainText.gameObject.SetActive(false);
             clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
             {
-                companyPanel.SetActive(false);
                 clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
                 genrePanel.SetActive(true);
             });
@@ -468,6 +390,11 @@ public class UIManager : MonoBehaviour
         gradeButtons[0].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[0]); minusMoney = 500; });
         gradeButtons[1].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[1]); minusMoney = 1000; });
         gradeButtons[2].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[2]); minusMoney = 5000; }); 
+    }
+
+    public void GachaGradeEnd()
+    {
+        gachaGradePanel.SetActive(false);
     }
 
     public void RealChoiceQuestion(Button showButton)
@@ -682,7 +609,6 @@ public class UIManager : MonoBehaviour
             {
                 selectPanel.SetActive(false);
                 explanePanel.SetActive(false);
-                sortText.text = "";
             }
         }
         else if(gachaGradePanel.activeSelf)
@@ -691,7 +617,7 @@ public class UIManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    gachaGradePanel.SetActive(false);
+                    GachaGradeEnd();
                 }
             }
         }

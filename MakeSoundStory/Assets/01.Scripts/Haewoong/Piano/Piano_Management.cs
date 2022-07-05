@@ -23,18 +23,21 @@ namespace Piano
         public Piano_NoteSpawner P_Spawner => p_Spawner;
         public Piano_NoteChecker P_Checker => p_Checker;
         public Piano_Stat P_Stat => p_Stat;
+        public Piano_Sound P_Sound => p_Sound;
 
         private Piano_Control p_Ctrl = null;
         private Piano_KeyMap p_KeyMap = null;
         private Piano_NoteSpawner p_Spawner = null;
         private Piano_NoteChecker p_Checker = null;
         private Piano_Stat p_Stat = null;
+        private Piano_Sound p_Sound = null;
 
         public Action noteInput_Act = null;
         public Action<int> noteCheck_Act = null;
+        public Action<int> noteSound_Act = null;
 
         /// <summary>
-        /// 0 : ë…ì°½ì„±, 1 : ëŒ€ì¤‘ì„±, 2 : ë©œë¡œë””ì»¬, 3 : ì¤‘ë…ì„±
+        /// 0 : ?…ì°½ì„±, 1 : ???ì¤‘ì„±, 2 : ë©œë¡œ?””ì»?, 3 : ì¤‘ë…?„±
         /// </summary>
         public int[] total_Stats = new int[4];
         public List<GameObject> spawned_Note_List = null;
@@ -45,14 +48,14 @@ namespace Piano
         public bool bPlaying = false;
         public bool bSpawn = false;
 
-        // ì‹œì‘ ê´€ë ¨
+        // ?‹œ?‘ ê´?? ¨
         private const float UP_POS_Y = 720.0f;
         private const float DOWN_POS_Y = 110.0f;
         private float curPlayTime = 0.0f;
         [SerializeField] private RectTransform start_Bar = null;
         public bool isDown = true;
 
-        // ì ìˆ˜ ê´€ë ¨
+        // ? ?ˆ˜ ê´?? ¨
         public int combo = 0;
         public int totalScore = 0;
         [SerializeField] private TextMeshProUGUI comboTMP = null;
@@ -78,8 +81,8 @@ namespace Piano
                     curPlayTime -= curPlayTime;
                     bSpawn = false;
 
-                    // TODO : í”¼ì•„ë…¸ ì¢…ë£Œ ì‹œ ì‹¤í–‰
-                    Debug.Log("ë");
+                    // TODO : ?”¼?•„?…¸ ì¢…ë£Œ ?‹œ ?‹¤?–‰
+                    Debug.Log("?");
                 }
             }
         }
@@ -92,7 +95,7 @@ namespace Piano
                 return;
             }
 
-            Debug.LogError("ë‹¤ìˆ˜ì˜ ë§¤ë‹ˆì§€ë¨¼íŠ¸");
+            Debug.LogError("?‹¤?ˆ˜?˜ ë§¤ë‹ˆì§?ë¨¼íŠ¸");
             Destroy(this.gameObject);
         }
 
@@ -102,10 +105,10 @@ namespace Piano
 
             if (GameManager.instance != null)
             {
-                total_Stats[0] = GameManager.instance.allCreativity; // ë…ì°½ì„±
-                total_Stats[1] = GameManager.instance.allPopularity; // ëŒ€ì¤‘ì„±
-                total_Stats[2] = GameManager.instance.allMelodic;    // ë©œë¡œë””ì»¬
-                total_Stats[3] = GameManager.instance.allAddictive;  // ì¤‘ë…ì„±  
+                total_Stats[0] = GameManager.instance.allCreativity; // ?…ì°½ì„±
+                total_Stats[1] = GameManager.instance.allPopularity; // ???ì¤‘ì„±
+                total_Stats[2] = GameManager.instance.allMelodic;    // ë©œë¡œ?””ì»?
+                total_Stats[3] = GameManager.instance.allAddictive;  // ì¤‘ë…?„±  
             }
 
             spawned_Note_List = new List<GameObject>();
@@ -116,12 +119,14 @@ namespace Piano
             p_Spawner = FindObjectOfType<Piano_NoteSpawner>();
             p_Checker = FindObjectOfType<Piano_NoteChecker>();
             p_Stat = FindObjectOfType<Piano_Stat>();
+            p_Sound = FindObjectOfType<Piano_Sound>();
 
             p_Ctrl?.InitValue();
             p_KeyMap?.InitValue();
             p_Spawner?.InitValue();
             p_Checker?.InitValue();
             p_Stat?.InitValue();
+            p_Sound?.InitValue();
 
             InitTile();
             InitStartPanel();
