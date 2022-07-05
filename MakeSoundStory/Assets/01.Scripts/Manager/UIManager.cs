@@ -392,6 +392,11 @@ public class UIManager : MonoBehaviour
         gradeButtons[2].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[2]); minusMoney = 5000; }); 
     }
 
+    public void GachaGradeEnd()
+    {
+        gachaGradePanel.SetActive(false);
+    }
+
     public void RealChoiceQuestion(Button showButton)
     {
             string showText = showButton.transform.GetChild(0).GetComponent<Text>().text;
@@ -604,7 +609,6 @@ public class UIManager : MonoBehaviour
             {
                 selectPanel.SetActive(false);
                 explanePanel.SetActive(false);
-                sortText.text = "";
             }
         }
         else if(gachaGradePanel.activeSelf)
@@ -613,7 +617,7 @@ public class UIManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    gachaGradePanel.SetActive(false);
+                    GachaGradeEnd();
                 }
             }
         }

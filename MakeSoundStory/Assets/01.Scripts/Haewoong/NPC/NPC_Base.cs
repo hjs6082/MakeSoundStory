@@ -10,8 +10,8 @@ namespace NPC
         protected abstract void Start();
         protected abstract void Update();
 
-        protected abstract void OnTriggerEnter(Collider other);
-        protected abstract void OnTriggerExit(Collider other);
+        protected abstract void OnTriggerEnter2D(Collider2D other);
+        protected abstract void OnTriggerExit2D(Collider2D other);
 
         protected abstract void InitValue();
         protected abstract void Ready();

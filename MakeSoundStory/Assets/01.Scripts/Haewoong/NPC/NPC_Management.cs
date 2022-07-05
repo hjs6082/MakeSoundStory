@@ -10,7 +10,8 @@ namespace NPC
         private static NPC_Management instance = null;
         public static NPC_Management Instance => instance;
 
-        public Action employ_Act = null;
+        public Action employ_Start_Act = null;
+        public Action employ_End_Act = null;
 
         [SerializeField] private NPC_EmployManager employManager = null;
 
@@ -21,13 +22,33 @@ namespace NPC
 
         private void InitValue()
         {
+            InitSington();
+
             /// NPC ÃÊ±âÈ­
-            employ_Act += () => StartEmploy();
+            employManager = FindObjectOfType<NPC_EmployManager>();
+            employ_Start_Act += () => StartEmploy();
+            employ_End_Act += () => EndEmploy();
+        }
+
+        private void InitSington()
+        {
+            if(instance == null)
+            {
+                instance = this;
+                return;
+            }
+
+            Destroy(this.gameObject);
         }
 
         private void StartEmploy()
         {
             UIManager.instance.GachaGradeStart();
+        }
+
+        private void EndEmploy()
+        {
+            UIManager.instance.GachaGradeEnd();
         }
     }
 }
