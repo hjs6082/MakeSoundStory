@@ -70,4 +70,23 @@ public class StaffSO : ScriptableObject
     private GameObject mySprite;
     public GameObject MySprite { get { return mySprite; } } 
 
+    public object[] GetInfos()
+    {
+        object[] infos = new object[11]
+        {
+            staffName,
+            stafflevel,
+            creativity,
+            melodic,
+            addictive,
+            popularity,
+            hateGenre,
+            favoriteGenre,
+            staffJob,
+            money,
+            staffNumber
+        };
+        
+        return infos;
+    }
 }
