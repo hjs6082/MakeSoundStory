@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int month = 1;
+    public int day = 1;
+
     public int playerMoney = 0;        //�÷��̾��� ������
    
     public int allCreativity; // ���� ��â��
@@ -25,6 +28,30 @@ public class GameManager : MonoBehaviour
             Debug.Log("�̹� ���ӸŴ����� �����մϴ�.");
         }
         UIManager.instance.GameStart();
+        StartCoroutine(DayTimer()); 
+    }
+
+
+    IEnumerator DayTimer()
+    {
+        if (month != 12)
+        {
+
+            yield return new WaitForSeconds(0.2f);
+            if (day != 31)
+            {
+                day++;
+                UIManager.instance.CalendarSetting();
+            }
+            else
+            {
+                month++;
+                day = 1;
+                UIManager.instance.CalendarSetting();
+            }
+            StartCoroutine(DayTimer());
+
+        }
     }
 
     // Update is called once per frame

@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text       explaneText      = null; //설명 텍스트 예) 소지금이 부족합니다.
     [SerializeField] private Text       moneyText        = null; // 소지금 텍스트
     [SerializeField] private Text       mainText         = null; // 메인 텍스트
+    [SerializeField] private Text       calendarText     = null; // 달력 텍스트
     [SerializeField] private Button     genreButton      = null;
     [SerializeField] private Transform  genreTransform   = null; // 메인 텍스트
 
@@ -159,6 +160,11 @@ public class UIManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void CalendarSetting()
+    {
+        calendarText.text = GameManager.instance.month + "월 " + GameManager.instance.day + "일";
     }
 
     public void SelectStaff(GameObject staffPanel)
