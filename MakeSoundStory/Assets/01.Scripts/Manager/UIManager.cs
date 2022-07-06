@@ -65,6 +65,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text       showStaffPageText        = null;
     [SerializeField] private int        showStaffCount = 0;
 
+    //-----------------스태프 배치 관련 변수 ------------------
+    [SerializeField] private Button staffSpawnButton    = null;  //스태프 배치 버튼    
+    [SerializeField] private GameObject staffSpawnPanel = null;  //스태프 배치 패널 버튼
+
     public int buttonCount = 0;
     private int staffCount = 0;
 
@@ -260,7 +264,8 @@ public class UIManager : MonoBehaviour
         showStaffListLeftButton.onClick.AddListener(() => { showStaffLeft(); });
         showStaffListRightButton.onClick.AddListener(() => { showStaffRight(); });
         genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
-                                                GenreManager.instance.GenreSet(genreTransform); }); 
+                                                GenreManager.instance.GenreSet(genreTransform); });
+        staffSpawnButton.onClick.AddListener(() => { staffSpawnPanel.SetActive(true); });
     }
 
     private readonly string[] STAFF_INFO_STRS = 
@@ -613,9 +618,6 @@ public class UIManager : MonoBehaviour
             clearPanel.SetActive(false);
         });
         companyPanel.SetActive(true);
-
-        //ClearTween(staffChoicePanelObj);
-        //staffChoicePanelObj.SetActive(false);
     }
 
     public void ClosePickUpPanel()
@@ -756,6 +758,8 @@ public class UIManager : MonoBehaviour
         panelObj.SetActive(false); 
 
     }
+
+    
 
 
 }

@@ -4462,6 +4462,8 @@ MonoBehaviour:
   showStaffListPanel: {fileID: 928576681}
   showStaffPageText: {fileID: 0}
   showStaffCount: 0
+  staffSpawnButton: {fileID: 0}
+  staffSpawnPanel: {fileID: 0}
   buttonCount: 0
   memberCount: 0
 --- !u!1 &510904227
@@ -16705,7 +16707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cb8e544c649fe9a46a31bdf3af68d609, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec9ad9658dc781344af495fbfe24a55c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16788,7 +16790,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cb8e544c649fe9a46a31bdf3af68d609, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2197a3c0fab9fb24a8b87d8c6696f231, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
