@@ -603,7 +603,18 @@ public class UIManager : MonoBehaviour
             StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
         }
         StaffManager.instance.pickWorkStaffList.Clear();
-        ClearTween(staffChoicePanelObj);
+        clearPanel.SetActive(true);
+        clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+        {
+            clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+            isOneClick = false;
+            buttonPanel.SetActive(true);
+            staffChoicePanelObj.SetActive(false);
+            clearPanel.SetActive(false);
+        });
+        companyPanel.SetActive(true);
+
+        //ClearTween(staffChoicePanelObj);
         //staffChoicePanelObj.SetActive(false);
     }
 
