@@ -102,39 +102,15 @@ public class BackGroundManager : MonoBehaviour
             });
         }
         backgroundObjList[0].transform.SetAsFirstSibling();
+        nowBackground = backgroundObjList[1].GetComponent<BackgroundData>().myData;
+        StartCoroutine(ShowNowPlace(nowBackground.PlaceName));
         backgroundObjList[0].transform.DOLocalMoveX(backPosition.transform.position.x, 2f);
         backgroundObjList.Add(backupground);
     }
 
     public void BackGroundLeftMove()
     {
-        bool isMove = false;
-        if(backgroundParent.GetComponent<GridLayoutGroup>())
-        {
-            Destroy(backgroundParent.GetComponent<GridLayoutGroup>());
-        }
-        else
-        {
-            backgroundParent.AddComponent<GridLayoutGroup>();
-            backgroundParent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(1920f, 1080f);
-            backgroundParent.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Vertical;
-            backgroundParent.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperRight;
-        }
-        nowPlaceIndex++;
-        GameObject backupground = backgroundObjList[0];
-        for (int i = 4; i > 0; i--)
-        {
-            backgroundObjList[i].transform.DOMoveX(backgroundObjList[i - 1].transform.position.x, 2f).OnComplete(() => {
-                backgroundObjList[0].transform.DOLocalMove(new Vector2(8590f, -490f), 0.1f).OnComplete(() => {
-                    if (isMove == false)
-                    {
-                        backgroundObjList.Remove(backgroundObjList[0]);
-                        isMove = true;
-                    }
-                });
-            });
-        }
-        backgroundObjList.Add(backupground);
+
     }
 }
 
