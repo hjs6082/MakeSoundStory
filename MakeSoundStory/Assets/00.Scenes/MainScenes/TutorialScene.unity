@@ -4573,6 +4573,7 @@ MonoBehaviour:
   explaneText: {fileID: 1118479378}
   moneyText: {fileID: 1111665618}
   mainText: {fileID: 2005589424}
+  calendarText: {fileID: 2052940425}
   genreButton: {fileID: 413587846}
   genreTransform: {fileID: 16978462}
   gachaStartButton: {fileID: 130466657}
@@ -15159,6 +15160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48378d5f38efbd46b7cdd685406393a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  month: 1
+  day: 1
   playerMoney: 0
   allCreativity: 0
   allAddictive: 0
@@ -16505,7 +16508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -728.4899, y: 445.59}
+  m_AnchoredPosition: {x: -728.49, y: 445.59}
   m_SizeDelta: {x: -1456.99, y: -891.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1831482433
@@ -18128,7 +18131,7 @@ GameObject:
   - component: {fileID: 2052940426}
   - component: {fileID: 2052940425}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CalinderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18150,8 +18153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: 0.0000076294}
-  m_SizeDelta: {x: 221.73, y: 67.91}
+  m_AnchoredPosition: {x: 77.06, y: 0.0000076294}
+  m_SizeDelta: {x: 295.85, y: 67.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052940425
 MonoBehaviour:
@@ -19229,7 +19232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5692587709019955837
 MonoBehaviour:
   m_ObjectHideFlags: 0

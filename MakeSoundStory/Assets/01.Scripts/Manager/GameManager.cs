@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         if (month != 12)
         {
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(120f);
             if (day != 31)
             {
                 day++;

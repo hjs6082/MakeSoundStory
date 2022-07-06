@@ -15,6 +15,9 @@ public class BackGroundManager : MonoBehaviour
     private GameObject backgroundPrefab;
 
     [SerializeField]
+    private GameObject backPosition;
+
+    [SerializeField]
     private Text nowPlaceText;
 
     [SerializeField]
@@ -98,6 +101,8 @@ public class BackGroundManager : MonoBehaviour
                 });
             });
         }
+        backgroundObjList[0].transform.SetAsFirstSibling();
+        backgroundObjList[0].transform.DOLocalMoveX(backPosition.transform.position.x, 2f);
         backgroundObjList.Add(backupground);
     }
 
