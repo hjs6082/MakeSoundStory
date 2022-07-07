@@ -29,6 +29,8 @@ public class BackGroundManager : MonoBehaviour
 
     private int nowPlaceIndex;
 
+    public GameObject employ_NPC = null;
+
     void Start()
     {
         if (instance == null)
@@ -60,6 +62,8 @@ public class BackGroundManager : MonoBehaviour
             backgroundPrefab.name = "Background" + i;
             backPrefab.GetComponent<Image>().sprite = backPrefab.GetComponent<BackgroundData>().myData.MySprite;
             backgroundObjList.Add(backPrefab);
+
+            if(i == 0) Instantiate(employ_NPC, backPrefab.transform);
         }
         nowBackground = allBackgrounds[nowPlaceIndex];
         StartCoroutine(ShowNowPlace(nowBackground.PlaceName));

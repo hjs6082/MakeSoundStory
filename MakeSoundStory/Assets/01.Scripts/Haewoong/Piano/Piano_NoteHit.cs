@@ -37,6 +37,7 @@ namespace Piano
                 note.DestroyNote();
 
                 Piano_Management.Instance.UpdateCombo();
+                Piano_Management.Instance.UpdateMakePercent();
 
                 return true;
             }

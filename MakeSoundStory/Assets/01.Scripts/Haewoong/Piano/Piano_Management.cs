@@ -61,6 +61,18 @@ namespace Piano
         [SerializeField] private TextMeshProUGUI comboTMP = null;
         [SerializeField] private TextMeshProUGUI totalScoreTMP = null;
 
+        public float curMakePercent = 0.0f; // 현재 완성도
+        public Image makePercentGuage = null;
+
+        public void UpdateMakePercent()
+        {
+            curMakePercent += 5.0f;
+            makePercentGuage.fillAmount = curMakePercent / 100.0f;
+
+            if(curMakePercent >= 40.0f)
+            p_Sound.ClipsToDrum();
+        }
+
         private void Awake()
         {
             InitValue();

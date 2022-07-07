@@ -104,6 +104,9 @@ TextureImporter:
   - first:
       213: 1834607813033371981
     second: PianoHit
+  - first:
+      213: 237141442995589343
+    second: Piano_34
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -914,6 +917,27 @@ TextureImporter:
       bones: []
       spriteID: d49a206f516d57910800000000000000
       internalID: 1834607813033371981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Piano_34
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 105
+        width: 250
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd0964fc2ee7a4300800000000000000
+      internalID: 237141442995589343
       vertices: []
       indices: 
       edges: []
