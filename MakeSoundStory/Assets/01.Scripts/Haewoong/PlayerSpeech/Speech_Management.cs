@@ -69,16 +69,18 @@ public class Speech_Management : MonoBehaviour
         switch (speechCount)
         {
             case 3: ChangeFocus(eFocus.DATE); break;
-            case 5: ChangeFocus(eFocus.MONEY); break;
-            case 7: ClearFocus(); break;
-            case 8:
+            case 4: ChangeFocus(eFocus.MONEY); break;
+            case 5: ClearFocus(); break;
+            case 7:
             {
                 Debug.Log("튜토 1 끝"); 
                 focusPanels[0].transform.parent.parent.gameObject.SetActive(false);
-                // TODO : 
+                // TODO : 스태프실 ㄱ
             }break;
-            default: Talk(); break;
+            default: break;
         }
+
+        Talk();
     }
 
     private void Talk()
