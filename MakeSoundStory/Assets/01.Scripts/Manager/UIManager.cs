@@ -66,8 +66,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int        showStaffCount = 0;
 
     //-----------------스태프 배치 관련 변수 ------------------
-    [SerializeField] private Button staffSpawnButton    = null;  //스태프 배치 버튼    
-    [SerializeField] private GameObject staffSpawnPanel = null;  //스태프 배치 패널 버튼
+    [SerializeField] private Button staffSpawnButton          = null;  //스태프 배치 버튼    
+    [SerializeField] private GameObject staffSpawnPanel       = null;  //스태프 배치 패널 오브젝트
+    [SerializeField] private GameObject spawnStaffChoicePanel = null; // 스폰할 스태프 패널
+    [SerializeField] private GameObject spawnStaffChoiceListPanel = null; // 스폰할 스태프 패널
 
     public int buttonCount = 0;
     private int staffCount = 0;
@@ -759,7 +761,63 @@ public class UIManager : MonoBehaviour
 
     }
 
-    
+    public void SpawnStaff()
+    {
+        spawnStaffChoicePanel.SetActive(true);
+
+        Transform[] childList = spawnStaffChoiceListPanel.GetComponentsInChildren<Transform>();
+        if (spawnStaffChoiceListPanel.transform.childCount != 0)
+        {
+            if (childList != null)
+            {
+                for (int i = 1; i < childList.Length; i++)
+                {
+                    if (childList[i] != transform)
+                    {
+                        Destroy(childList[i].gameObject); 
+                    }
+                }
+            }
+        }
+        GameObject noneStaff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        noneStaff.transform.parent = spawnStaffChoiceListPanel.transform;
+        noneStaff.transform.localScale = new Vector3(1, 1, 1);
+        noneStaff.GetComponent<Image>().sprite = Resources.Load<Sprite>("delete");
+        Destroy(noneStaff.GetComponent<StaffData>());
+        Destroy(noneStaff.GetComponent<ExplaneButton>());
+        //noChoiceStaffButton = noneStaff.GetComponent<Button>();
+        //noChoiceStaffButton.onClick.AddListener(() => { StaffNoChoice(); });
+
+        for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+        {
+            GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            staff.transform.parent = staffListPanel.transform;
+            staff.transform.localScale = new Vector3(1, 1, 1);
+
+            if (!isSort)
+            {
+                StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                {
+                    if (a.StaffNumber > b.StaffNumber) return 1;
+                    else if (a.StaffNumber < b.StaffNumber) return -1;
+                    return 0;
+                });
+            }
+
+            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[i].MySprite, staff.GetComponent<Image>().transform.position + Vector3.down * 0.6f, Quaternion.identity, staff.GetComponent<Image>().transform);
+            staffUnit.GetComponent<RectTransform>().localScale = new Vector3(150, 150, 1);
+            staff.GetComponent<StaffData>().myStaffData = StaffManager.instance.workStaffList[i];
+
+/*            if (buttons[buttonCount - 1].GetComponent<Image>().sprite == null)
+            {
+                staff.GetComponent<Button>().onClick.AddListener(() => { SelectWorkStaff(staff, staffUnit); });
+            }
+            else
+            {
+                staff.GetComponent<Button>().onClick.AddListener(() => { DistinctSelectWorkStaff(staff, staffUnit); });
+            }*/
+        }
+    }
 
 
 }
