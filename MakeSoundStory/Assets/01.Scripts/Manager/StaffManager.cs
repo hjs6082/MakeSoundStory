@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StaffManager : MonoBehaviour
+public class StaffManager : MonoBehaviour, IStaff
 {
     public static StaffManager instance;
 
@@ -19,6 +19,8 @@ public class StaffManager : MonoBehaviour
     public List<StaffSO> pickWorkStaffList = new List<StaffSO>();
 
     public int isSelectStaff;
+
+    private string[] sayList = { "안녕하세요, 날씨가 좋네요.", "개발중 오류가생겨서 고치는 작업중이에요." };
 
     private void Awake()
     {
@@ -90,5 +92,18 @@ public class StaffManager : MonoBehaviour
             }  
 
         }
+    }
+
+    public StaffSO ReturnRandomStaff()
+    {
+        int randoxIndex = Random.Range(0, staffList.Count);
+        return workStaffList[randoxIndex];
+    }
+
+    public void Say(StaffSO staff)
+    {
+        //대화창을 제작해야함. 대화창 안에 스태프 이미지를 넣고, 말하는것을 랜덤으로 정해주고 다이얼로그를 띄울것. 
+        int randomIndex = Random.Range(0, sayList.Length);
+        
     }
 }
