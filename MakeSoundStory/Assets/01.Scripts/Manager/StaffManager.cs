@@ -58,7 +58,7 @@ public class StaffManager : MonoBehaviour, IStaff
             pickStaffList.Add(staffList[randoxIndex]);
             //staffList.RemoveAt(randoxIndex); 
 
-            UIManager.instance.StaffGatcha(selectStaff);
+            UIManager.instance.StaffGatcha(selectStaff,randoxIndex);
 
             if (workStaffList.Count != 0)
             {
@@ -105,5 +105,10 @@ public class StaffManager : MonoBehaviour, IStaff
         //대화창을 제작해야함. 대화창 안에 스태프 이미지를 넣고, 말하는것을 랜덤으로 정해주고 다이얼로그를 띄울것. 
         int randomIndex = Random.Range(0, sayList.Length);
         
+    }
+
+    public void NoneTalk(StaffSO staff)
+    {
+
     }
 }

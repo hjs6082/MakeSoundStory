@@ -141,8 +141,9 @@ public class UIManager : MonoBehaviour
         } 
     }
 
-    public void StaffGatcha(StaffSO selectStaff)
+    public void StaffGatcha(StaffSO selectStaff,int index)
     {
+        StaffManager.instance.staffList.RemoveAt(index);
         //Debug.Log("Ω√¿€");
         int staffPanelsCount = staffPanelObj.transform.childCount;
         

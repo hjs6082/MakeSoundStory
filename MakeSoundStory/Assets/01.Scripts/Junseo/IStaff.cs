@@ -4,6 +4,11 @@ using UnityEngine;
 
 public interface IStaff
 {
+    enum staffStatus
+    {
+        none,
+        talk
+    };
     void Say(StaffSO staff); // 스태프가 말하는거
                              // 스태프가 행동할것
                              // 스태프가 부탁하는 것
