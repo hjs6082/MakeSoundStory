@@ -10,10 +10,7 @@ namespace NPC
         private static NPC_Management instance = null;
         public static NPC_Management Instance => instance;
 
-        public Action employ_Start_Act = null;
-        public Action employ_End_Act = null;
-
-        [SerializeField] private NPC_EmployManager employManager = null;
+        public NPC_FSM[] npc_FSMs = null;
 
         private void Awake()
         {
@@ -24,10 +21,20 @@ namespace NPC
         {
             InitSington();
 
-            /// NPC √ ±‚»≠
-            employManager = FindObjectOfType<NPC_EmployManager>();
-            employ_Start_Act += () => StartEmploy();
-            employ_End_Act += () => EndEmploy();
+            npc_FSMs = GetComponentsInChildren<NPC_FSM>();
+        }
+
+        public void AddNPC(GameObject npc_Prefab)
+        {
+            for(int i = 0; i < npc_FSMs.Length; i++)
+            {
+                if(npc_FSMs[i].npc_Unit_Prefab == null)
+                {
+                    npc_FSMs[i].npc_Unit_Prefab = npc_Prefab;
+                    npc_FSMs[i].Init();
+                    return;
+                }
+            }
         }
 
         private void InitSington()
@@ -39,16 +46,6 @@ namespace NPC
             }
 
             Destroy(this.gameObject);
-        }
-
-        private void StartEmploy()
-        {
-            UIManager.instance.GachaGradeStart();
-        }
-
-        private void EndEmploy()
-        {
-            UIManager.instance.GachaGradeEnd();
         }
     }
 }

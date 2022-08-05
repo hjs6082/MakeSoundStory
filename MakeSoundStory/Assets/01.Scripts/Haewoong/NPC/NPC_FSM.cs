@@ -6,7 +6,6 @@ public class NPC_FSM : MonoBehaviour
 {
     public enum eState
     {
-        INIT,
         WAIT,
         MOVE
     }
@@ -25,15 +24,14 @@ public class NPC_FSM : MonoBehaviour
     public float move_Speed = 0.5f;
     public float move_Time = 0.0f;
     public int curPoint = 0;
-    public eState curState = eState.INIT;
+    public eState curState = default;
 
     public bool isOnce = false;
     public bool isWait = false;
 
     public void InitValue()
     {
-        print( string.Format("###", npc_Unit_Idx));
-        npc_Unit_Prefab = Resources.Load<GameObject>("SPUM/SPUM_Units/Unit00" + npc_Unit_Idx);
+        print(string.Format("###", npc_Unit_Idx));
 
         npc_Unit = Instantiate(npc_Unit_Prefab, this.transform.position, Quaternion.identity, this.transform);
 
@@ -44,24 +42,28 @@ public class NPC_FSM : MonoBehaviour
         npc_RectTrm.anchoredPosition = Vector2.zero;
 
         curPoint = 0;
-        curState = eState.INIT;
+        curState = default;
     }
 
     private void Update()
     {
-        switch(curState)
+        if (isOnce)
         {
-            case eState.INIT: if(!isOnce) { isOnce = true; Init(); }
-            break;
-            case eState.WAIT: if(!isWait) { isWait = true; Wait(); }
-            break;
-            case eState.MOVE: Move();
-            break;
+            switch (curState)
+            {
+                case eState.WAIT:
+                    if (!isWait) { isWait = true; Wait(); }
+                    break;
+                case eState.MOVE:
+                    Move();
+                    break;
+            }
         }
     }
 
     public void Init()
     {
+        isOnce = true;
         InitValue();
         StartCoroutine(StateDelay());
     }
@@ -69,13 +71,13 @@ public class NPC_FSM : MonoBehaviour
     public void Move()
     {
         curPoint %= move_Points.Length;
-     
+
         npc_Trm.localScale = (npc_Trm.position.x - move_Points[curPoint].position.x < 0) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
         move_Time += Time.deltaTime;
         npc_Trm.position = Vector3.Lerp(npc_Trm.position, move_Points[curPoint].position, move_Time * Time.deltaTime * move_Speed);
 
-        if(Vector2.Distance(npc_Trm.position, move_Points[curPoint].position) <= 0.01f)
+        if (Vector2.Distance(npc_Trm.position, move_Points[curPoint].position) <= 0.01f)
         {
             npc_Trm.position = move_Points[curPoint].position;
 
@@ -110,5 +112,5 @@ public class NPC_FSM : MonoBehaviour
         curState = ChangeState();
     }
 
-    
+
 }
