@@ -107,6 +107,27 @@ TextureImporter:
   - first:
       213: 237141442995589343
     second: Piano_34
+  - first:
+      213: 7155306464297153727
+    second: Alphabet_Comma
+  - first:
+      213: 8608661184142209544
+    second: Alphabet_SingleQuote
+  - first:
+      213: 7484172423355334710
+    second: Alphabet_Slash
+  - first:
+      213: -7117239288358692408
+    second: Alphabet_SemiColon
+  - first:
+      213: 546059788571156731
+    second: Alphabet_Period
+  - first:
+      213: -3690695009785713069
+    second: Alphabet_Bracket_L
+  - first:
+      213: -1637316373695394505
+    second: Alphabet_Bracket_R
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -930,7 +951,7 @@ TextureImporter:
         width: 250
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -938,6 +959,153 @@ TextureImporter:
       bones: []
       spriteID: fd0964fc2ee7a4300800000000000000
       internalID: 237141442995589343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_Comma
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 0
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb4fc7f9151cc4360800000000000000
+      internalID: 7155306464297153727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_SingleQuote
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 0
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8027d708cbb187770800000000000000
+      internalID: 8608661184142209544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_Slash
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 0
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6308edb8a2f1dd760800000000000000
+      internalID: 7484172423355334710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_SemiColon
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 16
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c91de3739c7a3d90800000000000000
+      internalID: -7117239288358692408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_Period
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 16
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0a8eb0c7ef39700800000000000000
+      internalID: 546059788571156731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_Bracket_L
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 32
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e6a67517408ccc0800000000000000
+      internalID: -3690695009785713069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_Bracket_R
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 32
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73d84f8de651749e0800000000000000
+      internalID: -1637316373695394505
       vertices: []
       indices: 
       edges: []

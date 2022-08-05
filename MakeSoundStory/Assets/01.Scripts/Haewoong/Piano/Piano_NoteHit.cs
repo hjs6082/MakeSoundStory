@@ -19,41 +19,13 @@ namespace Piano
             sameLine_Notes = new List<Piano_Note>();
         }
 
-        private void Update()
-        {
-            
-        }
-
-        public bool CheckNote(int _hitIdx)
-        {
-            Piano_Note note = sameLine_Notes[0];
-            if(Mathf.Abs(note.transform.position.y - this.transform.position.y) <= 0.5f)
-            {
-                Piano_Management.Instance.P_Stat.IncreaseScore(_hitIdx % 4);
-                Piano_Management.Instance.noteSound_Act?.Invoke(_hitIdx);
-
-                sameLine_Notes.Remove(note);
-                note.bMiss = false;
-                note.DestroyNote();
-
-                Piano_Management.Instance.UpdateCombo();
-                Piano_Management.Instance.UpdateMakePercent();
-
-                return true;
-            }
-
-            note.MissNote();
-
-            return false;
-        }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             Piano_Note note = other.GetComponent<Piano_Note>();
 
             if(note != null)
             {
-                Debug.Log("³ëÆ® Ãæµ¹");
+                Debug.Log("ï¿½ï¿½Æ® ï¿½æµ¹");
                 sameLine_Notes.Add(note);
             }
         }

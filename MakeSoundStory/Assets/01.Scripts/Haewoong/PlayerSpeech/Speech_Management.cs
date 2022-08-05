@@ -71,7 +71,7 @@ public class Speech_Management : MonoBehaviour
             case 3: ChangeFocus(eFocus.DATE); break;
             case 4: ChangeFocus(eFocus.MONEY); break;
             case 5: ClearFocus(); break;
-            case 7:
+            case 6:
             {
                 Debug.Log("∆©≈‰ 1 ≥°"); 
                 focusPanels[0].transform.parent.parent.gameObject.SetActive(false);

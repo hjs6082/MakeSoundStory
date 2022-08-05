@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,71 +8,54 @@ namespace Piano
 {
     public class Piano_KeyMap : MonoBehaviour
     {
-        private readonly Color[] TILE_COLORS = {
-            Color.red, Color.green, Color.blue, Color.yellow
-        };
-
-        private readonly KeyCode[] MAPPING_KEYS = {
-            KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E,
-            KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J,
-            KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N, KeyCode.O,
-            KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T,
-            KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y,
-            KeyCode.Z
-        };
-
-        private List<Sprite> alphabet_Sprite_List = null;
+        private static Piano_KeyMap instance = null;
+        public static Piano_KeyMap Instance => instance;
 
         [SerializeField]
-        private Button[] pianoTile_Mapping_Btns = new Button[8];
+        private Image[] pianoTile_Mapping_Images = new Image[8];
         public KeyCode[] pianoTile_Keys = new KeyCode[8];
+        public List<KeyInfo> pianoTile_KeyInfo_List = new List<KeyInfo>();
+        public Dictionary<KeyCode, Sprite> pianoTile_KeyImage_Dic = new Dictionary<KeyCode, Sprite>();
 
-        private bool isWaitting = false;
+        public KeyCode curSelectedKey = KeyCode.None;
         private int curMapping = -1;
 
         private void Awake()
         {
-             
+            if (instance == null)
+            {
+                instance = this;
+                return;
+            }
+
+            InitValue();
         }
 
         private void Update()
         {
-            
+
         }
 
         public void InitValue()
         {
             Sprite[] alphabets = Resources.LoadAll<Sprite>("Haewoong/Piano/Alphabets");
-
-            alphabet_Sprite_List = new List<Sprite>(alphabets);
-
-            
         }
 
-        private void WaitMapping(int idx)
+        public void InitTile()
         {
-            pianoTile_Mapping_Btns[idx].GetComponent<Image>().color = TILE_COLORS[idx];
-            curMapping = idx;
-            isWaitting = true;
-        }
-
-        private void InputKeyCode()
-        {
-            if(Input.anyKeyDown)
+            for(int i = 0; i < pianoTile_KeyInfo_List.Count; i++)
             {
-                for(int i = 0; i < MAPPING_KEYS.Length; i++)
-                {
-                    if(Input.GetKeyDown(MAPPING_KEYS[i]))
-                    {
-                        Image pianoTile_Key_Img = pianoTile_Mapping_Btns[curMapping].GetComponentInChildren<Image>();
+                pianoTile_KeyInfo_List[i].InitSize();
+            }
+        }
 
-                        pianoTile_Keys[curMapping] = MAPPING_KEYS[i];
-                        pianoTile_Key_Img.sprite = alphabet_Sprite_List[i];
-                        curMapping = -1;
-                        isWaitting = false;
-                        return;
-                    }
-                }
+        public void KeyMapping(int _idx)
+        {
+            if (curSelectedKey != KeyCode.None)
+            {
+                pianoTile_Keys[_idx] = curSelectedKey;
+                pianoTile_Mapping_Images[_idx].sprite = pianoTile_KeyImage_Dic[curSelectedKey];
+                curSelectedKey = KeyCode.None;
             }
         }
     }

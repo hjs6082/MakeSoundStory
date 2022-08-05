@@ -40,24 +40,28 @@ namespace Piano
                     {
                         Piano_Management.Instance.noteCheck_Act?.Invoke(tile.Value);
                         Piano_Management.Instance.tile_List[tile.Value].ChangeTileColor(true);
+                        Piano_Management.Instance.MakeMusic();
                         ChangeGuideLineColor(tile.Value, tile.Value);
                     }
                 }
             }
-
-            foreach (var tile in pianoTile_Dic)
+            else
             {
-                if (Input.GetKeyUp(tile.Key))
+                foreach (var tile in pianoTile_Dic)
                 {
-                    Piano_Management.Instance.tile_List[tile.Value].ChangeTileColor(false);
-                    ChangeGuideLineColor(tile.Value, -1);
-
-                    if(Piano_Management.Instance.spawned_Note_List.Count == 0 && !Piano_Management.Instance.bSpawn)
+                    if (Input.GetKeyUp(tile.Key))
                     {
-                        Piano_Management.Instance.bPlaying = false;
+                        Piano_Management.Instance.tile_List[tile.Value].ChangeTileColor(false);
+                        ChangeGuideLineColor(tile.Value, -1);
+
+                        if (Piano_Management.Instance.spawned_Note_List.Count == 0 && !Piano_Management.Instance.bSpawn)
+                        {
+                            Piano_Management.Instance.bPlaying = false;
+                        }
                     }
                 }
             }
+
         }
 
         private void ChangeGuideLineColor(int _hitIdx, int _colorIdx)

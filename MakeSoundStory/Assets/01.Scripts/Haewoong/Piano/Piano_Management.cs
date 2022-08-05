@@ -37,7 +37,7 @@ namespace Piano
         public Action<int> noteSound_Act = null;
 
         /// <summary>
-        /// 0 : ?…ì°½ì„±, 1 : ???ì¤‘ì„±, 2 : ë©œë¡œ?””ì»?, 3 : ì¤‘ë…?„±
+        /// 0 : ?ï¿½ï¿½ì°½ì„±, 1 : ???ì¤‘ì„±, 2 : ë©œë¡œ?ï¿½ï¿½ï¿½?, 3 : ì¤‘ë…?ï¿½ï¿½
         /// </summary>
         public int[] total_Stats = new int[4];
         public List<GameObject> spawned_Note_List = null;
@@ -48,21 +48,24 @@ namespace Piano
         public bool bPlaying = false;
         public bool bSpawn = false;
 
-        // ?‹œ?‘ ê´?? ¨
+        // ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
         private const float UP_POS_Y = 720.0f;
         private const float DOWN_POS_Y = 110.0f;
         private float curPlayTime = 0.0f;
         [SerializeField] private RectTransform start_Bar = null;
         public bool isDown = true;
 
-        // ? ?ˆ˜ ê´?? ¨
+        // ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
         public int combo = 0;
         public int totalScore = 0;
         [SerializeField] private TextMeshProUGUI comboTMP = null;
         [SerializeField] private TextMeshProUGUI totalScoreTMP = null;
 
-        public float curMakePercent = 0.0f; // ÇöÀç ¿Ï¼ºµµ
+        public float curMakePercent = 0.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½
         public Image makePercentGuage = null;
+
+        private int DEFAULT_MUSIC_CLAMP = 10;
+        public int totalMusicClamp = 0;
 
         public void UpdateMakePercent()
         {
@@ -73,9 +76,21 @@ namespace Piano
             p_Sound.ClipsToDrum();
         }
 
+        public void MakeMusic()
+        {
+            totalMusicClamp--;
+
+            if(totalMusicClamp == 0)
+            {
+                // ìŒì•… ì œì‘ ì¢…ë£Œ
+                print("ì¢…ë£Œ");
+                bSpawn = false;
+            }
+        }
+
         private void Awake()
         {
-            InitValue();
+            InitialValue();
         }
 
         private void Update()
@@ -93,8 +108,8 @@ namespace Piano
                     curPlayTime -= curPlayTime;
                     bSpawn = false;
 
-                    // TODO : ?”¼?•„?…¸ ì¢…ë£Œ ?‹œ ?‹¤?–‰
-                    Debug.Log("?");
+                    // TODO : ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ì¢…ë£Œ ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
+                    Debug.Log("?ï¿½ï¿½");
                 }
             }
         }
@@ -107,25 +122,39 @@ namespace Piano
                 return;
             }
 
-            Debug.LogError("?‹¤?ˆ˜?˜ ë§¤ë‹ˆì§?ë¨¼íŠ¸");
+            Debug.LogError("?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ë§¤ë‹ˆï¿½?ë¨¼íŠ¸");
             Destroy(this.gameObject);
         }
 
-        private void InitValue()
+        private void InitialValue() // ìµœì´ˆ í•œ ë²ˆ
         {
             InitSingleton();
 
             if (GameManager.instance != null)
             {
-                total_Stats[0] = GameManager.instance.allCreativity; // ?…ì°½ì„±
+                total_Stats[0] = GameManager.instance.allCreativity; // ?ï¿½ï¿½ì°½ì„±
                 total_Stats[1] = GameManager.instance.allPopularity; // ???ì¤‘ì„±
-                total_Stats[2] = GameManager.instance.allMelodic;    // ë©œë¡œ?””ì»?
-                total_Stats[3] = GameManager.instance.allAddictive;  // ì¤‘ë…?„±  
+                total_Stats[2] = GameManager.instance.allMelodic;    // ë©œë¡œ?ï¿½ï¿½ï¿½?
+                total_Stats[3] = GameManager.instance.allAddictive;  // ì¤‘ë…?ï¿½ï¿½  
             }
 
             spawned_Note_List = new List<GameObject>();
             tile_List = new List<Piano_Tile>();
 
+            InitialPiano();
+            InitTile();
+            InitStartPanel();
+
+            curPlayTime = 0.0f;
+            combo = 0;
+            totalScore = 0;
+        
+            int statAverage = (total_Stats[0] + total_Stats[1] + total_Stats[2] + total_Stats[3]) / 4;
+            totalMusicClamp = DEFAULT_MUSIC_CLAMP + (statAverage / 2);
+        }
+
+        private void InitialPiano()
+        {
             p_Ctrl = FindObjectOfType<Piano_Control>();
             p_KeyMap = FindObjectOfType<Piano_KeyMap>();
             p_Spawner = FindObjectOfType<Piano_NoteSpawner>();
@@ -139,19 +168,12 @@ namespace Piano
             p_Checker?.InitValue();
             p_Stat?.InitValue();
             p_Sound?.InitValue();
-
-            InitTile();
-            InitStartPanel();
-
-            curPlayTime = 0.0f;
-            combo = 0;
-            totalScore = 0;
         }
-
         private void InitTile()
         {
             List<Sprite> tileImg_List = new List<Sprite>(Resources.LoadAll<Sprite>("Haewoong/Piano/Tiles"));
             List<Sprite> keyImg_List = new List<Sprite>();
+
             for(int i = 0; i < p_Ctrl.pianoTile_Keys.Length; i++)
             {
                 Sprite img = Resources.Load<Sprite>($"Haewoong/Piano/Alphabets/Alphabet_{p_Ctrl.pianoTile_Keys[i].ToString()}");
@@ -171,7 +193,6 @@ namespace Piano
                 pTile.keyImage.sprite = keyImg_List[i];
             }
         }
-
         public void InitStartPanel()
         {
             start_Bar.anchoredPosition = new Vector2(0.0f, DOWN_POS_Y);

@@ -30,7 +30,7 @@ namespace Piano
 
         private void MoveNote()
         {
-            noteTrm.position += Vector3.down * Time.deltaTime * curNoteSpeed;
+            noteTrm.localPosition += Vector3.up * Time.deltaTime * curNoteSpeed;
         }
 
         public void DestroyNote()
