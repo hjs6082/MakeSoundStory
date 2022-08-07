@@ -24,12 +24,12 @@ namespace NPC
         protected override void OnTriggerEnter2D(Collider2D other)
         {
             Debug.Log("hjkdhjksdfgjk");
-            NPC_Management.Instance.employ_Start_Act?.Invoke();
+            //NPC_Management.Instance.employ_Start_Act?.Invoke();
         }
 
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            NPC_Management.Instance.employ_End_Act?.Invoke();
+            //NPC_Management.Instance.employ_End_Act?.Invoke();
         }
 
         protected override void InitValue()

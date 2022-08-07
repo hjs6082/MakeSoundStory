@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class StaffManager : MonoBehaviour, IStaff
 {
@@ -16,11 +17,11 @@ public class StaffManager : MonoBehaviour, IStaff
     public List<StaffSO> workStaffList = new List<StaffSO>();
 
     [Header("음악 제작에 뽑힌 스태프 리스트")]
-    public List<StaffSO> pickWorkStaffList = new List<StaffSO>();
+    public List<StaffSO> pickWorkStaffList = new List<StaffSO>();   
 
     public int isSelectStaff;
 
-    private string[] sayList = { "안녕하세요, 날씨가 좋네요.", "개발중 오류가생겨서 고치는 작업중이에요." };
+    private string[] sayList = { "안녕하세요, 날씨가 좋네요.", "알아 나도, 시작하고 싶은 마음. 근데 곡이란게 별수있나..\n그냥 기다려보자고" };
 
     private void Awake()
     {
@@ -109,6 +110,19 @@ public class StaffManager : MonoBehaviour, IStaff
 
     public void NoneTalk(StaffSO staff)
     {
-
+        UIManager.instance.staffTalkText.DOKill();
+        if(UIManager.instance.staffImage.transform.childCount != 0)
+        {
+            Destroy(UIManager.instance.staffImage.transform.GetChild(0).gameObject);
+        }
+        int randomIndex = Random.Range(0, sayList.Length);
+        UIManager.instance.staffTalkPanel.SetActive(true);
+        UIManager.instance.staffTalkText.text = "";
+        UIManager.instance.staffTalkNameText.text = "";
+        UIManager.instance.staffTalkText.DOText(sayList[randomIndex], 3f);
+        UIManager.instance.staffTalkNameText.text = staff.StaffName;
+        GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity);
+        staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 1;
+        staffImage.transform.parent = UIManager.instance.staffImage;
     }
 }

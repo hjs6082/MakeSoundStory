@@ -15,6 +15,18 @@ public class UIManager : MonoBehaviour
 
     private bool isSort = false; //Sort를 하는것인지 체크용 bool;
 
+    public GameObject staffTalkPanel = null;
+    public GameObject staffStatus = null;
+
+    public Text staffTalkText = null;
+    public Text staffTalkNameText = null;
+
+    public Sprite talkImage = null;
+
+    public Transform staffImage = null;
+
+    [SerializeField] private Transform staffSpawnPosition = null;
+
     [SerializeField] private GameObject explanePanel     = null; // 플레이어 마우스를 따라다니며 설명을 해줄 설명 패널.
     [SerializeField] private GameObject buttonPanel      = null; // 버튼들이 모여있는 패널
     [SerializeField] private GameObject genrePanel       = null; 
@@ -102,7 +114,7 @@ public class UIManager : MonoBehaviour
 
     public void Explane()
     {
-        explanePanel.transform.position = GetMousePosition(); 
+        explanePanel.transform.position = GetMousePosition();
     }
 
     public Vector2 GetMousePosition()
@@ -193,7 +205,12 @@ public class UIManager : MonoBehaviour
         staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
         {
             ClearTween(staffGachaPanel);
-            staffPanel.GetComponent<MyData>().isSelect = false; 
+            staffPanel.GetComponent<MyData>().isSelect = false;
+            //GameObject staff = Instantiate(staffPanel.GetComponent<MyData>().myStaff.MySprite, staffSpawnPosition.position, Quaternion.identity);
+            //staff.transform.parent = staffSpawnPosition.transform;
+            //staff.transform.localScale = new Vector3(1f, 1f, 1f);
+            NPC.NPC_Management.Instance.AddNPC(staffPanel.GetComponent<MyData>().myStaff);
+
         });
     }
 

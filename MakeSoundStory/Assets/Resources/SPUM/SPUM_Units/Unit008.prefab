@@ -2082,7 +2082,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
 --- !u!95 &3251272310929191956
 Animator:
   serializedVersion: 3
@@ -2725,6 +2725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6403686012873424898}
   - component: {fileID: 5054607670874250452}
+  - component: {fileID: -3024021812012952393}
   m_Layer: 5
   m_Name: Unit008
   m_TagString: Untagged
@@ -2741,7 +2742,7 @@ RectTransform:
   m_GameObject: {fileID: 5901609193471143057}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 200, y: 200, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2596520475958645748}
   m_Father: {fileID: 0}
@@ -2774,6 +2775,20 @@ MonoBehaviour:
   UnitTypeChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!136 &-3024021812012952393
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901609193471143057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6465021519574718642
 GameObject:
   m_ObjectHideFlags: 0

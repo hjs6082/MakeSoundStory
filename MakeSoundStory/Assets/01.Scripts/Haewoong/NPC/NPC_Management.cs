@@ -24,14 +24,20 @@ namespace NPC
             npc_FSMs = GetComponentsInChildren<NPC_FSM>();
         }
 
-        public void AddNPC(GameObject npc_Prefab)
+        public void AddNPC(StaffSO npc_Prefab)
         {
             for(int i = 0; i < npc_FSMs.Length; i++)
             {
                 if(npc_FSMs[i].npc_Unit_Prefab == null)
                 {
-                    npc_FSMs[i].npc_Unit_Prefab = npc_Prefab;
+                    npc_FSMs[i].npc_Unit_Prefab = npc_Prefab.MySprite;
                     npc_FSMs[i].Init();
+                    npc_FSMs[i].npc_Unit.AddComponent<StaffData>();
+                    npc_FSMs[i].npc_Unit.GetComponent<StaffData>().myStaffData = npc_Prefab;
+                    npc_FSMs[i].npc_Unit.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 1;
+                    npc_FSMs[i].npc_Unit.AddComponent<Staff>();
+                    npc_FSMs[i].npc_Unit.GetComponent<Staff>().myStatus = UIManager.instance.staffStatus;
+                    npc_FSMs[i].npc_Unit.GetComponent<Staff>().noneTalkSprite = UIManager.instance.talkImage;
                     return;
                 }
             }

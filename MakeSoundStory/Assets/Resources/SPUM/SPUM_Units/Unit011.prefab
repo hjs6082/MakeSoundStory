@@ -2764,6 +2764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3899357791463372972}
   - component: {fileID: 1281946427050714030}
+  - component: {fileID: -3186019155168631707}
   m_Layer: 5
   m_Name: Unit011
   m_TagString: Untagged
@@ -2780,7 +2781,7 @@ RectTransform:
   m_GameObject: {fileID: 6139824866162230376}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 200, y: 200, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6100605724087992509}
   m_Father: {fileID: 0}
@@ -2813,6 +2814,20 @@ MonoBehaviour:
   UnitTypeChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!136 &-3186019155168631707
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139824866162230376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6400592518272909693
 GameObject:
   m_ObjectHideFlags: 0
