@@ -121,8 +121,29 @@ public class StaffManager : MonoBehaviour, IStaff
         UIManager.instance.staffTalkNameText.text = "";
         UIManager.instance.staffTalkText.DOText(sayList[randomIndex], 3f);
         UIManager.instance.staffTalkNameText.text = staff.StaffName;
-        GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity);
-        staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 1;
+        GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity); 
+        staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 2;
+        staffImage.transform.localScale = new Vector2(2f, 2f);
         staffImage.transform.parent = UIManager.instance.staffImage;
+    }
+
+    public void Talk(StaffSO staff, string talkText)
+    {
+        Debug.Log("Talk");
+        UIManager.instance.staffTalkText.DOKill();
+        if (UIManager.instance.staffImage.transform.childCount != 0)
+        { 
+            Destroy(UIManager.instance.staffImage.transform.GetChild(0).gameObject);
+        }
+            UIManager.instance.staffTalkPanel.SetActive(true);
+            UIManager.instance.staffTalkText.text = "";
+            UIManager.instance.staffTalkNameText.text = "";
+            UIManager.instance.staffTalkText.DOText(talkText, 3f);
+            UIManager.instance.staffTalkNameText.text = staff.StaffName;
+            GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity);
+            staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 2;
+            staffImage.transform.localScale = new Vector2(2f, 2f);
+            staffImage.transform.parent = UIManager.instance.staffImage;
+       
     }
 }
