@@ -18,6 +18,10 @@ public class UIManager : MonoBehaviour
     public GameObject staffTalkPanel = null;
     public GameObject staffStatus = null;
 
+    public GameObject staffNpcPanel = null;
+    public GameObject musicNpcPanel = null;
+    public GameObject settingNpcPanel = null;
+
     public Text staffTalkText = null;
     public Text staffTalkNameText = null;
 

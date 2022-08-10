@@ -138,7 +138,7 @@ public class StaffManager : MonoBehaviour, IStaff
             UIManager.instance.staffTalkPanel.SetActive(true);
             UIManager.instance.staffTalkText.text = "";
             UIManager.instance.staffTalkNameText.text = "";
-            UIManager.instance.staffTalkText.DOText(talkText, 3f);
+            UIManager.instance.staffTalkText.DOText(talkText, 1f);
             UIManager.instance.staffTalkNameText.text = staff.StaffName;
             GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity);
             staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 2;
