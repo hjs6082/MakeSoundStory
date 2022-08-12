@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
@@ -260,6 +261,7 @@ public class UIManager : MonoBehaviour
         companyPanel.SetActive(false);
         buttonPanel.SetActive(false); 
         staffGachaPanel.SetActive(true);
+
         for(int i = 0; i < staffPanels.Length; i++)
         {
             staffPanels[i].SetActive(true);     
@@ -317,7 +319,20 @@ public class UIManager : MonoBehaviour
         Transform infoTrm = _infoPanel.transform;
         Vector3 unitOffset = Vector3.down * 0.5f;
 
+        
+
         GameObject staffUnit = Instantiate(_staffSO.MySprite, infoTrm.GetChild(0).position + unitOffset, Quaternion.identity, infoTrm);
+        staffUnit.GetComponent<RectTransform>().localScale = new Vector2(150, 150);
+        
+        if(staffUnit.GetComponent<SortingGroup>() != null)
+        {
+            staffUnit.GetComponent<SortingGroup>().sortingOrder = 50;
+        }
+        else
+        {
+            staffUnit.AddComponent<SortingGroup>().sortingOrder = 50;
+        }
+
         for(int i = 0; i < _childCount; i++)
         {
             sb.Clear();

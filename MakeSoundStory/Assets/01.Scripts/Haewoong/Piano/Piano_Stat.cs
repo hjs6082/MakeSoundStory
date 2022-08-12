@@ -6,20 +6,14 @@ using DG.Tweening;
 
 namespace Piano
 {
-
     public class Piano_Stat : MonoBehaviour
     {
         [SerializeField] private int[] stat_Scores = null;
         [SerializeField] private int[] stat_Increase = null;
 
-        [Header("Score UI ê´€ë ¨")]
+        [Header("Score UI °ü·Ã")]
         [SerializeField] private Text[] stat_ScoreTexts = null;
         [SerializeField] private Image[] stat_Blocks = null;
-
-        private void Awake()
-        {
-
-        }
 
         public void InitValue()
         {
@@ -40,7 +34,6 @@ namespace Piano
         public void IncreaseScore(int _statIdx)
         {
             stat_Scores[_statIdx] += stat_Increase[_statIdx];
-            Piano_Management.Instance.UpdateScore(stat_Increase[_statIdx]);
         }
     }
 }

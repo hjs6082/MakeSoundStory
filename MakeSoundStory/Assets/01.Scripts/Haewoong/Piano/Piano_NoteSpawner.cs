@@ -16,31 +16,18 @@ namespace Piano
     {
         //private const float SPAWN_DELAY = 0.75f;
 
-        [SerializeField]
-        private GameObject[] note_Prefabs = null;
+        [SerializeField] private GameObject[] note_Prefabs = null;
+        [SerializeField] private Transform    note_Parent  = null;
+
         public Image[] guideLines = null;
         public List<int> lineIdxs = null;
-
-        private void Awake()
-        {
-            
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space) && !Piano_Management.Instance.bPlaying) Piano_Management.Instance.MakeStart();
-        }
-
+        
         public void InitValue()
         {
             guideLines = Piano_Management.Instance.guideLine_Parent.GetComponentsInChildren<Image>();
             lineIdxs = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
-            Piano_Management.Instance.noteCheck_Act += (x) => InsNote(x);
-        }
 
-        public void StartPiano()
-        {
-            //StartCoroutine(SpawnNote());
+            Piano_Management.Instance.noteCheck_Act += (x) => InsNote(x);
         }
 
         private GameObject InsNote(int _lineIdx)
@@ -53,7 +40,6 @@ namespace Piano
             else                                    { noteInfo = SetNote(3, _lineIdx); }
 
             GameObject note = Instantiate(noteInfo._note, noteInfo._notePos, guideLines[_lineIdx].rectTransform.rotation, this.transform);
-            Piano_Management.Instance.spawned_Note_List.Add(note);
 
             return note;
         }
@@ -63,42 +49,9 @@ namespace Piano
             NoteInfo noteInfo = new NoteInfo();
             
             noteInfo._note = note_Prefabs[_noteIdx];
-
-            noteInfo._notePos.x = guideLines[_lineIdx].transform.position.x;
-            noteInfo._notePos.y = Piano_Management.Instance.P_Checker.noteHits[_lineIdx].transform.position.y;
+            noteInfo._notePos = guideLines[_lineIdx].transform.position;
 
             return noteInfo;
-        }
-
-        // private IEnumerator SpawnNote()
-        // {
-        //     while(Piano_Management.Instance.bSpawn)
-        //     {
-        //         float spawnDelay = UnityEngine.Random.Range(SPAWN_DELAY / 1.5f, SPAWN_DELAY);
-        //         int spawnCount = UnityEngine.Random.Range(1, 5);
-
-        //         for(int i = 0; i < spawnCount; i++)
-        //         {
-        //             int randomLine = UnityEngine.Random.Range(0, guideLines.Length - i);
-        //             int idx = lineIdxs[randomLine];
-
-        //             for(int j = randomLine; j < lineIdxs.Count - i - 1; i++)
-        //             {
-        //                 lineIdxs[j] = lineIdxs[j + 1];
-        //             }   
-        //             lineIdxs[lineIdxs.Count - 1] = idx;
-
-        //             InsNote(randomLine);
-        //         }
-
-        //         lineIdxs.Sort();
-        //         yield return new WaitForSeconds(spawnDelay);
-        //     }
-        // }
-
-        private void SpawnNote()
-        {
-
         }
     }
 }

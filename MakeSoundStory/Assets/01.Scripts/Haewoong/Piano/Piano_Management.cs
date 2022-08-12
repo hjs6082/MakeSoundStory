@@ -10,86 +10,47 @@ namespace Piano
 {
     public class Piano_Management : MonoBehaviour
     {
-        public static Piano_Management Instance => instance;
+        public  static Piano_Management Instance => instance;
         private static Piano_Management instance = null;
 
-        public static readonly Color[] STAT_COLORS = {
-            Color.red, Color.green, Color.blue, Color.yellow
-        };
-        private const float PLAY_TIME = 20.0f;
+        private const float DEFAULT_PLAY_TIME = 90.0f; // ±‚∫ª ∞‘¿” «√∑π¿Ã Ω√∞£
 
-        public Piano_Control P_Ctrl => p_Ctrl;
-        public Piano_KeyMap P_KeyMap => p_KeyMap;
-        public Piano_NoteSpawner P_Spawner => p_Spawner;
-        public Piano_NoteChecker P_Checker => p_Checker;
-        public Piano_Stat P_Stat => p_Stat;
-        public Piano_Sound P_Sound => p_Sound;
+#region ≈¨∑°Ω∫
+        [Header("««æ∆≥Î ≈¨∑°Ω∫")]
+        public Piano_Control     p_Ctrl    = null;
+        public Piano_KeyMap      p_KeyMap  = null;
+        public Piano_NoteSpawner p_Spawner = null;
+        public Piano_Stat        p_Stat    = null;   
+        public Piano_Sound       p_Sound   = null;
+#endregion
 
-        private Piano_Control p_Ctrl = null;
-        private Piano_KeyMap p_KeyMap = null;
-        private Piano_NoteSpawner p_Spawner = null;
-        private Piano_NoteChecker p_Checker = null;
-        private Piano_Stat p_Stat = null;
-        private Piano_Sound p_Sound = null;
-
-        public Action noteInput_Act = null;
+#region Action
+        [Header("««æ∆≥Î Action ∫Øºˆ")]
+        public Action      noteInput_Act = null;
         public Action<int> noteCheck_Act = null;
         public Action<int> noteSound_Act = null;
+#endregion
 
-        /// <summary>
-        /// 0 : ?ÔøΩÔøΩÏ∞ΩÏÑ±, 1 : ???Ï§ëÏÑ±, 2 : Î©úÎ°ú?ÔøΩÔøΩÔøΩ?, 3 : Ï§ëÎèÖ?ÔøΩÔøΩ
-        /// </summary>
-        public int[] total_Stats = new int[4];
-        public List<GameObject> spawned_Note_List = null;
-        public Transform guideLine_Parent = null;
-        public GameObject tile_Prefab = null;
-        public Transform tile_Parent = null;
-        public List<Piano_Tile> tile_List = null;
-        public bool bPlaying = false;
-        public bool bSpawn = false;
+#region bool
+        [Header("BOOL ∫ØºˆµÈ")]
+        public bool bPlaying = false; // «√∑π¿Ã ¡ﬂ¿Œ¡ˆ
+#endregion
 
-        // ?ÔøΩÔøΩ?ÔøΩÔøΩ ÔøΩ??ÔøΩÔøΩ
-        private const float UP_POS_Y = 720.0f;
-        private const float DOWN_POS_Y = 110.0f;
+#region UI ∫Øºˆ
+        [Header("««æ∆≥Î UI ∞¸∑√ ∫Øºˆ")]
+        public Text            startText        = null;
+        public Text            secondText       = null;
+        public Image           secondGuage      = null;
+        public GameObject      tile_Prefab      = null;
+        public Transform       tile_Parent      = null;
+        public Transform       guideLine_Parent = null;
+#endregion
+
         private float curPlayTime = 0.0f;
-        [SerializeField] private RectTransform start_Bar = null;
-        public bool isDown = true;
-
-        // ?ÔøΩÔøΩ?ÔøΩÔøΩ ÔøΩ??ÔøΩÔøΩ
-        public int combo = 0;
-        public int totalScore = 0;
-        [SerializeField] private TextMeshProUGUI comboTMP = null;
-        [SerializeField] private TextMeshProUGUI totalScoreTMP = null;
-
-        public float curMakePercent = 0.0f; // ÔøΩÔøΩÔøΩÔøΩ ÔøΩœºÔøΩÔøΩÔøΩ
-        public Image makePercentGuage = null;
-
-        private int DEFAULT_MUSIC_CLAMP = 10;
-        public int totalMusicClamp = 0;
-
-        public void UpdateMakePercent()
-        {
-            curMakePercent += 5.0f;
-            makePercentGuage.fillAmount = curMakePercent / 100.0f;
-
-            if(curMakePercent >= 40.0f)
-            p_Sound.ClipsToDrum();
-        }
-
-        public void MakeMusic()
-        {
-            totalMusicClamp--;
-
-            if(totalMusicClamp == 0)
-            {
-                // ÏùåÏïÖ Ï†úÏûë Ï¢ÖÎ£å
-                print("Ï¢ÖÎ£å");
-                bSpawn = false;
-            }
-        }
 
         private void Awake()
         {
+            InitSingleton();
             InitialValue();
         }
 
@@ -98,18 +59,15 @@ namespace Piano
             if(bPlaying)
             {
                 noteInput_Act?.Invoke();
-            }
 
-            if(bSpawn)
-            {
                 curPlayTime += Time.deltaTime;
-                if (curPlayTime >= PLAY_TIME)
+                secondText.text = ((int)(DEFAULT_PLAY_TIME - curPlayTime)).ToString();
+                secondGuage.fillAmount = curPlayTime / DEFAULT_PLAY_TIME;
+                if (curPlayTime >= DEFAULT_PLAY_TIME)
                 {
                     curPlayTime -= curPlayTime;
-                    bSpawn = false;
-
-                    // TODO : ?ÔøΩÔøΩ?ÔøΩÔøΩ?ÔøΩÔøΩ Ï¢ÖÎ£å ?ÔøΩÔøΩ ?ÔøΩÔøΩ?ÔøΩÔøΩ
-                    Debug.Log("?ÔøΩÔøΩ");
+                    bPlaying = false;
+                    print("≥°");
                 }
             }
         }
@@ -122,50 +80,28 @@ namespace Piano
                 return;
             }
 
-            Debug.LogError("?ÔøΩÔøΩ?ÔøΩÔøΩ?ÔøΩÔøΩ Îß§ÎãàÔøΩ?Î®ºÌä∏");
             Destroy(this.gameObject);
         }
-
-        private void InitialValue() // ÏµúÏ¥à Ìïú Î≤à
+        private void InitialValue()
         {
-            InitSingleton();
-
-            if (GameManager.instance != null)
-            {
-                total_Stats[0] = GameManager.instance.allCreativity; // ?ÔøΩÔøΩÏ∞ΩÏÑ±
-                total_Stats[1] = GameManager.instance.allPopularity; // ???Ï§ëÏÑ±
-                total_Stats[2] = GameManager.instance.allMelodic;    // Î©úÎ°ú?ÔøΩÔøΩÔøΩ?
-                total_Stats[3] = GameManager.instance.allAddictive;  // Ï§ëÎèÖ?ÔøΩÔøΩ  
-            }
-
-            spawned_Note_List = new List<GameObject>();
-            tile_List = new List<Piano_Tile>();
-
-            InitialPiano();
+            InitPiano();
             InitTile();
-            InitStartPanel();
 
+            startText.fontSize = 130;
+            startText.text = "SPACE TO START";
             curPlayTime = 0.0f;
-            combo = 0;
-            totalScore = 0;
-        
-            int statAverage = (total_Stats[0] + total_Stats[1] + total_Stats[2] + total_Stats[3]) / 4;
-            totalMusicClamp = DEFAULT_MUSIC_CLAMP + (statAverage / 2);
         }
-
-        private void InitialPiano()
+        private void InitPiano()
         {
             p_Ctrl = FindObjectOfType<Piano_Control>();
             p_KeyMap = FindObjectOfType<Piano_KeyMap>();
             p_Spawner = FindObjectOfType<Piano_NoteSpawner>();
-            p_Checker = FindObjectOfType<Piano_NoteChecker>();
             p_Stat = FindObjectOfType<Piano_Stat>();
             p_Sound = FindObjectOfType<Piano_Sound>();
 
             p_Ctrl?.InitValue();
             p_KeyMap?.InitValue();
             p_Spawner?.InitValue();
-            p_Checker?.InitValue();
             p_Stat?.InitValue();
             p_Sound?.InitValue();
         }
@@ -187,54 +123,39 @@ namespace Piano
 
                 Piano_Tile pTile = tile.GetComponent<Piano_Tile>();
 
-                tile_List.Add(pTile);
-
                 pTile.tileImage.sprite = tileImg_List[i];
                 pTile.keyImage.sprite = keyImg_List[i];
             }
         }
-        public void InitStartPanel()
-        {
-            start_Bar.anchoredPosition = new Vector2(0.0f, DOWN_POS_Y);
-            isDown = true;
-
-            start_Bar.DOAnchorPosY(140.0f, 0.75f)
-            .SetLoops(-1, LoopType.Yoyo);
-        }
 
         public void MakeStart()
         {
-            float nextPos = (isDown) ? UP_POS_Y : DOWN_POS_Y;
-
-            isDown = false;
-            bPlaying = true;
-            bSpawn = true;
-
-            start_Bar.DOKill();
-            start_Bar.DOAnchorPosY(nextPos, 1.0f)
-            .SetEase(Ease.InBounce)
-            .SetDelay(0.5f)
-            .OnComplete(() =>
+            // TODO : ∏ﬁ∆Æ∑Œ≥ º“∏Æ 3π¯ »ƒ Ω√¿€
+            StartCoroutine(Metronome(() => 
             {
-                P_Spawner.StartPiano();
-            });
+                print("Ω√¿€");
+                bPlaying = true;
+            }));
         }
 
-        public void UpdateScore(int _increaseVal)
+        private IEnumerator Metronome(Action _callBack)
         {
-            totalScore += _increaseVal;
-            totalScoreTMP.text = totalScore.ToString();
-        }
+            var delay = new WaitForSeconds(1.0f);
 
-        public void UpdateCombo()
-        {
-            RectTransform comboTMP_Parent = comboTMP.transform.parent.GetComponent<RectTransform>();
+            for(int i = 0; i < 4; i++)
+            {
+                // ªÁøÓµÂ
+                p_Sound.PlayMetronome();
 
-            combo++;
-            comboTMP.text = combo.ToString();
+                startText.fontSize = (i < 3) ? 300 : 200;
+                startText.text = (i < 3) ? (3 - i).ToString() : "START";
 
-            comboTMP_Parent.DOComplete();
-            comboTMP_Parent.DOShakeAnchorPos(0.25f, 20, 20);
+                yield return delay;
+            }
+
+            startText.gameObject.SetActive(false);
+
+            _callBack?.Invoke();
         }
     }
 }

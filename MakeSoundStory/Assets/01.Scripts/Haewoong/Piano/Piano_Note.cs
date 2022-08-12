@@ -31,18 +31,14 @@ namespace Piano
         private void MoveNote()
         {
             noteTrm.localPosition += Vector3.up * Time.deltaTime * curNoteSpeed;
+
+            if(noteTrm.localPosition.y > 5.0f)
+            DestroyNote();
         }
 
         public void DestroyNote()
         {
-            Piano_Management.Instance.spawned_Note_List.Remove(noteTrm.gameObject);
             Destroy(noteTrm.gameObject);
-        }
-
-        public void MissNote()
-        {
-            Piano_Management.Instance.combo = -1;
-            Piano_Management.Instance.UpdateCombo();
         }
     }
 }

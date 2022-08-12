@@ -4952,6 +4952,7 @@ GameObject:
   - component: {fileID: 6697229454002195722}
   - component: {fileID: 3681739990626326533}
   - component: {fileID: 4989542163472094477}
+  - component: {fileID: -6411813125001340605}
   m_Layer: 5
   m_Name: Unit005
   m_TagString: Untagged
@@ -5016,6 +5017,17 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!210 &-6411813125001340605
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6986567662230320962}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 30
 --- !u!1 &7048706904392060072
 GameObject:
   m_ObjectHideFlags: 0

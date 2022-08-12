@@ -7,10 +7,10 @@ namespace Piano
 
     public class Piano_Sound : MonoBehaviour
     {
-        [SerializeField] private AudioSource[] audioSources = null;
-        [SerializeField] private AudioClip[] curClips = null;
-        [SerializeField] private AudioClip[] pianoClips = null;
-        [SerializeField] private AudioClip[] drumClips = null;
+        [SerializeField] private AudioSource[] audioSources  = null;
+        [SerializeField] private AudioClip[]   curClips      = null;
+        [SerializeField] private AudioClip[]   pianoClips    = null;
+        [SerializeField] private AudioClip     metronomeClip = null;
 
         public void InitValue()
         {
@@ -42,20 +42,20 @@ namespace Piano
             }
         }
 
-        public void ClipsToPiano()
+        private void ClipsToPiano()
         {
             ChangeClip(pianoClips);
         }
 
-        public void ClipsToDrum()
-        {
-            ChangeClip(drumClips);
-        }
-
-        public void PlayClip(int _idx)
+        private void PlayClip(int _idx)
         {
             audioSources[_idx].Stop();
             audioSources[_idx].Play();
+        }
+
+        public void PlayMetronome()
+        {
+            audioSources[0].PlayOneShot(metronomeClip);
         }
     }
 }
