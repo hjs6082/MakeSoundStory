@@ -91,6 +91,12 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Button musicMakeStartButton = null;
 
+    // -----------------이벤트 관련 변수 ------------------
+    [SerializeField] private GameObject eventPanel;
+    [SerializeField] private GameObject oxPanel;
+
+    private string[] sayList = { "앞으로 잘 부탁드립니다!", "이 회사에 들어온게 꿈만 같아요!","앞으로 열심히 해보겠습니다!" };
+
     public int buttonCount = 0;
     private int staffCount = 0;
 
@@ -218,7 +224,8 @@ public class UIManager : MonoBehaviour
             //staff.transform.parent = staffSpawnPosition.transform;
             //staff.transform.localScale = new Vector3(1f, 1f, 1f);
             NPC.NPC_Management.Instance.AddNPC(staffPanel.GetComponent<MyData>().myStaff);
-
+            int randomIndex = UnityEngine.Random.Range(0, sayList.Length);
+            HumanEvent(staffPanel.GetComponent<MyData>().myStaff, sayList[randomIndex], false);
         });
     }
 
@@ -860,5 +867,61 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    public void notHumanEvent(string text, bool isOX)
+    {
+        if (isOX)
+        {
+            oxPanel.SetActive(true);
+            eventPanel.SetActive(true);
+            StartCoroutine(endEvent(5f, eventPanel));
+            eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
+            eventPanel.transform.GetChild(1).GetComponent<Text>().text = text;
+            eventPanel.transform.DOLocalMoveX(519f, 1f);
+        }
+    }
+
+    public void HumanEvent(StaffSO staff, string text, bool isOX)
+    {
+        if (isOX)
+        {
+/*            if (eventPanel.transform.GetChild(0).gameObject.transform.childCount != 0)
+            {
+                Destroy(eventPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+            }*/
+            oxPanel.SetActive(true);
+            eventPanel.SetActive(true);
+            StartCoroutine(endEvent(5f, eventPanel));
+            eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
+            GameObject setStaff = Instantiate(staff.MySprite, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+            setStaff.transform.parent = eventPanel.transform.GetChild(0);
+            setStaff.transform.GetChild(0).gameObject.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
+            //setStaff.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
+            eventPanel.transform.GetChild(1).GetComponent<Text>().text = text;
+            eventPanel.transform.DOLocalMoveX(519f, 1f);
+        }
+        if (!isOX)
+        {
+/*            if(eventPanel.transform.GetChild(0).gameObject.transform.childCount !=0)
+            {
+                Destroy(eventPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+            }*/
+            eventPanel.SetActive(true);
+            StartCoroutine(endEvent(5f, eventPanel));
+            eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
+            GameObject setStaff = Instantiate(staff.MySprite, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+            setStaff.transform.parent = eventPanel.transform.GetChild(0);
+            setStaff.transform.GetChild(0).gameObject.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
+            //setStaff.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
+            eventPanel.transform.GetChild(1).GetComponent<Text>().text = text;
+            eventPanel.transform.DOLocalMoveX(519f, 1f);
+        }
+    }
+
+    IEnumerator endEvent(float time, GameObject falseObj)
+    {
+        yield return new WaitForSeconds(time);
+        falseObj.SetActive(false);
+    }
 
 }
