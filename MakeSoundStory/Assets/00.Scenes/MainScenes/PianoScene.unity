@@ -448,7 +448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 90
+  m_Text: 60
 --- !u!222 &137800365
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2848,7 +2848,6 @@ Transform:
   - {fileID: 1120407488}
   - {fileID: 1520000960}
   - {fileID: 1903739380}
-  - {fileID: 1670428506}
   - {fileID: 1576146197}
   - {fileID: 997518620}
   m_Father: {fileID: 0}
@@ -3018,7 +3017,7 @@ Transform:
   - {fileID: 2065439339}
   - {fileID: 585458384}
   m_Father: {fileID: 871792498}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &997518622
 MonoBehaviour:
@@ -4587,7 +4586,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 871792498}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1576146198
 MonoBehaviour:
@@ -4731,49 +4730,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1846985340480217024, guid: 26be9af724f37784982df94cbd88d4f3, type: 3}
   m_PrefabInstance: {fileID: 1687302713}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1670428505
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1670428506}
-  - component: {fileID: 1670428507}
-  m_Layer: 0
-  m_Name: NoteChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1670428506
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670428505}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 871792498}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1670428507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670428505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 571650525c505ef49acc06fbadb7e4e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1679098524 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5753255695628971073, guid: 025de809aefe6e14ea229bdbb1457190, type: 3}

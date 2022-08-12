@@ -326,7 +326,13 @@ public class UIManager : MonoBehaviour
         Transform infoTrm = _infoPanel.transform;
         Vector3 unitOffset = Vector3.down * 0.5f;
 
-        
+        if(infoTrm.childCount > 13)
+        {
+            for(int i = 13; i < infoTrm.childCount; i++)
+            {
+                Destroy(infoTrm.GetChild(i).gameObject);
+            }
+        }
 
         GameObject staffUnit = Instantiate(_staffSO.MySprite, infoTrm.GetChild(0).position + unitOffset, Quaternion.identity, infoTrm);
         staffUnit.GetComponent<RectTransform>().localScale = new Vector2(150, 150);
@@ -346,6 +352,8 @@ public class UIManager : MonoBehaviour
             sb.Append(STAFF_INFO_STRS[i]);
             sb.Append(_staffSO.GetInfos()[i]);
             if(i == 9) sb.Append("G");
+
+            if(infoTrm.GetChild(i) != null)
             infoTrm.GetChild(i + 1).GetComponent<Text>().text = sb.ToString();
         }
 

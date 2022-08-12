@@ -13,7 +13,7 @@ namespace Piano
         public  static Piano_Management Instance => instance;
         private static Piano_Management instance = null;
 
-        private const float DEFAULT_PLAY_TIME = 90.0f; // 기본 게임 플레이 시간
+        private const float DEFAULT_PLAY_TIME = 60.0f; // 기본 게임 플레이 시간
 
 #region 클래스
         [Header("피아노 클래스")]

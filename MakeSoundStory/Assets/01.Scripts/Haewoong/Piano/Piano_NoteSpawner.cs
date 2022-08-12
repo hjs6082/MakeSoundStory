@@ -40,6 +40,7 @@ namespace Piano
             else                                    { noteInfo = SetNote(3, _lineIdx); }
 
             GameObject note = Instantiate(noteInfo._note, noteInfo._notePos, guideLines[_lineIdx].rectTransform.rotation, this.transform);
+            note.transform.localScale = new Vector2(0.75f, 0.75f);
 
             return note;
         }
