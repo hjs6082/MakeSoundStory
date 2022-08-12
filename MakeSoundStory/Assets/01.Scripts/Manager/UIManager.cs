@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     public GameObject staffNpcPanel = null;
     public GameObject musicNpcPanel = null;
     public GameObject settingNpcPanel = null;
+    public GameObject bankNpcPanel = null;
 
     public Text staffTalkText = null;
     public Text staffTalkNameText = null;
@@ -86,6 +87,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject staffSpawnPanel       = null;  //스태프 배치 패널 오브젝트
     [SerializeField] private GameObject spawnStaffChoicePanel = null; // 스폰할 스태프 패널
     [SerializeField] private GameObject spawnStaffChoiceListPanel = null; // 스폰할 스태프 패널
+
+    [SerializeField] private Button musicMakeStartButton = null;
 
     public int buttonCount = 0;
     private int staffCount = 0;
@@ -290,6 +293,7 @@ public class UIManager : MonoBehaviour
         genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
                                                 GenreManager.instance.GenreSet(genreTransform); });
         staffSpawnButton.onClick.AddListener(() => { staffSpawnPanel.SetActive(true); });
+        musicMakeStartButton.onClick.AddListener(() => { LoadingSceneManager.LoadScene("PianoScene"); });
     }
 
     private readonly string[] STAFF_INFO_STRS = 

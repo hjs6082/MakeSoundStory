@@ -3265,7 +3265,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
 --- !u!95 &603582462335098260
 Animator:
   serializedVersion: 3
