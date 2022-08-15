@@ -21,7 +21,6 @@ namespace Piano
         public Piano_KeyMap      p_KeyMap  = null;
         public Piano_NoteSpawner p_Spawner = null;
         public Piano_Stat        p_Stat    = null;   
-        public Piano_Sound       p_Sound   = null;
 #endregion
 
 #region Action
@@ -97,13 +96,11 @@ namespace Piano
             p_KeyMap = FindObjectOfType<Piano_KeyMap>();
             p_Spawner = FindObjectOfType<Piano_NoteSpawner>();
             p_Stat = FindObjectOfType<Piano_Stat>();
-            p_Sound = FindObjectOfType<Piano_Sound>();
 
             p_Ctrl?.InitValue();
             p_KeyMap?.InitValue();
             p_Spawner?.InitValue();
             p_Stat?.InitValue();
-            p_Sound?.InitValue();
         }
         private void InitTile()
         {
@@ -145,7 +142,7 @@ namespace Piano
             for(int i = 0; i < 4; i++)
             {
                 // »ç¿îµå
-                p_Sound.PlayMetronome();
+                Sound_Management.Instance.PlayMetronome();
 
                 startText.fontSize = (i < 3) ? 300 : 200;
                 startText.text = (i < 3) ? (3 - i).ToString() : "START";

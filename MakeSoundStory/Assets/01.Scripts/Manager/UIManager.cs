@@ -918,7 +918,8 @@ public class UIManager : MonoBehaviour
             StartCoroutine(endEvent(5f, eventPanel));
             eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
             GameObject setStaff = Instantiate(staff.MySprite, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
-            setStaff.transform.parent = eventPanel.transform.GetChild(0);
+            setStaff.transform.SetParent(eventPanel.transform.GetChild(0));
+            //setStaff.transform.parent = eventPanel.transform.GetChild(0);
             setStaff.transform.GetChild(0).gameObject.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
             //setStaff.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
             eventPanel.transform.GetChild(1).GetComponent<Text>().text = text;

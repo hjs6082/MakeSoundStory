@@ -50,7 +50,8 @@ public class GenreManager : MonoBehaviour
             for (int i = 0; i < genreList.Count; i++)
             {
                 GameObject genreButton = Instantiate(genrePrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                genreButton.transform.parent = genreParent;
+                genreButton.transform.SetParent(genreParent);
+                //genreButton.transform.parent = genreParent;
                 genreButton.transform.localScale = new Vector3(1, 1, 1);
                 genreButton.GetComponent<GenreData>().myData = genreList[i];
                 genreButton.transform.GetChild(0).GetComponent<Text>().text = genreList[i].GenreName;
