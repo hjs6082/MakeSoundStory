@@ -2,17 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sound_Management : MonoSingleton<Sound_Management>
+public class Sound_Management : MonoBehaviour
 {
+    public static Sound_Management Instance = null;
+
     [SerializeField] private AudioSource[] audioSources = null;
     [SerializeField] private AudioClip[] curClips = null;
     [SerializeField] private AudioClip[] pianoClips = null;
     [SerializeField] private AudioClip metronomeClip = null;
 
+    private void Awake()
+    {
+        InitValue();
+    }
+
     public void InitValue()
     {
         InitSource();
         ClipsToPiano();
+
+        if(Instance == null)
+        {
+            Instance = this;
+            return;
+        }
+
+        Destroy(this.gameObject);
     }
 
     private void InitSource()

@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
    
     public int allCreativity; // ���� ��â��
     public int allAddictive; // ���� �ߵ���
-    public int allMelodic; // ���� ��ε���
+    public int allMelodic; // ���� ��ε���?
     public int allPopularity; // ���� ���߼�
+
+    public int curBPM = 100;
 
     void Start()
     {

@@ -73,32 +73,32 @@ public class SPUM_Manager : MonoBehaviour
         }
         else
         {
-            SetSpriteList(0,"0_Hair"); //Ìó§Ïñ¥ Ïó∞Í≤∞
-            SetSpriteList(1,"1_FaceHair"); //ÏàòÏóº Ïó∞Í≤∞
-            SetSpriteList(2,"4_Helmet"); //Ìà¨Íµ¨ Ïó∞Í≤∞
-            SetSpriteList(3,"2_Cloth"); //Ïò∑ Ïó∞Í≤∞
-            SetSpriteList(4,"3_Pant"); //Ìó§Ïñ¥ Ïó∞Í≤∞
-            SetSpriteList(5,"5_Armor"); //Í∞ëÏò∑ Ïó∞Í≤∞
-            SetSpriteList(6,"7_Back"); //Îí§ ÏïÑÏù¥ÌÖú Ïó∞Í≤∞
-            SetSpriteList(7,"6_Weapons"); //Ïò§Î•∏Ï™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
-            SetSpriteList(8,"6_Weapons"); //ÏôºÏ™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
-            SetSpriteList(9,"Eye"); //Îàà Ïó∞Í≤∞
+            SetSpriteList(0,"0_Hair"); //?ó§?ñ¥ ?ó∞Í≤?
+            SetSpriteList(1,"1_FaceHair"); //?àò?óº ?ó∞Í≤?
+            SetSpriteList(2,"4_Helmet"); //?à¨Íµ? ?ó∞Í≤?
+            SetSpriteList(3,"2_Cloth"); //?ò∑ ?ó∞Í≤?
+            SetSpriteList(4,"3_Pant"); //?ó§?ñ¥ ?ó∞Í≤?
+            SetSpriteList(5,"5_Armor"); //Í∞ëÏò∑ ?ó∞Í≤?
+            SetSpriteList(6,"7_Back"); //?í§ ?ïÑ?ù¥?Öú ?ó∞Í≤?
+            SetSpriteList(7,"6_Weapons"); //?ò§Î•∏Ï™Ω Î¨¥Í∏∞ ?ó∞Í≤?
+            SetSpriteList(8,"6_Weapons"); //?ôºÏ™? Î¨¥Í∏∞ ?ó∞Í≤?
+            SetSpriteList(9,"Eye"); //?àà ?ó∞Í≤?
 
-            //Ï∂îÍ∞Ä Ìå®ÌÇ§ÏßÄ Ïó∞Í≤∞
+            //Ï∂îÍ?? ?å®?Ç§Ïß? ?ó∞Í≤?
             AddPackageSprite();
 
             yield return StartCoroutine(GetPrefabList());
-            //ÌîÑÎ¶¨Ìåπ Ïó∞Îèô
-            ShowNowUnitNumber(); //ÌîÑÎ¶¨Ìåπ Ïà´Ïûê Ïó∞Îèô
+            //?îÑÎ¶¨Ìåπ ?ó∞?èô
+            ShowNowUnitNumber(); //?îÑÎ¶¨Ìåπ ?à´?ûê ?ó∞?èô
 
             SetInit();
-            //Í∏∞Î≥∏ ÏÉâ Ïó∞Îèô
-            //UIÏó∞Îèô.
+            //Í∏∞Î≥∏ ?Éâ ?ó∞?èô
+            //UI?ó∞?èô.
 
             _unitCode.text = GetFileName();
 
-            //Îç∞Ïù¥ÌÑ∞ Ïù∏Ï¶ù Î∂ÄÎ∂Ñ
-            //Ìå®ÌÇ§ÏßÄ Îç∞Ïù¥ÌÑ∞ Ï†ÄÏû•
+            //?ç∞?ù¥?Ñ∞ ?ù∏Ï¶? Î∂?Î∂?
+            //?å®?Ç§Ïß? ?ç∞?ù¥?Ñ∞ ????û•
             if(SoonsoonData.Instance._soonData2.packageList.Count > 0)
             {
                 SoonsoonData.Instance.LoadPackageData();
@@ -115,7 +115,7 @@ public class SPUM_Manager : MonoBehaviour
         _spriteObj._hairList[0].color = _basicColor;
         SetInitColor();
         _spriteObj.Reset(); 
-        //ÎààÎèÑ Ï¥àÍ∏∞Ìôî
+        //?àà?èÑ Ï¥àÍ∏∞?ôî
         SetSprite(9,null,"",-1);
 
         for(var i = 0 ; i < _textureList.Count;i++)
@@ -142,7 +142,7 @@ public class SPUM_Manager : MonoBehaviour
 
         if(num!=9)
         {
-            Object[] tObj = Resources.LoadAll("SPUM/SPUM_Sprites/Items/"+path+"/",typeof(Texture2D));
+            UnityEngine.Object[] tObj = Resources.LoadAll("SPUM/SPUM_Sprites/Items/"+path+"/",typeof(Texture2D));
             for(var i = 0 ; i < tObj.Length; i++)
             {
                 if(tObj[i].GetType() == typeof(Texture2D))
@@ -173,7 +173,7 @@ public class SPUM_Manager : MonoBehaviour
         
     }
 
-    //Ìå®ÌÇ§ÏßÄ Ï∂îÍ∞Ä
+    //?å®?Ç§Ïß? Ï∂îÍ??
     public void AddPackageSprite()
     {
         string packagePath = "Assets/Resources/SPUM/SPUM_Sprites/Packages";
@@ -219,22 +219,22 @@ public class SPUM_Manager : MonoBehaviour
                      _textureList[j]._packageNameList.Add(pName);
                 }
                
-                // SetSpritePackageList(0,"0_Hair",pName); //Ìó§Ïñ¥ Ïó∞Í≤∞
-                // SetSpritePackageList(1,"1_FaceHair",pName); //ÏàòÏóº Ïó∞Í≤∞
-                // SetSpritePackageList(2,"4_Helmet",pName); //Ìà¨Íµ¨ Ïó∞Í≤∞
-                // SetSpritePackageList(3,"2_Cloth",pName); //Ïò∑ Ïó∞Í≤∞
-                // SetSpritePackageList(4,"3_Pant",pName); //Ìó§Ïñ¥ Ïó∞Í≤∞
-                // SetSpritePackageList(5,"5_Armor",pName); //Í∞ëÏò∑ Ïó∞Í≤∞
-                // SetSpritePackageList(6,"7_Back",pName); //Îí§ ÏïÑÏù¥ÌÖú Ïó∞Í≤∞
-                // SetSpritePackageList(7,"6_Weapons",pName); //Ïò§Î•∏Ï™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
-                // SetSpritePackageList(8,"6_Weapons",pName); //ÏôºÏ™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
+                // SetSpritePackageList(0,"0_Hair",pName); //?ó§?ñ¥ ?ó∞Í≤?
+                // SetSpritePackageList(1,"1_FaceHair",pName); //?àò?óº ?ó∞Í≤?
+                // SetSpritePackageList(2,"4_Helmet",pName); //?à¨Íµ? ?ó∞Í≤?
+                // SetSpritePackageList(3,"2_Cloth",pName); //?ò∑ ?ó∞Í≤?
+                // SetSpritePackageList(4,"3_Pant",pName); //?ó§?ñ¥ ?ó∞Í≤?
+                // SetSpritePackageList(5,"5_Armor",pName); //Í∞ëÏò∑ ?ó∞Í≤?
+                // SetSpritePackageList(6,"7_Back",pName); //?í§ ?ïÑ?ù¥?Öú ?ó∞Í≤?
+                // SetSpritePackageList(7,"6_Weapons",pName); //?ò§Î•∏Ï™Ω Î¨¥Í∏∞ ?ó∞Í≤?
+                // SetSpritePackageList(8,"6_Weapons",pName); //?ôºÏ™? Î¨¥Í∏∞ ?ó∞Í≤?
             }
         }
     }
 
     public void SetSpritePackageList(int num, string path, string package)
     {
-        Object[] tObj = Resources.LoadAll("SPUM/SPUM_Sprites/Packages/"+package+"/"+path+"/",typeof(Texture2D));
+        UnityEngine.Object[] tObj = Resources.LoadAll("SPUM/SPUM_Sprites/Packages/"+package+"/"+path+"/",typeof(Texture2D));
         for(var i = 0 ; i < tObj.Length; i++)
         {
             if(tObj[i].GetType() == typeof(Texture2D))
@@ -265,7 +265,7 @@ public class SPUM_Manager : MonoBehaviour
             _textureList[listNum].SetUse(true);
             
             Sprite tSprite = null;
-            Object[] tObj = null;
+            UnityEngine.Object[] tObj = null;
             if(listNum != 9 )
             {
                 int value = (rand) ? Random.Range(0,_textureList[listNum]._textureList.Count) : num; 
@@ -285,7 +285,7 @@ public class SPUM_Manager : MonoBehaviour
 
                 int rV = (rand) ? Random.Range(0, info.Length) : num;
 
-                Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path+info[rV].Name);
+                UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path+info[rV].Name);
                 for(var j = 0 ; j < sprites.Length ;j++)
                 {
                     if(sprites[j].GetType() == typeof(Sprite))
@@ -307,7 +307,7 @@ public class SPUM_Manager : MonoBehaviour
             switch(listNum)
             {
                 case 0: 
-                // Ìó§Ïñ¥
+                // ?ó§?ñ¥
                 _spriteObj._hairList[0].sprite = tSprite;
                 _spriteObj._hairList[1].sprite = null;
 
@@ -321,7 +321,7 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 1: 
-                //ÏàòÏóº
+                //?àò?óº
                 _spriteObj._hairList[3].sprite = tSprite;
 
                 if(EmptyChk())
@@ -332,7 +332,7 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 2: 
-                //Ìó¨Î©ß
+                //?ó¨Î©?
                 _spriteObj._hairList[1].sprite = tSprite;
                 _spriteObj._hairList[0].sprite = null;
                 if(EmptyChk())
@@ -344,7 +344,7 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 3: 
-                // Ïò∑
+                // ?ò∑
                 _spriteObj._clothList[0].sprite = null;
                 _spriteObj._clothList[1].sprite = null;
                 _spriteObj._clothList[2].sprite = null;
@@ -377,7 +377,7 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 4: 
-                //Î∞îÏßÄ
+                //Î∞îÏ??
                 for(var i = 0; i < tObj.Length;i++)
                 {
                     switch(tObj[i].name)
@@ -435,7 +435,7 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 6: 
-                //Îí§ ÏïÑÏù¥ÌÖú
+                //?í§ ?ïÑ?ù¥?Öú
                 _spriteObj._backList[0].sprite = tSprite;
                 if(EmptyChk())
                 {
@@ -445,7 +445,7 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 7: 
-                //Ïò§Î•∏ÏÜê Î¨¥Í∏∞
+                //?ò§Î•∏ÏÜê Î¨¥Í∏∞
                 string tRWName = tSprite.name;
                 if(tRWName.Contains("Shield"))
                 {
@@ -467,7 +467,7 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 8: 
-                //ÏôºÏÜê Î¨¥Í∏∞
+                //?ôº?Üê Î¨¥Í∏∞
                 string tLWName = tSprite.name;
                 if(tLWName.Contains("Shield"))
                 {
@@ -493,33 +493,33 @@ public class SPUM_Manager : MonoBehaviour
         {
             _textureList[listNum].SetUse(false);
 
-            // ÏóÜÏùÑÎïå Ï¥àÍ∏∞Ìôî Íµ¨Î¨∏
+            // ?óÜ?ùÑ?ïå Ï¥àÍ∏∞?ôî Íµ¨Î¨∏
             switch(listNum)
             {
                 case 0: 
-                // Ìó§Ïñ¥
+                // ?ó§?ñ¥
                 _spriteObj._hairList[0].sprite = null;
                 break;
 
                 case 1: 
-                //ÏàòÏóº
+                //?àò?óº
                 _spriteObj._hairList[3].sprite = null;
                 break;
 
                 case 2: 
-                //Ìó¨Î©ß
+                //?ó¨Î©?
                 _spriteObj._hairList[1].sprite = null;
                 break;
 
                 case 3: 
-                // Ïò∑
+                // ?ò∑
                 _spriteObj._clothList[0].sprite = null;
                 _spriteObj._clothList[1].sprite = null;
                 _spriteObj._clothList[2].sprite = null;
                 break;
 
                 case 4: 
-                //Î∞îÏßÄ
+                //Î∞îÏ??
                 _spriteObj._pantList[0].sprite = null;
                 _spriteObj._pantList[1].sprite = null;
                 break;
@@ -532,24 +532,24 @@ public class SPUM_Manager : MonoBehaviour
                 break;
 
                 case 6: 
-                //Îí§ ÏïÑÏù¥ÌÖú
+                //?í§ ?ïÑ?ù¥?Öú
                 _spriteObj._backList[0].sprite = null;
                 break;
 
                 case 7: 
-                //Ïò§Î•∏ÏÜê Î¨¥Í∏∞
+                //?ò§Î•∏ÏÜê Î¨¥Í∏∞
                 _spriteObj._weaponList[0].sprite = null;
                 _spriteObj._weaponList[1].sprite = null;
                 break;
 
                 case 8: 
-                //ÏôºÏÜê Î¨¥Í∏∞
+                //?ôº?Üê Î¨¥Í∏∞
                 _spriteObj._weaponList[2].sprite = null;
                 _spriteObj._weaponList[3].sprite = null;
                 break;
 
                 case 9: 
-                //ÏôºÏÜê Î¨¥Í∏∞
+                //?ôº?Üê Î¨¥Í∏∞
                 
                 break;
 
@@ -576,9 +576,9 @@ public class SPUM_Manager : MonoBehaviour
         float tValue = Random.Range(0,0.7f);
         if(tValue <= 0.1f)
         {
-            //ÎåÄÎ®∏Î¶¨
+            //???Î®∏Î¶¨
         }
-        else if(tValue <= 0.4f) //Î®∏Î¶¨Î•º ÏÑ§Ïπò
+        else if(tValue <= 0.4f) //Î®∏Î¶¨Î•? ?Ñ§Ïπ?
         {
             RandomSelect(0); 
         }
@@ -595,39 +595,39 @@ public class SPUM_Manager : MonoBehaviour
         // if(!_SPButtonList[4]._toggle.isOn) RandomObjColor(2);
     }
 
-    //ÎûúÎç§ Î©îÏù¥ÌÇπ
+    //?ûú?ç§ Î©îÏù¥?Çπ
     public void RandomSelect(int num)
     {
         switch(num)
         {
             case 0:
-            //Ìó§Ïñ¥ Ï¢ÖÎ•ò
+            //?ó§?ñ¥ Ï¢ÖÎ•ò
             if(!_textureList[0]._LockBtn[1].activeInHierarchy) SetSpriteItem(0,-1,true);
             if(!_textureList[0]._LockBtn[1].activeInHierarchy) RandomObjColor(0);
             _panelTitle.text = "Hair Items";
             break;
 
             case 1:
-            //ÏàòÏóº
+            //?àò?óº
             if(!_textureList[1]._LockBtn[1].activeInHierarchy) SetSpriteItem(1,-1,true);
             if(!_textureList[1]._LockBtn[1].activeInHierarchy) RandomObjColor(1);
             _panelTitle.text = "Mustache Items";
             break;
 
             case 2:
-            //Ìó¨Î©ß Ï¢ÖÎ•ò
+            //?ó¨Î©? Ï¢ÖÎ•ò
             if(!_textureList[2]._LockBtn[1].activeInHierarchy) SetSpriteItem(2,-1,true);
             _panelTitle.text = "Helmet Items";
             break;
 
             case 3:
-            //Ïò∑ Ï¢ÖÎ•ò
+            //?ò∑ Ï¢ÖÎ•ò
             if(!_textureList[3]._LockBtn[1].activeInHierarchy) SetSpriteItem(3,-1,true);
             _panelTitle.text = "Cloths Items";
             break;
 
             case 4:
-            //Î∞îÏßÄ Ï¢ÖÎ•ò
+            //Î∞îÏ?? Ï¢ÖÎ•ò
             if(!_textureList[4]._LockBtn[1].activeInHierarchy) SetSpriteItem(4,-1,true);
             _panelTitle.text = "Pants Items";
             break;
@@ -639,25 +639,25 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 6:
-            //Îí§ Ï¢ÖÎ•ò
+            //?í§ Ï¢ÖÎ•ò
             if(!_textureList[6]._LockBtn[1].activeInHierarchy) SetSpriteItem(6,-1,true);
             _panelTitle.text = "Back Items";
             break;
 
             case 7:
-            //Ïò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+            //?ò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
             if(!_textureList[7]._LockBtn[1].activeInHierarchy) SetSpriteItem(7,-1,true);
             _panelTitle.text = "Right Weapons";
             break;
 
             case 8:
-            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
             if(!_textureList[8]._LockBtn[1].activeInHierarchy) SetSpriteItem(8,-1,true);
             _panelTitle.text = "Left Weapons";
             break;
 
             case 9:
-            //Îàà ÏÉâ
+            //?àà ?Éâ
             if(!_textureList[9]._LockBtn[1].activeInHierarchy) SetSpriteItem(9,-1,true);
             if(!_textureList[9]._LockBtn[1].activeInHierarchy) RandomObjColor(9);
             _panelTitle.text = "Eye Color";
@@ -682,27 +682,27 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 0:
-            //Ìó§Ïñ¥ Ï¢ÖÎ•ò
+            //?ó§?ñ¥ Ï¢ÖÎ•ò
             _panelTitle.text = "Hair Items";
             break;
 
             case 1:
-            //ÏàòÏóº
+            //?àò?óº
             _panelTitle.text = "Mustache Items";
             break;
 
             case 2:
-            //Ìó¨Î©ß Ï¢ÖÎ•ò
+            //?ó¨Î©? Ï¢ÖÎ•ò
             _panelTitle.text = "Helmet Items";
             break;
 
             case 3:
-            //Ïò∑ Ï¢ÖÎ•ò
+            //?ò∑ Ï¢ÖÎ•ò
             _panelTitle.text = "Cloths Items";
             break;
 
             case 4:
-            //Î∞îÏßÄ Ï¢ÖÎ•ò
+            //Î∞îÏ?? Ï¢ÖÎ•ò
             _panelTitle.text = "Pants Items";
             break;
 
@@ -712,27 +712,27 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 6:
-            //Îí§ Ï¢ÖÎ•ò
+            //?í§ Ï¢ÖÎ•ò
             _panelTitle.text = "Back Items";
             break;
 
             case 7:
-            //Ïò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+            //?ò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
             _panelTitle.text = "Right Weapons";
             break;
 
             case 8:
-            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
             _panelTitle.text = "Left Weapons";
             break;
 
             case 9:
-            //Îàà ÏÉâ
+            //?àà ?Éâ
             _panelTitle.text = "Eye Color";
             break;
 
             case 10:
-            //Îßê ÏÑ†ÌÉù
+            //Îß? ?Ñ†?Éù
             _panelTitle.text = "Horse Select";
             break;
         }
@@ -743,7 +743,7 @@ public class SPUM_Manager : MonoBehaviour
 
     public void DrawItemProcess()
     {
-        //Ï∞®ÏùºÎìú ÏÇ≠Ï†ú
+        //Ï∞®Ïùº?ìú ?Ç≠?†ú
         if(_childPool.childCount > 0)
         {
             for(var i=0; i < _childPool.childCount;i++)
@@ -763,7 +763,7 @@ public class SPUM_Manager : MonoBehaviour
         ttObjST2._itemType = _drawItemIndex;
         ttObjST2._sprite = null;
 
-        if( _drawItemIndex == 9 ) //ÎààÏùò Í≤ΩÏö∞
+        if( _drawItemIndex == 9 ) //?àà?ùò Í≤ΩÏö∞
         {
             string path = AssetDatabase.GetAssetPath(_mainBody);
             string tName = _mainBody.name + ".png";
@@ -787,7 +787,7 @@ public class SPUM_Manager : MonoBehaviour
                 ttObjST._eyeSetList[4].sprite = _mainBodyList[5];
                 ttObjST._eyeSetList[4].SetNativeSize();
 
-                Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path+info[i].Name);
+                UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path+info[i].Name);
                 for(var j = 0 ; j < sprites.Length ;j++)
                 {
                     if(sprites[j].GetType() == typeof(Sprite))
@@ -818,7 +818,7 @@ public class SPUM_Manager : MonoBehaviour
                 }
             }
         }
-        else if(_drawItemIndex == -1 ) //Î™∏
+        else if(_drawItemIndex == -1 ) //Î™?
         {
             string path = "Assets/SPUM/SPUM_Sprites/BodySource/Species/";
             DirectoryInfo dir = new DirectoryInfo(path);
@@ -857,7 +857,7 @@ public class SPUM_Manager : MonoBehaviour
                 ttObjST._itemType = _drawItemIndex;
                 ttObjST._name = _bodyList[i];
 
-                Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(_bodyList[i]);
+                UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(_bodyList[i]);
                 var sortedList = sprites.OrderBy(go=>go.name).ToList();
                 for(var k = 0 ; k < sortedList.Count;k++)
                 {
@@ -938,7 +938,7 @@ public class SPUM_Manager : MonoBehaviour
                 ttObjST._itemType = _drawItemIndex;
                 ttObjST._name = _horseList[i];
 
-                Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(_horseList[i]);
+                UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(_horseList[i]);
                 var sortedList = sprites.OrderBy(go=>go.name).ToList();
 
                 ttObjST._horseList[14].gameObject.SetActive(false);
@@ -1045,48 +1045,48 @@ public class SPUM_Manager : MonoBehaviour
                         switch(_drawItemIndex)
                         {
                             case 0:
-                            //Ìó§Ïñ¥ Ï¢ÖÎ•ò
-                            SetSpriteList(0,"0_Hair"); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ó§?ñ¥ Ï¢ÖÎ•ò
+                            SetSpriteList(0,"0_Hair"); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 1:
-                            //ÏàòÏóº
-                            SetSpriteList(1,"1_FaceHair"); //ÏàòÏóº Ïó∞Í≤∞
+                            //?àò?óº
+                            SetSpriteList(1,"1_FaceHair"); //?àò?óº ?ó∞Í≤?
                             break;
 
                             case 2:
-                            //Ìó¨Î©ß Ï¢ÖÎ•ò
-                            SetSpriteList(2,"4_Helmet"); //Ìà¨Íµ¨ Ïó∞Í≤∞
+                            //?ó¨Î©? Ï¢ÖÎ•ò
+                            SetSpriteList(2,"4_Helmet"); //?à¨Íµ? ?ó∞Í≤?
                             break;
 
                             case 3:
-                            //Ïò∑ Ï¢ÖÎ•ò
-                            SetSpriteList(3,"2_Cloth"); //Ïò∑ Ïó∞Í≤∞
+                            //?ò∑ Ï¢ÖÎ•ò
+                            SetSpriteList(3,"2_Cloth"); //?ò∑ ?ó∞Í≤?
                             break;
 
                             case 4:
-                            //Î∞îÏßÄ Ï¢ÖÎ•ò
-                             SetSpriteList(4,"3_Pant"); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //Î∞îÏ?? Ï¢ÖÎ•ò
+                             SetSpriteList(4,"3_Pant"); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 5:
                             //Í∞ëÏò∑ Ï¢ÖÎ•ò
-                            SetSpriteList(5,"5_Armor"); //Í∞ëÏò∑ Ïó∞Í≤∞
+                            SetSpriteList(5,"5_Armor"); //Í∞ëÏò∑ ?ó∞Í≤?
                             break;
 
                             case 6:
-                            //Îí§ Ï¢ÖÎ•ò
-                            SetSpriteList(6,"7_Back"); //Îí§ ÏïÑÏù¥ÌÖú Ïó∞Í≤∞
+                            //?í§ Ï¢ÖÎ•ò
+                            SetSpriteList(6,"7_Back"); //?í§ ?ïÑ?ù¥?Öú ?ó∞Í≤?
                             break;
 
                             case 7:
-                            //Ïò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpriteList(7,"6_Weapons"); //Ïò§Î•∏Ï™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
+                            //?ò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpriteList(7,"6_Weapons"); //?ò§Î•∏Ï™Ω Î¨¥Í∏∞ ?ó∞Í≤?
                             break;
 
                             case 8:
-                            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpriteList(8,"6_Weapons"); //ÏôºÏ™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
+                            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpriteList(8,"6_Weapons"); //?ôºÏ™? Î¨¥Í∏∞ ?ó∞Í≤?
                             break;
                         }
                     }
@@ -1098,48 +1098,48 @@ public class SPUM_Manager : MonoBehaviour
                         switch(_drawItemIndex)
                         {
                             case 0:
-                            //Ìó§Ïñ¥ Ï¢ÖÎ•ò
-                            SetSpritePackageList(0,"0_Hair",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ó§?ñ¥ Ï¢ÖÎ•ò
+                            SetSpritePackageList(0,"0_Hair",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 1:
-                            //ÏàòÏóº
-                            SetSpritePackageList(1,"1_FaceHair",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?àò?óº
+                            SetSpritePackageList(1,"1_FaceHair",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 2:
-                            //Ìó¨Î©ß Ï¢ÖÎ•ò
-                            SetSpritePackageList(2,"4_Helmet",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ó¨Î©? Ï¢ÖÎ•ò
+                            SetSpritePackageList(2,"4_Helmet",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 3:
-                            //Ïò∑ Ï¢ÖÎ•ò
-                            SetSpritePackageList(3,"2_Cloth",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ò∑ Ï¢ÖÎ•ò
+                            SetSpritePackageList(3,"2_Cloth",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 4:
-                            //Î∞îÏßÄ Ï¢ÖÎ•ò
-                            SetSpritePackageList(4,"3_Pant",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //Î∞îÏ?? Ï¢ÖÎ•ò
+                            SetSpritePackageList(4,"3_Pant",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 5:
                             //Í∞ëÏò∑ Ï¢ÖÎ•ò
-                            SetSpritePackageList(5,"5_Armor",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            SetSpritePackageList(5,"5_Armor",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 6:
-                            //Îí§ Ï¢ÖÎ•ò
-                            SetSpritePackageList(6,"7_Back",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?í§ Ï¢ÖÎ•ò
+                            SetSpritePackageList(6,"7_Back",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 7:
-                            //Ïò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpritePackageList(7,"6_Weapons",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpritePackageList(7,"6_Weapons",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 8:
-                            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpritePackageList(8,"6_Weapons",_textureList[_drawItemIndex]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpritePackageList(8,"6_Weapons",_textureList[_drawItemIndex]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
                         }
                     }
@@ -1202,7 +1202,7 @@ public class SPUM_Manager : MonoBehaviour
                         switch(_drawItemIndex)
                         {
                             case 3:
-                            //Ïò∑ Ï¢ÖÎ•ò
+                            //?ò∑ Ï¢ÖÎ•ò
                             ttObjST._clothList[0].gameObject.SetActive(false);
                             ttObjST._clothList[1].gameObject.SetActive(false);
                             ttObjST._clothList[2].gameObject.SetActive(false);
@@ -1236,10 +1236,10 @@ public class SPUM_Manager : MonoBehaviour
                             break;
 
                             case 4:
-                            //Î∞îÏßÄ Ï¢ÖÎ•ò
+                            //Î∞îÏ?? Ï¢ÖÎ•ò
                             ttObjST._pantList[0].sprite=null;
                             ttObjST._pantList[1].sprite=null;
-                            //Î∞îÏßÄ
+                            //Î∞îÏ??
                             Sprite[] tSpritePant = Resources.LoadAll<Sprite>( _textureList[_drawItemIndex]._textureList[i]);
                             for(var j = 0; j < tSpritePant.Length;j++)
                             {
@@ -1356,25 +1356,25 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 0:
-            //Ìó§Ïñ¥ Ï¢ÖÎ•ò
+            //?ó§?ñ¥ Ï¢ÖÎ•ò
             _spriteObj._hairList[0].sprite = sprite;
             _spriteObj._hairList[1].sprite = null;
             break;
             
             case 1:
-            //ÏàòÏóº
+            //?àò?óº
             _spriteObj._hairList[3].sprite = sprite;
             break;
             
             case 2:
-            //Ìó¨Î©ß Ï¢ÖÎ•ò
+            //?ó¨Î©? Ï¢ÖÎ•ò
             _spriteObj._hairList[1].sprite = sprite;
             _spriteObj._hairList[0].sprite = null;
             break;
 
             case 3:
-            //Ïò∑ Ï¢ÖÎ•ò
-            // Ïò∑
+            //?ò∑ Ï¢ÖÎ•ò
+            // ?ò∑
             _spriteObj._clothList[0].sprite = null;
             _spriteObj._clothList[1].sprite = null;
             _spriteObj._clothList[2].sprite = null;
@@ -1404,8 +1404,8 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 4:
-            //Î∞îÏßÄ Ï¢ÖÎ•ò
-            //Î∞îÏßÄ
+            //Î∞îÏ?? Ï¢ÖÎ•ò
+            //Î∞îÏ??
             _spriteObj._pantList[0].sprite = null;
             _spriteObj._pantList[1].sprite = null;
             if(name.Length > 0)
@@ -1456,12 +1456,12 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 6:
-            //Îí∑ ÏïÑÏù¥ÌÖú
+            //?í∑ ?ïÑ?ù¥?Öú
             _spriteObj._backList[0].sprite = sprite;
             break;
 
             case 7:
-            //Ïò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+            //?ò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
             if(sprite==null)
             {
                 _spriteObj._weaponList[0].sprite = null;
@@ -1485,7 +1485,7 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 8:
-            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
             if(sprite==null)
             {
                 _spriteObj._weaponList[2].sprite = null;
@@ -1508,11 +1508,11 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 9:
-            //Îàà Í∏∞Î≥∏ÏúºÎ°ú Î¶¨ÏÖã
+            //?àà Í∏∞Î≥∏?úºÎ°? Î¶¨ÏÖã
 
             if(name.Length > 0)
             {
-                Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(name);
+                UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(name);
                 for(var j = 0 ; j < sprites.Length ;j++)
                 {
                     if(sprites[j].GetType() == typeof(Sprite))
@@ -1534,7 +1534,7 @@ public class SPUM_Manager : MonoBehaviour
             else
             {
                 string path = AssetDatabase.GetAssetPath(_mainEye);
-                Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path);
+                UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path);
                 for(var j = 0 ; j < sprites.Length ;j++)
                 {
                     if(sprites[j].GetType() == typeof(Sprite))
@@ -1560,7 +1560,7 @@ public class SPUM_Manager : MonoBehaviour
             break;
 
             case 10:
-            //Îßê
+            //Îß?
             if(name.Length ==0)
             {
                 SetHorse(false,name);
@@ -1575,7 +1575,7 @@ public class SPUM_Manager : MonoBehaviour
             
 
             case 11:
-            //ÌíÄÏÖã
+            //????Öã
             editObjNum = index;
             LoadUnitDataName(index);
             LoadButtonSet(true);
@@ -1597,7 +1597,7 @@ public class SPUM_Manager : MonoBehaviour
     {
         SPUM_HorseSpriteList hST = _rootAnimList[1].GetComponent<SPUM_HorseSpriteList>();
 
-        Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(name);
+        UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(name);
         for(var j = 0 ; j < sprites.Length ;j++)
         {
             if(sprites[j].GetType() == typeof(Sprite))
@@ -1663,45 +1663,45 @@ public class SPUM_Manager : MonoBehaviour
 
         switch(num)
         {
-            case 0: //Î®∏Î¶¨Ïùò Í≤ΩÏö∞
+            case 0: //Î®∏Î¶¨?ùò Í≤ΩÏö∞
             if(_spriteObj._hairList[0].sprite != null ) available = true;
             break;
 
-            case 1: //ÏàòÏóºÏùò Í≤ΩÏö∞
+            case 1: //?àò?óº?ùò Í≤ΩÏö∞
             if(_spriteObj._hairList[3].sprite != null ) available = true;
             break;
 
-            case 2: //Ìó¨Î©ß
+            case 2: //?ó¨Î©?
             if(_spriteObj._hairList[1].sprite != null ) available = true;
             break;
 
-            case 3: //Ïò∑
+            case 3: //?ò∑
             if(_spriteObj._bodyList[0].sprite != null ) available = true;
             break;
 
-            case 4: //Î∞îÏßÄ
+            case 4: //Î∞îÏ??
             if(_spriteObj._pantList[0].sprite != null ) available = true;
             break;
 
-            case 5: //ÏïÑÎ®∏
+            case 5: //?ïÑÎ®?
             if(_spriteObj._armorList[0].sprite != null ) available = true;
             break;
 
-            case 6: //Îí§
+            case 6: //?í§
             if(_spriteObj._backList[0].sprite != null ) available = true;
             break;
 
-            case 7: //Ïò§Î•∏ÏÜê
+            case 7: //?ò§Î•∏ÏÜê
             if(_spriteObj._weaponList[0].sprite!=null) available = true;
             if(_spriteObj._weaponList[1].sprite!=null) available = true;
             break;
 
-            case 8: //ÏôºÏÜê
+            case 8: //?ôº?Üê
             if(_spriteObj._weaponList[2].sprite!=null) available = true;
             if(_spriteObj._weaponList[3].sprite!=null) available = true;
             break;
 
-            case 9: //ÎààÏùò Í≤ΩÏö∞
+            case 9: //?àà?ùò Í≤ΩÏö∞
             available = true;
             _spriteObj._eyeList[2].color = _nowColor;
             _spriteObj._eyeList[3].color = _nowColor;
@@ -1752,51 +1752,51 @@ public class SPUM_Manager : MonoBehaviour
     {
         switch(_nowColorNum)
         {
-            case 0: //Î®∏Î¶¨Ïùò Í≤ΩÏö∞
+            case 0: //Î®∏Î¶¨?ùò Í≤ΩÏö∞
             _spriteObj._hairList[0].color = _nowColor;
             
             break;
 
-            case 1: //ÏàòÏóºÏùò Í≤ΩÏö∞
+            case 1: //?àò?óº?ùò Í≤ΩÏö∞
             _spriteObj._hairList[3].color = _nowColor;
             break;
 
-            case 2: //Ìó¨Î©ß
+            case 2: //?ó¨Î©?
             _spriteObj._hairList[1].color = _nowColor;
             break;
 
-            case 3: //Ïò∑
+            case 3: //?ò∑
             _spriteObj._clothList[0].color = _nowColor;
             _spriteObj._clothList[1].color = _nowColor;
             _spriteObj._clothList[2].color = _nowColor;
             break;
 
-            case 4: //Î∞îÏßÄ
+            case 4: //Î∞îÏ??
             _spriteObj._pantList[0].color = _nowColor;
             _spriteObj._pantList[1].color = _nowColor;
             break;
 
-            case 5: //ÏïÑÎ®∏
+            case 5: //?ïÑÎ®?
             _spriteObj._armorList[0].color = _nowColor;
             _spriteObj._armorList[1].color = _nowColor;
             _spriteObj._armorList[2].color = _nowColor;
             break;
 
-            case 6: //Îí§
+            case 6: //?í§
             _spriteObj._backList[0].color = _nowColor;
             break;
 
-            case 7: //Ïò§Î•∏ÏÜê
+            case 7: //?ò§Î•∏ÏÜê
             if(_spriteObj._weaponList[0]!=null) _spriteObj._weaponList[0].color = _nowColor;
             if(_spriteObj._weaponList[1]!=null) _spriteObj._weaponList[1].color = _nowColor;
             break;
 
-            case 8: //ÏôºÏÜê
+            case 8: //?ôº?Üê
             if(_spriteObj._weaponList[2]!=null) _spriteObj._weaponList[2].color = _nowColor;
             if(_spriteObj._weaponList[3]!=null) _spriteObj._weaponList[3].color = _nowColor;
             break;
 
-            case 9: //ÎààÏùò Í≤ΩÏö∞
+            case 9: //?àà?ùò Í≤ΩÏö∞
             _spriteObj._eyeList[2].color = _nowColor;
             _spriteObj._eyeList[3].color = _nowColor;
             break;
@@ -1819,50 +1819,50 @@ public class SPUM_Manager : MonoBehaviour
         
         switch(num)
         {
-            case 0: //Î®∏Î¶¨Ïùò Í≤ΩÏö∞
+            case 0: //Î®∏Î¶¨?ùò Í≤ΩÏö∞
             _spriteObj._hairList[0].color = tColor;
             break;
 
-            case 1: //ÏàòÏóºÏùò Í≤ΩÏö∞
+            case 1: //?àò?óº?ùò Í≤ΩÏö∞
             _spriteObj._hairList[3].color = tColor;
             break;
 
-            case 2: //Ìó¨Î©ß
+            case 2: //?ó¨Î©?
             _spriteObj._hairList[1].color = tColor;
             break;
 
-            case 3: //Ïò∑
+            case 3: //?ò∑
             _spriteObj._clothList[0].color = tColor;
             _spriteObj._clothList[1].color = tColor;
             _spriteObj._clothList[2].color = tColor;
             break;
 
-            case 4: //Î∞îÏßÄ
+            case 4: //Î∞îÏ??
             _spriteObj._pantList[0].color = tColor;
             _spriteObj._pantList[1].color = tColor;
             break;
 
-            case 5: //ÏïÑÎ®∏
+            case 5: //?ïÑÎ®?
             _spriteObj._armorList[0].color = tColor;
             _spriteObj._armorList[1].color = tColor;
             _spriteObj._armorList[2].color = tColor;
             break;
 
-            case 6: //Îí§
+            case 6: //?í§
             _spriteObj._backList[0].color = tColor;
             break;
 
-            case 7: //Ïò§Î•∏ÏÜê
+            case 7: //?ò§Î•∏ÏÜê
             if(_spriteObj._weaponList[0]!=null) _spriteObj._weaponList[0].color = tColor;
             if(_spriteObj._weaponList[1]!=null) _spriteObj._weaponList[1].color = tColor;
             break;
 
-            case 8: //ÏôºÏÜê
+            case 8: //?ôº?Üê
             if(_spriteObj._weaponList[2]!=null) _spriteObj._weaponList[2].color = tColor;
             if(_spriteObj._weaponList[3]!=null) _spriteObj._weaponList[3].color = tColor;
             break;
 
-            case 9: //ÎààÏùò Í≤ΩÏö∞
+            case 9: //?àà?ùò Í≤ΩÏö∞
             _spriteObj._eyeList[2].color = tColor;
             _spriteObj._eyeList[3].color = tColor;
             break;
@@ -1882,12 +1882,12 @@ public class SPUM_Manager : MonoBehaviour
             {
                 string path = unitPath + fileInfo.Name;
                 GameObject prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
-                //Îç∞Ïù¥ÌÑ∞ Ïã±ÌÅ¨ Î∂ÄÎ∂Ñ
+                //?ç∞?ù¥?Ñ∞ ?ã±?Å¨ Î∂?Î∂?
                 SPUM_Prefabs tST = prefab.GetComponent<SPUM_Prefabs>();
                 SPUM_SpriteList tObjST = tST._spriteOBj;
                 _spriteObj.LoadSprite(tObjST);
 
-                //UIÏó∞Îèô.
+                //UI?ó∞?èô.
                 // _colorButton[0].color = tObjST._eyeList[0].color;
                 // _colorButton[1].color = tObjST._hairList[3].color;
                 // _colorButton[2].color = tObjST._hairList[0].color;
@@ -1959,7 +1959,7 @@ public class SPUM_Manager : MonoBehaviour
             {
                 string path = unitPath + fileInfo.Name;
                 GameObject prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
-                //Îç∞Ïù¥ÌÑ∞ Ïã±ÌÅ¨ Î∂ÄÎ∂Ñ
+                //?ç∞?ù¥?Ñ∞ ?ã±?Å¨ Î∂?Î∂?
                 SPUM_Prefabs tST = prefab.GetComponent<SPUM_Prefabs>();
                 // Debug.Log(tST._version);
                 // Debug.Log(_version);
@@ -1967,7 +1967,7 @@ public class SPUM_Manager : MonoBehaviour
                 if(tST._version == 0 || tST._version < _version)
                 {
                     Debug.Log("Old Version data found.. Now sync version data..");
-                    //Ïù¥ Í≤ΩÏö∞Îäî Îç∞Ïù¥ÌÑ∞Î•º Ïã±ÌÅ¨Ìï¥Ï§òÏïºÌïúÎã§.
+                    //?ù¥ Í≤ΩÏö∞?äî ?ç∞?ù¥?Ñ∞Î•? ?ã±?Å¨?ï¥Ï§òÏïº?ïú?ã§.
                     SPUM_SpriteList tObjST = tST._spriteOBj;
                     if(tObjST._spHorseSPList !=null)
                     {
@@ -1979,7 +1979,7 @@ public class SPUM_Manager : MonoBehaviour
                     }
                     _spriteObj.LoadSprite(tObjST);
 
-                    //UIÏó∞Îèô.
+                    //UI?ó∞?èô.
                     // _colorButton[0].color = tObjST._eyeList[0].color;
                     // _colorButton[1].color = tObjST._hairList[3].color;
                     // _colorButton[2].color = tObjST._hairList[0].color;
@@ -2014,7 +2014,7 @@ public class SPUM_Manager : MonoBehaviour
 
         
     }
-    //ÌîÑÎ¶¨Ìåπ Ï†ÄÏû• Î∂ÄÎ∂Ñ
+    //?îÑÎ¶¨Ìåπ ????û• Î∂?Î∂?
     public void SavePrefabs()
     {
         if(_prefabUnitList.Count < _maxNumber)
@@ -2212,7 +2212,7 @@ public class SPUM_Manager : MonoBehaviour
 
             SPUM_PreviewItem ttObjST = ttObj.GetComponent<SPUM_PreviewItem>();
             ttObjST.ShowObj(5);
-            //ÏïÑÏù¥ÌÖú Ïó∞Îèô Î∂ÄÎ∂Ñ
+            //?ïÑ?ù¥?Öú ?ó∞?èô Î∂?Î∂?
             ttObjST._fullSetList[0].sprite = tObjST._bodyList[0].sprite;
             if(tObjST._bodyList[0].sprite!=null) ttObjST._fullSetList[0].color = tObjST._bodyList[0].color;
             ttObjST._fullSetList[1].sprite = tObjST._bodyList[1].sprite;
@@ -2270,10 +2270,10 @@ public class SPUM_Manager : MonoBehaviour
             ttObjST._fullSetList[23].sprite = tObjST._backList[0].sprite;
             if(tObjST._backList[0].sprite!=null) ttObjST._fullSetList[23].color = tObjST._backList[0].color;
 
-            //string Ïó∞Îèô
+            //string ?ó∞?èô
 
             
-            //ÏÉâÏó∞Îèô
+            //?Éâ?ó∞?èô
             if(!tObjST._eyeList[0].gameObject.activeInHierarchy) 
             {
                 ttObjST._fullSetList[6].gameObject.SetActive(true);
@@ -2316,13 +2316,13 @@ public class SPUM_Manager : MonoBehaviour
                 else ttObjST._fullSetList[i].gameObject.SetActive(false);
             }
 
-            // Îßê Îç∞Ïù¥ÌÑ∞Í∞Ä ÏûàÎäîÏßÄ.
+            // Îß? ?ç∞?ù¥?Ñ∞Í∞? ?ûà?äîÏß?.
             if(tObj.GetComponent<SPUM_Prefabs>()._horse)
             {
                 ttObjST._objList[7].SetActive(true);
 
                 string tPath = tObj.GetComponent<SPUM_Prefabs>()._horseString;
-                Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(tPath);
+                UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(tPath);
                 var sortedList = sprites.OrderBy(go=>go.name).ToList();
 
                 ttObjST._horseList[14].gameObject.SetActive(false);
@@ -2449,10 +2449,10 @@ public class SPUM_Manager : MonoBehaviour
         _spriteObj.LoadSprite(tObjST);
         _unitCode.text = (_prefabUnitList[index].name).Split('.')[0];
 
-        //Îç∞Ïù¥ÌÑ∞ Ïú†Ìö®ÏÑ± Ï≤¥ÌÅ¨
+        //?ç∞?ù¥?Ñ∞ ?ú†?ö®?Ñ± Ï≤¥ÌÅ¨
         if(tPrefabST._version == 0 || tPrefabST._version < _version)
         {
-            //Î≤ÑÏ†ºÏù¥ Ï°¥Ïû¨ÌïòÏßÄ ÏïäÍ±∞ÎÇò ÏóÜÏúºÎ©¥ Resync Ïã§Ìñâ
+            //Î≤ÑÏ†º?ù¥ Ï°¥Ïû¨?ïòÏß? ?ïäÍ±∞ÎÇò ?óÜ?úºÎ©? Resync ?ã§?ñâ
             tObjST.ResyncData();
             tPrefabST._version = _version;
             Debug.Log(unitPath+_prefabUnitList[index].name+".prefab");
@@ -2509,7 +2509,7 @@ public class SPUM_Manager : MonoBehaviour
     }
 
 
-    //Ïï†ÎãàÎ©îÏù¥ÏÖò Ïª®Ìä∏Î°§Îü¨Î•º Ïó∞ÎèôÌï¥Ï§çÎãàÎã§.
+    //?ï†?ãàÎ©îÏù¥?Öò Ïª®Ìä∏Î°§Îü¨Î•? ?ó∞?èô?ï¥Ï§çÎãà?ã§.
     public void AnimContCheck()
     {
         // RuntimeAnimatorController tC;
@@ -2552,7 +2552,7 @@ public class SPUM_Manager : MonoBehaviour
         _noticeText.text = text;
         callbackNum = callback;
 
-        if(type == 0 ) //Î≤ÑÌäº ÏÇ¨Ïö© ÏÑ†ÌÉù
+        if(type == 0 ) //Î≤ÑÌäº ?Ç¨?ö© ?Ñ†?Éù
         {
             _buttonSet[0].SetActive(true);
             _buttonSet[1].SetActive(false);
@@ -2583,12 +2583,12 @@ public class SPUM_Manager : MonoBehaviour
         _noticeObj.SetActive(false);
     }
 
-    //Ïù∏Ïä§ÌÜ® Í¥ÄÎ†®
+    //?ù∏?ä§?Ü® Í¥??†®
     
     public void InstallSpriteData()
     {
         bool Chk = false;
-        //Í∏∞Î≥∏ Ìè¥Îçî Ï†úÏûë
+        //Í∏∞Î≥∏ ?è¥?çî ?†ú?ûë
         if(Directory.Exists("Assets/Resources/SPUM/SPUM_Sprites/Items"))
         {
             Debug.Log("Found Resources Folder Success!!");
@@ -2604,7 +2604,7 @@ public class SPUM_Manager : MonoBehaviour
             Directory.CreateDirectory("Assets/Resources/SPUM/SPUM_Sprites/");
         }
 
-        //Ìå®ÌÇ§ÏßÄ Îç∞Ïù¥ÌÑ∞ Ï†úÏûë
+        //?å®?Ç§Ïß? ?ç∞?ù¥?Ñ∞ ?†ú?ûë
         if(Directory.Exists("Assets/Resources/SPUM/SPUM_Sprites/Packages"))
         {
             Debug.Log("Found Package Folder Success!!");
@@ -2615,7 +2615,7 @@ public class SPUM_Manager : MonoBehaviour
             }
         }
 
-        //Ïñ¥ÏÖã Ïπ¥Ìîº
+        //?ñ¥?Öã Ïπ¥Ìîº
 
         if(AssetDatabase.CopyAsset("Assets/SPUM/SPUM_Sprites/Items","Assets/Resources/SPUM/SPUM_Sprites/Items"))
         {
@@ -2645,7 +2645,7 @@ public class SPUM_Manager : MonoBehaviour
     {
         _mainBodyList.Clear();
         string spritePath = AssetDatabase.GetAssetPath( _mainBody );
-        Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(spritePath);
+        UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(spritePath);
         var sortedList = sprites.OrderBy(go=>go.name).ToList();
         List<Sprite> tSP = new List<Sprite>();
         for(var i = 0 ; i < sortedList.Count;i++)
@@ -2777,53 +2777,53 @@ public class SPUM_Manager : MonoBehaviour
                         switch(k)
                         {
                             case 0:
-                            //Ìó§Ïñ¥ Ï¢ÖÎ•ò
-                            SetSpriteList(0,"0_Hair"); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ó§?ñ¥ Ï¢ÖÎ•ò
+                            SetSpriteList(0,"0_Hair"); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 1:
-                            //ÏàòÏóº
-                            SetSpriteList(1,"1_FaceHair"); //ÏàòÏóº Ïó∞Í≤∞
+                            //?àò?óº
+                            SetSpriteList(1,"1_FaceHair"); //?àò?óº ?ó∞Í≤?
                             break;
 
                             case 2:
-                            //Ìó¨Î©ß Ï¢ÖÎ•ò
-                            SetSpriteList(2,"4_Helmet"); //Ìà¨Íµ¨ Ïó∞Í≤∞
+                            //?ó¨Î©? Ï¢ÖÎ•ò
+                            SetSpriteList(2,"4_Helmet"); //?à¨Íµ? ?ó∞Í≤?
                             break;
 
                             case 3:
-                            //Ïò∑ Ï¢ÖÎ•ò
-                            SetSpriteList(3,"2_Cloth"); //Ïò∑ Ïó∞Í≤∞
+                            //?ò∑ Ï¢ÖÎ•ò
+                            SetSpriteList(3,"2_Cloth"); //?ò∑ ?ó∞Í≤?
                             break;
 
                             case 4:
-                            //Î∞îÏßÄ Ï¢ÖÎ•ò
-                                SetSpriteList(4,"3_Pant"); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //Î∞îÏ?? Ï¢ÖÎ•ò
+                                SetSpriteList(4,"3_Pant"); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 5:
                             //Í∞ëÏò∑ Ï¢ÖÎ•ò
-                            SetSpriteList(5,"5_Armor"); //Í∞ëÏò∑ Ïó∞Í≤∞
+                            SetSpriteList(5,"5_Armor"); //Í∞ëÏò∑ ?ó∞Í≤?
                             break;
 
                             case 6:
-                            //Îí§ Ï¢ÖÎ•ò
-                            SetSpriteList(6,"7_Back"); //Îí§ ÏïÑÏù¥ÌÖú Ïó∞Í≤∞
+                            //?í§ Ï¢ÖÎ•ò
+                            SetSpriteList(6,"7_Back"); //?í§ ?ïÑ?ù¥?Öú ?ó∞Í≤?
                             break;
 
                             case 7:
-                            //Ïò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpriteList(7,"6_Weapons"); //Ïò§Î•∏Ï™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
+                            //?ò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpriteList(7,"6_Weapons"); //?ò§Î•∏Ï™Ω Î¨¥Í∏∞ ?ó∞Í≤?
                             break;
 
                             case 8:
-                            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpriteList(8,"6_Weapons"); //ÏôºÏ™Ω Î¨¥Í∏∞ Ïó∞Í≤∞
+                            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpriteList(8,"6_Weapons"); //?ôºÏ™? Î¨¥Í∏∞ ?ó∞Í≤?
                             break;
 
                             case 9:
-                            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpriteList(9,"Eye"); //Îàà Ïó∞Í≤∞
+                            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpriteList(9,"Eye"); //?àà ?ó∞Í≤?
                             break;
                         }
                     }
@@ -2835,53 +2835,53 @@ public class SPUM_Manager : MonoBehaviour
                         switch(k)
                         {
                             case 0:
-                            //Ìó§Ïñ¥ Ï¢ÖÎ•ò
-                            SetSpritePackageList(0,"0_Hair",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ó§?ñ¥ Ï¢ÖÎ•ò
+                            SetSpritePackageList(0,"0_Hair",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 1:
-                            //ÏàòÏóº
-                            SetSpritePackageList(1,"1_FaceHair",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?àò?óº
+                            SetSpritePackageList(1,"1_FaceHair",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 2:
-                            //Ìó¨Î©ß Ï¢ÖÎ•ò
-                            SetSpritePackageList(2,"4_Helmet",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ó¨Î©? Ï¢ÖÎ•ò
+                            SetSpritePackageList(2,"4_Helmet",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 3:
-                            //Ïò∑ Ï¢ÖÎ•ò
-                            SetSpritePackageList(3,"2_Cloth",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ò∑ Ï¢ÖÎ•ò
+                            SetSpritePackageList(3,"2_Cloth",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 4:
-                            //Î∞îÏßÄ Ï¢ÖÎ•ò
-                            SetSpritePackageList(4,"3_Pant",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //Î∞îÏ?? Ï¢ÖÎ•ò
+                            SetSpritePackageList(4,"3_Pant",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 5:
                             //Í∞ëÏò∑ Ï¢ÖÎ•ò
-                            SetSpritePackageList(5,"5_Armor",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            SetSpritePackageList(5,"5_Armor",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 6:
-                            //Îí§ Ï¢ÖÎ•ò
-                            SetSpritePackageList(6,"7_Back",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?í§ Ï¢ÖÎ•ò
+                            SetSpritePackageList(6,"7_Back",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 7:
-                            //Ïò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpritePackageList(7,"6_Weapons",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ò§Î•∏ÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpritePackageList(7,"6_Weapons",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 8:
-                            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpritePackageList(8,"6_Weapons",_textureList[k]._packageNameList[i]); //Ìó§Ïñ¥ Ïó∞Í≤∞
+                            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpritePackageList(8,"6_Weapons",_textureList[k]._packageNameList[i]); //?ó§?ñ¥ ?ó∞Í≤?
                             break;
 
                             case 9:
-                            //ÏôºÏÜê Î¨¥Í∏∞ Ï¢ÖÎ•ò
-                            SetSpritePackageList(9,"Eye",_textureList[k]._packageNameList[i]); //Îàà Ïó∞Í≤∞
+                            //?ôº?Üê Î¨¥Í∏∞ Ï¢ÖÎ•ò
+                            SetSpritePackageList(9,"Eye",_textureList[k]._packageNameList[i]); //?àà ?ó∞Í≤?
                             break;
                         }
                     }

@@ -68,7 +68,7 @@ public class SPUM_Editor : Editor
                     SPB._mainBody = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/SPUM/SPUM_Sprites/BodySource/Species/0_Human/Human_1.png",typeof(Texture2D));
 
                     string spritePath = AssetDatabase.GetAssetPath(  SPB._mainBody );
-                    Object[] sprites = AssetDatabase.LoadAllAssetsAtPath("Assets/SPUM/SPUM_Sprites/BodySource/Species/0_Human/Human_1.png");
+                    UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath("Assets/SPUM/SPUM_Sprites/BodySource/Species/0_Human/Human_1.png");
                     var sortedList = sprites.OrderBy(go=>go.name).ToList();
                     List<Sprite> tSP = new List<Sprite>();
                     for(var i = 0 ; i < sortedList.Count;i++)

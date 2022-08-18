@@ -434,8 +434,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSources: []
   curClips: []
-  pianoClips: []
-  metronomeClip: {fileID: 0}
+  pianoClips:
+  - {fileID: 8300000, guid: 19c4f58b20126874aa2cd00a3cd90024, type: 3}
+  - {fileID: 8300000, guid: abae6b682e3b8be4c835beea28798241, type: 3}
+  - {fileID: 8300000, guid: d7c064e605cf65540a1040e3546d2ef2, type: 3}
+  - {fileID: 8300000, guid: a7613a8a8b544bd48bc14a080ef0ca2e, type: 3}
+  - {fileID: 8300000, guid: 4f5d88fd09e5872479e081f08861d9a8, type: 3}
+  - {fileID: 8300000, guid: f023a09ef7f97154fb894501e757b6c5, type: 3}
+  - {fileID: 8300000, guid: 3d22b69a84a166f41b746a20da0cce3b, type: 3}
+  - {fileID: 8300000, guid: 01647684df7410445847510e17cc53b3, type: 3}
+  metronomeClip: {fileID: 8300000, guid: 1f4d8dcbd861de148827c5dacd0ae88f, type: 3}
 --- !u!1 &319309509652143519
 GameObject:
   m_ObjectHideFlags: 0

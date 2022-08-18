@@ -92,7 +92,7 @@ public class SPUM_SpriteEditManager : MonoBehaviour
         if(sp==null) return;
 
         string spritePath = AssetDatabase.GetAssetPath( sp );
-        Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(spritePath);
+        UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(spritePath);
 
         foreach(object obj in sprites)
         {

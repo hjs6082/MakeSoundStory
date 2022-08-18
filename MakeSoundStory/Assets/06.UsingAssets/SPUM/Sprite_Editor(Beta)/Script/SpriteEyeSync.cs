@@ -42,7 +42,7 @@ public class SpriteEyeSync : MonoBehaviour
         if(_nowTexture != null )
         {
             string path = AssetDatabase.GetAssetPath(_nowTexture);
-            Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path);
+            UnityEngine.Object[] sprites = AssetDatabase.LoadAllAssetsAtPath(path);
 
             for( var i = 0 ; i < sprites.Length ; i++ )
             {
