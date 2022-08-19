@@ -95,6 +95,7 @@ public class UIManager : MonoBehaviour
     // -----------------이벤트 관련 변수 ------------------
     [SerializeField] private GameObject eventPanel;
     [SerializeField] private GameObject oxPanel;
+    private Vector3 eventStartPosition;
 
     private string[] sayList = { "앞으로 잘 부탁드립니다!", "이 회사에 들어온게 꿈만 같아요!","앞으로 열심히 해보겠습니다!" };
 
@@ -118,6 +119,7 @@ public class UIManager : MonoBehaviour
             instance = this;
         }
         ButtonClick();
+        eventStartPosition = eventPanel.transform.position;
     }
 
     void Update()
@@ -897,12 +899,14 @@ public class UIManager : MonoBehaviour
 
     public void HumanEvent(StaffSO staff, string text, bool isOX)
     {
+
+        eventPanel.transform.position = eventStartPosition;
         if (isOX)
         {
-/*            if (eventPanel.transform.GetChild(0).gameObject.transform.childCount != 0)
+            if (eventPanel.transform.GetChild(0).gameObject.transform.childCount != 0)
             {
                 Destroy(eventPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-            }*/
+            }
             oxPanel.SetActive(true);
             eventPanel.SetActive(true);
             StartCoroutine(endEvent(5f, eventPanel));
@@ -916,10 +920,10 @@ public class UIManager : MonoBehaviour
         }
         if (!isOX)
         {
-/*            if(eventPanel.transform.GetChild(0).gameObject.transform.childCount !=0)
+            if(eventPanel.transform.GetChild(0).gameObject.transform.childCount !=0)
             {
                 Destroy(eventPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-            }*/
+            }
             eventPanel.SetActive(true);
             StartCoroutine(endEvent(5f, eventPanel));
             eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });

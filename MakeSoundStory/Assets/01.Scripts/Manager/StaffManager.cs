@@ -146,4 +146,19 @@ public class StaffManager : MonoBehaviour, IStaff
             staffImage.transform.parent = UIManager.instance.staffImage;
        
     }
+
+    IEnumerator StaffEvent()
+    {
+        if(workStaffList.Count != 0)
+        {
+            int randomIndex = Random.Range(0, workStaffList.Count);
+            StaffSO randomStaff = workStaffList[randomIndex];
+            //UIManager.instance.HumanEvent(randomIndex,);
+        }
+        else
+        {
+            yield return new WaitForSeconds(60f);
+            StartCoroutine(StaffEvent());
+        }
+    }
 }

@@ -34728,6 +34728,10 @@ PrefabInstance:
       propertyPath: BPM_Play_Button
       value: 
       objectReference: {fileID: 221469325}
+    - target: {fileID: 390420795159138560, guid: adee94b06d420614b8f5b47e64db1028, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 390420795994049825, guid: adee94b06d420614b8f5b47e64db1028, type: 3}
       propertyPath: m_Name
       value: GenreChoiceCanvas_1
@@ -34826,11 +34830,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5642688991722014771, guid: adee94b06d420614b8f5b47e64db1028, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5726005758601164082, guid: adee94b06d420614b8f5b47e64db1028, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adee94b06d420614b8f5b47e64db1028, type: 3}
