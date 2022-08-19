@@ -97,6 +97,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject oxPanel;
     private Vector3 eventStartPosition;
 
+    [SerializeField] private GameObject dogamPanel = null;
+
     private string[] sayList = { "앞으로 잘 부탁드립니다!", "이 회사에 들어온게 꿈만 같아요!","앞으로 열심히 해보겠습니다!" };
 
     public int buttonCount = 0;
@@ -368,6 +370,15 @@ public class UIManager : MonoBehaviour
         return staffUnit;
     }
 
+    public void showDogam()
+    {
+        dogamPanel.SetActive(true);
+        Camera.main.GetComponent<CameraSetting>().enabled = false;
+        dogamPanel.transform.GetChild(5).gameObject.GetComponent<Button>().onClick.AddListener(() => { dogamPanel.SetActive(false);
+            Camera.main.GetComponent<CameraSetting>().enabled = true;
+        });
+    }
+    
     public void showStaffLeft()
     {
         if(showStaffCount >= 1)

@@ -53,7 +53,7 @@ public class NPCSetting : MonoBehaviour
                 });
                 staffPanel.transform.GetChild(1).gameObject.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    UIManager.instance.showStaffList();
+                    UIManager.instance.showDogam();
                     staffPanel.SetActive(false);
                     UIManager.instance.staffTalkPanel.SetActive(false);
                 });
