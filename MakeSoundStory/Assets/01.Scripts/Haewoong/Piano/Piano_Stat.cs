@@ -23,11 +23,14 @@ namespace Piano
             if (GameManager.instance != null)
             {
                 int staffCount = StaffManager.instance.pickWorkStaffList.Count;
-
-                stat_Increase[0] = 1 + GameManager.instance.allPopularity / staffCount;
-                stat_Increase[1] = 1 + GameManager.instance.allMelodic / staffCount;
-                stat_Increase[2] = 1 + GameManager.instance.allAddictive / staffCount;
-                stat_Increase[3] = 1 + GameManager.instance.allCreativity / staffCount;
+                
+                if(staffCount > 0)
+                {
+                    stat_Increase[0] = 1 + GameManager.instance.allPopularity / staffCount;
+                    stat_Increase[1] = 1 + GameManager.instance.allMelodic / staffCount;
+                    stat_Increase[2] = 1 + GameManager.instance.allAddictive / staffCount;
+                    stat_Increase[3] = 1 + GameManager.instance.allCreativity / staffCount;
+                }
             }
         }
 

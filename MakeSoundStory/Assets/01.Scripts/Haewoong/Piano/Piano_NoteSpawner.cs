@@ -52,7 +52,7 @@ namespace Piano
 
         private void InsLine()
         {
-            Sound_Management.Instance.PlayMetronome();
+            //Sound_Management.Instance.PlayMetronome();
         }
 
         private IEnumerator InsLineRoutine()
