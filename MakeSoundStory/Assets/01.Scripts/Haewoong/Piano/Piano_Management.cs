@@ -45,6 +45,7 @@ namespace Piano
         public Transform       guideLine_Parent = null;
 #endregion
 
+        public float delayTime = 0.0f;
         private float curPlayTime = 0.0f;
 
         private void Awake()
@@ -88,6 +89,8 @@ namespace Piano
 
             startText.fontSize = 130;
             startText.text = "SPACE TO START";
+
+            if(GameManager.instance != null) { delayTime = 60.0f / (float)GameManager.instance.curBPM; }
             curPlayTime = 0.0f;
         }
         private void InitPiano()
@@ -132,12 +135,13 @@ namespace Piano
             {
                 print("Ω√¿€");
                 bPlaying = true;
+                p_Spawner.StartInsLine();
             }));
         }
 
         private IEnumerator Metronome(Action _callBack)
         {
-            var delay = new WaitForSeconds(1.0f);
+            var delay = new WaitForSeconds(delayTime);
 
             for(int i = 0; i < 4; i++)
             {

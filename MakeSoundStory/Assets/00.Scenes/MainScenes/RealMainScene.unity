@@ -7244,7 +7244,7 @@ MonoBehaviour:
   staffSpawnPanel: {fileID: 1574320178}
   spawnStaffChoicePanel: {fileID: 1557207181}
   spawnStaffChoiceListPanel: {fileID: 1512083193}
-  musicMakeStartButton: {fileID: 256189910}
+  musicMakeStartButton: {fileID: 1399092395}
   eventPanel: {fileID: 712468456}
   oxPanel: {fileID: 0}
   buttonCount: 0
@@ -23416,6 +23416,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389828334}
   m_CullTransparentMesh: 1
+--- !u!114 &1399092395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 390420795503420151, guid: adee94b06d420614b8f5b47e64db1028, type: 3}
+  m_PrefabInstance: {fileID: 2052606416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1399963071
 GameObject:
   m_ObjectHideFlags: 0

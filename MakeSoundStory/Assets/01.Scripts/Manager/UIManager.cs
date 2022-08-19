@@ -303,7 +303,12 @@ public class UIManager : MonoBehaviour
         genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
                                                 GenreManager.instance.GenreSet(genreTransform); });
         staffSpawnButton.onClick.AddListener(() => { staffSpawnPanel.SetActive(true); });
-        musicMakeStartButton.onClick.AddListener(() => { LoadingSceneManager.LoadScene("PianoScene"); });
+        musicMakeStartButton.onClick.AddListener(() =>
+        {
+            GameManager.instance.curBPM = BPM_Management.Instance.curBPM;
+
+            LoadingSceneManager.LoadScene("PianoScene"); 
+        });
     }
 
     private readonly string[] STAFF_INFO_STRS = 

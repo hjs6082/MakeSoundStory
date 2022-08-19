@@ -98,7 +98,6 @@ public class BPM_Management : MonoBehaviour
         if(isPlaying) BPM_State();
 
         curBPM = (int)(curGenre.MinBPM + (curGenre.MaxBPM - curGenre.MinBPM) * _value);
-        GameManager.instance.curBPM = curBPM;
         UpdateText();
     }
 

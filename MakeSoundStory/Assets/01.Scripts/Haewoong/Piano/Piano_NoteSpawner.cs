@@ -45,6 +45,28 @@ namespace Piano
             return note;
         }
 
+        public void StartInsLine()
+        {
+            StartCoroutine(InsLineRoutine());
+        }
+
+        private void InsLine()
+        {
+            Sound_Management.Instance.PlayMetronome();
+        }
+
+        private IEnumerator InsLineRoutine()
+        {
+            var delay = new WaitForSeconds(Piano_Management.Instance.delayTime);
+
+            while(Piano_Management.Instance.bPlaying)
+            {
+                InsLine();
+
+                yield return delay;
+            }
+        }
+
         private NoteInfo SetNote(int _noteIdx, int _lineIdx)
         {
             NoteInfo noteInfo = new NoteInfo();
