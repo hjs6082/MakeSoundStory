@@ -58,7 +58,7 @@ public class Sound_Management : MonoBehaviour
         ChangeClip(pianoClips);
     }
 
-    private void PlayClip(int _idx)
+    public void PlayClip(int _idx)
     {
         audioSources[_idx].Stop();
         audioSources[_idx].Play();

@@ -55,7 +55,7 @@ namespace Piano
         private void InsLine()
         {
             //Sound_Management.Instance.PlayMetronome();
-            GameObject line = Instantiate<GameObject>(linePrefabs);
+            GameObject line = Instantiate<GameObject>(linePrefabs, lineParent.position, Quaternion.identity, lineParent);
         }
 
         private IEnumerator InsLineRoutine()
