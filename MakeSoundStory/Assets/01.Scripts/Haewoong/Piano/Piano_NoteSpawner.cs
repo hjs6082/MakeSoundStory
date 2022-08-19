@@ -21,6 +21,8 @@ namespace Piano
 
         public Image[] guideLines = null;
         public List<int> lineIdxs = null;
+        public GameObject linePrefabs = null;
+        public Transform lineParent = null;
         
         public void InitValue()
         {
@@ -53,6 +55,7 @@ namespace Piano
         private void InsLine()
         {
             //Sound_Management.Instance.PlayMetronome();
+            GameObject line = Instantiate<GameObject>(linePrefabs);
         }
 
         private IEnumerator InsLineRoutine()
