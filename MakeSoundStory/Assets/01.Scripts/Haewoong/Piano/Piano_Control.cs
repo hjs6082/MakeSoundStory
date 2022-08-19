@@ -27,6 +27,7 @@ namespace Piano
             }
 
             Piano_Management.Instance.noteInput_Act += () => InputPiano();
+            Piano_Management.Instance.noteSound_Act += (x) => Sound_Management.Instance.PlayClip(x);
         }
 
         private void InputStart()
