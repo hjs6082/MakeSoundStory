@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7f923a8e69c7fc4daca735509df65aa, type: 3}
-  m_Name: StaffS10
+  m_Name: StaffSO12
   m_EditorClassIdentifier: 
-  stafflevel: 2
-  staffNumber: 10
-  staffName: "\uC724\uC740\uC131"
+  stafflevel: 4
+  staffNumber: 12
+  staffName: "\uC804\uD61C\uC120"
   staffJob: "\uC5C6\uC74C"
-  favoriteGenre: 0
-  hateGenre: 0
+  favoriteGenre: 5
+  hateGenre: 8
   creativity: 35
-  addictive: 25
-  melodic: 20
-  popularity: 20
+  addictive: 5
+  melodic: 25
+  popularity: 35
   money: 0
-  mySprite: {fileID: 3593811322849627655, guid: 15341dcd7f917164eb33285ba723630d, type: 3}
+  mySprite: {fileID: 1309562424992258379, guid: 3d2f70727897b2b459719a23a2d81a94, type: 3}
