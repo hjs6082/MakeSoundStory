@@ -231,6 +231,7 @@ public class UIManager : MonoBehaviour
             NPC.NPC_Management.Instance.AddNPC(staffPanel.GetComponent<MyData>().myStaff);
             int randomIndex = UnityEngine.Random.Range(0, sayList.Length);
             HumanEvent(staffPanel.GetComponent<MyData>().myStaff, sayList[randomIndex], false);
+            Dogam.instance.DogamChange(staffPanel.GetComponent<MyData>().myStaff.StaffNumber);
         });
     }
 

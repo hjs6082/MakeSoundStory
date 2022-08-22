@@ -48,6 +48,12 @@ public class StaffManager : MonoBehaviour, IStaff
         {
             staffList.Add(staffs[i]);
         }
+        staffList.Sort(delegate (StaffSO a, StaffSO b)
+        {
+            if (a.StaffNumber > b.StaffNumber) return 1;
+            else if (a.StaffNumber < b.StaffNumber) return -1;
+            return 0;
+        });
     }
 
     public void RandomStaff()

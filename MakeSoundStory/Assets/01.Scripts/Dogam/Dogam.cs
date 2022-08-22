@@ -8,6 +8,8 @@ public class Dogam : MonoBehaviour
     [SerializeField]
     private GameObject dogamObj;
     [SerializeField]
+    private GameObject dogamPrefab;
+    [SerializeField]
     private Text dogamCountText;
     [SerializeField]
     private GameObject[] dogamPanels;
@@ -21,9 +23,6 @@ public class Dogam : MonoBehaviour
         instance = this;
 
         DogamStart();
-
-        DogamChange(1);
-        DogamChange(2);
     }
 
     // Update is called once per frame
@@ -54,25 +53,33 @@ public class Dogam : MonoBehaviour
                 dogamCount++;
             }
         }
-        dogamCountText.text = dogamDictionary.Count + "개 중 " + dogamCount + " 개의 캐릭터 발견";
+        dogamCountText.text = dogamDictionary.Count + "명 중 " + dogamCount + " 명의 스태프 발견";
     }
 
     public void DogamStart()
     {
-        int dogamCount = dogamObj.transform.childCount;
-        dogamPanels = new GameObject[dogamCount];
-        for (int i = 0; i < dogamCount; i++)
+        for (int i = 0; i < StaffManager.instance.staffList.Count; i++)
+        {
+            GameObject dogam = Instantiate(dogamPrefab, new Vector3(0f,0f), Quaternion.identity);
+            dogam.transform.parent = dogamObj.transform;
+            dogam.transform.localScale = new Vector3(1f, 1f);
+            dogam.GetComponent<StaffData>().myStaffData = StaffManager.instance.staffList[i];
+        }
+        int dogamListCount = dogamObj.transform.childCount;
+        dogamPanels = new GameObject[dogamListCount];
+        for (int i = 0; i < dogamListCount; i++)
         {
             dogamPanels[i] = dogamObj.transform.GetChild(i).gameObject;
         }
         for (int i = 0; i < dogamPanels.Length; i++)
         {
-            dogamPanels[i].transform.GetChild(0).GetComponent<Text>().text = "#" + dogamPanels[i].GetComponent<MyDatas>().myData.Number.ToString();
+            dogamPanels[i].transform.GetChild(0).GetComponent<Text>().text = "#" + dogamPanels[i].GetComponent<StaffData>().myStaffData.StaffNumber.ToString();
             //dogamPanels[i].transform.GetChild(1).GetComponent<Image>().sprite = dogamPanels[i].GetComponent<MyData>().myData.CharacterImg; <<아트가 없기때문에 아직 못넣었어요.
-            dogamPanels[i].transform.GetChild(2).GetComponent<Text>().text = dogamPanels[i].GetComponent<MyDatas>().myData.MyName;
-            dogamPanels[i].transform.GetChild(3).GetComponent<Text>().text = dogamPanels[i].GetComponent<MyDatas>().myData.Explane;
-            dogamDictionary.Add(dogamPanels[i].GetComponent<MyDatas>().myData.Number, false);
+            dogamPanels[i].transform.GetChild(2).GetComponent<Text>().text = dogamPanels[i].GetComponent<StaffData>().myStaffData.StaffName;
+            dogamPanels[i].transform.GetChild(3).GetComponent<Text>().text = dogamPanels[i].GetComponent<StaffData>().myStaffData.StaffJob;
+            dogamDictionary.Add(dogamPanels[i].GetComponent<StaffData>().myStaffData.StaffNumber, false);
         }
+        dogamCountText.text = dogamDictionary.Count + "명 중 " + 0 + " 명의 스태프 발견";
     }
 
 }

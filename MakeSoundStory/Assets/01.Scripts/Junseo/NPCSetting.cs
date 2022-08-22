@@ -60,6 +60,7 @@ public class NPCSetting : MonoBehaviour
                 staffPanel.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     staffPanel.SetActive(false);
+                    UIManager.instance.staffTalkPanel.SetActive(false);
                 });
                 break;
             case Npctype.make:
@@ -74,7 +75,13 @@ public class NPCSetting : MonoBehaviour
                 break;
             case Npctype.setting:
                 StaffManager.instance.Talk(this.gameObject.GetComponent<StaffData>().myStaffData, "설정을 완료해주세요.");
+                Camera.main.GetComponent<CameraSetting>().enabled = false;
                 settingPanel.SetActive(true);
+                settingPanel.transform.GetChild(1).gameObject.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    settingPanel.SetActive(false);
+                    UIManager.instance.staffTalkPanel.SetActive(false); 
+                });
                 break;
             case Npctype.bank:
                 int bankMoney = 500;
@@ -105,10 +112,12 @@ public class NPCSetting : MonoBehaviour
                 {
                     GameManager.instance.playerMoney += bankMoney;
                     bankPanel.SetActive(false);
+                    UIManager.instance.staffTalkPanel.SetActive(false);
                 });
                 bankPanel.transform.GetChild(6).gameObject.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     bankPanel.SetActive(false);
+                    UIManager.instance.staffTalkPanel.SetActive(false);
                 });
                 break;
             case Npctype.office:
@@ -117,6 +126,7 @@ public class NPCSetting : MonoBehaviour
                 officePanel.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     officePanel.SetActive(false);
+                    UIManager.instance.staffTalkPanel.SetActive(false);
                 });
                 break;
             default:
