@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public GameObject settingNpcPanel = null;
     public GameObject bankNpcPanel = null;
     public GameObject officeNpcPanel = null;
+    public GameObject shopNpcPanel = null;
 
     public Text staffTalkText = null;
     public Text staffTalkNameText = null;

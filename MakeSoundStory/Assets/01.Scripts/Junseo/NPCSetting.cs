@@ -20,13 +20,17 @@ public class NPCSetting : MonoBehaviour
     [SerializeField]
     private GameObject officePanel;
 
+    [SerializeField]
+    private GameObject shopPanel;
+
     public enum Npctype
     {
         staff,      //스태프를 관리하고 배치하는 스태프
         make,       //음악을 제작하는 스태프
         setting,    //설정창을 여는 스태프
         bank,        //돈을 대출하는 스태프  
-        office      //회사 정보를 확인하는 스태프
+        office,      //회사 정보를 확인하는 스태프
+        shop
     }
 
     public Npctype npctype;
@@ -38,6 +42,7 @@ public class NPCSetting : MonoBehaviour
         musicPanel = UIManager.instance.musicNpcPanel;
         bankPanel = UIManager.instance.bankNpcPanel;
         officePanel = UIManager.instance.officeNpcPanel;
+        shopPanel = UIManager.instance.shopNpcPanel;
     }
 
     private void OnMouseDown()
@@ -126,6 +131,15 @@ public class NPCSetting : MonoBehaviour
                 officePanel.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     officePanel.SetActive(false);
+                    UIManager.instance.staffTalkPanel.SetActive(false);
+                });
+                break;
+            case Npctype.shop:
+                shopPanel.SetActive(true);
+                StaffManager.instance.Talk(this.gameObject.GetComponent<StaffData>().myStaffData, "상점에서 필요한 아이템을 구매해주세요.");
+                shopPanel.transform.GetChild(1).gameObject.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    shopPanel.SetActive(false);
                     UIManager.instance.staffTalkPanel.SetActive(false);
                 });
                 break;

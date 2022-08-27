@@ -2,36 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Item
+{
+    public int number;           //넘버
+    public int price;            //가격 
+    public Sprite itemSprite;    //아이템 스프라이트
+    public string itemName;      //아이템 이름
+    public string itemExplane;   //아이템 설명
+    public int maxamount;        //최대 수량
+    public int amount;           //가지고있는 수량 
+}
+
 [CreateAssetMenu(fileName = "ItemSO", menuName = "Scriptable Object/ItemSO", order = 1)]
 public class ItemSO : ScriptableObject
 {
-    [SerializeField][Header("아이템 넘버")]
-    private int itemNumber;
-    public int ItemNumber { get { return itemNumber; } }
-
-    [SerializeField][Header("아이템 이름")]
-    private string itemName;
-    public string ItemName { get { return itemName; } }
-
-    [SerializeField][Header("아이템 효과")]
-    private string itemEffect;
-    public string ItemEffect { get { return itemEffect; } }
-
-    public enum itemStat
-    {
-        creativity, //독창성
-        addictive,  //중독성
-        melodic,    //멜로디컬
-        popularity  //대중성
-    }
-    public itemStat ItemStat; 
-
-    public enum itemPercentage
-    {
-        small, //작음 5% 올려줌
-        midium, //중간 10% 올려줌
-        large // 큼 15% 올려줌
-    }
-
-    public itemPercentage ItemPercentage; 
+    public Item[] items; 
 }
