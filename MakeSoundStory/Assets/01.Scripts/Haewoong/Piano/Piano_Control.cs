@@ -50,6 +50,8 @@ namespace Piano
                         Piano_Management.Instance.noteSound_Act?.Invoke(tile.Value);
                     }
                 }
+
+                Piano_Management.Instance.p_Spawner.PopNotes();
             }
         }
     }

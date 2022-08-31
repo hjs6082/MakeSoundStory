@@ -338,9 +338,9 @@ public class UIManager : MonoBehaviour
         Transform infoTrm = _infoPanel.transform;
         Vector3 unitOffset = Vector3.down * 0.5f;
 
-        if(infoTrm.childCount > 13)
+        if(infoTrm.childCount > _childCount)
         {
-            for(int i = 13; i < infoTrm.childCount; i++)
+            for(int i = _childCount; i < infoTrm.childCount; i++)
             {
                 Destroy(infoTrm.GetChild(i).gameObject);
             }
@@ -365,8 +365,8 @@ public class UIManager : MonoBehaviour
             sb.Append(_staffSO.GetInfos()[i]);
             if(i == 9) sb.Append("G");
 
-            if(infoTrm.GetChild(i) != null)
-            infoTrm.GetChild(i + 1).GetComponent<Text>().text = sb.ToString();
+            Text text = infoTrm.GetChild(i + 1).GetComponent<Text>();
+            if(text != null) text.text = sb.ToString();
         }
 
         return staffUnit;
@@ -546,7 +546,7 @@ public class UIManager : MonoBehaviour
             }
         }
         GameObject noneStaff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        noneStaff.transform.parent = staffListPanel.transform;
+        noneStaff.transform.SetParent(staffListPanel.transform);
         noneStaff.transform.localScale = new Vector3(1, 1, 1);
         noneStaff.GetComponent<Image>().sprite = Resources.Load<Sprite>("delete");
         Destroy(noneStaff.GetComponent<StaffData>());
@@ -557,7 +557,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
         {
             GameObject staff = Instantiate(staffPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            staff.transform.parent = staffListPanel.transform;
+            staff.transform.SetParent(staffListPanel.transform);
             staff.transform.localScale = new Vector3(1, 1, 1);  
 
             if (!isSort)
@@ -571,8 +571,17 @@ public class UIManager : MonoBehaviour
             }
 
             GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[i].MySprite, staff.GetComponent<Image>().transform.position + Vector3.down * 0.6f, Quaternion.identity, staff.GetComponent<Image>().transform);
-            staffUnit.GetComponent<RectTransform>().localScale = new Vector3(150, 150, 1);
+            staffUnit.GetComponent<RectTransform>().localScale = new Vector3(125, 125, 1);
             staff.GetComponent<StaffData>().myStaffData = StaffManager.instance.workStaffList[i];
+
+            if(staffUnit.GetComponent<SortingGroup>() != null)
+            {
+                staffUnit.GetComponent<SortingGroup>().sortingOrder = 30;
+            }
+            else
+            {
+                staffUnit.AddComponent<SortingGroup>().sortingOrder = 30;
+            }
 
             if (buttons[buttonCount - 1].GetComponent<Image>().sprite == null)
             {

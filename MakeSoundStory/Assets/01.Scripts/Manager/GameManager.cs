@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("�̹� ���ӸŴ����� �����մϴ�.");
         }
-        UIManager.instance.GameStart();
+        
+        UIManager.instance?.GameStart();
         StartCoroutine(DayTimer()); 
     }
 

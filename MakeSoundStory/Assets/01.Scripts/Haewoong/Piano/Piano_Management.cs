@@ -21,6 +21,7 @@ namespace Piano
         public Piano_KeyMap      p_KeyMap  = null;
         public Piano_NoteSpawner p_Spawner = null;
         public Piano_Stat        p_Stat    = null;   
+        public Piano_Music   p_Music   = null;
 #endregion
 
 #region Action
@@ -33,6 +34,7 @@ namespace Piano
 #region bool
         [Header("BOOL 변수들")]
         public bool bPlaying = false; // 플레이 중인지
+        public bool isCanTap = false;
 #endregion
 
 #region UI 변수
@@ -45,6 +47,8 @@ namespace Piano
         public Transform       guideLine_Parent = null;
 #endregion
 
+        public int lineStackNum = 30;
+        public int curStack = 0;
         public float delayTime = 0.0f;
         private float curPlayTime = 0.0f;
 
@@ -58,17 +62,12 @@ namespace Piano
         {
             if(bPlaying)
             {
-                noteInput_Act?.Invoke();
-
-                curPlayTime += Time.deltaTime;
-                secondText.text = ((int)(DEFAULT_PLAY_TIME - curPlayTime)).ToString();
-                secondGuage.fillAmount = curPlayTime / DEFAULT_PLAY_TIME;
-                if (curPlayTime >= DEFAULT_PLAY_TIME)
+                if(isCanTap)
                 {
-                    curPlayTime -= curPlayTime;
-                    bPlaying = false;
-                    print("끝");
+                    noteInput_Act?.Invoke();
                 }
+
+                secondGuage.fillAmount = curStack / lineStackNum;
             }
         }
 
@@ -91,7 +90,15 @@ namespace Piano
             startText.text = "SPACE TO START";
 
             if(GameManager.instance != null) { delayTime = 60.0f / (float)GameManager.instance.curBPM; }
+            else { delayTime = 0.5f; }
+
+            noteCheck_Act += (x) => p_Spawner.NoteTap(x);
+
+            lineStackNum = 30;
             curPlayTime = 0.0f;
+
+            isCanTap = true;
+            bPlaying = false;
         }
         private void InitPiano()
         {
@@ -99,11 +106,13 @@ namespace Piano
             p_KeyMap = FindObjectOfType<Piano_KeyMap>();
             p_Spawner = FindObjectOfType<Piano_NoteSpawner>();
             p_Stat = FindObjectOfType<Piano_Stat>();
+            p_Music = FindObjectOfType<Piano_Music>();
 
             p_Ctrl?.InitValue();
             p_KeyMap?.InitValue();
             p_Spawner?.InitValue();
             p_Stat?.InitValue();
+            p_Music?.InitValue();
         }
         private void InitTile()
         {
@@ -135,8 +144,17 @@ namespace Piano
             {
                 print("시작");
                 bPlaying = true;
-                p_Spawner.StartInsLine();
             }));
+        }
+
+        public void MakeEnd()
+        {
+            // 음악 제작 후처리
+            p_Music.savePanel.SetActive(true);
+
+            bPlaying = false;
+            
+            print("끗");
         }
 
         private IEnumerator Metronome(Action _callBack)

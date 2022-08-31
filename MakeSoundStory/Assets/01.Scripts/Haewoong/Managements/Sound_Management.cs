@@ -6,8 +6,9 @@ public class Sound_Management : MonoBehaviour
 {
     public static Sound_Management Instance = null;
 
+    public AudioClip[] curClips = null;
+    
     [SerializeField] private AudioSource[] audioSources = null;
-    [SerializeField] private AudioClip[] curClips = null;
     [SerializeField] private AudioClip[] pianoClips = null;
     [SerializeField] private AudioClip metronomeClip = null;
 

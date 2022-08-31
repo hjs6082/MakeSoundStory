@@ -149,7 +149,7 @@ public class StaffManager : MonoBehaviour, IStaff
             GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity);
             staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 2;
             staffImage.transform.localScale = new Vector2(2f, 2f);
-            staffImage.transform.parent = UIManager.instance.staffImage;
+            staffImage.transform.SetParent(UIManager.instance.staffImage);
        
     }
 

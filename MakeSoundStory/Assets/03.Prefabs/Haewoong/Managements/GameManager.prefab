@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2451246959184127197}
   - component: {fileID: 2451246959184127196}
+  - component: {fileID: 7366192094240328527}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -52,6 +53,31 @@ MonoBehaviour:
   allMelodic: 0
   allPopularity: 0
   curBPM: 100
+--- !u!114 &7366192094240328527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451246959184127139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdf6c616326c4aaeb610b335fbb67fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useDefaultBackgroundColor: 0
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  useDefaultTextColor: 0
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  font: {fileID: 12800000, guid: 3e53c1bee5e5e43219f0342dc04f5be0, type: 3}
+  fontSize: 16
+  fontStyle: 0
+  alignment: 0
+  textDropShadow: 0
 --- !u!1001 &2451246959146517826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,15 +95,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 319309509475904311, guid: dd6f3561cad7fb14986606efe0797df0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.862434
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 319309509475904311, guid: dd6f3561cad7fb14986606efe0797df0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4277949
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 319309509475904311, guid: dd6f3561cad7fb14986606efe0797df0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 741.2188
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 319309509475904311, guid: dd6f3561cad7fb14986606efe0797df0, type: 3}
       propertyPath: m_LocalRotation.w
