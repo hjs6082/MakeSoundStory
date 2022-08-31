@@ -10,8 +10,7 @@ public class Item
     public Sprite itemSprite;    //아이템 스프라이트
     public string itemName;      //아이템 이름
     public string itemExplane;   //아이템 설명
-    public int maxamount;        //최대 수량
-    public int amount;           //가지고있는 수량 
+    public int reserve;        //보유량
 }
 
 [CreateAssetMenu(fileName = "ItemSO", menuName = "Scriptable Object/ItemSO", order = 1)]

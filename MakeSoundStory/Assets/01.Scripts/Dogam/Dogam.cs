@@ -58,6 +58,12 @@ public class Dogam : MonoBehaviour
 
     public void DogamStart()
     {
+        StaffManager.instance.staffList.Sort(delegate (StaffSO a, StaffSO b)
+        {
+            if (a.StaffNumber > b.StaffNumber) return 1;
+            else if (a.StaffNumber < b.StaffNumber) return -1;
+            return 0;
+        });
         for (int i = 0; i < StaffManager.instance.staffList.Count; i++)
         {
             GameObject dogam = Instantiate(dogamPrefab, new Vector3(0f,0f), Quaternion.identity);

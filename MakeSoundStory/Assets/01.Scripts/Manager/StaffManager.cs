@@ -23,6 +23,9 @@ public class StaffManager : MonoBehaviour, IStaff
 
     private string[] sayList = { "안녕하세요, 날씨가 좋네요.", "알아 나도, 시작하고 싶은 마음. 근데 곡이란게 별수있나..\n그냥 기다려보자고" };
 
+    [SerializeField]
+    private GameObject npcTransform;
+
     private void Awake()
     {
         if(instance != null)
@@ -151,6 +154,23 @@ public class StaffManager : MonoBehaviour, IStaff
             staffImage.transform.localScale = new Vector2(2f, 2f);
             staffImage.transform.SetParent(UIManager.instance.staffImage);
        
+    }
+
+
+    public void StopNpc()
+    {
+        for (int i = 0; i < npcTransform.transform.childCount; i++)
+        {
+            npcTransform.transform.GetChild(i).gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        }
+    }
+
+    public void RunNpc()
+    {
+        for (int i = 0; i < npcTransform.transform.childCount; i++)
+        {
+            npcTransform.transform.GetChild(i).gameObject.GetComponent<CapsuleCollider>().enabled = true;
+        }
     }
 
     IEnumerator StaffEvent()
