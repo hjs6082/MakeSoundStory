@@ -186,7 +186,7 @@ public class UIManager : MonoBehaviour
         }
 
         StaffManager.instance.staffList.Remove(selectStaff);
-        GameObject staffUnit = InitStaffInfo(staffPanels[staffCount], selectStaff, 10);
+        GameObject staffUnit = InitStaffInfo(staffPanels[staffCount], selectStaff, 11);
         gachaStaff.Add(staffUnit);
         staffPanels[staffCount].GetComponent<MyData>().myStaff = selectStaff;
 
@@ -366,7 +366,7 @@ public class UIManager : MonoBehaviour
             if(i == 9) sb.Append("G");
 
             Text text = infoTrm.GetChild(i + 1).GetComponent<Text>();
-            if(text != null) text.text = sb.ToString();
+            if(text != null) text.text = sb.ToString(); 
         }
 
         return staffUnit;
