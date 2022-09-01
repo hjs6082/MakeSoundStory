@@ -123,14 +123,14 @@ public class NPCSetting : MonoBehaviour
                 {
                     if (bankMoney != 500)
                     {
-                        bankMoney -= 500;
+                        bankMoney -= 500; 
                         bankPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = bankMoney + "G";
                         bankPanel.transform.GetChild(4).gameObject.GetComponent<Text>().text = bankMoney + GameManager.instance.playerMoney + "G";
                     }
                 });
                 bankPanel.transform.GetChild(5).gameObject.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    GameManager.instance.playerMoney += bankMoney;
+                    GameManager.instance.playerMoney += bankMoney; 
                     bankPanel.SetActive(false);
                     UIManager.instance.staffTalkPanel.SetActive(false);
                     StaffManager.instance.RunNpc();

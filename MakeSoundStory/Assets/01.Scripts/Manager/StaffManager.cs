@@ -17,7 +17,10 @@ public class StaffManager : MonoBehaviour, IStaff
     public List<StaffSO> workStaffList = new List<StaffSO>();
 
     [Header("음악 제작에 뽑힌 스태프 리스트")]
-    public List<StaffSO> pickWorkStaffList = new List<StaffSO>();   
+    public List<StaffSO> pickWorkStaffList = new List<StaffSO>();
+
+    [Header("휴가를 낸 스태프 리스트")]
+    public List<StaffSO> triedStaffList = new List<StaffSO>(); 
 
     public int isSelectStaff;
 

@@ -46,6 +46,18 @@ public class StaffSO : ScriptableObject
 
     public Genre HateGenre { get { return hateGenre; } }
 
+    public enum tried
+    {
+        normal,
+        bad, 
+        good
+    }
+
+    [SerializeField] [Header("피로도")]
+    private tried staffTried; //선호 장르
+
+    public tried StaffTried { get { return staffTried; } }
+
     [SerializeField][Header("독창성")]
     private int creativity; //독창성
     public int Creativity { get { return creativity; } }
