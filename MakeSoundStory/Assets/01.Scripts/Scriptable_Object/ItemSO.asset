@@ -15,31 +15,31 @@ MonoBehaviour:
   items:
   - number: 1
     price: 500
-    itemSprite: {fileID: 0}
+    itemSprite: {fileID: -6136648385878135983, guid: cdd05b2fd323e40408ce639ff31277d3, type: 3}
     itemName: "(S) \uC18C\uD615 \uC2A4\uD0EF \uBB3C\uC57D"
     itemExplane: "\uC2A4\uD0EF\uC758 \uCD1D\uD569\uC744 20 \uC62C\uB824\uC900\uB2E4."
     reserve: 0
   - number: 2
     price: 1500
-    itemSprite: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: fd00b29c3d9553d4c8e0ab3b572af409, type: 3}
     itemName: "(M) \uC911\uD615 \uC2A4\uD0EF \uBB3C\uC57D"
     itemExplane: "\uC2A4\uD0EF\uC758 \uCD1D\uD569\uC744 40 \uC62C\uB824\uC900\uB2E4."
-    reserve: 0
+    reserve: 1
   - number: 3
     price: 3000
-    itemSprite: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: 9d1a3e0bc36dfc9468a738d92b6e92d4, type: 3}
     itemName: "(L) \uB300\uD615 \uC2A4\uD0EF \uBB3C\uC57D"
     itemExplane: "\uC2A4\uD0EF\uC758 \uCD1D\uD569\uC744 60 \uC62C\uB824\uC900\uB2E4."
     reserve: 0
   - number: 4
     price: 2000
-    itemSprite: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: 367fef7c7a0cf8b4e8fc2020259965e9, type: 3}
     itemName: "(S) \uC18C\uD615 \uD53C\uB85C\uD68C\uBCF5\uC81C"
     itemExplane: "\uC2A4\uD0DC\uD504\uC758 \uD53C\uB85C\uB97C \uC870\uAE08 \uD68C\uBCF5\uD55C\uB2E4."
     reserve: 0
   - number: 5
     price: 4000
-    itemSprite: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: 429517ea1b1287a47952cd5cd8261d74, type: 3}
     itemName: "(L) \uB300\uD615 \uD53C\uB85C\uD68C\uBCF5\uC81C"
     itemExplane: "\uC2A4\uD0DC\uD504\uC758 \uD53C\uB85C\uB97C \uC644\uC804\uD788
       \uD68C\uBCF5\uD55C\uB2E4."

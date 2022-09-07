@@ -55,8 +55,11 @@ public class StaffSO : ScriptableObject
 
     [SerializeField] [Header("피로도")]
     private tried staffTried; //선호 장르
-
     public tried StaffTried { get { return staffTried; } }
+
+    [SerializeField] [Header("스트레스")]
+    private int stress;
+    public int Stress { get { return stress; } }
 
     [SerializeField][Header("독창성")]
     private int creativity; //독창성

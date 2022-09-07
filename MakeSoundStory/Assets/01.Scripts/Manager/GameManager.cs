@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    public static GameManager instance;
 
     public int month = 1;
     public int day = 1;
 
     public int playerMoney = 0;        //�÷��̾��� ������
-   
+
+    public int bankMoney = 500;
+
+    public int playerDebt = 0;
+
     public int allCreativity; // ���� ��â��
     public int allAddictive; // ���� �ߵ���
     public int allMelodic; // ���� ��ε���?
@@ -20,16 +23,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Debug.Log("�̹� ���ӸŴ����� �����մϴ�.");
-        }
-        
         UIManager.instance?.GameStart();
         StartCoroutine(DayTimer()); 
     }

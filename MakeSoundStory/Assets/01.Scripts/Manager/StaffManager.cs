@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class StaffManager : MonoBehaviour, IStaff
+public class StaffManager : MonoBehaviour
 {
     public static StaffManager instance;
 
