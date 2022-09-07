@@ -7,14 +7,17 @@ namespace LunchPad
 {
     public class Pad_Controller : MonoBehaviour
     {
-        [SerializeField]
-        private Button recordButton = null;
+        [SerializeField] private Button recordButton = null;
+        [SerializeField] private Button playButton = null;
+        [SerializeField] private Button editButton = null;
+
         private List<Pad_Button> pad_Btn_List = null;
 
         public void InitValue()
         {
-            recordButton.onClick.RemoveAllListeners();
-            recordButton.onClick.AddListener(() => { Recording(); });
+            recordButton.onClick.AddListener(() => Recording());
+            playButton.onClick.AddListener(() => PlayLunch());
+            editButton.onClick.AddListener(() => EditMode());
 
             pad_Btn_List = new List<Pad_Button>(Pad_Management.Instance.pad_Spawner.pad_Btn_List);
         }
@@ -22,6 +25,16 @@ namespace LunchPad
         public void Recording()
         {
             Pad_Management.Instance.pad_Recorder.isRec = true;
+        }
+
+        public void PlayLunch()
+        {
+            StartCoroutine(Pad_Management.Instance.pad_Spawner.PlayLunch());
+        }
+
+        public void EditMode()
+        {
+            Pad_Management.Instance.ChangeEditMode();
         }
 
         public void InputLunchPad()

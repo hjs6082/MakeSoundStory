@@ -34,6 +34,17 @@ public class MusicData
     }
 }
 
+[System.Serializable]
+public class SampleMusic
+{
+    public int[] stats;
+
+    public SampleMusic(int[] stats)
+    {
+        
+    }
+}
+
 public static class SaveSystem
 {
     private static string SavePath => Application.persistentDataPath + "/saves/";

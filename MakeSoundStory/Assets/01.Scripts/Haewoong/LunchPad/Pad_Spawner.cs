@@ -9,6 +9,7 @@ namespace LunchPad
     {
         private const float MAX_GRID_SIZE = 845.0f;
         
+        [Range(3, 6)]
         public int pad_Grid_Count = 4;
         
         public GameObject pad_Btn_Prefab = null;
@@ -16,10 +17,13 @@ namespace LunchPad
 
         public List<Pad_Button> pad_Btn_List = null;
 
+        public WaitForSeconds wait = null;
+
         public void InitValue()
         {
             pad_Btn_List = new List<Pad_Button>();
-            
+            wait = new WaitForSeconds(Pad_Management.Instance.bpmSpeed);
+
             InitLunchPad();
         }
 
@@ -40,10 +44,22 @@ namespace LunchPad
 
                 GameObject pad = Instantiate(pad_Btn_Prefab, lunchPad_Parent);
                 Pad_Button padBtn = pad.GetComponent<Pad_Button>();
+                Text padText = pad.GetComponentInChildren<Text>();
 
                 padBtn.ownIdx = idx;
+                padText.text = idx.ToString();
 
                 pad_Btn_List.Add(padBtn);           
+            }
+        }
+
+        public IEnumerator PlayLunch()
+        {
+            for(int i = 0; i < pad_Btn_List.Count; i++)
+            {
+                pad_Btn_List[i].Play();
+
+                yield return new WaitForSeconds(pad_Btn_List[i].ownClip.length);
             }
         }
     }
