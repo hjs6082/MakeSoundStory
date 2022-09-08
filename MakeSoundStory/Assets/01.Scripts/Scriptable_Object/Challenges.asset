@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5f365805e676146956f23002d77789, type: 3}
+  m_Name: Challenges
+  m_EditorClassIdentifier: 
+  challenges:
+  - challengeNumber: 0
+    challengeName: 
+    needValue: 0
+    getGold: 0
+    challengeType: 0
+    isClear: 0
+  - challengeNumber: 2
+    challengeName: "\uC774\uC81C \uC2DC\uC791!"
+    needValue: 5
+    getGold: 500
+    challengeType: 0
+    isClear: 0
+  - challengeNumber: 2
+    challengeName: "\uC911\uAE08 \uC2A4\uD0DC\uD504"
+    needValue: 5
+    getGold: 500
+    challengeType: 0
+    isClear: 0

@@ -227,10 +227,21 @@ public class Shop : MonoBehaviour
     }
 
     public void ItemTextSetting(int index)
-    { 
-        useItemObj.transform.GetChild(1).gameObject.GetComponent<Text>().text = itemList.items[index].itemName;
-        useItemObj.transform.GetChild(2).gameObject.GetComponent<Text>().text = itemList.items[index].itemExplane;
-        useItemObj.transform.GetChild(3).gameObject.GetComponent<Text>().text = "보유량 : " + itemList.items[index].reserve.ToString() + "개"; 
+    {
+        if (index == 0 || index == 1 || index == 2)
+        {
+            useItemObj.transform.GetChild(1).gameObject.GetComponent<Text>().text = itemList.items[index].itemName;
+            useItemObj.transform.GetChild(2).gameObject.GetComponent<Text>().text = itemList.items[index].itemExplane;
+            useItemObj.transform.GetChild(3).gameObject.GetComponent<Text>().text = "보유량 : " + itemList.items[index].reserve.ToString() + "개";
+            useItemObj.transform.GetChild(4).gameObject.SetActive(false);
+        }
+        else
+        {
+            useItemObj.transform.GetChild(1).gameObject.GetComponent<Text>().text = itemList.items[index].itemName;
+            useItemObj.transform.GetChild(2).gameObject.GetComponent<Text>().text = itemList.items[index].itemExplane;
+            useItemObj.transform.GetChild(3).gameObject.GetComponent<Text>().text = "보유량 : " + itemList.items[index].reserve.ToString() + "개";
+            useItemObj.transform.GetChild(4).gameObject.SetActive(true);    
+        }
     }
 
     public Item RandomItem()
