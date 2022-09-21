@@ -5,78 +5,82 @@ using UnityEngine.UI;
 
 public class NPCSetting : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject staffPanel;
+    // [SerializeField]
+    // private GameObject staffPanel;
 
-    [SerializeField]
-    private GameObject settingPanel;
+    // [SerializeField]
+    // private GameObject settingPanel;
 
-    [SerializeField]
-    private GameObject musicPanel;
+    // [SerializeField]
+    // private GameObject musicPanel;
 
-    [SerializeField]
-    private GameObject bankPanel;
+    // [SerializeField]
+    // private GameObject bankPanel;
 
-    [SerializeField]
-    private GameObject officePanel;
+    // [SerializeField]
+    // private GameObject officePanel;
 
-    [SerializeField]
-    private GameObject shopPanel;
+    // [SerializeField]
+    // private GameObject shopPanel;
 
-    public enum Npctype
-    {
-        staff,      //½ºÅÂÇÁ¸¦ °ü¸®ÇÏ°í ¹èÄ¡ÇÏ´Â ½ºÅÂÇÁ
-        make,       //À½¾ÇÀ» Á¦ÀÛÇÏ´Â ½ºÅÂÇÁ
-        setting,    //¼³Á¤Ã¢À» ¿©´Â ½ºÅÂÇÁ
-        bank,        //µ·À» ´ëÃâÇÏ´Â ½ºÅÂÇÁ  
-        office,      //È¸»ç Á¤º¸¸¦ È®ÀÎÇÏ´Â ½ºÅÂÇÁ
-        shop
-    }
+    // public enum Npctype
+    // {
+    //     staff,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //     make,       //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //     setting,    //ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //     bank,        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
+    //     office,      //È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //     shop
+    // }
 
-    public Npctype npctype;
+    // public Npctype npctype;
 
-    private void Start()
-    {
-        staffPanel = UIManager.instance.staffNpcPanel;
-        settingPanel = UIManager.instance.settingNpcPanel;
-        musicPanel = UIManager.instance.musicNpcPanel;
-        bankPanel = UIManager.instance.bankNpcPanel;
-        officePanel = UIManager.instance.officeNpcPanel;
-        shopPanel = UIManager.instance.shopNpcPanel;
-    }
+    // private void Start()
+    // {
+    //     staffPanel = UIManager.instance.staffNpcPanel;
+    //     settingPanel = UIManager.instance.settingNpcPanel;
+    //     musicPanel = UIManager.instance.musicNpcPanel;
+    //     bankPanel = UIManager.instance.bankNpcPanel;
+    //     officePanel = UIManager.instance.officeNpcPanel;
+    //     shopPanel = UIManager.instance.shopNpcPanel;
+    // }
+
+    [SerializeField] private StaffPanel staffpanel = null;
 
     private void OnMouseDown()
-    {
-        switch (npctype)
-        {
-            case Npctype.staff:
-                Setting(staffPanel, "¿øÇÏ½Ã´Â ¹öÆ°À» ¼±ÅÃÇØÁÖ¼¼¿ä."); 
-                break;
-            case Npctype.make:
-                Setting(musicPanel, "À½¾Ç Á¦ÀÛÀ» ½ÃÀÛÇÒ±î¿ä?");
-                break;
-            case Npctype.setting:
-                Setting(settingPanel, "¼³Á¤À» ¿Ï·áÇØÁÖ¼¼¿ä.");               
-                break;
-            case Npctype.bank:
-                Setting(bankPanel, "¿øÇÏ´Â ¾×¼ö¸¸Å­ ´ëÃâÀ» ÁøÇàÇØÁÖ¼¼¿ä.");
-                break;
-            case Npctype.office:
-                Setting(officePanel, "ÇöÀç È¸»ç Á¤º¸ÀÔ´Ï´Ù."); 
-                break;
-            case Npctype.shop:
-                Setting(shopPanel, "»óÁ¡¿¡¼­ ÇÊ¿äÇÑ ¾ÆÀÌÅÛÀ» ±¸¸ÅÇØÁÖ¼¼¿ä."); 
-                break;
-            default:
-                break;
-        }
+    { 
+        // switch (npctype)
+        // {
+        //     case Npctype.staff:
+        //         Setting(staffPanel, "ï¿½ï¿½ï¿½Ï½Ã´ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½."); 
+        //         break;
+        //     case Npctype.make:
+        //         Setting(musicPanel, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½ï¿½?");
+        //         break;
+        //     case Npctype.setting:
+        //         Setting(settingPanel, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");               
+        //         break;
+        //     case Npctype.bank:
+        //         Setting(bankPanel, "ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½×¼ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
+        //         break;
+        //     case Npctype.office:
+        //         Setting(officePanel, "ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½."); 
+        //         break;
+        //     case Npctype.shop:
+        //         Setting(shopPanel, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½."); 
+        //         break;
+        //     default:
+        //         break;
+        // }
+    
+        Setting(staffpanel, "");
     }
     
-    public void Setting(GameObject panel, string sayText)
+    public void Setting(StaffPanel panel, string sayText)
     {
-        panel.SetActive(true);
+        panel.OnPanel();
         StaffManager.instance.Talk(this.gameObject.GetComponent<StaffData>().myStaffData, sayText);
-        Camera.main.GetComponent<CameraSetting>().enabled = false;
+        //Camera.main.GetComponent<CameraSetting>().enabled = false;
         StaffManager.instance.StopNpc();
     }
 

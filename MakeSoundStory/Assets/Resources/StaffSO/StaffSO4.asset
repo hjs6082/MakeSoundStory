@@ -18,9 +18,11 @@ MonoBehaviour:
   staffJob: "\uC5C6\uC74C"
   favoriteGenre: 3
   hateGenre: 7
+  staffTried: 0
+  stress: 0
   creativity: 10
   addictive: 20
   melodic: 50
   popularity: 20
   money: 500
-  mySprite: {fileID: 4582615295677981128, guid: b0ff501ef9c14954284abc7c4fbd1781, type: 3}
+  staffPrefab: {fileID: 4285132074026339518, guid: f3c23903723e75e4aa520849298b78e3, type: 3}

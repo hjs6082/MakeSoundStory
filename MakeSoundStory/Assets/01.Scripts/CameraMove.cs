@@ -21,7 +21,7 @@ public class CameraMove : MonoBehaviour
 
     private void Update()
     {
-        if(Input.anyKey)
+        if(Input.anyKey && !UIManagement.instance.isPanelOn)
         {
             PlayerControl();
         }
@@ -38,7 +38,7 @@ public class CameraMove : MonoBehaviour
         moveOffset = new Vector3();
     }
 
-    // ÃßÈÄ¿¡ GameManager·Î ¿Å±æ ¿¹Á¤
+    // ï¿½ï¿½ï¿½Ä¿ï¿½ GameManagerï¿½ï¿½ ï¿½Å±ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void FrameSetting()
     {
         QualitySettings.vSyncCount = 0;

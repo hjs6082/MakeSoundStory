@@ -24,7 +24,7 @@ public class Setting : MonoBehaviour
         xButton.onClick.AddListener(() =>
         {
             this.gameObject.SetActive(false); 
-            Camera.main.GetComponent<CameraSetting>().enabled = true;
+            //Camera.main.GetComponent<CameraSetting>().enabled = true;
             UIManager.instance.staffTalkPanel.SetActive(false);
             StaffManager.instance.RunNpc();
         });

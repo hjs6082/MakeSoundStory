@@ -46,19 +46,21 @@ public class Bank : MonoBehaviour
         {
             GameManager.instance.playerMoney += GameManager.instance.bankMoney;
             GameManager.instance.playerDebt += GameManager.instance.bankMoney;
-            this.gameObject.SetActive(false);
             GameManager.instance.bankMoney = 500;
+
             bankGold.text = 500 + "G";
             endGold.text = GameManager.instance.bankMoney + GameManager.instance.playerMoney + "G";
             plrGold.text = GameManager.instance.playerMoney.ToString() + "G"; 
+
+            this.gameObject.SetActive(false);
             UIManager.instance.staffTalkPanel.SetActive(false); 
             StaffManager.instance.RunNpc();
-            Camera.main.GetComponent<CameraSetting>().enabled = true;
+            
+            UIManagement.instance.MoneyTextUpdate();
         });
         xButton.onClick.AddListener(() =>
         {
             this.gameObject.SetActive(false);
-            Camera.main.GetComponent<CameraSetting>().enabled = true;
             UIManager.instance.staffTalkPanel.SetActive(false);
             StaffManager.instance.RunNpc();
         });

@@ -5,45 +5,42 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StaffSO", menuName = "Scriptable Object/StaffSO", order = 1)]
 public class StaffSO : ScriptableObject
 {
-    [SerializeField][Header("½ºÅÂÇÁ ·¹º§")]
-    private int stafflevel; // ½ºÅÂÇÁ ·¹º§
+    [SerializeField][Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    private int stafflevel; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int StaffLevel { get { return stafflevel; } }
     
-    [SerializeField][Header("½ºÅÂÇÁ ¹øÈ£")]
-    private int staffNumber; // ½ºÅÂÇÁ ³Ñ¹ö
+    [SerializeField][Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£")]
+    private int staffNumber; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
     public int StaffNumber { get { return staffNumber; } }
 
-    [SerializeField][Header("ÀÌ¸§")]
-    private string staffName; // ÀÌ¸§
+    [SerializeField][Header("ï¿½Ì¸ï¿½")]
+    private string staffName; // ï¿½Ì¸ï¿½
     public string StaffName { get { return staffName; } }
 
-    [SerializeField][Header("Á÷¾÷")]
-    private string staffJob; // Á÷¾÷
+    [SerializeField][Header("ï¿½ï¿½ï¿½ï¿½")]
+    private string staffJob; // ï¿½ï¿½ï¿½ï¿½
     public string StaffJob { get { return staffJob;  } }
 
     public enum Genre
     {
-        ÆË,
-        ¾Ë¾Øºñ,
-        ÀçÁî,
-        Æ®·¦,
-        ºÕ¹í,
-        ¹ß¶óµå,
-        Æ®·ÎÆ®,
-        ¶ô,
-        ÆãÅ©,
-        ´í½º, 
-        ¾øÀ½
+        íŒ,
+        RnB,
+        ì¬ì¦ˆ,
+        íŠ¸ë©,
+        ë¶ë±,
+        ë°œë¼ë“œ,
+        íŠ¸ë¡œíŠ¸,
+        ë½,
+        í‘í¬,
+        ë””ìŠ¤ì½”
     }
 
-    [SerializeField][Header("¼±È£ Àå¸£")]
-    private Genre favoriteGenre; //¼±È£ Àå¸£
-
+    [SerializeField][Header("ï¿½ï¿½È£ ï¿½å¸£")]
+    private Genre favoriteGenre; //ï¿½ï¿½È£ ï¿½å¸£
     public Genre FavoriteGenre { get { return favoriteGenre; } }
 
-    [SerializeField] [Header("ºÒÈ£ Àå¸£")]
-    private Genre hateGenre; //¼±È£ Àå¸£
-
+    [SerializeField] [Header("ï¿½ï¿½È£ ï¿½å¸£")]
+    private Genre hateGenre; //ï¿½ï¿½È£ ï¿½å¸£
     public Genre HateGenre { get { return hateGenre; } }
 
     public enum tried
@@ -53,55 +50,35 @@ public class StaffSO : ScriptableObject
         good
     }
 
-    [SerializeField] [Header("ÇÇ·Îµµ")]
-    private tried staffTried; //¼±È£ Àå¸£
+    [SerializeField] [Header("ï¿½Ç·Îµï¿½")]
+    private tried staffTried; //ï¿½ï¿½È£ ï¿½å¸£
     public tried StaffTried { get { return staffTried; } }
 
-    [SerializeField] [Header("½ºÆ®·¹½º")]
+    [SerializeField] [Header("ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½")]
     private int stress;
     public int Stress { get { return stress; } }
 
-    [SerializeField][Header("µ¶Ã¢¼º")]
-    private int creativity; //µ¶Ã¢¼º
+    [SerializeField][Header("ï¿½ï¿½Ã¢ï¿½ï¿½")]
+    private int creativity; //ï¿½ï¿½Ã¢ï¿½ï¿½
     public int Creativity { get { return creativity; } }
 
-    [SerializeField][Header("Áßµ¶¼º")]
-    private int addictive; //Áßµ¶¼º
+    [SerializeField][Header("ï¿½ßµï¿½ï¿½ï¿½")]
+    private int addictive; //ï¿½ßµï¿½ï¿½ï¿½
     public int Addictive { get { return addictive; } }
 
-    [SerializeField][Header("¸á·ÎµğÄÃ")]
-    private int melodic; //¸á·ÎµğÄÃÇÔ
+    [SerializeField][Header("ï¿½ï¿½Îµï¿½ï¿½ï¿½")]
+    private int melodic; //ï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½
     public int Melodic { get { return melodic; } }
 
-    [SerializeField] [Header("´ëÁß¼º")]
-    private int popularity; //´ëÁß¼º   
+    [SerializeField] [Header("ï¿½ï¿½ï¿½ß¼ï¿½")]
+    private int popularity; //ï¿½ï¿½ï¿½ß¼ï¿½   
     public int Popularity { get { return popularity; } }
 
-    [SerializeField][Header("°è¾à±İ")]
-    private int money; //°è¾à±İ
+    [SerializeField][Header("ï¿½ï¿½ï¿½ï¿½")]
+    private int money; //ï¿½ï¿½ï¿½ï¿½
     public int Money { get { return money; } }
 
-    [SerializeField][Header("Á÷¿ø »çÁø")]
-    private GameObject mySprite;
-    public GameObject MySprite { get { return mySprite; } } 
-
-    public object[] GetInfos()
-    {
-        object[] infos = new object[11]
-        {
-            staffName,
-            stafflevel,
-            creativity,
-            melodic,
-            addictive,
-            popularity,
-            hateGenre,
-            favoriteGenre,
-            staffJob,
-            money,
-            staffNumber
-        };
-        
-        return infos;
-    }
+    [SerializeField][Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    private GameObject staffPrefab;
+    public GameObject StaffPrefab { get { return staffPrefab; } } 
 }

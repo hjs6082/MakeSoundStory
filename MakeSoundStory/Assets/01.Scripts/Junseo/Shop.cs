@@ -28,7 +28,7 @@ public class Shop : MonoBehaviour
     private Button xButton;
 
 
-    // ---------------------------¾ÆÀÌÅÛ »ç¿ë °ü·Ã º¯¼öµé --------------------------
+    // ---------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ --------------------------
     [SerializeField]
     private GameObject useItemObj;
 
@@ -47,7 +47,7 @@ public class Shop : MonoBehaviour
     [SerializeField]
     private int itemIndex = 0;
 
-    // ·£´ý ¾ÆÀÌÅÛ »Ì±â °ü·Ã º¯¼ö
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
     private GameObject gachaPanel;
 
@@ -90,13 +90,13 @@ public class Shop : MonoBehaviour
         xButton.onClick.AddListener(() =>
         {
             this.gameObject.SetActive(false);
-            Camera.main.GetComponent<CameraSetting>().enabled = true;
+            //Camera.main.GetComponent<CameraSetting>().enabled = true;
             UIManager.instance.staffTalkPanel.SetActive(false);
             StaffManager.instance.RunNpc();
         });
     }
 
-    public void Test() //º¸À¯·®À» 0À¸·Î ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö, ºôµå¶§´Â ¾²Áö¾ÊÀ»°Í
+    public void Test() //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½, ï¿½ï¿½ï¿½å¶§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         for(int i = 0; i < itemList.items.Length; i++)
         {
@@ -109,7 +109,7 @@ public class Shop : MonoBehaviour
         if (item.reserve < 5)
         {
             buyPanel.SetActive(true);
-            buyPanel.transform.GetChild(0).gameObject.GetComponent<Text>().text = item.itemName + " x1\n ±¸¸ÅÇß½À´Ï´Ù.";
+            buyPanel.transform.GetChild(0).gameObject.GetComponent<Text>().text = item.itemName + " x1\n ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.";
             item.reserve++;
             //buyPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = item.itemSprite;
             buyPanel.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() =>
@@ -117,14 +117,14 @@ public class Shop : MonoBehaviour
             buyPanel.SetActive(false);
                 for (int i = 0; i < shopPanels.Length - 1; i++)
                 {
-                    shopPanels[i + 1].transform.GetChild(4).GetComponent<Text>().text = "º¸À¯·® : " + itemList.items[i].reserve.ToString() + "°³";
+                    shopPanels[i + 1].transform.GetChild(4).GetComponent<Text>().text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + itemList.items[i].reserve.ToString() + "ï¿½ï¿½";
                 }
             });
         }
         else
         {
             buyPanel.SetActive(true);
-            buyPanel.transform.GetChild(0).gameObject.GetComponent<Text>().text = "¾ÆÀÌÅÛ º¸À¯·®ÀÌ ÃÖ´ë °³¼ö¸¦ ³Ñ¾ú½À´Ï´Ù.";
+            buyPanel.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.";
             //buyPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = item.itemSprite;
             buyPanel.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -146,7 +146,7 @@ public class Shop : MonoBehaviour
             }
             else
             {
-                UIManager.instance.ShowExplane("µ·ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
+                UIManager.instance.ShowExplane("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             }
         });
         shopButton.onClick.AddListener(() =>
@@ -176,10 +176,10 @@ public class Shop : MonoBehaviour
         {
             int index = i - 1;
             shopPanels[i].transform.GetChild(0).GetComponent<Text>().text = "#" + itemList.items[index].number;
-            //dogamPanels[i].transform.GetChild(1).GetComponent<Image>().sprite = dogamPanels[i].GetComponent<MyData>().myData.CharacterImg; <<¾ÆÆ®°¡ ¾ø±â¶§¹®¿¡ ¾ÆÁ÷ ¸ø³Ö¾ú¾î¿ä.
+            //dogamPanels[i].transform.GetChild(1).GetComponent<Image>().sprite = dogamPanels[i].GetComponent<MyData>().myData.CharacterImg; <<ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½â¶§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½.
             shopPanels[i].transform.GetChild(2).GetComponent<Text>().text = itemList.items[index].itemName;
             shopPanels[i].transform.GetChild(3).GetComponent<Text>().text = itemList.items[index].itemExplane;
-            shopPanels[i].transform.GetChild(4).GetComponent<Text>().text = "º¸À¯·® : " + itemList.items[index].reserve.ToString() + "°³";
+            shopPanels[i].transform.GetChild(4).GetComponent<Text>().text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + itemList.items[index].reserve.ToString() + "ï¿½ï¿½";
             shopPanels[i].transform.GetChild(5).transform.GetChild(0).GetComponent<Text>().text = itemList.items[index].price + "G";
             shopPanels[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -191,7 +191,7 @@ public class Shop : MonoBehaviour
                 }
                 else
                 {
-                    UIManager.instance.ShowExplane("µ·ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
+                    UIManager.instance.ShowExplane("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
                 }
             });
         }
@@ -232,14 +232,14 @@ public class Shop : MonoBehaviour
         {
             useItemObj.transform.GetChild(1).gameObject.GetComponent<Text>().text = itemList.items[index].itemName;
             useItemObj.transform.GetChild(2).gameObject.GetComponent<Text>().text = itemList.items[index].itemExplane;
-            useItemObj.transform.GetChild(3).gameObject.GetComponent<Text>().text = "º¸À¯·® : " + itemList.items[index].reserve.ToString() + "°³";
+            useItemObj.transform.GetChild(3).gameObject.GetComponent<Text>().text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + itemList.items[index].reserve.ToString() + "ï¿½ï¿½";
             useItemObj.transform.GetChild(4).gameObject.SetActive(false);
         }
         else
         {
             useItemObj.transform.GetChild(1).gameObject.GetComponent<Text>().text = itemList.items[index].itemName;
             useItemObj.transform.GetChild(2).gameObject.GetComponent<Text>().text = itemList.items[index].itemExplane;
-            useItemObj.transform.GetChild(3).gameObject.GetComponent<Text>().text = "º¸À¯·® : " + itemList.items[index].reserve.ToString() + "°³";
+            useItemObj.transform.GetChild(3).gameObject.GetComponent<Text>().text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + itemList.items[index].reserve.ToString() + "ï¿½ï¿½";
             useItemObj.transform.GetChild(4).gameObject.SetActive(true);    
         }
     }
@@ -258,11 +258,11 @@ public class Shop : MonoBehaviour
             randomText.text = "";
             for (int i = 0; i < shopPanels.Length - 1; i++)
             {
-                shopPanels[i + 1].transform.GetChild(4).gameObject.GetComponent<Text>().text = "º¸À¯·® : " + itemList.items[i].reserve.ToString() + "°³";
+                shopPanels[i + 1].transform.GetChild(4).gameObject.GetComponent<Text>().text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + itemList.items[i].reserve.ToString() + "ï¿½ï¿½";
             }
         });
         StartCoroutine(RandomImage());
-        randomText.GetComponent<Text>().DOText("·£´ý ¾ÆÀÌÅÛÀ» »Ì´ÂÁßÀÔ´Ï´Ù..", 5f).OnComplete(() =>
+        randomText.GetComponent<Text>().DOText("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì´ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½..", 5f).OnComplete(() =>
         {
             gachaEndButton.gameObject.SetActive(true);
             Item getItem = RandomItem();

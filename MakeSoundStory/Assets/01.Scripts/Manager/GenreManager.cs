@@ -29,7 +29,7 @@ public class GenreManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ÀÌ¹Ì Àå¸£¸Å´ÏÀú°¡ ÀÖ½À´Ï´Ù.");
+            Debug.Log("ì´ë¯¸ ì¥ë¥´ë§¤ë‹ˆì €ê°€ ìˆìŠµë‹ˆë‹¤.");
         }
         AddGenre();
 
@@ -93,12 +93,12 @@ public class GenreManager : MonoBehaviour
             if (StaffManager.instance.pickWorkStaffList[i].HateGenre.ToString() == checkGenre.GenreName)
             {
                 waringText.gameObject.SetActive(true);
-                waringText.text = "¼±ÅÃÇÑ Á÷¿øÁß ÀÌ Àå¸£¸¦ ½È¾îÇÏ´Â Á÷¿øÀÌ ÀÖ½À´Ï´Ù. ÇØ´ç Á÷¿øÀÇ ´É·ÂÄ¡°¡ -5% °¨¼ÒÇÕ´Ï´Ù.";
+                waringText.text = "ì„ íƒí•œ ì§ì›ì¤‘ ì´ ì¥ë¥´ë¥¼ ì‹«ì–´í•˜ëŠ” ì§ì›ì´ ìˆìŠµë‹ˆë‹¤. í•´ë‹¹ ì§ì›ì˜ ëŠ¥ë ¥ì¹˜ê°€ -5% ê°ì†Œí•©ë‹ˆë‹¤.";
                 waringText.color = new Color(255, 0, 0); 
             }
             else if(StaffManager.instance.pickWorkStaffList[i].FavoriteGenre.ToString() == checkGenre.GenreName)
             {
-                waringText.text = "¼±ÅÃÇÑ Á÷¿øÁß ÀÌ Àå¸£¸¦ ÁÁ¾ÆÇÏ´Â Á÷¿øÀÌ ÀÖ½À´Ï´Ù. ÇØ´ç Á÷¿øÀÇ ´É·ÂÄ¡°¡ 5% Áõ°¡ÇÕ´Ï´Ù.";
+                waringText.text = "ì„ íƒí•œ ì§ì›ì¤‘ ì´ ì¥ë¥´ë¥¼ ì¢‹ì•„í•˜ëŠ” ì§ì›ì´ ìˆìŠµë‹ˆë‹¤. í•´ë‹¹ ì§ì›ì˜ ëŠ¥ë ¥ì¹˜ê°€ 5% ì¦ê°€í•©ë‹ˆë‹¤.";
                 waringText.gameObject.SetActive(true);
                 waringText.color = new Color(170, 255, 0);
             }

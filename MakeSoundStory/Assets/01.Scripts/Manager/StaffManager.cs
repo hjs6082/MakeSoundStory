@@ -7,24 +7,24 @@ public class StaffManager : MonoBehaviour
 {
     public static StaffManager instance;
 
-    [Header("ÀüÃ¼ ½ºÅÂÇÁ ¸®½ºÆ®")]
+    [Header("ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®")]
     public List<StaffSO> staffList = new List<StaffSO>();
 
-    [Header("»ÌÈù ½ºÅÂÇÁ ¸®½ºÆ®")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®")]
     public List<StaffSO> pickStaffList = new List<StaffSO>();
 
-    [Header("ÇöÀç ÀÏÇÏ°íÀÖ´Â ½ºÅÂÇÁ ¸®½ºÆ®")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®")]
     public List<StaffSO> workStaffList = new List<StaffSO>();
 
-    [Header("À½¾Ç Á¦ÀÛ¿¡ »ÌÈù ½ºÅÂÇÁ ¸®½ºÆ®")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®")]
     public List<StaffSO> pickWorkStaffList = new List<StaffSO>();
 
-    [Header("ÈÞ°¡¸¦ ³½ ½ºÅÂÇÁ ¸®½ºÆ®")]
+    [Header("ï¿½Þ°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®")]
     public List<StaffSO> triedStaffList = new List<StaffSO>(); 
 
     public int isSelectStaff;
 
-    private string[] sayList = { "¾È³çÇÏ¼¼¿ä, ³¯¾¾°¡ ÁÁ³×¿ä.", "¾Ë¾Æ ³ªµµ, ½ÃÀÛÇÏ°í ½ÍÀº ¸¶À½. ±Ùµ¥ °îÀÌ¶õ°Ô º°¼öÀÖ³ª..\n±×³É ±â´Ù·Áº¸ÀÚ°í" };
+    private string[] sayList = { "ï¿½È³ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½×¿ï¿½.", "ï¿½Ë¾ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ùµï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½..\nï¿½×³ï¿½ ï¿½ï¿½Ù·ï¿½ï¿½ï¿½ï¿½Ú°ï¿½" };
 
     [SerializeField]
     private GameObject npcTransform;
@@ -33,7 +33,7 @@ public class StaffManager : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.Log("ÀÌ¹Ì ½ºÅÂÇÁ¸Å´ÏÀú°¡ ÀÖ½À´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.");
         }
         else
         {
@@ -49,11 +49,7 @@ public class StaffManager : MonoBehaviour
 
     public void AddStaff()
     {
-        StaffSO[] staffs = (Resources.LoadAll<StaffSO>("StaffSO"));
-        for(int i = 0; i < staffs.Length; i++)
-        {
-            staffList.Add(staffs[i]);
-        }
+        staffList = new List<StaffSO>(Resources.LoadAll<StaffSO>("StaffSO"));
         staffList.Sort(delegate (StaffSO a, StaffSO b)
         {
             if (a.StaffNumber > b.StaffNumber) return 1;
@@ -115,7 +111,7 @@ public class StaffManager : MonoBehaviour
 
     public void Say(StaffSO staff)
     {
-        //´ëÈ­Ã¢À» Á¦ÀÛÇØ¾ßÇÔ. ´ëÈ­Ã¢ ¾È¿¡ ½ºÅÂÇÁ ÀÌ¹ÌÁö¸¦ ³Ö°í, ¸»ÇÏ´Â°ÍÀ» ·£´ýÀ¸·Î Á¤ÇØÁÖ°í ´ÙÀÌ¾ó·Î±×¸¦ ¶ç¿ï°Í. 
+        //ï¿½ï¿½È­Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½. ï¿½ï¿½È­Ã¢ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½, ï¿½ï¿½ï¿½Ï´Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½Î±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½. 
         int randomIndex = Random.Range(0, sayList.Length);
         
     }
@@ -133,7 +129,7 @@ public class StaffManager : MonoBehaviour
         UIManager.instance.staffTalkNameText.text = "";
         UIManager.instance.staffTalkText.DOText(sayList[randomIndex], 3f);
         UIManager.instance.staffTalkNameText.text = staff.StaffName;
-        GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity); 
+        GameObject staffImage = Instantiate(staff.StaffPrefab, UIManager.instance.staffImage.position, Quaternion.identity); 
         staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 2;
         staffImage.transform.localScale = new Vector2(2f, 2f);
         staffImage.transform.parent = UIManager.instance.staffImage;
@@ -152,7 +148,7 @@ public class StaffManager : MonoBehaviour
             UIManager.instance.staffTalkNameText.text = "";
             UIManager.instance.staffTalkText.DOText(talkText, 1f);
             UIManager.instance.staffTalkNameText.text = staff.StaffName;
-            GameObject staffImage = Instantiate(staff.MySprite, UIManager.instance.staffImage.position, Quaternion.identity);
+            GameObject staffImage = Instantiate(staff.StaffPrefab, UIManager.instance.staffImage.position, Quaternion.identity);
             staffImage.transform.GetChild(0).gameObject.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 2;
             staffImage.transform.localScale = new Vector2(2f, 2f);
             staffImage.transform.SetParent(UIManager.instance.staffImage);

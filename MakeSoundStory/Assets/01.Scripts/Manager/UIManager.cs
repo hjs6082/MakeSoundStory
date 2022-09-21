@@ -9,22 +9,39 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class UIManager : MonoBehaviour
-{
+{                   
     public static UIManager instance;
 
-    public bool isOneClick = false; // ÇÑ¹ø¸¸ µÇ°Ô ÇÏ´Â bool ÇÔ¼öÀÓ ¿¹)½ºÅÂÇÁ ¼±ÅÃÀÌ ´©¸¦¶§¸¶´Ù µé¾î¿À¸é ¾ÈµÇ±â¶§¹®¿¡ 1È¸Á¦ÇÑÀ» µÎ´Â º¯¼ö.
+    private readonly string[] STAFF_INFO_STRS = 
+    {
+        "??? : ",
+        "???? : ",
+        "????? : ",
+        "??ï¿½ï¿½??? : ",
+        "????? : ",
+        "????? : ",
+        "??????? ?? : ",
+        "?????? ?? : ",
+        "???? : ",
+        "???? : "
+    };
+#region Values
+    public bool isOneClick = false; // ????? ??? ??? bool ????? ??)?????? ?????? ?????????? ?????? ???????? 1??????? ?ï¿½ï¿½? ????.
 
-    private bool isSort = false; //Sort¸¦ ÇÏ´Â°ÍÀÎÁö Ã¼Å©¿ë bool;
+    private bool isSort = false; //Sort?? ??ï¿½ï¿½????? ???? bool;
 
     public GameObject staffTalkPanel = null;
     public GameObject staffStatus = null;
 
+#region NPC Panel
+    [Header("NPC Panel")]
     public GameObject staffNpcPanel = null;
     public GameObject musicNpcPanel = null;
     public GameObject settingNpcPanel = null;
     public GameObject bankNpcPanel = null;
     public GameObject officeNpcPanel = null;
     public GameObject shopNpcPanel = null;
+#endregion
 
     public Text staffTalkText = null;
     public Text staffTalkNameText = null;
@@ -35,49 +52,50 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Transform staffSpawnPosition = null;
 
-    [SerializeField] private GameObject explanePanel     = null; // ÇÃ·¹ÀÌ¾î ¸¶¿ì½º¸¦ µû¶ó´Ù´Ï¸ç ¼³¸íÀ» ÇØÁÙ ¼³¸í ÆÐ³Î.
-    [SerializeField] private GameObject buttonPanel      = null; // ¹öÆ°µéÀÌ ¸ð¿©ÀÖ´Â ÆÐ³Î
+    [SerializeField] private GameObject explanePanel     = null; // ?ï¿½ï¿½???? ???ï¿½J?? ??????? ?????? ???? ???? ?ï¿½ï¿½?.
+    [SerializeField] private GameObject buttonPanel      = null; // ??????? ????? ?ï¿½ï¿½?
     [SerializeField] private GameObject genrePanel       = null; 
     [SerializeField] private GameObject genreChoicePanel = null; 
-    [SerializeField] private GameObject companyPanel     = null; //È¸»ç ÆÐ³Î 
-    [SerializeField] private Text       explaneText      = null; //¼³¸í ÅØ½ºÆ® ¿¹) ¼ÒÁö±ÝÀÌ ºÎÁ·ÇÕ´Ï´Ù.
-    [SerializeField] private Text       moneyText        = null; // ¼ÒÁö±Ý ÅØ½ºÆ®
-    [SerializeField] private Text       mainText         = null; // ¸ÞÀÎ ÅØ½ºÆ®
-    [SerializeField] private Text       calendarText     = null; // ´Þ·Â ÅØ½ºÆ®
+    [SerializeField] private GameObject companyPanel     = null; //??? ?ï¿½ï¿½? 
+    [SerializeField] private Text       explaneText      = null; //???? ???? ??) ???????? ????????.
+    [SerializeField] private Text       moneyText        = null; // ?????? ????
+    [SerializeField] private Text       mainText         = null; // ???? ????
+    [SerializeField] private Text       calendarText     = null; // ??? ????
     [SerializeField] private Button     genreButton      = null;
-    [SerializeField] private Transform  genreTransform   = null; // ¸ÞÀÎ ÅØ½ºÆ®
+    [SerializeField] private Transform  genreTransform   = null; // ???? ????
 
     private int minusMoney = 0;
 
-    //---------½ºÅÂÇÁ »Ì±â °ü·Ã º¯¼ö-----------
-    [SerializeField] private Button         gachaStartButton = null; //°¡Ã­ ½ºÅ¸Æ® ¹öÆ°
-    [SerializeField] private GameObject     gachaGradePanel  = null; //°¡Ã­ÀÇ µî±ÞÀ» Á¤ÇÏ´Â ÆÐ³Î
+    //---------?????? ??? ???? ????-----------
+    [SerializeField] private Button         gachaStartButton = null; //??? ???? ???
+    [SerializeField] private GameObject     gachaGradePanel  = null; //????? ????? ????? ?ï¿½ï¿½?
     [SerializeField] private Button[]       gradeButtons     = null;
-    [SerializeField] private GameObject     staffPanelObj    = null;   //½ºÅÂÇÁ ÆÐ³ÎÀ» ÀÚ½ÄÀ¸·Î °¡Áö°íÀÖ´Â ºÎ¸ð ¿ÀºêÁ§Æ®
-    [SerializeField] private GameObject     realPanelObj     = null;   //Á¤¸»·Î °í¸¦°Å³Ä°í ¹°¾îº¸´Â ¿ÀºêÁ§Æ®
-    [SerializeField] private GameObject[]   staffPanels      = null; //°¢ 3°³ÀÇ ½ºÅÂÇÁ¸¦ ¶ç¿ï ÆÐ³Îµé;
+    [SerializeField] private GameObject     staffPanelObj    = null;   //?????? ?ï¿½ï¿½??? ??????? ????????? ?ï¿½ï¿½? ???????
+    [SerializeField] private GameObject     realPanelObj     = null;   //?????? ???????? ?????? ???????
+    [SerializeField] private GameObject[]   staffPanels      = null; //?? 3???? ???????? ??? ?ï¿½Ô¥ï¿½?;
     [SerializeField] private GameObject     gradeSelectPanel = null;
-    [SerializeField] private GameObject     clearPanel       = null; //Á¾·á¶§ ¶ç¿ï °ËÀº»ö ÆÐ³Î
+    [SerializeField] private GameObject     clearPanel       = null; //???? ??? ?????? ?ï¿½ï¿½?
 
-    public GameObject staffGachaPanel; //½ºÅÂÇÁ °¡Ã­ ÆÐ³Î
+    public GameObject staffGachaPanel; //?????? ??? ?ï¿½ï¿½?
 
-    //---------½ºÅÂÇÁ ¼±ÅÃ °ü·Ã º¯¼ö-----------
-    public GameObject staffChoicePanelObj; // ½ºÅÂÇÁ ¼±ÅÃ ÀüÃ¼ÆÐ³Î
+    //---------?????? ???? ???? ????-----------
+    public GameObject staffChoicePanelObj; // ?????? ???? ????ï¿½ï¿½?
     
-    public GameObject selectPanel; // ½ºÅÂÇÁ¸¦ ¼±ÅÃÇÏ´Â ÆÐ³Î
+    public GameObject selectPanel; // ???????? ??????? ?ï¿½ï¿½?
 
-    [SerializeField] private GameObject staffPrefab         = null; // ½ºÅÂÇÁ¸¦ Ãß°¡ÇÒ ¿ëµµ·Î »ç¿ëÇÏ´Â °ÔÀÓ¿ÀºêÁ§Æ® ÇÁ¸®ÆÕ
-    [SerializeField] private GameObject staffListPanel      = null; //½ºÅÂÇÁ¸¦ ÀÚ½ÄÀ¸·Î °¡Áö°ÔµÉ ÆÐ³Î
-    [SerializeField] private Button[]   buttons             = null; //¸â¹ö¸¦ ¼±ÅÃÇÒ ¼ö ÀÖ´Â ¹öÆ°µé
-    [SerializeField] private Button     pickUpExitButton    = null; //³ª°¡±â ¹öÆ°
-    [SerializeField] private Button     makeMusicButton     = null; //À½¾Ç ¸¸µé±â ¹öÆ°
-    [SerializeField] private Button     choiceStaffButton   = null; //½ºÅÂÇÁ ¼±ÅÃ ¹öÆ°
-    [SerializeField] private Button     noChoiceStaffButton = null; //½ºÅÂÇÁ ¼±ÅÃ ¾ÈÇÔ ¹öÆ°
+    [SerializeField] private GameObject staffPrefab         = null; // ???????? ????? ?ï¿½ï¿½?? ?????? ?????????? ??????
+    [SerializeField] private GameObject staffListPanel      = null; //???????? ??????? ??????? ?ï¿½ï¿½?
+    [SerializeField] private Button[]   buttons             = null; //????? ?????? ?? ??? ?????
+    [SerializeField] private Button     pickUpExitButton    = null; //?????? ???
+    [SerializeField] private Button     makeMusicButton     = null; //???? ????? ???
+    [SerializeField] private Button     choiceStaffButton   = null; //?????? ???? ???
+    [SerializeField] private Button     noChoiceStaffButton = null; //?????? ???? ???? ???
     [SerializeField] private Button[]   sortButtons         = null;
     [SerializeField] private Text[]     statTexts           = null;
     [SerializeField] private Text       sortText            = null;
 
-    //------------------½ºÅÂÇÁ ¸ñ·Ï °ü·Ã º¯¼ö-----------------
+    //------------------?????? ??? ???? ????-----------------
+    [Header("Show Staff")]
     [SerializeField] private Button     showStaffListButton      = null;
     [SerializeField] private Button     showStaffListLeftButton  = null;
     [SerializeField] private Button     showStaffListRightButton = null;
@@ -85,22 +103,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text       showStaffPageText        = null;
     [SerializeField] private int        showStaffCount = 0;
 
-    //-----------------½ºÅÂÇÁ ¹èÄ¡ °ü·Ã º¯¼ö ------------------
-    [SerializeField] private Button staffSpawnButton          = null;  //½ºÅÂÇÁ ¹èÄ¡ ¹öÆ°    
-    [SerializeField] private GameObject staffSpawnPanel       = null;  //½ºÅÂÇÁ ¹èÄ¡ ÆÐ³Î ¿ÀºêÁ§Æ®
-    [SerializeField] private GameObject spawnStaffChoicePanel = null; // ½ºÆùÇÒ ½ºÅÂÇÁ ÆÐ³Î
-    [SerializeField] private GameObject spawnStaffChoiceListPanel = null; // ½ºÆùÇÒ ½ºÅÂÇÁ ÆÐ³Î
+    //-----------------?????? ??? ???? ???? ------------------
+    [SerializeField] private Button staffSpawnButton          = null;  //?????? ??? ???    
+    [SerializeField] private GameObject staffSpawnPanel       = null;  //?????? ??? ?ï¿½ï¿½? ???????
+    [SerializeField] private GameObject spawnStaffChoicePanel = null; // ?????? ?????? ?ï¿½ï¿½?
+    [SerializeField] private GameObject spawnStaffChoiceListPanel = null; // ?????? ?????? ?ï¿½ï¿½?
 
     [SerializeField] private Button musicMakeStartButton = null;
 
-    // -----------------ÀÌº¥Æ® °ü·Ã º¯¼ö ------------------
+    // -----------------???? ???? ???? ------------------
     [SerializeField] private GameObject eventPanel;
     [SerializeField] private GameObject oxPanel;
     private Vector3 eventStartPosition;
 
     [SerializeField] private GameObject dogamPanel = null;
 
-    private string[] sayList = { "¾ÕÀ¸·Î Àß ºÎÅ¹µå¸³´Ï´Ù!", "ÀÌ È¸»ç¿¡ µé¾î¿Â°Ô ²Þ¸¸ °°¾Æ¿ä!","¾ÕÀ¸·Î ¿­½ÉÈ÷ ÇØº¸°Ú½À´Ï´Ù!" };
+    private string[] sayList = { "?????? ?? ????ï¿½ï¿½???!", "?? ??ï¿½ï¿½ ???ï¿½ï¿½? ??? ?????!","?????? ?????? ?????????!" };
 
     public int buttonCount = 0;
     private int staffCount = 0;
@@ -110,18 +128,20 @@ public class UIManager : MonoBehaviour
     private List<GameObject> gachaStaff = new List<GameObject>();
     private GameObject explainStaffUnit = null;
     private GameObject showStaffUnit = null;
+#endregion
 
+#region ê¸°ë³¸ ë©”ì„œë“œ
     void Awake()
     {
         if (instance != null)
         {
-            Debug.Log("ÀÌ¹Ì UI¸Å´ÏÀú°¡ ÀÖ½À´Ï´Ù.");
+            Debug.Log("??? UI??????? ??????.");
         }
         else
         {
             instance = this;
         }
-        ButtonClick();
+        InitButton();
         eventStartPosition = eventPanel.transform.position;
     }
 
@@ -130,6 +150,211 @@ public class UIManager : MonoBehaviour
         ClosePickUpPanel();
         TestPanel();
         Explane();
+    }
+#endregion
+
+#region RandomStaff
+    public void StaffGatcha(StaffSO selectStaff,int index)
+    {
+        StaffManager.instance.staffList.RemoveAt(index);
+        //Debug.Log("????");
+        int staffPanelsCount = staffPanelObj.transform.childCount;
+        
+        staffPanels = new GameObject[staffPanelsCount];
+        for(int i = 0; i < staffPanels.Length/* - 1*/; i++)
+        {
+            staffPanels[i] = staffPanelObj.transform.GetChild(i).gameObject;
+        }
+
+        StaffManager.instance.staffList.Remove(selectStaff);
+        GameObject staffUnit = InitStaffInfo(staffPanels[staffCount], selectStaff, 11);
+        gachaStaff.Add(staffUnit);
+        staffPanels[staffCount].GetComponent<MyData>().myStaff = selectStaff;
+
+        if (staffCount != 3)
+        {
+            staffCount++;
+            if (staffCount == 3)
+            {
+                staffCount = 0;
+            }
+        }
+    }
+
+    public void StaffGachaStart() {
+        Debug.Log(23);
+        companyPanel.SetActive(false);
+        buttonPanel.SetActive(false); 
+        staffGachaPanel.SetActive(true);
+
+        for(int i = 0; i < staffPanels.Length; i++)
+        {
+            staffPanels[i].SetActive(true);     
+            staffPanels[i].transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            StaffManager.instance.RandomStaff();
+        }
+    }
+
+    public void StaffGachaEnd() {
+        for(int i = 0; i < staffPanels.Length; i++)
+        {
+            Image image = staffPanels[i].GetComponent<Image>();
+            var tempColor = image.color;
+            tempColor.a = 0.42f;
+            image.color = tempColor;
+        }
+        StaffManager.instance.isSelectStaff = 0; // ???? -1?????.
+    }
+
+    public void YesGacha()
+    {
+        if (GameManager.instance.playerMoney >= minusMoney)
+        {
+            GameManager.instance.playerMoney -= minusMoney;
+            realPanelObj.SetActive(false);
+            gachaGradePanel.SetActive(false);
+
+            clearPanel.SetActive(true);
+            clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
+            {
+                clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
+                isOneClick = false;
+                StaffGachaStart();
+                minusMoney = 0;
+                buttonPanel.SetActive(false);
+                companyPanel.SetActive(false);
+                staffGachaPanel.SetActive(true);
+            });
+            staffChoicePanelObj.SetActive(false);
+        }
+        else
+        {
+            ShowExplane("???? ????????.");
+        }
+    }
+
+    public void NoGacha()
+    {
+        realPanelObj.SetActive(false);
+    }
+
+    public void GachaGradeStart()
+    {
+        gachaGradePanel.SetActive(true);
+
+        gradeButtons[0].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[0]); minusMoney = 500; });
+        gradeButtons[1].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[1]); minusMoney = 1000; });
+        gradeButtons[2].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[2]); minusMoney = 5000; }); 
+    }
+#endregion
+
+#region Staff Select
+    public void SelectStaff(GameObject staffPanel)
+    {
+        for (int i = 0; i < staffPanels.Length; i++)
+        {
+            staffPanels[i].SetActive(false);
+        }
+
+        if (GameManager.instance.playerMoney >= staffPanel.GetComponent<MyData>().myStaff.Money)
+        {
+            GameManager.instance.playerMoney -= staffPanel.GetComponent<MyData>().myStaff.Money;
+        }
+        else
+        {
+            ShowExplane("???? ????????.");
+        }
+        staffPanel.SetActive(true);
+        staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
+        {
+            ClearTween(staffGachaPanel);
+            staffPanel.GetComponent<MyData>().isSelect = false;
+            //GameObject staff = Instantiate(staffPanel.GetComponent<MyData>().myStaff.StaffPrefab, staffSpawnPosition.position, Quaternion.identity);
+            //staff.transform.parent = staffSpawnPosition.transform;
+            //staff.transform.localScale = new Vector3(1f, 1f, 1f);
+            NPC.NPC_Management.Instance.AddNPC(staffPanel.GetComponent<MyData>().myStaff);
+            int randomIndex = UnityEngine.Random.Range(0, sayList.Length);
+            HumanEvent(staffPanel.GetComponent<MyData>().myStaff, sayList[randomIndex], false);
+            Dogam.instance.DogamChange(staffPanel.GetComponent<MyData>().myStaff.StaffNumber);
+        });
+    }
+
+    
+#endregion
+
+#region Show Staff
+    public void showStaffLeft()
+    {
+        if(showStaffCount >= 1)
+        {
+            Destroy(showStaffUnit);
+            showStaffCount--;  
+            int listIndex = showStaffCount + 1;
+            StaffSO staffSO = StaffManager.instance.workStaffList[showStaffCount];
+            showStaffUnit = InitStaffInfo(showStaffListPanel, staffSO, 9);
+            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+        }
+    }
+
+
+    public void showStaffRight()
+    {
+        if (showStaffCount <= StaffManager.instance.workStaffList.Count -2)
+        {
+            Destroy(showStaffUnit);
+            showStaffCount++;
+            int listIndex = showStaffCount + 1;
+            StaffSO staffSO = StaffManager.instance.workStaffList[showStaffCount];
+            showStaffUnit = InitStaffInfo(showStaffListPanel, staffSO, 9);
+
+            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+        }
+    }
+
+    public void showStaffList()
+    {
+        if (StaffManager.instance.workStaffList.Count != 0)
+        {
+            int listIndex = showStaffCount + 1;
+            showStaffListPanel.SetActive(true);
+
+            Destroy(showStaffUnit);
+            showStaffUnit = InitStaffInfo(showStaffListPanel, StaffManager.instance.workStaffList[showStaffCount], 9);
+            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
+        }
+        else
+        {
+            ShowExplane("?????? ???????.");
+        }
+    }
+#endregion
+
+    
+    public void InitButton()
+    {
+        for(int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].onClick.AddListener(() => { buttonCount = i + 1; SelectPanelClick(); });
+        }
+
+        pickUpExitButton.onClick.AddListener(() => { PickUpStaffEnd(); });
+        //choiceStaffButton.onClick.AddListener(() => { MusicSceneChange(); /*ClearTween(staffChoicePanelObj);*/ });
+        
+        // gachaStartButton.onClick.AddListener(() => { GachaGradeStart(); });
+        // makeMusicButton.onClick.AddListener(() => { MakeMusicStart(); });
+        showStaffListButton.onClick.AddListener(() => { showStaffList(); });
+        showStaffListLeftButton.onClick.AddListener(() => { showStaffLeft(); });
+        showStaffListRightButton.onClick.AddListener(() => { showStaffRight(); });
+        genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
+                                                GenreManager.instance.GenreSet(genreTransform); });
+        //staffSpawnButton.onClick.AddListener(() => { staffSpawnPanel.SetActive(true); });
+        musicMakeStartButton.onClick.AddListener(() =>
+        {
+            GameManager.instance.curBPM = BPM_Management.Instance.curBPM;
+        });
     }
 
     public void Explane()
@@ -173,81 +398,16 @@ public class UIManager : MonoBehaviour
         } 
     }
 
-    public void StaffGatcha(StaffSO selectStaff,int index)
-    {
-        StaffManager.instance.staffList.RemoveAt(index);
-        //Debug.Log("½ÃÀÛ");
-        int staffPanelsCount = staffPanelObj.transform.childCount;
-        
-        staffPanels = new GameObject[staffPanelsCount];
-        for(int i = 0; i < staffPanels.Length/* - 1*/; i++)
-        {
-            staffPanels[i] = staffPanelObj.transform.GetChild(i).gameObject;
-        }
-
-        StaffManager.instance.staffList.Remove(selectStaff);
-        GameObject staffUnit = InitStaffInfo(staffPanels[staffCount], selectStaff, 11);
-        gachaStaff.Add(staffUnit);
-        staffPanels[staffCount].GetComponent<MyData>().myStaff = selectStaff;
-
-        if (staffCount != 3)
-        {
-            staffCount++;
-            if (staffCount == 3)
-            {
-                staffCount = 0;
-            }
-        }
-
-    }
+    
 
     public void CalendarSetting()
     {
-        calendarText.text = GameManager.instance.month + "¿ù " + GameManager.instance.day + "ÀÏ";
+        calendarText.text = GameManager.instance.month + "?? " + GameManager.instance.day + "??";
     }
 
-    public void SelectStaff(GameObject staffPanel)
-    {
-        for (int i = 0; i < staffPanels.Length; i++)
-        {
-            staffPanels[i].SetActive(false);
-        }
-
-        if (GameManager.instance.playerMoney >= staffPanel.GetComponent<MyData>().myStaff.Money)
-        {
-            GameManager.instance.playerMoney -= staffPanel.GetComponent<MyData>().myStaff.Money;
-        }
-        else
-        {
-            ShowExplane("µ·ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
-        }
-        staffPanel.SetActive(true);
-        staffPanel.transform.DOScale(new Vector3(1.2f, 1.2f), 1.3f).OnComplete(() =>
-        {
-            ClearTween(staffGachaPanel);
-            staffPanel.GetComponent<MyData>().isSelect = false;
-            //GameObject staff = Instantiate(staffPanel.GetComponent<MyData>().myStaff.MySprite, staffSpawnPosition.position, Quaternion.identity);
-            //staff.transform.parent = staffSpawnPosition.transform;
-            //staff.transform.localScale = new Vector3(1f, 1f, 1f);
-            NPC.NPC_Management.Instance.AddNPC(staffPanel.GetComponent<MyData>().myStaff);
-            int randomIndex = UnityEngine.Random.Range(0, sayList.Length);
-            HumanEvent(staffPanel.GetComponent<MyData>().myStaff, sayList[randomIndex], false);
-            Dogam.instance.DogamChange(staffPanel.GetComponent<MyData>().myStaff.StaffNumber);
-        });
-    }
-
-    public void StaffGachaEnd()
-    {
-        for(int i = 0; i < staffPanels.Length; i++)
-        {
-            Image image = staffPanels[i].GetComponent<Image>();
-            var tempColor = image.color;
-            tempColor.a = 0.42f;
-            image.color = tempColor;
-        }
-        StaffManager.instance.isSelectStaff = 0; // ¿ø·¡ -1ÀÌ¿´À½.
-    }
+    
      
+    
     public void ClearTween(GameObject falsePanel)
     {
         clearPanel.SetActive(true);
@@ -269,67 +429,13 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void StaffGachaStart()
-    {
-        Debug.Log(23);
-        companyPanel.SetActive(false);
-        buttonPanel.SetActive(false); 
-        staffGachaPanel.SetActive(true);
-
-        for(int i = 0; i < staffPanels.Length; i++)
-        {
-            staffPanels[i].SetActive(true);     
-            staffPanels[i].transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        for (int i = 0; i < 3; i++)
-        {
-            StaffManager.instance.RandomStaff();
-        }
-    }
+    
 
 
 
-    //---------½ºÅÂÇÁ ¼±ÅÃ °ü·Ã ÇÔ¼ö-----------
+    //---------?????? ???? ???? ???-----------
 
-    public void ButtonClick()
-    {
-        buttons[0].onClick.AddListener(() => { buttonCount = 1; SelectPanelClick(); });
-        buttons[1].onClick.AddListener(() => { buttonCount = 2; SelectPanelClick(); });
-        buttons[2].onClick.AddListener(() => { buttonCount = 3; SelectPanelClick(); });
-        buttons[3].onClick.AddListener(() => { buttonCount = 4; SelectPanelClick(); });
-        buttons[4].onClick.AddListener(() => { buttonCount = 5; SelectPanelClick(); });
-
-        pickUpExitButton.onClick.AddListener(() => { PickUpStaffEnd(); });
-        choiceStaffButton.onClick.AddListener(() => { MusicSceneChange(); /*ClearTween(staffChoicePanelObj);*/ });
-        gachaStartButton.onClick.AddListener(() => { GachaGradeStart(); });
-        makeMusicButton.onClick.AddListener(() => { MakeMusicStart(); });
-        showStaffListButton.onClick.AddListener(() => { showStaffList(); });
-        showStaffListLeftButton.onClick.AddListener(() => { showStaffLeft(); });
-        showStaffListRightButton.onClick.AddListener(() => { showStaffRight(); });
-        genreButton.onClick.AddListener(() => { genreChoicePanel.SetActive(true);
-                                                GenreManager.instance.GenreSet(genreTransform); });
-        staffSpawnButton.onClick.AddListener(() => { staffSpawnPanel.SetActive(true); });
-        musicMakeStartButton.onClick.AddListener(() =>
-        {
-            GameManager.instance.curBPM = BPM_Management.Instance.curBPM;
-
-            LoadingSceneManager.LoadScene("PianoScene"); 
-        });
-    }
-
-    private readonly string[] STAFF_INFO_STRS = 
-    {
-        "ÀÌ¸§ : ",
-        "·¹º§ : ",
-        "µ¶Ã¢¼º : ",
-        "¸á·ÎµðÄÃ : ",
-        "Áßµ¶¼º : ",
-        "´ëÁß¼º : ",
-        "ÁÁ¾ÆÇÏ´Â Àå¸£ : ",
-        "½È¾îÇÏ´Â Àå¸£ : ",
-        "Á÷¾÷ : ",
-        "°è¾à±Ý : "
-    };
+    
 
     private GameObject InitStaffInfo(GameObject _infoPanel, StaffSO _staffSO, int _childCount)
     {
@@ -346,7 +452,7 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        GameObject staffUnit = Instantiate(_staffSO.MySprite, infoTrm.GetChild(0).position + unitOffset, Quaternion.identity, infoTrm);
+        GameObject staffUnit = Instantiate(_staffSO.StaffPrefab, infoTrm.GetChild(0).position + unitOffset, Quaternion.identity, infoTrm);
         staffUnit.GetComponent<RectTransform>().localScale = new Vector2(150, 150);
         
         if(staffUnit.GetComponent<SortingGroup>() != null)
@@ -358,72 +464,16 @@ public class UIManager : MonoBehaviour
             staffUnit.AddComponent<SortingGroup>().sortingOrder = 50;
         }
 
-        for(int i = 0; i < _childCount; i++)
-        {
-            sb.Clear();
-            sb.Append(STAFF_INFO_STRS[i]);
-            sb.Append(_staffSO.GetInfos()[i]);
-            if(i == 9) sb.Append("G");
-
-            Text text = infoTrm.GetChild(i + 1).GetComponent<Text>();
-            if(text != null) text.text = sb.ToString(); 
-        }
-
         return staffUnit;
     }
 
     public void showDogam()
     {
         dogamPanel.SetActive(true);
-        Camera.main.GetComponent<CameraSetting>().enabled = false;
+        //Camera.main.GetComponent<CameraSetting>().enabled = false;
         dogamPanel.transform.GetChild(5).gameObject.GetComponent<Button>().onClick.AddListener(() => { dogamPanel.SetActive(false);
-            Camera.main.GetComponent<CameraSetting>().enabled = true;
+            //Camera.main.GetComponent<CameraSetting>().enabled = true;
         });
-    }
-    
-    public void showStaffLeft()
-    {
-        if(showStaffCount >= 1)
-        {
-            Destroy(showStaffUnit);
-            showStaffCount--;  
-            int listIndex = showStaffCount + 1;
-            StaffSO staffSO = StaffManager.instance.workStaffList[showStaffCount];
-            showStaffUnit = InitStaffInfo(showStaffListPanel, staffSO, 9);
-            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
-        }
-    }
-
-
-    public void showStaffRight()
-    {
-        if (showStaffCount <= StaffManager.instance.workStaffList.Count -2)
-        {
-            Destroy(showStaffUnit);
-            showStaffCount++;
-            int listIndex = showStaffCount + 1;
-            StaffSO staffSO = StaffManager.instance.workStaffList[showStaffCount];
-            showStaffUnit = InitStaffInfo(showStaffListPanel, staffSO, 9);
-
-            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
-        }
-    }
-
-    public void showStaffList()
-    {
-        if (StaffManager.instance.workStaffList.Count != 0)
-        {
-            int listIndex = showStaffCount + 1;
-            showStaffListPanel.SetActive(true);
-
-            Destroy(showStaffUnit);
-            showStaffUnit = InitStaffInfo(showStaffListPanel, StaffManager.instance.workStaffList[showStaffCount], 9);
-            showStaffPageText.text = listIndex + "/" + StaffManager.instance.workStaffList.Count;
-        }
-        else
-        {
-            ShowExplane("Á÷¿øÀÌ ¾ø½À´Ï´Ù.");
-        }
     }
 
     public void MusicSceneChange()
@@ -442,7 +492,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            ShowExplane("3¸í ÀÌ»óÀÇ ½ºÅÂÇÁ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");   
+            ShowExplane("3?? ????? ???????? ???????????.");   
         }
     }
 
@@ -473,15 +523,6 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void GachaGradeStart()
-    {
-        gachaGradePanel.SetActive(true);
-
-        gradeButtons[0].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[0]); minusMoney = 500; });
-        gradeButtons[1].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[1]); minusMoney = 1000; });
-        gradeButtons[2].onClick.AddListener(() => { RealChoiceQuestion(gradeButtons[2]); minusMoney = 5000; }); 
-    }
-
     public void GachaGradeEnd()
     {
         gachaGradePanel.SetActive(false);
@@ -493,39 +534,6 @@ public class UIManager : MonoBehaviour
             realPanelObj.transform.GetChild(1).GetComponent<Text>().text = showText;
             realPanelObj.SetActive(true);
     }
-
-    public void YesGacha()
-    {
-        if (GameManager.instance.playerMoney >= minusMoney)
-        {
-            GameManager.instance.playerMoney -= minusMoney;
-            realPanelObj.SetActive(false);
-            gachaGradePanel.SetActive(false);
-
-            clearPanel.SetActive(true);
-            clearPanel.transform.DOScale(new Vector3(2.5f, 2.2f), 0.5f).OnComplete(() =>
-            {
-                clearPanel.transform.DOScale(new Vector3(0f, 0f), 0.5f);
-                isOneClick = false;
-                StaffGachaStart();
-                minusMoney = 0;
-                buttonPanel.SetActive(false);
-                companyPanel.SetActive(false);
-                staffGachaPanel.SetActive(true);
-            });
-            staffChoicePanelObj.SetActive(false);
-        }
-        else
-        {
-            ShowExplane("µ·ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
-        }
-    }
-
-    public void NoGacha()
-    {
-        realPanelObj.SetActive(false);
-    }
-
 
     public void SelectPanelClick()
     {
@@ -562,7 +570,7 @@ public class UIManager : MonoBehaviour
 
             if (!isSort)
             {
-                StaffManager.instance.workStaffList.Sort(delegate (StaffSO a, StaffSO b)
+                StaffManager.instance.workStaffList.Sort((StaffSO a, StaffSO b) =>
                 {
                     if (a.StaffNumber > b.StaffNumber) return 1;
                     else if (a.StaffNumber < b.StaffNumber) return -1;
@@ -570,7 +578,7 @@ public class UIManager : MonoBehaviour
                 });
             }
 
-            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[i].MySprite, staff.GetComponent<Image>().transform.position + Vector3.down * 0.6f, Quaternion.identity, staff.GetComponent<Image>().transform);
+            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[i].StaffPrefab, staff.GetComponent<Image>().transform.position + Vector3.down * 0.6f, Quaternion.identity, staff.GetComponent<Image>().transform);
             staffUnit.GetComponent<RectTransform>().localScale = new Vector3(125, 125, 1);
             staff.GetComponent<StaffData>().myStaffData = StaffManager.instance.workStaffList[i];
 
@@ -637,11 +645,11 @@ public class UIManager : MonoBehaviour
         ShowStat();
     }
 
-    public void DistinctSelectWorkStaff(GameObject staffObj, GameObject staffUnit) //ÀÌ¹Ì ÀÖ´Â ½ºÅÂÇÁ¸¦ ¼öÁ¤ÇÏ¿´À»¶§
+    public void DistinctSelectWorkStaff(GameObject staffObj, GameObject staffUnit) //??? ??? ???????? ???????????
     {
         for (int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
         {
-            if (buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].MySprite)
+            if (buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].StaffPrefab)
             {
                 StatSetting(); 
                 StaffManager.instance.workStaffList.Add(StaffManager.instance.pickWorkStaffList[i]);
@@ -661,7 +669,7 @@ public class UIManager : MonoBehaviour
     {
         for(int i = 0; i < StaffManager.instance.pickWorkStaffList.Count; i++)
         {
-            if(buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].MySprite)
+            if(buttons[buttonCount - 1].GetComponent<Image>().sprite == StaffManager.instance.pickWorkStaffList[i].StaffPrefab)
             {
                 GameManager.instance.allAddictive -= StaffManager.instance.pickWorkStaffList[i].Addictive;
                 GameManager.instance.allCreativity -= StaffManager.instance.pickWorkStaffList[i].Creativity;
@@ -737,10 +745,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     public void TestPanel()
     {
-        moneyText.text = "¼ÒÁö±Ý : " + GameManager.instance.playerMoney.ToString() + "G";  
+        moneyText.text = "?????? : " + GameManager.instance.playerMoney.ToString() + "G";  
         if(Input.GetKeyDown(KeyCode.C))
         {
             buttonPanel.SetActive(false);
@@ -762,10 +769,12 @@ public class UIManager : MonoBehaviour
         }
     }       
 
+    
+
     public void StaffSort(GameObject sortObj, GameObject panelObj)
     {
-        Debug.Log(53);
         isSort = true;
+
         switch (sortObj.GetComponent<SortButtonData>().sortData)
         {
             case SortButtonData.Sort.creativity:
@@ -776,6 +785,7 @@ public class UIManager : MonoBehaviour
                     {
                         if (a.Creativity < b.Creativity) return 1;
                         else if (a.Creativity > b.Creativity) return -1;
+
                         return 0;
                     });
                 }
@@ -890,21 +900,20 @@ public class UIManager : MonoBehaviour
                 });
             }
 
-            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[i].MySprite, staff.GetComponent<Image>().transform.position + Vector3.down * 0.6f, Quaternion.identity, staff.GetComponent<Image>().transform);
+            GameObject staffUnit = Instantiate(StaffManager.instance.workStaffList[i].StaffPrefab, staff.GetComponent<Image>().transform.position + Vector3.down * 0.6f, Quaternion.identity, staff.GetComponent<Image>().transform);
             staffUnit.GetComponent<RectTransform>().localScale = new Vector3(150, 150, 1);
             staff.GetComponent<StaffData>().myStaffData = StaffManager.instance.workStaffList[i];
 
-/*            if (buttons[buttonCount - 1].GetComponent<Image>().sprite == null)
-            {
-                staff.GetComponent<Button>().onClick.AddListener(() => { SelectWorkStaff(staff, staffUnit); });
-            }
-            else
-            {
-                staff.GetComponent<Button>().onClick.AddListener(() => { DistinctSelectWorkStaff(staff, staffUnit); });
-            }*/
+            // if (buttons[buttonCount - 1].GetComponent<Image>().sprite == null)
+            // {
+            //     staff.GetComponent<Button>().onClick.AddListener(() => { SelectWorkStaff(staff, staffUnit); });
+            // }
+            // else
+            // {
+            //     staff.GetComponent<Button>().onClick.AddListener(() => { DistinctSelectWorkStaff(staff, staffUnit); });
+            // }
         }
     }
-
 
     public void notHumanEvent(string text, bool isOX)
     {
@@ -933,7 +942,7 @@ public class UIManager : MonoBehaviour
             eventPanel.SetActive(true);
             StartCoroutine(endEvent(5f, eventPanel));
             eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
-            GameObject setStaff = Instantiate(staff.MySprite, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+            GameObject setStaff = Instantiate(staff.StaffPrefab, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
             setStaff.transform.parent = eventPanel.transform.GetChild(0);
             setStaff.transform.GetChild(0).gameObject.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
             //setStaff.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
@@ -949,7 +958,7 @@ public class UIManager : MonoBehaviour
             eventPanel.SetActive(true);
             StartCoroutine(endEvent(5f, eventPanel));
             eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
-            GameObject setStaff = Instantiate(staff.MySprite, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+            GameObject setStaff = Instantiate(staff.StaffPrefab, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
             setStaff.transform.SetParent(eventPanel.transform.GetChild(0));
             //setStaff.transform.parent = eventPanel.transform.GetChild(0);
             setStaff.transform.GetChild(0).gameObject.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
