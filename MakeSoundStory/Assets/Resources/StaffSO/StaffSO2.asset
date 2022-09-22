@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f923a8e69c7fc4daca735509df65aa, type: 3}
   m_Name: StaffSO2
   m_EditorClassIdentifier: 
-  stafflevel: 4
+  stafflevel: 1
   staffNumber: 2
   staffName: "\uAE40\uC2DC\uC791"
-  staffJob: "\uD14C\uC2A4\uD2B8"
+  staffJob: "\uC0AC\uC6B4\uB4DC \uC5D4\uC9C0\uB2C8\uC5B4"
   favoriteGenre: 2
   hateGenre: 3
   staffTried: 0
@@ -25,4 +25,4 @@ MonoBehaviour:
   melodic: 20
   popularity: 20
   money: 5000
-  staffPrefab: {fileID: 8363628913389726116, guid: f25151ec0448c15439c5ac3e18f31622, type: 3}
+  staffPrefab: {fileID: 0}

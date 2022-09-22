@@ -15,7 +15,7 @@ MonoBehaviour:
   stafflevel: 1
   staffNumber: 14
   staffName: "\uC548\uD558\uBE48"
-  staffJob: "\uD504\uB85C\uB4C0\uC11C"
+  staffJob: "\uC791\uACE1\uAC00"
   favoriteGenre: 6
   hateGenre: 1
   staffTried: 0
@@ -25,4 +25,4 @@ MonoBehaviour:
   melodic: 20
   popularity: 20
   money: 1000
-  staffPrefab: {fileID: 3120465134241928504, guid: 3fc1084b7ff43e14d86648fff82c6159, type: 3}
+  staffPrefab: {fileID: 0}

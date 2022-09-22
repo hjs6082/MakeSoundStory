@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using LitJson;
+using DG.Tweening;
 
 #region 경매 아이템 설정
 public class AuctionItem
@@ -47,7 +48,9 @@ public class AuctionItem
 
 public class Auction : MonoBehaviour
 {
-    public List<AuctionItem> auctionItems = new List<AuctionItem>();  
+    public List<AuctionItem> auctionItems = new List<AuctionItem>();
+
+    public AuctionItem buyItem;
 
     public GameObject auctionPanel;
     public GameObject bubblePrefab;
@@ -70,6 +73,11 @@ public class Auction : MonoBehaviour
     public bool isPlrBid = false; //입찰상태 플레이어가 입찰중인지
     public bool isAIBid = false;  //AI가 입찰중인지.
 
+    public GameObject buyPanel;   // 산물건에 대한 패널
+    public Text isBuyText;        // 입찰인지 유찰인지
+    public Text buyExplaneText;          // 구매한 상품에 대한 설명
+    public Button buyOkButton;      // 확인버튼
+
 
     public void Start()
     {
@@ -82,7 +90,12 @@ public class Auction : MonoBehaviour
         if (isAuction)
         {
             nowGold.text = "현재 가격 : "  + gold + "G";
-            goldSlider.value -= 0.1f * Time.deltaTime;
+            goldSlider.value -= 0.3f * Time.deltaTime;
+        }
+        if(goldSlider.value <= 0)
+        {
+            isAuction = false;
+            BuyCheck(buyItem);
         }
     }
 
@@ -114,6 +127,7 @@ public class Auction : MonoBehaviour
 
     public void UISetting(AuctionItem nowItem) // 랜덤 아이템을 가지고 UI를 세팅한다.
     {
+        buyItem = nowItem; 
         bidButton.onClick.AddListener(() => { Bid(); });
         musicName.text = "제목 : " + nowItem.musicName;
         genreName.text = "장르 : " + nowItem.genre.ToString();
@@ -145,21 +159,24 @@ public class Auction : MonoBehaviour
 
     public void Bid() // 입찰버튼 누르면 
     {
-        if (GameManager.instance.playerMoney >= gold + 500)
+        if (isAuction)
         {
-            if (!isPlrBid)
+            if (GameManager.instance.playerMoney >= gold + 500)
             {
-                PlrBid();
+                if (!isPlrBid)
+                {
+                    PlrBid();
+                }
+                else
+                {
+                    GameManager.instance.playerMoney += gold;
+                    PlrBid();
+                }
             }
             else
             {
-                GameManager.instance.playerMoney += gold; 
-                PlrBid();
+                Debug.Log("돈이 부족합니다.");
             }
-        }
-        else
-        {
-            Debug.Log("돈이 부족합니다.");
         }
     }
 
@@ -198,6 +215,25 @@ public class Auction : MonoBehaviour
         yield return new WaitForSeconds(2f);
         StartCoroutine(AIBid(betGold));  
     } 
+
+    public void BuyCheck(AuctionItem buyItem) //누가 샀는지 체크
+    {
+        buyOkButton.onClick.AddListener(() => { auctionPanel.SetActive(false); buyExplaneText.text = ""; buyPanel.transform.localScale = new Vector2(0.1f, 0.1f);
+            isAIBid = false; isPlrBid = false;
+        });
+        buyPanel.SetActive(true);
+        buyPanel.transform.DOScale(new Vector2(1f, 1f),2f);
+        if(isPlrBid) //플레이어가 샀을경우
+        {
+            isBuyText.text = "낙찰";
+            buyExplaneText.text = "축하합니다! \n" + buyItem.musicName + " 노래를 구매하셨습니다.\n" + "구매한 노래는 노래 리스트에 저장됩니다.";
+        }
+        else // AI가 샀을 경우
+        {
+            isBuyText.text = "유찰";
+            buyExplaneText.text = "아쉽습니다 \n" + buyItem.musicName + " 노래는 다른 판매자가 구매하였습니다.\n" + "다음 기회에 도전하세요."; 
+        }
+    }
 
     public IEnumerator BidText(GameObject bidBubble, Text bidText, Transform spawnTrm) //입찰 메시지
     {
