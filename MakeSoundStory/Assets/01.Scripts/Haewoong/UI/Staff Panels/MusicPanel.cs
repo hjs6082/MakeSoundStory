@@ -12,6 +12,7 @@ public class MusicPanel : StaffPanel
     public override Button exitButton { get; set; } = null;
 
     [SerializeField] private Button exitBtn = null;
+    [SerializeField] private Button initBtn = null;
     [SerializeField] private Button makeBtn = null;
     [SerializeField] private CompleteMusicPanel completeMusic = null;
     [SerializeField] private ProductionWarningPanel warningPanel = null;
@@ -44,6 +45,10 @@ public class MusicPanel : StaffPanel
 
     protected override void InitValue()
     {
+        initBtn.onClick.AddListener(() => {
+            //InitProfiles();
+        });
+
         makeBtn.onClick.AddListener(() => {
             if(selected_Staff_List.Count < 3) { Warning(); }
             else { MusicOut(); };
@@ -79,7 +84,8 @@ public class MusicPanel : StaffPanel
         // TODO : 패널 초기화 스크립트 작성
         staffList.gameObject.SetActive(false);
         warningPanel.gameObject.SetActive(false);
-        
+        completeMusic.OffPanel();
+    
         base.OffPanel();
     }
 
@@ -106,6 +112,8 @@ public class MusicPanel : StaffPanel
             Destroy(image_List[i]);
             
         }
+
+        //InitProfiles();
 
         staffList.gameObject.SetActive(false);
     }
@@ -154,5 +162,16 @@ public class MusicPanel : StaffPanel
 
         completeMusic.MakeComplete(stats, allStats);
     }
+
+    // private void InitProfiles()
+    // {
+    //     for(int i = 0; i < memberButton.Length; i++)
+    //     {
+    //         ProfileButton profile = memberButton[i].GetComponent<ProfileButton>();
+
+    //         profile.ProfileUpdate(null);
+    //         profile.profileButton.interactable = true;
+    //     }   
+    // }
 #endregion
 }

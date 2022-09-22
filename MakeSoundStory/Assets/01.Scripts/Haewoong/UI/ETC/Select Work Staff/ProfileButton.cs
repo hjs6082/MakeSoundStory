@@ -28,6 +28,7 @@ public class ProfileButton : MonoBehaviour
     {
         if(profileSO != null)
         {
+            StaffManager.instance.workStaffList.Add(profileSO);
             UIManagement.instance.GetStaffPanel<MusicPanel>().selected_Staff_List.Remove(profileSO);
         }
         profileSO = _staffSO;
@@ -36,5 +37,7 @@ public class ProfileButton : MonoBehaviour
         profileNameText.text = profileSO.StaffName;
 
         StaffManager.instance.pickWorkStaffList.Add(profileSO);
+
+        profileButton.interactable = false;
     }
 }

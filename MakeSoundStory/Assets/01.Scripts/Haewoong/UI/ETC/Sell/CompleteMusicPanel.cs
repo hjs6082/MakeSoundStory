@@ -3,15 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// [System.Serializable]
+// public struct MusicNames
+// {
+//     public string[] music_Names;
+
+//     public MusicNames(string[] _musicNames)
+//     {
+//         music_Names = _musicNames;   
+//     }
+// }
+
+[System.Serializable]
 public struct MusicInfo
 {
-    public string name;
-    public float[] stats;
+    public string m_Name;
+    public float[] m_Stats;
+    public float m_Cost;
+    public bool m_IsSoldOut;
 
-    public MusicInfo(string _name, float[] _stats)
+    public MusicInfo(string _name, float[] _stats, float _cost, bool _isSoldOut)
     {
-        name = _name;
-        stats = _stats;
+        m_Name = _name;
+        m_Stats = _stats;
+        m_Cost = _cost;
+        m_IsSoldOut = _isSoldOut;
     }
 }
 
@@ -25,6 +41,7 @@ public class CompleteMusicPanel : MonoBehaviour
     [SerializeField] private InputField title_Field = null;
     [SerializeField] private Button make_Button = null;
     [SerializeField] private MusicInfo makedMusic = default;
+    [SerializeField] private List<string> musicName_List = null;
 
     private float[] stats = null;
 
@@ -74,9 +91,27 @@ public class CompleteMusicPanel : MonoBehaviour
 
     public void SaveMusic()
     {
-        string musicName = title_Field.text;
-        makedMusic = new MusicInfo(musicName, stats);
+        // string [] loadMusicNames = SaveSystem.Load<MusicNames>(MusicManagement.instance.MUSIC_NAMES_SAVE).music_Names;
+        // musicName_List = new List<string>(loadMusicNames);
 
+        string musicName = title_Field.text;
+        float musicCost = 0;
+
+        for(int i = 0; i < stats.Length; i++)
+        {
+            musicCost += stats[i];
+        }
+
+        musicCost = Mathf.Round(musicCost) * 10;
+        makedMusic = new MusicInfo(musicName, stats, musicCost, false);
+
+        // musicName_List.Add(musicName);
+        // MusicNames musicNames = new MusicNames(musicName_List.ToArray());
+        // SaveSystem.Save<MusicNames>(musicNames, MusicManagement.instance.MUSIC_NAMES_SAVE);
+
+        MusicManagement.instance.AddMusic(makedMusic);
         SaveSystem.Save<MusicInfo>(makedMusic, musicName + "_MUSIC");
+
+        UIManagement.instance.GetStaffPanel<MusicPanel>().OffPanel();
     }
 }

@@ -28,7 +28,13 @@ public class BankPanel : StaffPanel
 
     protected override void Update()
     {
-        
+#if UNITY_EDITOR
+    if(Input.GetKeyDown(KeyCode.L))
+    {
+        curLoanMoney = 100000;
+        Loan();
+    }
+#endif
     }
 
     protected override void InitValue()

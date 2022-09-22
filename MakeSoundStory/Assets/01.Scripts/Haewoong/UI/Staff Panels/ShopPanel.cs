@@ -11,6 +11,11 @@ public class ShopPanel : StaffPanel
 
     [SerializeField] private Button exitBtn = null;
 
+    [SerializeField] private RectTransform musicListParent = null;
+    [SerializeField] private GameObject musicListPrefab = null;
+
+    public List<MusicListInfo> musicListInfo_List = null;
+
     protected override void Awake()
     {
         exitButton = exitBtn;
@@ -24,6 +29,8 @@ public class ShopPanel : StaffPanel
 
     protected override void InitValue()
     {
+        musicListInfo_List = new List<MusicListInfo>();
+
         TextUpdate();
         OffPanel();
 
@@ -37,6 +44,17 @@ public class ShopPanel : StaffPanel
     
     public override void OnPanel()
     {
+        MusicInfo[] musics = MusicManagement.instance.GetMusicList();
+
+        for(int i = 0; i < musics.Length; i++)
+        {
+            GameObject music = Instantiate<GameObject>(musicListPrefab, musicListParent);
+            MusicListInfo musicInfo = music.GetComponent<MusicListInfo>();
+
+            musicListInfo_List.Add(musicInfo);
+            musicInfo.SetMusic(musics[i]);
+        }
+
         TextUpdate();
         base.OnPanel();
     }
@@ -44,6 +62,16 @@ public class ShopPanel : StaffPanel
     public override void OffPanel()
     {
         // TODO : 패널 초기화 스크립트 작성
+        if (musicListInfo_List != null)
+        {
+            for (int i = 0; i < musicListInfo_List.Count; i++)
+            {
+                Destroy(musicListInfo_List[i].gameObject);
+            }
+            
+            musicListInfo_List.Clear();
+        }
+
 
         base.OffPanel();
     }
