@@ -22,7 +22,7 @@ public class MainScene : MonoBehaviour
 
     public void LogoMove()
     {
-        logoSprite.transform.DOLocalMoveY(800f, 3f).OnComplete(() => { StartCoroutine(LogoAnimation()); }) ;
+        logoSprite.transform.DOLocalMoveY(931f, 3f).OnComplete(() => { StartCoroutine(LogoAnimation()); }) ;
         for(int i = 0; i < buttons.Length; i++)
         {
             buttons[i].transform.DOLocalMoveX(0f, 3f); 
@@ -31,9 +31,9 @@ public class MainScene : MonoBehaviour
 
     IEnumerator LogoAnimation()
     {
-        logoSprite.transform.DOScale(new Vector2(1.1f, 1.1f), 0.5f).OnComplete(() =>
+        logoSprite.transform.DOScale(new Vector2(2.1f, 2.1f), 0.5f).OnComplete(() =>
         { 
-            logoSprite.transform.DOScale(new Vector2(1f, 1f), 0.5f).OnComplete(() => { StartCoroutine(LogoAnimation()); });
+            logoSprite.transform.DOScale(new Vector2(2.0f, 2.0f), 0.5f).OnComplete(() => { StartCoroutine(LogoAnimation()); });
         });
         yield return new WaitForSeconds(0.1f);
     }
@@ -57,13 +57,18 @@ public class MainScene : MonoBehaviour
 
     public void ReturnMainPanel()
     {
+        RequestionPanel.SetActive(false);
         nameSettingPanel.SetActive(false); 
     }
 
     public void GameStart()
     {
-        Screen.SetResolution(1920, 1080, true); 
         LoadingSceneManager.LoadScene("RealMainScene");
+    }
+
+    public void Load()
+    {
+        //게임을 로드할것
     }
 
     public void GameQuit()
