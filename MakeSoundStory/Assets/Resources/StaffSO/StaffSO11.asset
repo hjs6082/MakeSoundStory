@@ -18,11 +18,10 @@ MonoBehaviour:
   staffJob: "\uD504\uB85C\uB4C0\uC11C"
   favoriteGenre: 1
   hateGenre: 0
-  staffTried: 0
-  stress: 0
   creativity: 5
   addictive: 35
   melodic: 25
   popularity: 35
   money: 0
-  staffPrefab: {fileID: 0}
+  staffPrefab: {fileID: 4824491604444268126, guid: f27f7d364048ee24189548396a15f2d7, type: 3}
+  staffHeadPrefab: {fileID: 4824491604444268126, guid: 14c57156aa489c64ba1362544fb116e4, type: 3}

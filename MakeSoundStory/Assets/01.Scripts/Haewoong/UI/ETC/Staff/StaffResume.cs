@@ -41,11 +41,14 @@ public class StaffResume : MonoBehaviour, IPointerClickHandler , IPointerEnterHa
     {
         staffInfo = _staffInfo;
 
-        staffObj = Instantiate<GameObject>(staffInfo.StaffPrefab, staffRectTrm.anchoredPosition, Quaternion.identity, staffRectTrm);
-        staffObj.transform.localScale = new Vector2(2, 2);
+        if(staffObj != null) { Destroy(staffObj); staffObj = null; }
+        staffObj = Instantiate<GameObject>(staffInfo.StaffHeadPrefab, staffRectTrm);
 
-        SortingGroup staffSorting = staffObj.AddComponent<SortingGroup>();
-        staffSorting.sortingOrder = 50;
+        RectTransform staffRect = staffObj.GetComponent<RectTransform>();
+        staffRect.anchoredPosition = new Vector2(3, -8);
+        staffRect.localScale = new Vector2(0.7f, 0.7f);
+        
+        UIManagement.GetOrAddComponent<SortingGroup>(staffObj).sortingOrder = 50;
 
         SetTexts(staffInfo.StaffName, staffInfo.StaffLevel, staffInfo.FavoriteGenre.ToString(), staffInfo.HateGenre.ToString(), staffInfo.StaffJob,
                  staffInfo.Money, staffInfo.Creativity, staffInfo.Addictive, staffInfo.Melodic, staffInfo.Popularity);

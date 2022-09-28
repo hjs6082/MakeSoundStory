@@ -66,10 +66,10 @@ public class GameManager : MonoSingleton<GameManager>
         //UIManager.instance?.GameStart();
         StartTime();
 
-        nextDayButton.onClick.AddListener(() =>
-        {
-            NextDay();
-        });
+        // nextDayButton.onClick.AddListener(() =>
+        // {
+        //     NextDay();
+        // });
     }
 
     void Update()
@@ -80,7 +80,7 @@ public class GameManager : MonoSingleton<GameManager>
             TextSetting();
             if (time >= 540f)
             {
-                ShowResult();
+                //ShowResult();
             }
         }
     }

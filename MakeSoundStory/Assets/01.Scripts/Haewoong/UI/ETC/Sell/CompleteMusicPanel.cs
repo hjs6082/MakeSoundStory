@@ -112,6 +112,8 @@ public class CompleteMusicPanel : MonoBehaviour
         MusicManagement.instance.AddMusic(makedMusic);
         SaveSystem.Save<MusicInfo>(makedMusic, musicName + "_MUSIC");
 
+        title_Field.text = string.Empty;
+        
         UIManagement.instance.GetStaffPanel<MusicPanel>().OffPanel();
     }
 }

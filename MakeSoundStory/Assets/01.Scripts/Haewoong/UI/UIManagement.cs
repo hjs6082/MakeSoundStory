@@ -112,6 +112,15 @@ public class UIManagement : MonoBehaviour
         _text.text = _str;
     }
 
+    public static T GetOrAddComponent<T>(GameObject _obj) where T : UnityEngine.Component
+    {
+        T component = _obj.GetComponent<T>();
+
+        if(component == null) component = _obj.AddComponent<T>();
+
+        return component;
+    }
+
     public T GetStaffPanel<T>() where T : StaffPanel
     {
         for(int i = 0; i < staffPanels.Length; i++)

@@ -52,23 +52,6 @@ public class StaffSO : ScriptableObject
 
     public Genre HateGenre { get { return hateGenre; } }
 
-    public enum tried
-    {
-        normal,
-        bad,
-        good
-    }
-
-    [SerializeField]
-    [Header("피로도")]
-    private tried staffTried; //선호 장르
-    public tried StaffTried { get { return staffTried; } }
-
-    [SerializeField]
-    [Header("스트레스")]
-    private int stress;
-    public int Stress { get { return stress; } }
-
     [SerializeField]
     [Header("독창성")]
     private int creativity; //독창성
@@ -95,9 +78,14 @@ public class StaffSO : ScriptableObject
     public int Money { get { return money; } }
 
     [SerializeField]
-    [Header("���� ����")]
+    [Header("SPUM 스태프 프리팹")]
     private GameObject staffPrefab;
     public GameObject StaffPrefab { get { return staffPrefab; } }
+
+    [SerializeField]
+    [Header("SPUM 스태프 머리 프리팹")]
+    private GameObject staffHeadPrefab;
+    public GameObject StaffHeadPrefab { get { return staffHeadPrefab; } }
 
     public object[] GetInfos()
     {

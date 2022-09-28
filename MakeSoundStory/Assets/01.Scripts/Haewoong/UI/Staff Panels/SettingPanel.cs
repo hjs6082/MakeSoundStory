@@ -24,7 +24,6 @@ public class SettingPanel : StaffPanel
 
     protected override void InitValue()
     {
-
         TextUpdate();
         OffPanel();
 

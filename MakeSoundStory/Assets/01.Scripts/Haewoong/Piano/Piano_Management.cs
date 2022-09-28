@@ -13,10 +13,10 @@ namespace Piano
         public  static Piano_Management Instance => instance;
         private static Piano_Management instance = null;
 
-        private const float DEFAULT_PLAY_TIME = 60.0f; // ±âº» °ÔÀÓ ÇÃ·¹ÀÌ ½Ã°£
+        private const float DEFAULT_PLAY_TIME = 60.0f; // ê¸°ë³¸ ê²Œì„ í”Œë ˆì´ ì‹œê°„
 
-#region Å¬·¡½º
-        [Header("ÇÇ¾Æ³ë Å¬·¡½º")]
+#region í´ë˜ìŠ¤
+        [Header("í”¼ì•„ë…¸ í´ë˜ìŠ¤")]
         public Piano_Control     p_Ctrl    = null;
         public Piano_KeyMap      p_KeyMap  = null;
         public Piano_NoteSpawner p_Spawner = null;
@@ -25,20 +25,20 @@ namespace Piano
 #endregion
 
 #region Action
-        [Header("ÇÇ¾Æ³ë Action º¯¼ö")]
+        [Header("í”¼ì•„ë…¸ Action ë³€ìˆ˜")]
         public Action      noteInput_Act = null;
         public Action<int> noteCheck_Act = null;
         public Action<int> noteSound_Act = null;
 #endregion
 
 #region bool
-        [Header("BOOL º¯¼öµé")]
-        public bool bPlaying = false; // ÇÃ·¹ÀÌ ÁßÀÎÁö
+        [Header("BOOL ë³€ìˆ˜ë“¤")]
+        public bool bPlaying = false; // í”Œë ˆì´ ì¤‘ì¸ì§€
         public bool isCanTap = false;
 #endregion
 
-#region UI º¯¼ö
-        [Header("ÇÇ¾Æ³ë UI °ü·Ã º¯¼ö")]
+#region UI ë³€ìˆ˜
+        [Header("í”¼ì•„ë…¸ UI ê´€ë ¨ ë³€ìˆ˜")]
         public Text            startText        = null;
         public Text            secondText       = null;
         public Image           secondGuage      = null;
@@ -139,22 +139,22 @@ namespace Piano
 
         public void MakeStart()
         {
-            // TODO : ¸ŞÆ®·Î³ğ ¼Ò¸® 3¹ø ÈÄ ½ÃÀÛ
+            // TODO : ë©”íŠ¸ë¡œë†ˆ ì†Œë¦¬ 3ë²ˆ í›„ ì‹œì‘
             StartCoroutine(Metronome(() => 
             {
-                print("½ÃÀÛ");
+                print("ì‹œì‘");
                 bPlaying = true;
             }));
         }
 
         public void MakeEnd()
         {
-            // À½¾Ç Á¦ÀÛ ÈÄÃ³¸®
+            // ìŒì•… ì œì‘ í›„ì²˜ë¦¬
             p_Music.savePanel.SetActive(true);
 
             bPlaying = false;
             
-            print("²ı");
+            print("ë—");
         }
 
         private IEnumerator Metronome(Action _callBack)
@@ -163,7 +163,7 @@ namespace Piano
 
             for(int i = 0; i < 4; i++)
             {
-                // »ç¿îµå
+                // ì‚¬ìš´ë“œ
                 Sound_Management.Instance.PlayMetronome();
 
                 startText.fontSize = (i < 3) ? 300 : 200;

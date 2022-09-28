@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class EmployPanel : StaffPanel
 {
-    public override Action init { get; set; }= null;
+    public override Action init { get; set; } = null;
     public override Button exitButton { get; set; } = null;
 
     [SerializeField] private Button exitBtn = null;
@@ -21,7 +21,10 @@ public class EmployPanel : StaffPanel
     [SerializeField] private ResumePanel resumePanel = null;    // 고용 로딩 화면
     [SerializeField] private DrawPanel drawPanel = null;        // 고용 메인 화면
     [SerializeField] private EmployWarningPanel warningPanel = null;
-    
+
+    [Header("Staff List")]
+    [SerializeField] private ListPanel listPanel = null;
+
     protected override void Awake()
     {
         exitButton = exitBtn;
@@ -30,7 +33,7 @@ public class EmployPanel : StaffPanel
 
     protected override void Update()
     {
-        
+
     }
 
     protected override void InitValue()
@@ -41,17 +44,18 @@ public class EmployPanel : StaffPanel
 
         resumePanel.InitValue();
         drawPanel.InitValue();
+        listPanel.InitValue();
         warningPanel.InitValue();
 
         TextUpdate();
         OffPanel();
 
-        base.InitValue(); 
+        base.InitValue();
     }
-    
+
     protected override void TextUpdate()
     {
-        
+
     }
 
     public override void OnPanel()
@@ -76,28 +80,33 @@ public class EmployPanel : StaffPanel
     public override void Warning()
     {
         warningPanel.OnPanel();
-        
+
         base.Warning();
     }
 
-#region Draw Staff
+    #region Draw Staff
 
     private void DrawStaff()
     {
         // TODO : 이력서 받는 중 트윈
         startPanel.SetActive(false);
         resumePanel.OnPanel();
-        StartCoroutine(UIManagement.MethodDelay(() => {
+        StartCoroutine(UIManagement.MethodDelay(() =>
+        {
             drawPanel.OnPanel();
         }, 0.5f));
     }
-#endregion
+    #endregion
 
-#region Staff List
+    #region Staff List
 
     private void ListStaff()
     {
-
+        if (StaffManager.instance.workStaffList.Count > 0)
+        {
+            startPanel.SetActive(false);
+            listPanel.OnPanel();
+        }
     }
-#endregion
+    #endregion
 }

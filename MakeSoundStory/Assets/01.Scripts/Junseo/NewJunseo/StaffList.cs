@@ -102,7 +102,7 @@ public class StaffList : MonoBehaviour
         {
             Destroy(staffTrm.GetChild(0).gameObject);
         }
-        mainText.text = "½ºÅÂÇÁ ¸ñ·Ï";
+        mainText.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½";
         nowStaff = staff;
         staffNameText.text = staff.StaffName;
         staffLevelText.text = "Lv " + staff.StaffLevel;
@@ -115,10 +115,9 @@ public class StaffList : MonoBehaviour
         {
              fillSetting(statFills[i], int.Parse(staff.GetInfos()[i + 2].ToString()));
         }
-        GameObject miniStaff = Instantiate(staff.StaffPrefab, staffTrm.position, Quaternion.identity);
+        GameObject miniStaff = Instantiate(staff.StaffHeadPrefab, staffTrm);
         miniStaff.transform.GetChild(0).gameObject.GetComponent<SortingGroup>().sortingOrder = 3;
-        miniStaff.transform.parent = staffTrm;
-        miniStaff.transform.localScale = new Vector2(3f, 3f); 
+        //miniStaff.transform.localScale = new Vector2(3f, 3f); 
     }
 
     public void fillSetting(GameObject statFill, int stat)
@@ -130,14 +129,14 @@ public class StaffList : MonoBehaviour
     {
         if (nowStaff.StaffLevel != 5)
         {
-            mainText.text = "·¹º§¾÷";
+            mainText.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
             leftButton.gameObject.SetActive(false);
             rightButton.gameObject.SetActive(false);
             LevelUpPanelSetting(nowStaff);
         }
         else
         {
-            UIManager.instance.ShowExplane("½ºÅÂÇÁ°¡ ÀÌ¹Ì ÃÖ´ë ·¹º§ÀÔ´Ï´Ù.");
+            UIManager.instance.ShowExplane("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
         }
     }
 
@@ -205,7 +204,7 @@ public class StaffList : MonoBehaviour
 
         mySequence.Restart();
 
-        mainText.text = "½ºÅÂÇÁ ¸ñ·Ï";
+        mainText.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½";
         levelupButton.gameObject.SetActive(true);
         closeButton.gameObject.SetActive(true);
         levelupOkButton.gameObject.SetActive(false);
