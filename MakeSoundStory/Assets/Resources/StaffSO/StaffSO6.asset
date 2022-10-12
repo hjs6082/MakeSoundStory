@@ -22,6 +22,7 @@ MonoBehaviour:
   addictive: 30
   melodic: 30
   popularity: 20
-  money: 650
+  money: 1200
+  isQuest: 0
   staffPrefab: {fileID: 6986567662230320962, guid: 48b7bcb9690829f4f9c36d9750c8fc8e, type: 3}
   staffHeadPrefab: {fileID: 6986567662230320962, guid: 5ad726805f603b940825553934a1cbe7, type: 3}
