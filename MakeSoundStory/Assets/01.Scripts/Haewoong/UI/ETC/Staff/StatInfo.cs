@@ -39,6 +39,8 @@ public class StatInfo : MonoBehaviour
     {
         SetCurStat();
 
+        backGuage.rectTransform.sizeDelta = new Vector2(0, 30);
+
         print((float)curStat / (float)MAX_STAT);
         frontOffset.x = ((float)curStat / (float)MAX_STAT) * DEFAULT_WIDTH;
 
@@ -74,5 +76,12 @@ public class StatInfo : MonoBehaviour
     private void StatTextUpdate()
     {
         curStatText.text = curStat.ToString();
+    }
+
+    public void SetStatText(string _str)
+    {
+        string curString = curStatText.text;
+
+        curStatText.text = curString + _str;
     }
 }

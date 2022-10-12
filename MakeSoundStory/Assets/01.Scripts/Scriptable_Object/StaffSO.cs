@@ -107,7 +107,9 @@ public class StaffSO : ScriptableObject
         return infos;
     }
 
-
-
+    public StaffSO ShallowCopy()
+    {
+        return (StaffSO)this.MemberwiseClone();
+    }
 
 }

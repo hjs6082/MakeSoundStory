@@ -19,7 +19,22 @@ public class DrawPanel : MonoBehaviour
 
     private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            List<StaffSO> staffList = new List<StaffSO>(StaffManager.instance.staffList);
+
+            for(int i = 0; i < StaffManager.instance.workStaffList.Count; i++)
+            {
+                staffList.Remove(StaffManager.instance.workStaffList[i]);
+            }
+
+            for(int i = 0; i < staffList.Count; i++)
+            {
+                StaffManager.instance.workStaffList.Add(staffList[i]);
+            }
+
+            employPanel.OffPanel();
+        }
     }
 
     public void InitValue()

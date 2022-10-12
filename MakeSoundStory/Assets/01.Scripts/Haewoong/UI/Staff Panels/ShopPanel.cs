@@ -11,6 +11,7 @@ public class ShopPanel : StaffPanel
 
     [SerializeField] private Button exitBtn = null;
 
+    [SerializeField] private ScrollRect musicScrollRect = null;
     [SerializeField] private RectTransform musicListParent = null;
     [SerializeField] private GameObject musicListPrefab = null;
 
@@ -46,13 +47,22 @@ public class ShopPanel : StaffPanel
     {
         MusicInfo[] musics = MusicManagement.instance.GetMusicList();
 
-        for(int i = 0; i < musics.Length; i++)
+        if (musics.Length > 0)
         {
-            GameObject music = Instantiate<GameObject>(musicListPrefab, musicListParent);
-            MusicListInfo musicInfo = music.GetComponent<MusicListInfo>();
+            musicScrollRect.gameObject.SetActive(true);
 
-            musicListInfo_List.Add(musicInfo);
-            musicInfo.SetMusic(musics[i]);
+            for (int i = 0; i < musics.Length; i++)
+            {
+                GameObject music = Instantiate<GameObject>(musicListPrefab, musicListParent);
+                MusicListInfo musicInfo = music.GetComponent<MusicListInfo>();
+
+                musicListInfo_List.Add(musicInfo);
+                musicInfo.SetMusic(musics[i]);
+            }
+        }
+        else
+        {
+            musicScrollRect.gameObject.SetActive(false);
         }
 
         TextUpdate();

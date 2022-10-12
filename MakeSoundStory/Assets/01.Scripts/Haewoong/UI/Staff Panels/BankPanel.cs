@@ -95,6 +95,7 @@ public class BankPanel : StaffPanel
     {
         GameManager.instance.playerMoney += curLoanMoney;
         GameManager.instance.bankMoney += curLoanMoney;
+        GameManager.instance.playerDebt += curLoanMoney;
 
         Debug.Log(GameManager.instance.playerMoney);
         

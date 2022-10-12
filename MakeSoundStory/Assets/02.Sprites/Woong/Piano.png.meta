@@ -128,6 +128,15 @@ TextureImporter:
   - first:
       213: -1637316373695394505
     second: Alphabet_Bracket_R
+  - first:
+      213: 1988150180785455321
+    second: Alphabet_Angle_Bracket_L
+  - first:
+      213: -5199218369229511910
+    second: Alphabet_Angle_Bracket_R
+  - first:
+      213: -7144738890900418401
+    second: Piano_44
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -886,10 +895,10 @@ TextureImporter:
         x: 25
         y: 65
         width: 24
-        height: 64
+        height: 66
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1106,6 +1115,69 @@ TextureImporter:
       bones: []
       spriteID: 73d84f8de651749e0800000000000000
       internalID: -1637316373695394505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_Angle_Bracket_L
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 48
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d088d54e04579b10800000000000000
+      internalID: 1988150180785455321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alphabet_Angle_Bracket_R
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 48
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a13a368907aa8d7b0800000000000000
+      internalID: -5199218369229511910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Piano_44
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 80
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9056fa45d9c8dc90800000000000000
+      internalID: -7144738890900418401
       vertices: []
       indices: 
       edges: []

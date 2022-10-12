@@ -8,6 +8,8 @@ public class CameraMove : MonoBehaviour
 
     [Range(5, 10), SerializeField]
     private float speed = 5.0f;
+    [Range(30, 120), SerializeField]
+    private int targetFrame = 60;
     
     private Transform player = null;
     private Transform cam = null;
@@ -19,7 +21,7 @@ public class CameraMove : MonoBehaviour
         InitValue();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(Input.anyKey && !UIManagement.instance.isPanelOn)
         {
@@ -42,7 +44,7 @@ public class CameraMove : MonoBehaviour
     private void FrameSetting()
     {
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = targetFrame;
     }
 
     private void PlayerControl()
@@ -72,7 +74,7 @@ public class CameraMove : MonoBehaviour
         dirY.y = (_y > 0) ? 1.0f : -1.0f;
 
         RaycastHit2D hitX = Physics2D.Raycast(player.position, dirX, 8.0f);
-        RaycastHit2D hitY = Physics2D.Raycast(player.position, dirY, 3.6f);
+        RaycastHit2D hitY = Physics2D.Raycast(player.position, dirY, 3.0f);
 
         Debug.DrawRay(player.position, dirX, Color.red, 8.0f);
         Debug.DrawRay(player.position, dirY, Color.red, 3.6f);

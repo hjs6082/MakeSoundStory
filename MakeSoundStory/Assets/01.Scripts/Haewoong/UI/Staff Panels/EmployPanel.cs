@@ -72,6 +72,7 @@ public class EmployPanel : StaffPanel
         // TODO : 패널 초기화 스크립트 작성
         startPanel.SetActive(true);
         drawPanel.gameObject.SetActive(false);
+        listPanel.OffPanel();
         warningPanel.gameObject.SetActive(false);
 
         base.OffPanel();

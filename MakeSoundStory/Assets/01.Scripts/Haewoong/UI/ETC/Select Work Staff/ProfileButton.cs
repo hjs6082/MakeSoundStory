@@ -26,12 +26,15 @@ public class ProfileButton : MonoBehaviour
 
     public void ProfileUpdate(StaffSO _staffSO)
     {
-        if(profileSO != null)
-        {
-            StaffManager.instance.workStaffList.Add(profileSO);
-            UIManagement.instance.GetStaffPanel<MusicPanel>().selected_Staff_List.Remove(profileSO);
-        }
+        StaffSO oldSO = profileSO;
         profileSO = _staffSO;
+
+        if(oldSO != null)
+        {
+            StaffManager.instance.workStaffList.Add(oldSO);
+            UIManagement.instance.GetStaffPanel<MusicPanel>().selected_Staff_List.Remove(oldSO);
+        }
+        
         UIManagement.instance.GetStaffPanel<MusicPanel>().selected_Staff_List.Add(profileSO);
 
         profileNameText.text = profileSO.StaffName;

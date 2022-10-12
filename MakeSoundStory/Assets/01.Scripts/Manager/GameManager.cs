@@ -25,7 +25,7 @@ public class Data
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public int day = 1;
+    public int day = 0;
 
     public int playerMoney = 0;        //占시뤄옙占싱억옙占쏙옙 占쏙옙占쏙옙占쏙옙
 
@@ -66,10 +66,23 @@ public class GameManager : MonoSingleton<GameManager>
         //UIManager.instance?.GameStart();
         StartTime();
 
-        // nextDayButton.onClick.AddListener(() =>
-        // {
-        //     NextDay();
-        // });
+        day = 0;
+
+        playerMoney = 1000;        //占시뤄옙占싱억옙占쏙옙 占쏙옙占쏙옙占쏙옙
+
+        bankMoney = 500;
+
+        playerNote = 0;
+
+        officeStar = 0;
+
+        playerDebt = 0;
+
+        nextDayButton.onClick.AddListener(() =>
+        {
+            NextDay();
+        });
+        NextDay();
     }
 
     void Update()
@@ -80,7 +93,8 @@ public class GameManager : MonoSingleton<GameManager>
             TextSetting();
             if (time >= 540f)
             {
-                //ShowResult();
+                ShowResult();
+                //NextDay();
             }
         }
     }
@@ -102,7 +116,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void TextSetting()
     {
-        dayText.text = day + "일차";
+        dayText.text = day + " 일차";
         int hour = Mathf.FloorToInt(time / 60.0f);
         int minutes = Mathf.FloorToInt(time - hour * 60);
         timeText.text = string.Format("{0:00}:{1:00}", hour + 9, minutes);
@@ -127,6 +141,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         StopTime();
         resultPanel.SetActive(true);
+        UIManagement.instance.isPanelOn = true;
         dayResultText.DOText(day + "일차 결과", 1f).OnComplete(() =>
         {
             goldResultText.DOText(playerMoney + "G", 1f).OnComplete(() =>
@@ -137,8 +152,8 @@ public class GameManager : MonoSingleton<GameManager>
                     {
                         starResultText.DOText(officeStar + "성", 1f).OnComplete(() =>
                         {
-                            nextDayButton.gameObject.SetActive(true); 
                         });
+                            nextDayButton.gameObject.SetActive(true); 
                     });
                 });
             });
@@ -151,10 +166,12 @@ public class GameManager : MonoSingleton<GameManager>
 
         RemoveText(dayResultText);
         RemoveText(goldResultText);
-        RemoveText(starResultText);
+        //RemoveText(starResultText);
         RemoveText(debtResultText);
         RemoveText(staffResultText);
         resultPanel.SetActive(false);
+
+        UIManagement.instance.isPanelOn = false;
 
         Data data = new Data(day, playerMoney, playerDebt, StaffManager.instance.workStaffList.Count, officeStar);
         Save(data);

@@ -31,7 +31,9 @@ public class ListPanel : MonoBehaviour
 
     [Header("스태프 스탯 관련")]
     [SerializeField] private StatInfo[] statGuages = null;
+    [SerializeField] private Button levelUpReadyButton   = null;
     [SerializeField] private Button levelUpButton   = null;
+    [SerializeField] private Button levelUpCancleButton   = null;
 
     private bool readyToLevelup = false;
 
@@ -75,7 +77,10 @@ public class ListPanel : MonoBehaviour
 
         nextStaffButton.onClick.AddListener(() => { NextStaff(); });
         prevStaffButton.onClick.AddListener(() => { PrevStaff(); });
+
+        levelUpReadyButton.onClick.AddListener(() => { LevelUpReady(); });
         levelUpButton.onClick.AddListener(() => { LevelUp(); });
+        levelUpCancleButton.onClick.AddListener(() => { LevelUpCancle(); });
 
         OffPanel();
     }
@@ -125,26 +130,38 @@ public class ListPanel : MonoBehaviour
         SetStaff();
     }
 
+    private void LevelUpReady()
+    {
+        levelUpReadyButton.gameObject.SetActive(false);
+
+        for(int i = 0; i < statGuages.Length; i++)
+        {
+            statGuages[i].SetStatText($"+ {5 * curStaffSO.StaffLevel}");
+            statGuages[i].BackGuageUpdate(curStaffSO.StaffLevel);
+        }
+    }
+
     private void LevelUp()
     {
-        if(!readyToLevelup)
+        curStaffSO.StaffLevel++;
+        levelText.text = $"Lv. {curStaffSO.StaffLevel}";
+
+        curStaffSO.Addictive = Mathf.Clamp(curStaffSO.Addictive + (5 * curStaffSO.StaffLevel), 0, 100);
+        curStaffSO.Creativity = Mathf.Clamp(curStaffSO.Creativity + (5 * curStaffSO.StaffLevel), 0, 100);
+        curStaffSO.Melodic = Mathf.Clamp(curStaffSO.Melodic + (5 * curStaffSO.StaffLevel), 0, 100);
+        curStaffSO.Popularity = Mathf.Clamp(curStaffSO.Popularity + (5 * curStaffSO.StaffLevel), 0, 100);
+
+        LevelUpCancle();
+    }
+
+    private void LevelUpCancle()
+    {
+        for(int i = 0; i < statGuages.Length; i++)
         {
-            // 레벨업 코스트 표시
-            Debug.Log("레벨업 준비");
-
-
+            statGuages[i].InitGuage();
         }
-        else
-        {
-            Debug.Log("레벨업 확정");
 
-            curStaffSO.StaffLevel++;
-
-            curStaffSO.Addictive += (5 * curStaffSO.StaffLevel);
-            curStaffSO.Creativity += (5 * curStaffSO.StaffLevel);
-            curStaffSO.Melodic += (5 * curStaffSO.StaffLevel);
-            curStaffSO.Popularity += (5 * curStaffSO.StaffLevel);
-        }
+        levelUpReadyButton.gameObject.SetActive(true);
     }
 #endregion
 }

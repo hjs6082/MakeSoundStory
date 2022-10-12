@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f923a8e69c7fc4daca735509df65aa, type: 3}
   m_Name: StaffSO19
   m_EditorClassIdentifier: 
-  stafflevel: 5
+  stafflevel: 1
   staffNumber: 19
   staffName: "\uC784\uCC3D\uC9C4"
   staffJob: "\uC74C\uC545 \uAC10\uB3C5"
   favoriteGenre: 4
   hateGenre: 10
-  creativity: 105
-  addictive: 105
-  melodic: 85
-  popularity: 85
+  creativity: 35
+  addictive: 35
+  melodic: 15
+  popularity: 15
   money: 1000
   staffPrefab: {fileID: 1046706631623003859, guid: 93653cfab369b144686724645eb90522, type: 3}
   staffHeadPrefab: {fileID: 1046706631623003859, guid: b21e05966c77c1642b8d6428e25f65f1, type: 3}

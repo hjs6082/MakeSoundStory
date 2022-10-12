@@ -34,7 +34,6 @@ public struct MusicInfo
 public class CompleteMusicPanel : MonoBehaviour
 {
     private readonly string[] stat_Names = { "독창성", "중독성", "멜로디컬", "대중성" };
-    private readonly Color[] stat_Colors = { Color.red, Color.yellow, Color.blue, Color.green };
 
     [SerializeField] private Text[] stat_Texts = null;
     [SerializeField] private Text[] stat_Values = null;
@@ -74,11 +73,13 @@ public class CompleteMusicPanel : MonoBehaviour
 
     public void MakeComplete(float[] _randStats, float[] _allStats)
     {
+        Vector2 sizeOffset = new Vector2(0, 30);
+
         for(int i = 0; i < stat_Texts.Length; i++)
         {
             Image statImage = stat_Texts[i].GetComponentInChildren<Image>();
-            statImage.fillAmount = _randStats[i] / _allStats[i];
-            statImage.color = stat_Colors[i];
+            sizeOffset.x = (_randStats[i] / _allStats[i]) * 300;
+            statImage.rectTransform.sizeDelta = sizeOffset;
 
             Text statValue = stat_Values[i];
             statValue.text = $"{_randStats[i]:F0} / {_allStats[i]}";

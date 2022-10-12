@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f923a8e69c7fc4daca735509df65aa, type: 3}
   m_Name: StaffSO18
   m_EditorClassIdentifier: 
-  stafflevel: 4
+  stafflevel: 1
   staffNumber: 18
   staffName: "\uC2E0\uACBD\uD6C8"
   staffJob: "\uBE44\uD2B8 \uBA54\uC774\uCEE4"

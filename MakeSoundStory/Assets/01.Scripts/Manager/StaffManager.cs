@@ -49,7 +49,17 @@ public class StaffManager : MonoBehaviour
 
     public void AddStaff()
     {
-        staffList = new List<StaffSO>(Resources.LoadAll<StaffSO>("StaffSO"));
+        StaffSO so = StaffSO.CreateInstance<StaffSO>();
+        StaffSO[] sos = Resources.LoadAll<StaffSO>("StaffSO");
+
+        staffList = new List<StaffSO>();
+        for(int i = 0; i < sos.Length; i++)
+        {
+            so = sos[i].ShallowCopy();
+
+            staffList.Add(so);
+        }
+        
         staffList.Sort(delegate (StaffSO a, StaffSO b)
         {
             if (a.StaffNumber > b.StaffNumber) return 1;

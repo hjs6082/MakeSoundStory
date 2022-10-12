@@ -12,8 +12,10 @@ public class MusicPanel : StaffPanel
     public override Button exitButton { get; set; } = null;
 
     [SerializeField] private Button exitBtn = null;
+    //[SerializeField] private Button backBtn = null;
     [SerializeField] private Button initBtn = null;
     [SerializeField] private Button makeBtn = null;
+    [SerializeField] private MinigamePanel minigamePanel = null;
     [SerializeField] private CompleteMusicPanel completeMusic = null;
     [SerializeField] private ProductionWarningPanel warningPanel = null;
 
@@ -51,12 +53,13 @@ public class MusicPanel : StaffPanel
 
         makeBtn.onClick.AddListener(() => {
             if(selected_Staff_List.Count < 3) { Warning(); }
-            else { MusicOut(); };
+            else { minigamePanel.StartGame(); };
         });
 
         image_List = new List<GameObject>();
         selected_Staff_List = new List<StaffSO>();
 
+        minigamePanel.InitValue();
         completeMusic.InitValue();
         warningPanel.InitValue();
 
@@ -133,6 +136,7 @@ public class MusicPanel : StaffPanel
 
             StaffImage staffImg = profile.GetComponent<StaffImage>();
             staffImg.ownStaffSO = staff_List[i];
+            
             profile.GetComponentInChildren<Text>().text = staffImg.ownStaffSO.StaffName;
 
             image_List.Add(profile);
@@ -143,21 +147,26 @@ public class MusicPanel : StaffPanel
 #region 음악 제작
     public void MusicOut()
     {
-        float[] stats = new float[4];
-        float[] allStats = new float[4];
+        float[] stats = minigamePanel.resultStats;
+        float[] allStats = minigamePanel.statIncreases;
 
-        for(int i = 0; i < selected_Staff_List.Count; i++)
-        {
-            allStats[0] += selected_Staff_List[i].Creativity;
-            allStats[1] += selected_Staff_List[i].Addictive;
-            allStats[2] += selected_Staff_List[i].Melodic;
-            allStats[3] += selected_Staff_List[i].Popularity;
-        }
+        // for(int i = 0; i < selected_Staff_List.Count; i++)
+        // {
+        //     allStats[0] += selected_Staff_List[i].Creativity;
+        //     allStats[1] += selected_Staff_List[i].Addictive;
+        //     allStats[2] += selected_Staff_List[i].Melodic;
+        //     allStats[3] += selected_Staff_List[i].Popularity;
+        // }
 
-        for(int i = 0; i < stats.Length; i++)
+        // for(int i = 0; i < stats.Length; i++)
+        // {
+        //     float stat = allStats[i];
+        //     stats[i] = Mathf.Round(UnityEngine.Random.Range(stat / 3, stat));
+        // }
+
+        for(int i = 0; i < allStats.Length; i++)
         {
-            float stat = allStats[i];
-            stats[i] = Mathf.Round(UnityEngine.Random.Range(stat / 3, stat));
+            allStats[i] *= 50.0f;
         }
 
         completeMusic.MakeComplete(stats, allStats);

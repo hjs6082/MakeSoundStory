@@ -63,12 +63,12 @@ public class MainScene : MonoBehaviour
 
     public void GameStart()
     {
-        LoadingSceneManager.LoadScene("RealMainScene");
+        LoadingSceneManager.LoadScene("RealMainScene_W_UI");
     }
 
     public void Load()
     {
-        //°ÔÀÓÀ» ·ÎµåÇÒ°Í
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½Ò°ï¿½
     }
 
     public void GameQuit()

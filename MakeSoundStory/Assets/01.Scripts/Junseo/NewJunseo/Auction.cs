@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using LitJson;
 using DG.Tweening;
 
-#region °æ¸Å ¾ÆÀÌÅÛ ¼³Á¤
+#region ê²½ë§¤ ì•„ì´í…œ ì„¤ì •
 public class AuctionItem
 {
     public int index;
@@ -13,16 +13,16 @@ public class AuctionItem
     public string madeOffice;
     public enum Genre 
     {
-        ÆË,
-        ¾Ë¾Øºñ,
-        ÀçÁî,
-        Æ®·¦,
-        ºÕ¹í,
-        ¹ß¶óµå,
-        Æ®·ÎÆ®,
-        ¶ô,
-        ÆãÅ©,
-        ´í½º,
+        íŒ,
+        ì•Œì•¤ë¹„,
+        ì¬ì¦ˆ,
+        íŠ¸ë©,
+        ë¶ë±,
+        ë°œë¼ë“œ,
+        íŠ¸ë¡œíŠ¸,
+        ë½,
+        í‘í¬,
+        ëŒ„ìŠ¤,
     }
     public enum Grade
     {
@@ -63,23 +63,24 @@ public class Auction : MonoBehaviour
 
     public Slider goldSlider;
 
-    public Button bidButton; //°æ¸Å ³«Âû ¹öÆ°
+    public Button bidButton; //ê²½ë§¤ ë‚™ì°° ë²„íŠ¼
 
     public int gold = 500;
     public int maxGold;
 
     public bool isAuction = false;
 
-    public bool isPlrBid = false; //ÀÔÂû»óÅÂ ÇÃ·¹ÀÌ¾î°¡ ÀÔÂûÁßÀÎÁö
-    public bool isAIBid = false;  //AI°¡ ÀÔÂûÁßÀÎÁö.
+    public bool isPlrBid = false; //ì…ì°°ìƒíƒœ í”Œë ˆì´ì–´ê°€ ì…ì°°ì¤‘ì¸ì§€
+    public bool isAIBid = false;  //AIê°€ ì…ì°°ì¤‘ì¸ì§€.
 
-    public GameObject buyPanel;   // »ê¹°°Ç¿¡ ´ëÇÑ ÆĞ³Î
-    public Text isBuyText;        // ÀÔÂûÀÎÁö À¯ÂûÀÎÁö
-    public Text buyExplaneText;          // ±¸¸ÅÇÑ »óÇ°¿¡ ´ëÇÑ ¼³¸í
-    public Button buyOkButton;      // È®ÀÎ¹öÆ°
+    public GameObject buyPanel;   // ì‚°ë¬¼ê±´ì— ëŒ€í•œ íŒ¨ë„
+    public Text isBuyText;        // ì…ì°°ì¸ì§€ ìœ ì°°ì¸ì§€
+    public Text buyExplaneText;          // êµ¬ë§¤í•œ ìƒí’ˆì— ëŒ€í•œ ì„¤ëª…
+    public Button buyOkButton;      // í™•ì¸ë²„íŠ¼
 
+    private MusicInfo music = default;
 
-    public void Start()
+    public void AuctionStart()
     {
         ItemParsing(Load(), auctionItems);
         UISetting(RandomItem()); 
@@ -89,7 +90,7 @@ public class Auction : MonoBehaviour
     {
         if (isAuction)
         {
-            nowGold.text = "ÇöÀç °¡°İ : "  + gold + "G";
+            nowGold.text = "í˜„ì¬ ê°€ê²© : "  + gold + "G";
             goldSlider.value -= 0.3f * Time.deltaTime;
         }
         if(goldSlider.value <= 0)
@@ -99,7 +100,7 @@ public class Auction : MonoBehaviour
         }
     }
 
-    public void ItemParsing(JsonData itemData, List<AuctionItem> auctionItem) //¾ÆÀÌÅÛ ÆÄ½ÌÀ¸·Î ¸ğµç¾ÆÀÌÅÛÀ» ºÒ·¯¿Â´Ù.
+    public void ItemParsing(JsonData itemData, List<AuctionItem> auctionItem) //ì•„ì´í…œ íŒŒì‹±ìœ¼ë¡œ ëª¨ë“ ì•„ì´í…œì„ ë¶ˆëŸ¬ì˜¨ë‹¤.
     {
         for (int i = 0; i < itemData.Count; i++)
         {
@@ -118,21 +119,24 @@ public class Auction : MonoBehaviour
         }
     }
 
-    public AuctionItem RandomItem() // ·£´ı ¾ÆÀÌÅÛÀ» »Ì´Â´Ù.
+    public AuctionItem RandomItem() // ëœë¤ ì•„ì´í…œì„ ë½‘ëŠ”ë‹¤.
     {
         int randomRange = Random.Range(0, auctionItems.Count);
-        return auctionItems[randomRange];
+        AuctionItem item = auctionItems[randomRange];
+        music = new MusicInfo(item.musicName, new float[4]{30, 30, 30, 30}, 0, false);
+
+        return item;
     }
 
 
-    public void UISetting(AuctionItem nowItem) // ·£´ı ¾ÆÀÌÅÛÀ» °¡Áö°í UI¸¦ ¼¼ÆÃÇÑ´Ù.
+    public void UISetting(AuctionItem nowItem) // ëœë¤ ì•„ì´í…œì„ ê°€ì§€ê³  UIë¥¼ ì„¸íŒ…í•œë‹¤.
     {
         buyItem = nowItem; 
         bidButton.onClick.AddListener(() => { Bid(); });
-        musicName.text = "Á¦¸ñ : " + nowItem.musicName;
-        genreName.text = "Àå¸£ : " + nowItem.genre.ToString();
-        madeOffice.text = "Á¦ÀÛ»ç : " + nowItem.madeOffice;
-        nowGold.text = "ÇöÀç °¡°İ : " + 500 + "G";
+        musicName.text = "ì œëª© : " + nowItem.musicName;
+        genreName.text = "ì¥ë¥´ : " + nowItem.genre.ToString();
+        madeOffice.text = "ì œì‘ì‚¬ : " + nowItem.madeOffice;
+        nowGold.text = "í˜„ì¬ ê°€ê²© : " + 500 + "G";
 
         switch (nowItem.grade)
         {
@@ -151,13 +155,13 @@ public class Auction : MonoBehaviour
             default:
                 break;
         }
-        musicGold.text = "¿¹»ó °¡Ä¡ : " + maxGold + "G";
+        musicGold.text = "ì˜ˆìƒ ê°€ì¹˜ : " + maxGold + "G";
         isAuction = true;
         int randomGold = (Random.Range(maxGold - 500, maxGold + 500) / 100) * 100;
         StartCoroutine(AIBid(randomGold));
     }
 
-    public void Bid() // ÀÔÂû¹öÆ° ´©¸£¸é 
+    public void Bid() // ì…ì°°ë²„íŠ¼ ëˆ„ë¥´ë©´ 
     {
         if (isAuction)
         {
@@ -175,16 +179,16 @@ public class Auction : MonoBehaviour
             }
             else
             {
-                Debug.Log("µ·ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
+                Debug.Log("ëˆì´ ë¶€ì¡±í•©ë‹ˆë‹¤.");
             }
         }
     }
 
-    public void PlrBid() //ÇÃ·¹ÀÌ¾î°¡ ÀÔÂûÇÒ¶§
+    public void PlrBid() //í”Œë ˆì´ì–´ê°€ ì…ì°°í• ë•Œ
     {
         gold += 500;
         GameManager.instance.playerMoney -= gold;
-        nowGold.text = "ÇöÀç °¡°İ : " + gold + "G";
+        nowGold.text = "í˜„ì¬ ê°€ê²© : " + gold + "G";
         goldSlider.value = 1f;
         isAIBid = false;
         isPlrBid = true; 
@@ -200,42 +204,47 @@ public class Auction : MonoBehaviour
                 isPlrBid = false;
                 GameManager.instance.playerMoney += gold; 
                 gold += 500;
-                nowGold.text = "ÇöÀç °¡°İ : " + gold + "G";
+                nowGold.text = "í˜„ì¬ ê°€ê²© : " + gold + "G";
                 goldSlider.value = 1f;
                 isAIBid = true;
             }
             else
             {
                 gold += 500;
-                nowGold.text = "ÇöÀç °¡°İ : " + gold + "G";
+                nowGold.text = "í˜„ì¬ ê°€ê²© : " + gold + "G";
                 goldSlider.value = 1f;
                 isAIBid = true; 
             }
         }
+        Random.Range(2.0f, 3.5f);
+
         yield return new WaitForSeconds(2f);
         StartCoroutine(AIBid(betGold));  
     } 
 
-    public void BuyCheck(AuctionItem buyItem) //´©°¡ »ò´ÂÁö Ã¼Å©
+    public void BuyCheck(AuctionItem buyItem) //ëˆ„ê°€ ìƒ€ëŠ”ì§€ ì²´í¬
     {
         buyOkButton.onClick.AddListener(() => { auctionPanel.SetActive(false); buyExplaneText.text = ""; buyPanel.transform.localScale = new Vector2(0.1f, 0.1f);
             isAIBid = false; isPlrBid = false;
         });
         buyPanel.SetActive(true);
         buyPanel.transform.DOScale(new Vector2(1f, 1f),2f);
-        if(isPlrBid) //ÇÃ·¹ÀÌ¾î°¡ »òÀ»°æ¿ì
+        if(isPlrBid) //í”Œë ˆì´ì–´ê°€ ìƒ€ì„ê²½ìš°
         {
-            isBuyText.text = "³«Âû";
-            buyExplaneText.text = "ÃàÇÏÇÕ´Ï´Ù! \n" + buyItem.musicName + " ³ë·¡¸¦ ±¸¸ÅÇÏ¼Ì½À´Ï´Ù.\n" + "±¸¸ÅÇÑ ³ë·¡´Â ³ë·¡ ¸®½ºÆ®¿¡ ÀúÀåµË´Ï´Ù.";
+            isBuyText.text = "ë‚™ì°°";
+            buyExplaneText.text = "ì¶•í•˜í•©ë‹ˆë‹¤! \n" + buyItem.musicName + " ë…¸ë˜ë¥¼ êµ¬ë§¤í•˜ì…¨ìŠµë‹ˆë‹¤.\n" + "êµ¬ë§¤í•œ ë…¸ë˜ëŠ” ë…¸ë˜ ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ë©ë‹ˆë‹¤.";
+            ShopPanel shop = UIManagement.instance.GetStaffPanel<ShopPanel>();
+            //shop.musicListInfo_List.Add()
+
         }
-        else // AI°¡ »òÀ» °æ¿ì
+        else // AIê°€ ìƒ€ì„ ê²½ìš°
         {
-            isBuyText.text = "À¯Âû";
-            buyExplaneText.text = "¾Æ½±½À´Ï´Ù \n" + buyItem.musicName + " ³ë·¡´Â ´Ù¸¥ ÆÇ¸ÅÀÚ°¡ ±¸¸ÅÇÏ¿´½À´Ï´Ù.\n" + "´ÙÀ½ ±âÈ¸¿¡ µµÀüÇÏ¼¼¿ä."; 
+            isBuyText.text = "ìœ ì°°";
+            buyExplaneText.text = "ì•„ì‰½ìŠµë‹ˆë‹¤ \n" + buyItem.musicName + " ë…¸ë˜ëŠ” ë‹¤ë¥¸ íŒë§¤ìê°€ êµ¬ë§¤í•˜ì˜€ìŠµë‹ˆë‹¤.\n" + "ë‹¤ìŒ ê¸°íšŒì— ë„ì „í•˜ì„¸ìš”."; 
         }
     }
 
-    public IEnumerator BidText(GameObject bidBubble, Text bidText, Transform spawnTrm) //ÀÔÂû ¸Ş½ÃÁö
+    public IEnumerator BidText(GameObject bidBubble, Text bidText, Transform spawnTrm) //ì…ì°° ë©”ì‹œì§€
     {
         GameObject bidObj = Instantiate(bidBubble, spawnTrm);
         gold += 500;
