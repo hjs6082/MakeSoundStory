@@ -51,18 +51,27 @@ public class MusicPanel : StaffPanel
     protected override void InitValue()
     {
         initBtn.onClick.AddListener(() => {
-            //InitProfiles();
+            InitProfiles();
         });
 
         makeBtn.onClick.AddListener(() => {
             if(selected_Staff_List.Count < 3) { Warning(); }
-            else { minigamePanel.StartGame(); };
+            else
+            {
+                minigamePanel.StartGame();
+            };
         });
 
         image_List = new List<GameObject>();
         selected_Staff_List = new List<StaffSO>();
 
         audioSource = GetComponent<AudioSource>();
+
+        drumSound = new AudioClip[4];
+        for(int i = 0; i < 4; i++)
+        {
+            drumSound[i] = Resources.Load($"SoundClips/Drum/DrumClip_{i}") as AudioClip; 
+        }
 
         minigamePanel.InitValue();
         completeMusic.InitValue();
@@ -116,9 +125,7 @@ public class MusicPanel : StaffPanel
     {
         for(int i = 0; i < image_List.Count; i++)
         {
-
             Destroy(image_List[i]);
-            
         }
 
         //InitProfiles();
@@ -174,6 +181,7 @@ public class MusicPanel : StaffPanel
             allStats[i] *= 50.0f;
         }
 
+        InitProfiles();
         completeMusic.MakeComplete(stats, allStats);
     }
 
@@ -182,15 +190,15 @@ public class MusicPanel : StaffPanel
         audioSource.PlayOneShot(drumSound[_idx]);
     }
 
-    // private void InitProfiles()
-    // {
-    //     for(int i = 0; i < memberButton.Length; i++)
-    //     {
-    //         ProfileButton profile = memberButton[i].GetComponent<ProfileButton>();
+    private void InitProfiles()
+    {
+        for(int i = 0; i < memberButton.Length; i++)
+        {
+            ProfileButton profile = memberButton[i].GetComponent<ProfileButton>();
 
-    //         profile.ProfileUpdate(null);
-    //         profile.profileButton.interactable = true;
-    //     }   
-    // }
+            profile.ProfileUpdate(null);
+            profile.profileButton.interactable = true;
+        }   
+    }
 #endregion
 }

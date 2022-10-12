@@ -34,6 +34,8 @@ public struct MusicInfo
 public class CompleteMusicPanel : MonoBehaviour
 {
     private readonly string[] stat_Names = { "독창성", "중독성", "멜로디컬", "대중성" };
+    private readonly Color disableColor = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+    private readonly Color enableColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
     [SerializeField] private Text[] stat_Texts = null;
     [SerializeField] private Text[] stat_Values = null;
@@ -43,6 +45,20 @@ public class CompleteMusicPanel : MonoBehaviour
     [SerializeField] private List<string> musicName_List = null;
 
     private float[] stats = null;
+
+    private void Update()
+    {
+        if(title_Field.text.Length > 0 && !make_Button.interactable)
+        {
+            make_Button.interactable = true;
+            make_Button.GetComponentInChildren<Text>().color = enableColor;
+        }
+        else if(title_Field.text.Length <= 0)
+        {
+            make_Button.interactable = false;
+            make_Button.GetComponentInChildren<Text>().color = disableColor;
+        }
+    }
 
     public void InitValue()
     {

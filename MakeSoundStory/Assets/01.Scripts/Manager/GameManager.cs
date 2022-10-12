@@ -59,6 +59,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Text starResultText;
     public Button nextDayButton;
 
+    public AudioSource clickSource = null;
 
     void Start()
     {
@@ -67,16 +68,14 @@ public class GameManager : MonoSingleton<GameManager>
         StartTime();
 
         day = 0;
-
         playerMoney = 1000;        //占시뤄옙占싱억옙占쏙옙 占쏙옙占쏙옙占쏙옙
-
         bankMoney = 500;
-
         playerNote = 0;
-
         officeStar = 0;
-
         playerDebt = 0;
+
+        clickSource = GetComponent<AudioSource>();
+        clickSource.clip = Resources.Load("SoundClips/Click") as AudioClip;
 
         nextDayButton.onClick.AddListener(() =>
         {
@@ -96,6 +95,12 @@ public class GameManager : MonoSingleton<GameManager>
                 ShowResult();
                 //NextDay();
             }
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            clickSource?.Stop();
+            clickSource?.Play();
         }
     }
 

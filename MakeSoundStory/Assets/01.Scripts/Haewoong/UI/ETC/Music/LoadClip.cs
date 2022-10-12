@@ -10,14 +10,15 @@ public class LoadClip : MonoBehaviour
     private void Awake()
     {
         source = GetComponent<AudioSource>();        
-    
-        source.clip = LoadAudioClip();
 
+        source.volume = 0.5f;
+        source.clip = LoadAudioClip();
+        PlayClip();
     }
 
     public AudioClip LoadAudioClip()
     {
-        return Resources.Load(clipName) as AudioClip;
+        return Resources.Load($"SoundClips/{clipName}") as AudioClip;
     }
 
     public void PlayClip()

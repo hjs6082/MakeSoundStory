@@ -23,6 +23,7 @@ public class MinigamePanel : MonoBehaviour
     public  Image   spaceBarImage = null;
 
     [SerializeField] private Button nextButton = null;
+    private LoadClip bgm = null;
 
     private void Update()
     {
@@ -43,6 +44,7 @@ public class MinigamePanel : MonoBehaviour
     public void InitValue()
     {
         musicPanel = UIManagement.instance.GetStaffPanel<MusicPanel>();
+        bgm = FindObjectOfType<LoadClip>();
 
         isPlaying = false;
 
@@ -54,6 +56,7 @@ public class MinigamePanel : MonoBehaviour
 
         nextButton.onClick.AddListener(() => {
             musicPanel.MusicOut();
+            bgm.source.Play();
             OffPanel();
         });
         nextButton.gameObject.SetActive(false);
@@ -121,6 +124,8 @@ public class MinigamePanel : MonoBehaviour
 
     public void OffPanel()
     {
+        nextButton.gameObject.SetActive(false);
+
         this.gameObject.SetActive(false);
     }
 
@@ -128,6 +133,8 @@ public class MinigamePanel : MonoBehaviour
     {
         OnPanel();
         ResetGame();
+
+        bgm.source.Pause();
 
         isPlaying = true;
     }
