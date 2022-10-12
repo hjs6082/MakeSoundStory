@@ -18,7 +18,7 @@ public class MusicPanel : StaffPanel
     [SerializeField] private MinigamePanel minigamePanel = null;
     [SerializeField] private CompleteMusicPanel completeMusic = null;
     [SerializeField] private ProductionWarningPanel warningPanel = null;
-
+    
     public Button[] memberButton = null;
     public Button curProfile = null;
 
@@ -27,6 +27,9 @@ public class MusicPanel : StaffPanel
     public List<GameObject> image_List = null;
 
     public List<StaffSO> selected_Staff_List = null;
+    
+    [SerializeField] private AudioSource audioSource = null;
+    [SerializeField] private AudioClip[] drumSound = null;
 
     protected override void Awake()
     {
@@ -58,6 +61,8 @@ public class MusicPanel : StaffPanel
 
         image_List = new List<GameObject>();
         selected_Staff_List = new List<StaffSO>();
+
+        audioSource = GetComponent<AudioSource>();
 
         minigamePanel.InitValue();
         completeMusic.InitValue();
@@ -170,6 +175,11 @@ public class MusicPanel : StaffPanel
         }
 
         completeMusic.MakeComplete(stats, allStats);
+    }
+
+    public void PlayDrum(int _idx)
+    {
+        audioSource.PlayOneShot(drumSound[_idx]);
     }
 
     // private void InitProfiles()

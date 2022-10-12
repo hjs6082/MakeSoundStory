@@ -142,11 +142,16 @@ public class MinigamePanel : MonoBehaviour
 
     public void Tab()
     {
-        resultStats[curStat % 4] += statIncreases[curStat % 4] * UnityEngine.Random.Range(1.0f, 2.0f);
+        int statIdx = curStat % 4;
 
-        Vector2 size = statGuages[curStat % 4].rectTransform.sizeDelta;
-        size.y = resultStats[curStat % 4] / (statIncreases[curStat % 4] * STAT_INCREASE_OFFSET) * 350.0f;
-        statGuages[curStat % 4].rectTransform.sizeDelta = size;
+        float statIncrease = statIncreases[statIdx] * UnityEngine.Random.Range(1.0f, 2.0f);
+        resultStats[statIdx] = Mathf.Clamp(resultStats[statIdx] + statIncrease, 0, statIncreases[statIdx] * STAT_INCREASE_OFFSET);
+
+        Vector2 size = statGuages[statIdx].rectTransform.sizeDelta;
+        size.y = resultStats[statIdx] / (statIncreases[statIdx] * STAT_INCREASE_OFFSET) * 350.0f;
+        statGuages[statIdx].rectTransform.sizeDelta = size;
+
+        musicPanel.PlayDrum(statIdx);
 
         curStat = UnityEngine.Random.Range(0, 4);
     }
