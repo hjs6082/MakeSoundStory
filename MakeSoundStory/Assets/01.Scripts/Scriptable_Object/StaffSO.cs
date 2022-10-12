@@ -78,6 +78,11 @@ public class StaffSO : ScriptableObject
     public int Money { get { return money; } }
 
     [SerializeField]
+    [Header("퀘스트 여부")]
+    private bool isQuest = false;
+    public bool IsQuest { get { return isQuest; } set { isQuest = value; } }
+
+    [SerializeField]
     [Header("SPUM 스태프 프리팹")]
     private GameObject staffPrefab;
     public GameObject StaffPrefab { get { return staffPrefab; } }

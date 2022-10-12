@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +9,7 @@ public class ChallengeSetting : MonoBehaviour
     [SerializeField] private GameObject chalPrefab;
     [SerializeField] private GameObject[] chalObjs;
 
-    [SerializeField] private Challenge chals;
+    //[SerializeField] private Challenge chals;
 
     private void Start()
     {
@@ -56,3 +56,4 @@ public class ChallengeSetting : MonoBehaviour
 
     }
 }
+*/

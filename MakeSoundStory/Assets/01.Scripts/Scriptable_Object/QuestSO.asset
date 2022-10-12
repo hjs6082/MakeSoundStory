@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f132d1d653d4a6479554f5817bda24f, type: 3}
+  m_Name: QuestSO
+  m_EditorClassIdentifier: 
+  quests:
+  - item:
+      number: 5
+      itemName: "\uAE30\uD0C0 \uC904"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 5
+  - item:
+      number: 1
+      itemName: "\uC74C\uBC18 \uC870\uAC01"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 1
+    reward: 5
+  - item:
+      number: 5
+      itemName: "\uAE30\uD0C0 \uC904"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 1
+    reward: 5
+  - item:
+      number: 2
+      itemName: "\uD589\uC6B4\uC758 \uC74C\uD45C"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 0
+  - item:
+      number: 6
+      itemName: "\uD5E4\uB4DC\uC14B"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 5
+  - item:
+      number: 7
+      itemName: "\uC774\uC5B4\uD3F0"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 2
+    reward: 10
+  - item:
+      number: 2
+      itemName: "\uD589\uC6B4\uC758 \uC74C\uD45C"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 15
+  - item:
+      number: 6
+      itemName: "\uD5E4\uB4DC\uC14B"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 0
+    reward: 15
+  - item:
+      number: 3
+      itemName: "\uAE30\uD0C0 \uD53C\uD06C"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 2
+    reward: 10
+  - item:
+      number: 4
+      itemName: "\uD53C\uC544\uB178 \uAC74\uBC18"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 1
+    reward: 5
+  - item:
+      number: 2
+      itemName: "\uD589\uC6B4\uC758 \uC74C\uD45C"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 0
+  - item:
+      number: 7
+      itemName: "\uC774\uC5B4\uD3F0"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 1
+    reward: 0
+  - item:
+      number: 2
+      itemName: "\uD589\uC6B4\uC758 \uC74C\uD45C"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 0
+    reward: 15
+  - item:
+      number: 6
+      itemName: "\uD5E4\uB4DC\uC14B"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 0
+    reward: 15
+  - item:
+      number: 6
+      itemName: "\uD5E4\uB4DC\uC14B"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 10
+  - item:
+      number: 2
+      itemName: "\uD589\uC6B4\uC758 \uC74C\uD45C"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 0
+    reward: 10
+  - item:
+      number: 7
+      itemName: "\uC774\uC5B4\uD3F0"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 0
+  - item:
+      number: 5
+      itemName: "\uAE30\uD0C0 \uC904"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 2
+    reward: 0
+  - item:
+      number: 5
+      itemName: "\uAE30\uD0C0 \uC904"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 3
+    reward: 15
+  - item:
+      number: 4
+      itemName: "\uD53C\uC544\uB178 \uAC74\uBC18"
+      count: 0
+      itemSprite: {fileID: 0}
+    count: 1
+    reward: 5

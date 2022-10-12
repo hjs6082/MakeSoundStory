@@ -8,7 +8,7 @@ public class Item
     public int number;           //넘버
     public string itemName;      //아이템 이름
     public int count;            //소지량
-    public Sprite itemSprite;
+    public Sprite itemSprite; 
 }
 
 [CreateAssetMenu(fileName = "ItemSO", menuName = "Scriptable Object/ItemSO", order = 1)]

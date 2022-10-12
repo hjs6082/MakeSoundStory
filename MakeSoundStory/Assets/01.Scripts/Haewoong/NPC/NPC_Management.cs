@@ -32,9 +32,8 @@ namespace NPC
                 {
                     npc_FSMs[i].npc_Unit_Prefab = npc_Prefab.StaffPrefab;
                     npc_FSMs[i].Init();
-                    npc_FSMs[i].npc_Unit.AddComponent<StaffData>();
-                    npc_FSMs[i].npc_Unit.GetComponent<StaffData>().myStaffData = npc_Prefab;
                     npc_FSMs[i].npc_Unit.AddComponent<Staff>();
+                    npc_FSMs[i].npc_Unit.GetComponent<Staff>().myStaffData = npc_Prefab;
                     return;
                 }
             }

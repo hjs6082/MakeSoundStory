@@ -124,7 +124,7 @@ public class UIManager : MonoBehaviour
             instance = this;
         }
         ButtonClick();
-        eventStartPosition = eventPanel.transform.position;
+        //eventStartPosition = eventPanel.transform.position;
     }
 
     void Update()
@@ -233,7 +233,7 @@ public class UIManager : MonoBehaviour
             //staff.transform.localScale = new Vector3(1f, 1f, 1f);
             NPC.NPC_Management.Instance.AddNPC(staffPanel.GetComponent<MyData>().myStaff);
             int randomIndex = UnityEngine.Random.Range(0, sayList.Length);
-            HumanEvent(staffPanel.GetComponent<MyData>().myStaff, sayList[randomIndex], false);
+            //HumanEvent(staffPanel.GetComponent<MyData>().myStaff, sayList[randomIndex]);
             Dogam.instance.DogamChange(staffPanel.GetComponent<MyData>().myStaff.StaffNumber);
         });
     }
@@ -916,57 +916,15 @@ public class UIManager : MonoBehaviour
         {
             oxPanel.SetActive(true);
             eventPanel.SetActive(true);
-            StartCoroutine(endEvent(5f, eventPanel));
+            //StartCoroutine(endEvent(5f, eventPanel));
             eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
             eventPanel.transform.GetChild(1).GetComponent<Text>().text = text;
             eventPanel.transform.DOLocalMoveX(519f, 1f);
         }
     }
 
-    public void HumanEvent(StaffSO staff, string text, bool isOX)
-    {
 
-        eventPanel.transform.position = eventStartPosition;
-        if (isOX)
-        {
-            if (eventPanel.transform.GetChild(0).gameObject.transform.childCount != 0)
-            {
-                Destroy(eventPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-            }
-            oxPanel.SetActive(true);
-            eventPanel.SetActive(true);
-            StartCoroutine(endEvent(5f, eventPanel));
-            eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
-            GameObject setStaff = Instantiate(staff.StaffPrefab, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
-            setStaff.transform.parent = eventPanel.transform.GetChild(0);
-            setStaff.transform.GetChild(0).gameObject.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
-            //setStaff.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
-            eventPanel.transform.GetChild(1).GetComponent<Text>().text = text;
-            eventPanel.transform.DOLocalMoveX(519f, 1f);
-        }
-        if (!isOX)
-        {
-            if(eventPanel.transform.GetChild(0).gameObject.transform.childCount !=0)
-            {
-                Destroy(eventPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-            }
-            eventPanel.SetActive(true);
-            StartCoroutine(endEvent(5f, eventPanel));
-            eventPanel.GetComponent<Button>().onClick.AddListener(() => { eventPanel.SetActive(false); });
-            GameObject setStaff = Instantiate(staff.StaffPrefab, eventPanel.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
-            setStaff.transform.SetParent(eventPanel.transform.GetChild(0));
-            //setStaff.transform.parent = eventPanel.transform.GetChild(0);
-            setStaff.transform.GetChild(0).gameObject.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
-            //setStaff.transform.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingOrder = 31;
-            eventPanel.transform.GetChild(1).GetComponent<Text>().text = text;
-            eventPanel.transform.DOLocalMoveX(519f, 1f);
-        }
-    }
 
-    IEnumerator endEvent(float time, GameObject falseObj)
-    {
-        yield return new WaitForSeconds(time);
-        falseObj.SetActive(false);
-    }
+
 
 }

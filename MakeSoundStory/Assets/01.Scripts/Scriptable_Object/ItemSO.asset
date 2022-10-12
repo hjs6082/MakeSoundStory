@@ -16,21 +16,28 @@ MonoBehaviour:
   - number: 1
     itemName: "\uC74C\uBC18 \uC870\uAC01"
     count: 0
+    itemSprite: {fileID: 0}
   - number: 2
     itemName: "\uD589\uC6B4\uC758 \uC74C\uD45C"
     count: 0
+    itemSprite: {fileID: 0}
   - number: 3
     itemName: "\uAE30\uD0C0 \uD53C\uD06C"
     count: 0
+    itemSprite: {fileID: 0}
   - number: 4
     itemName: "\uD53C\uC544\uB178 \uAC74\uBC18"
     count: 0
+    itemSprite: {fileID: 0}
   - number: 5
     itemName: "\uAE30\uD0C0 \uC904"
     count: 0
+    itemSprite: {fileID: 0}
   - number: 6
     itemName: "\uD5E4\uB4DC\uC14B"
     count: 0
+    itemSprite: {fileID: 0}
   - number: 7
     itemName: "\uC774\uC5B4\uD3F0"
-    count: 0
+    count: -1
+    itemSprite: {fileID: 0}
